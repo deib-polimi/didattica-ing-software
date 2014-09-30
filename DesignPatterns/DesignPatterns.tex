@@ -9,6 +9,19 @@
 \usepackage{courier} % Required for the courier font
 \usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
 \usepackage{hyperref}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{listings}
+\usepackage{subfigure}
+\usepackage{afterpage}
+\usepackage{amsmath,amssymb}            
+\usepackage{rotating}  
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{amsthm}
+\usepackage[scriptsize]{caption} 
+\hyphenation{a-gen-tiz-za-zio-ne}
 % Margins
 \topmargin=-0.45in
 \evensidemargin=0in
@@ -147,7 +160,7 @@ The goal is to create an interface which allows \textbf{to create families} of r
      \label{AbstractFactoryUML}
 \end{figure}
 
-The UML of Figure~\ref{AbstractFactoryUML} is composed by the following classes:
+Using this pattern an abstract framework (factory) is defined, which allows to create objects that follow a general pattern. At run-time the abstract factory is paired with any concrete factory that allows to create the objects that follow the concrete pattern. In other words, the Abstract Factory is a super-factory which creates other factories (Factory of factories). The UML of Figure~\ref{AbstractFactoryUML} is composed by the following classes:
 \begin{itemize}
 \item \emph{AbstractFactory}: is an abstract class (see the italic style of the text), which declares the interface for the operations that allows to create \emph{abstract} products
 \item \emph{ConcreteFactory}: are the concrete classes that allows to create \emph{concrete} products (Note the hierarchical relation between the AbstractFactory and the ConcreteFactory). Each product is a family of related dependent objects AbstractProductA and AbstractProductB, and in particular, for the ConcreteFactory1 the products are ProductA1 and ProductB1, while for the ConcreteFactory2 the products are ProductA2 and ProductB2 (Note the uses relation between the Factories and the products).
@@ -156,16 +169,28 @@ The UML of Figure~\ref{AbstractFactoryUML} is composed by the following classes:
 \item \emph{Client}: instantiate a specific ConcreteFactory (depending on its necessities) to obtain specific products.
 \end{itemize}
 
+Note: usually only a single instance of a ConcreteFactory class is created at run-time. The AbstractFactory defers the creation of products to the ConcreteFactories.
+
 \subsubsection{Examples}
-Using this pattern an abstract framework (factory) is defined, which allows to create objects that follow a general pattern. At run-time the abstract factory is paired with any concrete factory that allows to create the objects that follow the concrete pattern. In other words, the Abstract Factory is a super-factory which creates other factories (Factory of factories).
+\textbf{Window Interface}\\
+Consider a user interface that must support multiple devices, such as laptops, cellphones. Different interfaces must be creating depending on the device which runs the application (e.g., different type of scroll bars, windows, buttons). To be portable, the application should not be hard-coded to a particular look and feel. The instantiation and the designing new look-and-feels must be easy. The example is inspired by~\cite{gamma1994design}.
 
 
-
-The classes that are involved in the Abstract factory pattern are:
+\subsubsection{Implementation}
 \begin{itemize}
-\item \emph{Abstract Factory} is the interface the the ConcreteFactories must implement
-\item \emph{Concrete Factories} implements the operations and allow to create concrete products
+\item \emph{AbstractFactory} only declare the interface for the creating the products
+\item \emph{ConcreteFactory} are \emph{singleton}. A \emph{factory method} is defined for each product. 
+
 \end{itemize}
+
+\subsubsection{Pro and Cons}
+\begin{itemize}
+\item it requires a concrete factory subclass for each product even if the families differ only slightly
+\item if many families are possible think about using a \emph{prototype pattern} inside the factory (You can store classes inside a concrete factory that create the various concrete products in variables, much like prototypes).
+\item AbstractFactory usually define a \emph{different operation} for each kind of product it is possible to create, i.e., for each product there is a signature in the AbstractFactory Interface. This implies that \emph{to add a new product} you must add the \emph{signature in the abstract factory} and all the sub Factory-classes. A \textbf{more flexible} but \textbf{less safe} design is to add a parameter in the operations to create objects. This parameter specifies the object to be created (e.g., an enum).
+\item All the products are returned to the client as abstract interfaces to the product. The client is not able to make safe assumption on the type of the product.
+\end{itemize}
+
 
 \subsection{Builder}
 \subsubsection{Goal}
@@ -178,5 +203,18 @@ Separate the construction of a complex object from its representation, so that t
 \subsection{Factory Method (Virtual Constructor)}
 \subsubsection{Goal}
 Define an interface for creating an object, but let sub-classes decide which class to instantiate.
+
+\clearpage
+% ---- Bibliography ----
+
+
+
+
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliographystyle{alpha}
+\bibliography{DesignPatterns}
+\nocite{*}
+
+
 \end{document}
 
