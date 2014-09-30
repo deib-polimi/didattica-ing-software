@@ -1,0 +1,13 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Creational Patterns}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Prototype}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Abstract Factory \(Kit\)}{section.2}% 4
+\BOOKMARK [3][-]{subsubsection.2.2.1}{Goal}{subsection.2.2}% 5
+\BOOKMARK [3][-]{subsubsection.2.2.2}{Structure}{subsection.2.2}% 6
+\BOOKMARK [3][-]{subsubsection.2.2.3}{Examples}{subsection.2.2}% 7
+\BOOKMARK [2][-]{subsection.2.3}{Builder}{section.2}% 8
+\BOOKMARK [3][-]{subsubsection.2.3.1}{Goal}{subsection.2.3}% 9
+\BOOKMARK [3][-]{subsubsection.2.3.2}{Motivation}{subsection.2.3}% 10
+\BOOKMARK [2][-]{subsection.2.4}{Singleton}{section.2}% 11
+\BOOKMARK [2][-]{subsection.2.5}{Factory Method \(Virtual Constructor\)}{section.2}% 12
+\BOOKMARK [3][-]{subsubsection.2.5.1}{Goal}{subsection.2.5}% 13

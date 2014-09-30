@@ -1,0 +1,182 @@
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{hyperref}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle} % Top center head
+\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true
+  tabsize=3
+}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Design Pattern} % Assignment title
+\newcommand{\hmwkDueDate}{Martedi,\ Aprile 15,\ 2014} % Due date
+\newcommand{\hmwkClass}{Ingegneria del Software 1} % Course/class
+\newcommand{\hmwkClassTime}{} % Class/lecture time
+\newcommand{\hmwkClassInstructor}{} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{} % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+\vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+\vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+\newpage
+\tableofcontents
+\newpage
+
+
+
+%----------------------------------------------------------------------------------------
+\section{Introduction}
+
+
+\section{Creational Patterns}
+Inside the class of the creational patterns we can distinguish between two main pattern:
+\begin{itemize}
+\item \textbf{class creational pattern} uses inheritance to change how the different classes are intantiated.
+\item \textbf{object creational pattern} delegate the instantiation of the object to another object.
+\end{itemize}
+The object creational pattern become important when it is necessary to compose a smaller set of composed behavior into complex one. Thus, creating an object with a particular behavior is more complex then simply instantiating a new class.
+
+\subsection{Prototype}
+
+\subsection{Abstract Factory (Kit)}
+\subsubsection{Goal}
+The goal is to create an interface which allows \textbf{to create families} of related or dependent objects, \textit{without specifying} their concrete classes. 
+
+\subsubsection{Structure}
+
+\begin{figure}[h!]
+  \centering
+    \includegraphics[width=0.8\textwidth]{Img/AbstractFactoryUML.png}
+     \caption{Abstract Factory UML.}
+     \label{AbstractFactoryUML}
+\end{figure}
+
+The UML of Figure~\ref{AbstractFactoryUML} is composed by the following classes:
+\begin{itemize}
+\item \emph{AbstractFactory}: is an abstract class (see the italic style of the text), which declares the interface for the operations that allows to create \emph{abstract} products
+\item \emph{ConcreteFactory}: are the concrete classes that allows to create \emph{concrete} products (Note the hierarchical relation between the AbstractFactory and the ConcreteFactory). Each product is a family of related dependent objects AbstractProductA and AbstractProductB, and in particular, for the ConcreteFactory1 the products are ProductA1 and ProductB1, while for the ConcreteFactory2 the products are ProductA2 and ProductB2 (Note the uses relation between the Factories and the products).
+\item \emph{AbstractProduct}:  declares an abstract product which can be aggregated to other products using appropriate factories
+\item \emph{ConcreteProduct}: are  concrete products which extends  particular abstract products.
+\item \emph{Client}: instantiate a specific ConcreteFactory (depending on its necessities) to obtain specific products.
+\end{itemize}
+
+\subsubsection{Examples}
+Using this pattern an abstract framework (factory) is defined, which allows to create objects that follow a general pattern. At run-time the abstract factory is paired with any concrete factory that allows to create the objects that follow the concrete pattern. In other words, the Abstract Factory is a super-factory which creates other factories (Factory of factories).
+
+
+
+The classes that are involved in the Abstract factory pattern are:
+\begin{itemize}
+\item \emph{Abstract Factory} is the interface the the ConcreteFactories must implement
+\item \emph{Concrete Factories} implements the operations and allow to create concrete products
+\end{itemize}
+
+\subsection{Builder}
+\subsubsection{Goal}
+Separate the construction of a complex object from its representation, so that the same construction process can create different representations.
+
+\subsubsection{Motivation}
+
+\subsection{Singleton}
+
+\subsection{Factory Method (Virtual Constructor)}
+\subsubsection{Goal}
+Define an interface for creating an object, but let sub-classes decide which class to instantiate.
+\end{document}
+
