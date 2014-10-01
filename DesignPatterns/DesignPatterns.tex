@@ -137,13 +137,52 @@
 \section{Introduction}
 
 
-\section{Creational Patterns}
+\section{Creational Patterns Theory}
 Inside the class of the creational patterns we can distinguish between two main pattern:
 \begin{itemize}
-\item \textbf{class creational pattern} uses inheritance to change how the different classes are intantiated.
+\item \textbf{class creational pattern} uses inheritance to change how the different classes are intantiated (Singleton~\ref{Singleton}).
 \item \textbf{object creational pattern} delegate the instantiation of the object to another object.
 \end{itemize}
 The object creational pattern become important when it is necessary to compose a smaller set of composed behavior into complex one. Thus, creating an object with a particular behavior is more complex then simply instantiating a new class.
+
+\subsection{Singleton}
+\label{Singleton}
+\subsubsection{Goal}
+Guarantee that only \textbf{one instance} of a specific class is created and allow to create that instance.
+
+\subsubsection{Structure}
+\begin{figure}[h!]
+  \centering
+    \includegraphics[width=0.3\textwidth]{Img/SingletonUML.png}
+     \caption{Singleton UML}
+     \label{SingletonUML}
+\end{figure}
+General idea: make the class ensuring that \textbf{only} one instance is creating. The idea is to make the class able to intersect creation of new objects and to provide an easy way to access the instance.
+
+\subsubsection{Implementation}
+The class which must be singleton (in this case named as $Singleton$) has
+\begin{itemize}
+\item a \textbf{static} attribute $singleton$ of type $Singleton$
+\item a \textbf{private} constructor (in this case $Singleton()$) which could have also parameters
+\item a \textbf{public} and \textbf{static} method $getInstance()$ which returns the instance of the singleton class. The method $getInstance$ is the only way to instantiate the object and thus can guarantee the access of the unique copy referenced by the $static$ attribute singleton. 
+\end{itemize}
+
+
+\subsubsection{Examples}
+\textbf{Printer spooler}\\
+ Although there can be many printers in a system, there should be only one printer spooler.
+ 
+ \textbf{File system, Window manager}\\
+ There should be only one file system and one window manager.
+ 
+\subsubsection{When to use it}
+\begin{itemize}
+\item when it is necessary to instantiate  a class exactly once (the class must be accessible to the client from a well known access point).
+\item when it is necessary to control the access to the instance (it is possible to control $who$ and $when$ can access the instance).
+\item it can reduce the number of instances of an object in the system
+\item allows the refinement of the class and provides a way to configure the application to get the instance of the class you need at run-time
+\item it allows using a similar approach to control the number of instances of a class at run-time
+\end{itemize}
 
 \subsection{Prototype}
 
@@ -171,17 +210,18 @@ Using this pattern an abstract framework (factory) is defined, which allows to c
 
 Note: usually only a single instance of a ConcreteFactory class is created at run-time. The AbstractFactory defers the creation of products to the ConcreteFactories.
 
-\subsubsection{Examples}
-\textbf{Window Interface}\\
-Consider a user interface that must support multiple devices, such as laptops, cellphones. Different interfaces must be creating depending on the device which runs the application (e.g., different type of scroll bars, windows, buttons). To be portable, the application should not be hard-coded to a particular look and feel. The instantiation and the designing new look-and-feels must be easy. The example is inspired by~\cite{gamma1994design}.
-
-
 \subsubsection{Implementation}
 \begin{itemize}
 \item \emph{AbstractFactory} only declare the interface for the creating the products
 \item \emph{ConcreteFactory} are \emph{singleton}. A \emph{factory method} is defined for each product. 
-
 \end{itemize}
+
+
+\subsubsection{Examples}
+\emph{Window Interface}\\
+Consider a user interface that must support multiple devices, such as laptops, cellphones. Different interfaces must be creating depending on the device which runs the application (e.g., different type of scroll bars, windows, buttons). To be portable, the application should not be hard-coded to a particular look and feel. The instantiation and the designing new look-and-feels must be easy. The example is inspired by~\cite{gamma1994design}.
+
+
 
 \subsubsection{Pro and Cons}
 \begin{itemize}
@@ -191,7 +231,7 @@ Consider a user interface that must support multiple devices, such as laptops, c
 \item All the products are returned to the client as abstract interfaces to the product. The client is not able to make safe assumption on the type of the product.
 \end{itemize}
 
-aaa
+
 
 \subsection{Builder}
 \subsubsection{Goal}
@@ -199,11 +239,19 @@ Separate the construction of a complex object from its representation, so that t
 
 \subsubsection{Motivation}
 
-\subsection{Singleton}
+
 
 \subsection{Factory Method (Virtual Constructor)}
 \subsubsection{Goal}
 Define an interface for creating an object, but let sub-classes decide which class to instantiate.
+
+
+
+
+\section{Creational Patterns Exercises}
+\subsection{Singleton}
+
+
 
 \clearpage
 % ---- Bibliography ----
