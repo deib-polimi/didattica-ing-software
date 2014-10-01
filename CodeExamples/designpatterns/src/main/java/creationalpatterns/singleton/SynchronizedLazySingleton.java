@@ -28,5 +28,4 @@ public class SynchronizedLazySingleton {
 		return uniqueInstance;
 			
 	}
-
 }
