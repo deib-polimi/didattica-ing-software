@@ -15,7 +15,7 @@ public class EagerSingleton {
 	 * contains the unique instance of the {@link EagerSingleton} class
 	 * if the object is big it can occupy a lot of memory if not used
 	 */
-	private static EagerSingleton uniqueinstance=new EagerSingleton();
+	private static EagerSingleton uniqueInstance=new EagerSingleton();
 	
 	/**
 	 * The constructor of the {@link EagerSingleton} class is hided (either private or protected). 
@@ -30,6 +30,6 @@ public class EagerSingleton {
 	 * @return the pointer to the unique instance of the {@link EagerSingleton} class
 	 */
 	public static EagerSingleton getInstance(){
-		return uniqueinstance;
+		return uniqueInstance;
 	}
 }
