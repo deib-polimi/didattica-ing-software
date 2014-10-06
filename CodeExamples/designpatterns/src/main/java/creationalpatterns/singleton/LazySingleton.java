@@ -1,6 +1,3 @@
-/**
- * 
- */
 package creationalpatterns.singleton;
 
 /**
@@ -15,7 +12,6 @@ public class LazySingleton {
 	
 	/**
 	 * contains the unique instance of the {@link LazySingleton} class
-	 * if the object is big it can occupy a lot of memory if not used
 	 */
 	private static LazySingleton uniqueInstance;
 	// other attributes
@@ -36,6 +32,7 @@ public class LazySingleton {
 		
 		// if the instance has not already been created,  the new instance is created
 		if(uniqueInstance==null){
+			
 			uniqueInstance=new LazySingleton();
 		}
 		// the instance is returned

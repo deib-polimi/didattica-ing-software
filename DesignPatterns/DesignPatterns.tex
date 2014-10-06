@@ -184,6 +184,9 @@ The class which must be singleton (in this case named as $Singleton$) has
 \item it allows using a similar approach to control the number of instances of a class at run-time
 \end{itemize}
 
+\subsubsection{Additional references}
+For additional information the interested reader may refer to \url{http://www.javaworld.com/article/2073352/core-java/simply-singleton.html}.
+
 \subsection{Prototype}
 
 \subsection{Abstract Factory (Kit)}
@@ -290,8 +293,44 @@ public class EagerSingleton {
 }
 \end{lstlisting}
 
+\subsubsection{Use of EagerSingleton}
+\begin{lstlisting}
+package creationalpatterns.singleton;
 
-\subsubsection{Lazy Singleton}
+/**
+ * this class shows an example of use of the EagerSingleton pattern
+ * @author claudio menghi
+ *
+ */
+public class EagerSingletonMain {
+
+	public static void main(String[] args) {
+		
+		// declares a new instance of EagerSingleton 
+		EagerSingleton eagerSing1;
+		// declares a new instance of EagerSingleton 
+		EagerSingleton eagerSing2;
+		
+		// gets an instance of an EagerSingleton
+		eagerSing1=EagerSingleton.getInstance();
+		
+		// gets another (the same) instance of an EagerSingleton
+		eagerSing2=EagerSingleton.getInstance();
+		
+		/*
+		 *  compare the references of the two objects using ==  
+		 */
+		if(eagerSing1==eagerSing2){
+			System.out.println("The two references are equals: they point to the same object");
+		}
+		else{
+			System.out.println("The two references are different");
+		}
+	}
+}
+\end{lstlisting}
+
+\subsubsection{LazySingleton}
 
 \begin{lstlisting}
 package creationalpatterns.singleton;
@@ -336,6 +375,90 @@ public class LazySingleton {
 }
 \end{lstlisting}
 
+\subsubsection{Use of LazySingleton}
+\begin{lstlisting}
+package creationalpatterns.singleton;
+
+public class LazySingletonMain {
+
+	public static void main(String[] args) {
+		
+		// declares a new instance of LazySingleton 
+		LazySingleton lazySing1;
+		// declares a new instance of LazySingleton 
+		LazySingleton lazySing2;
+		
+		// gets an instance of an LazySingleton
+		lazySing1=LazySingleton.getInstance();
+		
+		// gets another (the same) instance of an LazySingleton
+		lazySing2=LazySingleton.getInstance();
+		
+		/*
+		 *  compare the references of the two objects using ==  
+		 */
+		if(lazySing1==lazySing2){
+			System.out.println("The two references are equals: they point to the same object");
+		}
+		else{
+			System.out.println("The two references are different");
+		}
+	}
+}
+\end{lstlisting}
+
+\subsubsection{Synchronization problems in the use of LazySingleton}
+\begin{lstlisting}
+package creationalpatterns.singleton;
+
+public class LazySingletonSynchronization {
+   private static LazySingleton singleton = null;
+	
+   public static void main(String[] args) throws InterruptedException {
+		
+	   // Both threads call Singleton.getInstance().
+      Thread threadOne = new Thread(new SingletonRunnable());
+      Thread threadTwo = new Thread(new SingletonRunnable());
+      threadOne.start();
+      threadTwo.start();
+      threadOne.join();
+      threadTwo.join();
+   }
+   private static class SingletonRunnable implements Runnable {
+      public void run() {
+    	 /*
+    	  * add 
+    	  * try {
+				Thread.currentThread().sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			in the constructor of the LazySingleton 
+    	  */
+         // Get a reference to the singleton.
+         LazySingleton s = LazySingleton.getInstance();
+         // Protect singleton member variable from
+         // multithreaded access.
+         synchronized(LazySingleton.class) {
+            if(singleton == null) // If local reference is null...
+               singleton = s;     // ...set it to the singleton
+         }
+         // Local reference must be equal to the one and
+         // only instance of Singleton; otherwise, we have two
+                  // Singleton instances.
+         if(s==singleton){
+        	 System.out.printf("The local reference is equal to singleton\n");
+         }
+         else{
+        	 System.out.printf("The local reference is not equal to the singleton\n");
+         }
+      }
+   }
+}
+\end{lstlisting}
+
+
 
 \subsubsection{Synchronized Lazy Singleton}
 \begin{lstlisting}
@@ -369,6 +492,59 @@ public class SynchronizedLazySingleton {
 	}
 }
 \end{lstlisting}
+
+\subsubsection{Use of the Synchronized Lazy Singleton}
+\begin{lstlisting}
+package creationalpatterns.singleton;
+
+
+public class SynchronizedLasySingletonMain {
+	private static SynchronizedLazySingleton singleton = null;
+	
+	   public static void main(String[] args) throws InterruptedException {
+			
+		   // Both threads call Singleton.getInstance().
+	      Thread threadOne = new Thread(new SingletonRunnable());
+	      Thread threadTwo = new Thread(new SingletonRunnable());
+	      threadOne.start();
+	      threadTwo.start();
+	      threadOne.join();
+	      threadTwo.join();
+	   }
+	   private static class SingletonRunnable implements Runnable {
+	      public void run() {
+	    	 /*
+	    	  * add 
+	    	  * try {
+					Thread.currentThread().sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				in the constructor of the LazySingleton 
+	    	  */
+	         // Get a reference to the singleton.
+	    	  SynchronizedLazySingleton s = SynchronizedLazySingleton.getInstance();
+	         // Protect singleton member variable from
+	         // multithreaded access.
+	         synchronized(SynchronizedLazySingleton.class) {
+	            if(singleton == null) // If local reference is null...
+	               singleton = s;     // ...set it to the singleton
+	         }
+	         // Local reference must be equal to the one and
+	         // only instance of Singleton; otherwise, we have two
+	                  // Singleton instances.
+	         if(s==singleton){
+	        	 System.out.printf("The local reference is equal to singleton\n");
+	         }
+	         else{
+	        	 System.out.printf("The local reference is not equal to the singleton\n");
+	         }
+	      }
+	   }
+}
+\end{lstlisting}
+
 
 \subsubsection{Enum Singleton}
 
