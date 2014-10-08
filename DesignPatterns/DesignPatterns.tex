@@ -185,9 +185,59 @@ The class which must be singleton (in this case named as $Singleton$) has
 \end{itemize}
 
 \subsubsection{Additional references}
-For additional information the interested reader may refer to \url{http://www.javaworld.com/article/2073352/core-java/simply-singleton.html}.
+For additional information the interested reader may refer to \url{http://www.javaworld.com/article/2073352/core-java/simply-singleton.html} and to~\cite{gamma1994design}.
 
-\subsection{Prototype}
+
+\subsection{Factory Method (Virtual Constructor)}
+\subsubsection{Goal}
+Define an interface for creating an object, but let free the sub-classes decide which class to instantiate.
+
+\subsubsection{Structure}
+
+\begin{figure}[h!]
+  \centering
+    \includegraphics[width=0.8\textwidth]{Img/FactoryMethod.png}
+     \caption{Factory Method UML.}
+     \label{FactoryMethod}
+\end{figure}
+
+\begin{itemize}
+\item the creation of the object is hidden inside a specific method called factory: \emph{a method which returns an object but is not the constructor of that object}
+\item the factory method decides the strategy to be employed in the allocation of the object
+\end{itemize}
+
+
+Components involved:
+
+\begin{itemize}
+\item  \textbf{Product} defines the interface of the products that the factory method creates.
+\item \textbf{Concrete Product} are the concrete product the factory creates
+\item  \textbf{Creator} 
+\begin{itemize}
+\item declares the factory method, which returns the Product
+\item it is also possible to provide a default implementation of the factory method 
+\end{itemize}
+\item \textbf{Concrete Creator} overrides the factory method of the abstract creator to return a specific Concrete Product
+\end{itemize}
+
+\subsubsection{Implementation}
+To describe the implementation we refer to figure~\ref{FactoryMethod}. Other implementations and designs may be provided.
+\begin{itemize}
+\item the \textbf{Creator} is an abstract class with an abstract public or protected factory method. If a default implementation is provided the method is not abstract. It uses the Abstract class Product
+\item  \textbf{ConcreteCreator} overrides the factory method of the Creator, in this case it also forces the method to be public. The Factory Method of the ConcreteCreator returns the ConcreteProduct. It uses the ConcreteProduct class.
+\item  \textbf{Product} is an AbstractClass which describes the Product
+\item \textbf{ConcreteProduct} is a concrete class which extends the AbstractClass Product
+\end{itemize}
+
+\subsubsection{Examples}
+Let's consider a drawing application. We may have two classes one for drawing the application interface (DrawingApplication) and one for driving the document (DrawingDocument). The Application class is responsible for creating these Drawing elements when the user requires them, for example when he clicks on the Open or New menus.
+
+\subsubsection{When to use it}
+\begin{itemize}
+\item it is not possible to anticipate a priori the class to be created
+\item the designer wants to delegate the responsibility to create the class to one of several helper subclasses, and you want to localize the knowledge of the class to create in the subclasses.
+\end{itemize}
+%----------------------------
 
 \subsection{Abstract Factory (Kit)}
 \subsubsection{Goal}
@@ -236,17 +286,7 @@ Consider a user interface that must support multiple devices, such as laptops, c
 
 
 
-\subsection{Builder}
-\subsubsection{Goal}
-Separate the construction of a complex object from its representation, so that the same construction process can create different representations.
 
-\subsubsection{Motivation}
-
-
-
-\subsection{Factory Method (Virtual Constructor)}
-\subsubsection{Goal}
-Define an interface for creating an object, but let sub-classes decide which class to instantiate.
 
 
 
@@ -562,6 +602,9 @@ public enum EnumSingleton {
 	}
 }
 \end{lstlisting}
+
+
+\subsection{Factory Method}
 
 \clearpage
 % ---- Bibliography ----
