@@ -239,9 +239,13 @@ Let's consider a drawing application. We may have two classes one for drawing th
 \end{itemize}
 %----------------------------
 
+\subsubsection{Additional references}
+A different implementation of the Factory Method Pattern can be found in~\cite{gamma1994design}.
+
+
 \subsection{Abstract Factory (Kit)}
 \subsubsection{Goal}
-The goal is to create an interface which allows \textbf{to create families} of related or dependent objects, \textit{without specifying} their concrete classes. 
+The goal is to create an interface which allows to create families of \textbf{related or dependent objects}, \textit{without specifying} their concrete classes. 
 
 \subsubsection{Structure}
 
@@ -605,6 +609,575 @@ public enum EnumSingleton {
 
 
 \subsection{Factory Method}
+
+\subsubsection{Product}
+
+\begin{lstlisting}
+/**
+ * 
+ */
+package creationalpatterns.factorymethod;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @author claudio menghi
+ * contains the abstract product
+ */
+public abstract class Pizza {
+	/**
+	 * contains the name of the {@link Pizza}
+	 */
+	private String name;
+	/**
+	 * contains the sauce used to make the {@link Pizza}
+	 */
+	private String sauce;
+	/**
+	 * contains the List of the ingredients of the {@link Pizza}
+	 */
+	private List<String> ingredients;
+	
+	/**
+	 * creates a new {@link Pizza}
+	 * @param name is the name of the {@link Pizza}
+	 * @param sauce is the sauce used to make the {@link Pizza}
+	 */
+	protected Pizza(String name, String sauce){
+		this.name=name;
+		this.sauce=sauce;
+		this.ingredients=new ArrayList<String>();
+	}
+
+	/**
+	 * add the ingredient ingredient to the {@link Pizza}
+	 * @param ingredient is the ingredient to be added to the pizza
+	 */
+	public void addIngredient(String ingredient){
+		if(ingredient==null){
+			throw new NullPointerException("The ingredient to be added cannot be null");
+		}
+		this.ingredients.add(ingredient);
+		
+	}
+	
+	public void prepare() {
+		System.out.println("Preparazione di Pizza " + name);
+		System.out.println("Aggiungi la salsa " + sauce);
+		System.out.println("Aggiungi gli ingredienti:" );
+		for (String ingrediente: ingredients){
+			System.out.println(ingrediente);
+		}		
+	}
+	public void cook(){
+		System.out.println("Cotta in forno per 10 minuti");
+	}
+	public void cut(){
+		System.out.println("Taglia la pizza a fette");
+	}
+	
+	public String getNome(){
+		return name;
+	}
+}
+\end{lstlisting}
+
+
+\begin{lstlisting}
+package creationalpatterns.factorymethod;
+
+/**
+ * contains a specific type of {@link Pizza} and in particular {@link PizzaGenovese}
+ * @author Claudio1
+ */
+public class PizzaGenovese extends Pizza {
+
+	/**
+	 * creates a new {@link PizzaGenovese}
+	 */
+	public PizzaGenovese() {
+		super("Al pesto", "Pesto DOC");
+		this.addIngredient("Pomodorini");
+		this.addIngredient("Grana a scaglie");
+	}
+}
+\end{lstlisting}
+
+\begin{lstlisting}
+package creationalpatterns.factorymethod;
+
+/**
+ * contains a specific type of {@link Pizza} and in particular {@link PizzaNapoletana}
+ * @author Claudio1
+ */
+public class PizzaNapoletana extends Pizza {
+
+	/**
+	 * creates a new {@link PizzaNapoletana}
+	 */
+	public PizzaNapoletana(){
+		super("Margherita", "Spesso e soffice");
+		this.addIngredient("Mozzarella di Bufala");
+		this.addIngredient("Basilico Fresco");
+	}
+}
+\end{lstlisting}
+
+\begin{lstlisting}
+package creationalpatterns.factorymethod;
+
+/**
+ * contains a specific type of {@link Pizza} and in particular {@link PizzaTaggiasca}
+ * @author Claudio1
+ */
+public class PizzaTaggiasca extends Pizza {
+
+	/**
+	 * creates a new {@link PizzaTaggiasca}
+	 */
+	public PizzaTaggiasca(){
+		super("Pizza alle Olive", "Sottile e croccante");
+		this.addIngredient("Pomodorini");
+		this.addIngredient("Olive taggiasche");
+	}
+}
+\end{lstlisting}
+
+\subsubsection{Creator}
+
+\begin{lstlisting}
+/**
+ * 
+ */
+package creationalpatterns.factorymethod;
+
+/**
+ * is the creator:  an abstract class with an abstract public or protected factory method. 
+ * If a default implementation is provided the method is not abstract. It uses the Abstract class Product
+ * @author Claudio1
+ *
+ */
+public abstract class Pizzeria {
+
+	/**
+	 * is a public method which allows to create the pizza
+	 * @param type is the type of the pizza which is ordered
+	 * @return the ordered pizza
+	 */
+	public Pizza orderPizza(String type){
+		Pizza pizza;
+		pizza = createPizza(type);
+		pizza.prepare();
+		pizza.cook();
+		pizza.cut();
+		return pizza;
+	}
+	/**
+	 * is the factory method
+	 * @param type is the type of the pizza require
+	 * @return the pizza required
+	 * @throws IllegalArgumentException if the specific type of pizza is not available
+	 */
+	protected abstract Pizza createPizza(String type);
+}
+\end{lstlisting}
+
+\begin{lstlisting}
+package creationalpatterns.factorymethod;
+
+/**
+ * is a concrete Creator.
+ * It overrides the factory method of the Creator. 
+ * The Factory Method of the ConcreteCreator returns the ConcreteProduct (the concrete pizza). 
+ * It uses the ConcreteProduct class {@link PizzaNapoletana} 
+ * @author Claudio1
+ *
+ */
+public class PizzeriaBellaNapoli extends Pizzeria {
+
+	@Override
+	public Pizza createPizza(String type) {
+		if(!type.equals("margherita")){
+			throw new IllegalArgumentException("The pizza "+type+" is not available in the PizzeriaBellaNapoli");
+		}
+		return new PizzaNapoletana();
+	}
+}
+\end{lstlisting}
+
+\begin{lstlisting}
+package creationalpatterns.factorymethod;
+
+/**
+ * is a concrete Creator.
+ * It overrides the factory method of the Creator. 
+ * The Factory Method of the ConcreteCreator returns the ConcreteProduct (the concrete pizza). 
+ * It uses the ConcreteProduct class {@link PizzaGenoveses} 
+ * @author Claudio1
+ *
+ */
+public class PizzeriaCinqueTerre extends Pizzeria {
+
+	@Override
+	protected Pizza createPizza(String type) {
+		switch(type){
+			case "pesto":
+				return new PizzaGenovese();
+			case "olive":
+				return new PizzaTaggiasca();
+			default: 
+				throw new IllegalArgumentException("The pizza "+type+" is not available in the PizzeriaCinqueTerre");
+		}
+	}
+}
+\end{lstlisting}
+
+
+\subsubsection{Use of the pattern}
+\begin{lstlisting}
+package creationalpatterns.factorymethod;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Pizzeria bellaNapoli = new PizzeriaBellaNapoli();
+		Pizzeria cinqueTerre = new PizzeriaCinqueTerre();
+		
+		Pizza pizza = bellaNapoli.orderPizza("margherita");
+		System.out.println("Valerio ha ordinato la pizza " + pizza.getNome());
+		System.out.println("###############");
+		
+		pizza = cinqueTerre.orderPizza("pesto");
+		System.out.println("Carlo ha ordinato la pizza " + pizza.getNome());
+	}
+}
+\end{lstlisting}
+
+
+
+
+\subsection{Abstract Factory}
+
+\subsubsection{Product 1: Sauce}
+\begin{lstlisting}
+/**
+ * 
+ */
+package creationalpatterns.abstractfactory.sauce;
+
+/**
+ * @author Claudio1
+ * contains the abstract description of a sauce
+ */
+public abstract class Sauce {
+
+	/**
+	 * @return the String description of the sauce
+	 */
+	public abstract String toString();
+}
+\end{lstlisting}
+
+\begin{lstlisting}
+/**
+ * 
+ */
+package creationalpatterns.abstractfactory.sauce;
+
+/**
+ * @author Claudio1
+ * contains a pesto sauce
+ */
+public class PestoSauce extends Sauce {
+
+	@Override
+	public String toString() {
+		
+		return "Pesto sauce";
+	}
+
+}
+\end{lstlisting}
+
+\begin{lstlisting}
+/**
+ * 
+ */
+package creationalpatterns.abstractfactory.sauce;
+
+/**
+ * @author Claudio1
+ * contains a Tomato sauce
+ */
+public class TomatoSauce extends Sauce {
+
+	@Override
+	public String toString() {
+		return "Tomato sauce";
+	}
+
+}
+
+\end{lstlisting}
+
+\subsubsection{Product 2: Ground}
+\begin{lstlisting}
+/**
+ * 
+ */
+package creationalpatterns.abstractfactory.ground;
+
+/**
+ * @author Claudio1
+ * contains the abstract description of the ground of the pizza
+ */
+public abstract class Ground {
+	
+	/**
+	 * @return a {@link String} which describes the ground
+	 */
+	public abstract String toString();
+}
+\end{lstlisting}
+
+\begin{lstlisting}
+/**
+ * 
+ */
+package creationalpatterns.abstractfactory.ground;
+
+/**
+ * @author Claudio1
+ *	contains a crisp grpund
+ */
+public class CrispGround extends Ground {
+
+	@Override
+	public String toString() {
+		return "Crisp ground";
+	}
+
+}
+\end{lstlisting}
+
+\begin{lstlisting}
+/**
+ * 
+ */
+package creationalpatterns.abstractfactory.ground;
+
+/**
+ * @author Claudio1
+ * contains a soft gound
+ */
+public class SoftGround extends Ground {
+
+	@Override
+	public String toString() {
+		return "Soft ground";
+	}
+
+}
+\end{lstlisting}
+
+\subsubsection{Factories}
+\begin{lstlisting}
+/**
+ * 
+ */
+package creationalpatterns.abstractfactory.pizzafactories;
+
+import creationalpatterns.abstractfactory.ground.Ground;
+import creationalpatterns.abstractfactory.sauce.Sauce;
+
+/**
+ * @author Claudio1
+ * is a factory which returns the ingredients of a particular pizza
+ */
+public abstract class PizzaIngredientFactory {
+	/**
+	 * returns the {@link Ground} of the pizza
+	 * @return the {@link Ground} of the pizza
+	 */
+	public abstract Ground createGroud();
+	/**
+	 * returns the {@link Sauce} to be added in the pizza
+	 * @return the {@link Sauce} to be added in the pizza
+	 */
+	public abstract Sauce createSauce();
+}
+\end{lstlisting}
+
+\begin{lstlisting}
+/**
+ * 
+ */
+package creationalpatterns.abstractfactory.pizzafactories;
+
+import creationalpatterns.abstractfactory.ground.Ground;
+import creationalpatterns.abstractfactory.ground.SoftGround;
+import creationalpatterns.abstractfactory.sauce.Sauce;
+import creationalpatterns.abstractfactory.sauce.TomatoSauce;
+import creationalpatterns.factorymethod.Pizza;
+
+/**
+ * @author Claudio1
+ * contains the Factory of a Napoli {@link Pizza}
+ */
+public class NapoliPizzaIngredientFactory extends PizzaIngredientFactory {
+
+	/**
+	 * returns the Ground created in a Genova Pizza Factory which is a {@link SoftGround}
+	 * @return a {@link SoftGround}
+	 */
+	
+	@Override
+	public Ground createGroud() {
+		return new SoftGround();
+	}
+	/**
+	 * returns the {@link Sauce} created in a Genova {@link PizzaIngredientFactory} factory which is a {@link TomatoSauce}
+	 * @return a {@link TomatoSauce}
+	 */
+	
+	@Override
+	public Sauce createSauce() {
+		return new TomatoSauce();
+	}
+
+}
+\end{lstlisting}
+
+\begin{lstlisting}
+/**
+ * 
+ */
+package creationalpatterns.abstractfactory.pizzafactories;
+
+import creationalpatterns.abstractfactory.ground.CrispGround;
+import creationalpatterns.abstractfactory.ground.Ground;
+import creationalpatterns.abstractfactory.sauce.PestoSauce;
+import creationalpatterns.abstractfactory.sauce.Sauce;
+
+/**
+ * @author Claudio1
+ * contains
+ */
+public class GenovaPizzaIngredientFactory extends PizzaIngredientFactory {
+
+	/**
+	 * returns the Ground created in a Genova Pizza Factory which is a {@link CrispGround}
+	 * @return a {@link CrispGround}
+	 */
+	@Override
+	public Ground createGroud() {
+		Ground ground = new CrispGround();
+		return ground;
+		
+	}
+	/**
+	 * returns the {@link Sauce} created in a Genova {@link PizzaIngredientFactory} factory which is a {@link PestoSauce}
+	 * @return a {@link PestoSauce}
+	 */
+	@Override
+	public Sauce createSauce() {
+		PestoSauce sauce=new PestoSauce();
+		return sauce;
+	}
+
+}
+\end{lstlisting}
+
+\subsubsection{Client}
+\begin{lstlisting}
+/**
+ * 
+ */
+package creationalpatterns.abstractfactory.pizza;
+
+import creationalpatterns.abstractfactory.ground.Ground;
+import creationalpatterns.abstractfactory.pizzafactories.PizzaIngredientFactory;
+import creationalpatterns.abstractfactory.sauce.Sauce;
+
+/**
+ * @author Claudio1
+ * contains the abstract of a Pizza represents a client which is using the {@link PizzaIngredientFactory}
+ * 
+ */
+public class Pizza {
+	/**
+	 * contains the ground of the {@link Pizza}
+	 */
+	private Ground ground;
+	/**
+	 * contains the {@link Sauce} of the {@link Pizza}
+	 */
+	private Sauce sauce;
+	
+	/**
+	 * creates a new {@link Pizza} with the specified {@link Ground} and {@link Sauce}
+	 * @param ground is the {@link Ground} of the {@link Pizza}
+	 * @param sauce is the {@link Sauce} of the {@link Pizza}
+	 */
+	private Pizza(Ground ground, Sauce sauce){
+		this.ground=ground;
+		this.sauce=sauce;
+	}
+	
+	/**
+	 * creates a new {@link Pizza} with the specified {@link PizzaIngredientFactory}
+	 * @param factory is the factory which is used to create the {@link Pizza}
+	 */
+	public Pizza(PizzaIngredientFactory factory){
+		this(factory.createGroud(), factory.createSauce());
+	}
+	/**
+	 * returns the {@link String} representation of the {@link Pizza}
+	 */
+	public String toString(){
+		return "ground: "+this.ground.toString()+" \t sauce: "+this.sauce.toString();
+	}
+}
+\end{lstlisting}
+
+\subsubsection{Use of the Factory}
+
+\begin{lstlisting}
+/**
+ * 
+ */
+package creationalpatterns.abstractfactory;
+
+import creationalpatterns.abstractfactory.pizza.Pizza;
+import creationalpatterns.abstractfactory.pizzafactories.GenovaPizzaIngredientFactory;
+import creationalpatterns.abstractfactory.pizzafactories.NapoliPizzaIngredientFactory;
+
+/**
+ * @author Claudio1
+ *
+ */
+public class Main {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// creates a new GenovaIngridient factory
+		GenovaPizzaIngredientFactory genovaFactory=new GenovaPizzaIngredientFactory();
+		// creates a new pizza using the ingredients provided by the Genova factory
+		Pizza pizzaGenovese=new Pizza(genovaFactory);
+		System.out.println(pizzaGenovese);
+		
+		// creates a new NapoliPizzaIngridient factory
+		NapoliPizzaIngredientFactory napoliFactory=new NapoliPizzaIngredientFactory();
+		// creates a new pizza using the ingredients provided by a Napoli pizzeria
+		Pizza pizzaNapoletana=new Pizza(napoliFactory);
+		System.out.println(pizzaNapoletana);
+	}
+}
+\end{lstlisting}
+
 
 \clearpage
 % ---- Bibliography ----
