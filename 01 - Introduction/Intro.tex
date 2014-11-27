@@ -1,0 +1,904 @@
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{hyperref}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{listings}
+\usepackage{subfigure}
+\usepackage{afterpage}
+\usepackage{amsmath,amssymb}            
+\usepackage{rotating}  
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{amsthm}
+\usepackage[scriptsize]{caption} 
+\hyphenation{a-gen-tiz-za-zio-ne}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1} % Line spacing
+
+\lstset{
+  numbers=left,
+  stepnumber=5,    
+  firstnumber=1,
+  numberfirstline=true
+}
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle} % Top center head
+\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true
+  tabsize=3
+}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Introduction} % Assignment title
+\newcommand{\hmwkDueDate}{Martedi,\ Aprile 15,\ 2014} % Due date
+\newcommand{\hmwkClass}{Ingegneria del Software 1} % Course/class
+\newcommand{\hmwkClassTime}{} % Class/lecture time
+\newcommand{\hmwkClassInstructor}{Carlo Ghezzi} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{} % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+\vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+\vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+\newpage
+\tableofcontents
+\newpage
+
+
+
+%----------------------------------------------------------------------------------------
+\section{Introduction (10 min)}
+Java main feature:
+\begin{itemize}
+\item \emph{Portability} the main goal of the language is to allow developer to \emph{write programs only once with the assurance that it is possible to execute these programs independently on the architecture on which the program is run}: ``Write Once, Run Anywhere".
+\end{itemize}
+
+Java language characteristics:
+\begin{itemize}
+\item \emph{Compiled} ``a compiled language is a programming language whose implementations are typically compilers (translators that generate machine code from source code), and not interpreters (step-by-step executors of source code, where no pre-runtime translation takes place)"\cite{WikipediaCompiled}.
+\item \emph{Object-oriented}: in contrast with $C$, $COBOL$ or $PASCAL$ which are based on a procedural paradigm~\footnote{Ina procedural paradigm the main building block is the function which manipulates the data of the program.} $JAVA$ is object oriented. In an object-oriented paradigm the developer reason with respect to objects, that are abstraction of concepts of the real world the developer wants to model. Technically an Object is an \emph{instance} of a class~\footnote{$JAVA$ is also considered as multiparadigm language since it is also a procedural language (and if we consider Java 8 also functional.}.
+\item \emph{Class-based}: ``is a style of object-oriented programming in which inheritance is achieved by defining classes of objects, as opposed to the objects themselves (compare prototype-based programming)"\cite{Wikipedia}.
+\item \emph{Statically typed} ``In a statically typed language, every variable name is bound both
+to a type (at compile time, by means of a data declaration) to an object.
+The binding to an object is optional — if a name is not bound to an object, the name is said to be null"\cite{}.
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+\section{Java Exercises proposed to Show the Java Characteristics 1 h : 20 min}
+\subsection{Portability + Compiled (20 min)}
+\begin{itemize}
+\item The goal of the first exercise is to show the main advantage of using Java and, more precisely how java supports portability.
+\item Let's crate our first Java project
+\end{itemize}
+
+\subsubsection{Creating a Java File}
+\begin{itemize}
+\item Open TextEdit (for mac users), Blocco Note (for Windows users) of vi (for Linux) users.
+\item (For Mac User from TextEdit choose \textit{preferenze} $>$ \textit{Solo Testo} $>$ \textit{File} $>$ \textit{New} )
+\item Type the following Java code
+\end{itemize}
+\begin{lstlisting}
+public class Welcome {	
+    public static void main(String[] args){	
+	 	System.out.println("Benvenuto al corso di Ingegneria del Software");
+    }
+}
+\end{lstlisting}
+\begin{itemize}
+\item Save the file as Welcome.java (Note: be sure that another extension is not selected).
+\end{itemize}
+
+\subsubsection{Compiling the Java File}
+\begin{itemize}
+\item open the Terminal (for Mac and Linux users) or the Command Propt (for Windows users)
+\item locate the file created - useful commands 
+\begin{itemize}
+\item for Mac and Linux Users it is possible to open a folder with \emph{cd}, exit from a folder with \emph{cd ..} and show the content of a folder with \emph{ls}) 
+\item
+\end{itemize}
+\item Type \emph{javac Welcome.java}
+\item This command \textbf{compliles} the Welcom.jar file and generates a .class (or a jar) file which contains the a bytecode file that can be executed on the different platforms\footnote{The bytecode is an intermediate representation that can be interpreted by a Virtual Machine.}. This process supports \textbf{portability}.
+\item \emph{To run the javac command a JDK (Java Development Kit) must be installed in your pc\footnote{The JDK also include the Java Run-Time Environment which will be later introduced}.} The JDK allows to \emph{compile} and \emph{execute} the created programs and several \emph{libraries} which are commonly used in the development.
+\end{itemize}
+
+\subsubsection{Running the Java File}
+\begin{itemize}
+\item the java bytecode file (.class) can be executed on each architecture over which a Virtual Machine (which provides an \textbf{interpreter} for the $Java$ bytecode) for Java is installed. The Java JRE provides this Virtual Machine.
+\item to run the java bytecodefile run type \emph{java Welcome}
+\item the command java Welcome executes the \emph{Main} method of the class Welcome
+\end{itemize}
+
+\subsubsection{Our first Java program}
+\begin{lstlisting}
+public class Welcome {	
+    public static void main(String[] args){	
+	 	System.out.println("Benvenuto al corso di Ingegneria del Software");
+    }
+}
+\end{lstlisting}
+\begin{itemize}
+\item The code specified defines a \emph{class} called Welcome with a single \emph{method} called main
+\item \emph{public} is used to specify that the class and the corresponding method can be accessed by an external client (such as other classes).
+\item \emph{class} is used to specify a new type of data
+\item \emph{void} specifies that the method does not return any value
+\item \emph{static} specifies that the method can be invoked without creating the corresponding object (Welcome)
+\item \emph{main} is a ``starting method" that \textbf{must} be present in at least one class for the application to be run.
+\item \emph{args} contains the parameter of the main argument. The parameters (also called arguments) are variables that can contains values that are passed to the method when is called. The parameters must have a type
+\item \emph{String[]} (array of String) is the type of the args parameter 
+\item the arg parameter is used from main to obtain arguments that can be passed when the method is invoked from command line
+\item \emph{System.out.println} writes the specified text on the screen
+\end{itemize}
+
+\subsubsection{Our second Java program}
+Change the previously described program to:
+\begin{itemize}
+\item to require the user to insert is name (for example Carlo)
+\item to print ``Ciao Carlo, Benvenuto al corso di Ingegneria del Software" 
+\end{itemize}
+Solution:
+\begin{itemize}
+\item create a new Java file with name \emph{WelcomeWithName}
+\item type the following
+\end{itemize}
+\begin{lstlisting}[
+    language=Java,escapechar=|]
+import java.util.Scanner;
+
+public class WelcomeWithName {
+	public static void main(String[] args){
+		Scanner scanner = new Scanner(System.in); |\label{line:scanner}|
+		System.out.println("Inserisci il tuo nome:");
+		String nome = scanner.nextLine();
+		scanner.close();
+		String welcome = "Benvenuto al corso di Ingegneria del Software";
+		System.out.println("Ciao " + nome + ", " + welcome);
+	}
+}
+\end{lstlisting}
+\begin{itemize}
+\item \emph{import} is used to import the \emph{class} Scanner which is contained in the \emph{java.util} package
+\item \emph{new} creates (\emph{instantiate}) a new Scanner Object
+\item \emph{scanner.nextLine()} reads the next of the current line
+\item \emph{scanner.close()} close the scanner
+\end{itemize}
+
+
+\subsection{Object-orientated and class-based (30 min)}
+\begin{itemize}
+\item The object oriented programming languages have as main goal to support the development of programs based on classes.
+\item  Classes are used to \emph{model} concepts and objects of the real word.
+\item Differently from languages such as $C$ in which first you think about function and then on the structure of the manipulated data, in $Java$ and in general in an object oriented language you \emph{first think on the data and modeling the problem} and then how the to change these data.
+\end{itemize}
+
+\textbf{Problem}
+\begin{itemize}
+\item Try to model a Bike
+\end{itemize}
+
+To design your Bike you (or the client) must answer two main questions:
+\begin{itemize}
+\item How can you define the \textbf{state} of the bike?
+\item Which \textbf{functionalities} offers the bike?
+\end{itemize}
+
+
+\subsubsection{Modeling a Bike 1}
+\begin{itemize}
+\item Let's start considering the \textbf{state} of the bike
+\end{itemize}
+A bike has a certain SPEED that depends on the GEAR (marcia) and on the CADENCE (ritmo di pedalata).
+
+\begin{lstlisting}[language=Java,escapechar=|]
+// defines a public class called Bike 
+// the name of the class usually starts with an upper case letter
+public class Bike {
+	
+	// The attributes of the class are used to describe the state of the class and are usually private or protected 
+	// The attributes of the class usually start with lower case letters
+	private int gear=1; //default 1
+	private int cadence; //default 0
+	private int speed; //default 0
+	
+	// is the constructor of the class which allows to create a new Bike
+	// the constructor has the same name of the class and does not have a return type
+	public Bike(){
+	}
+}
+\end{lstlisting}
+
+\textbf{Implementing a client}
+\begin{itemize}
+\item A client (generally) is a generic user of classes (e.g., a class provided of a Main method).
+\end{itemize}
+
+\begin{lstlisting}[language=Java,escapechar=|]
+public class Client {
+	
+	public static void main(String[] args)
+    {
+        Bike bike1; // defines a new identifier (pointer) of class Bike with a predefined value null
+        bike1 = new Bike(); // instantiate  the object
+        // when the method new is invoked, the VM allocates dynamically the quantity of memory which is sufficient to contain the Bike object
+        Bike bike2 = new Bike(); // defines and instantiate a new object of class Bike
+     }
+}
+\end{lstlisting}
+
+To run the program compile the Bike and the Client and run the Client
+
+\subsubsection{Modeling a Bike 2}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class Client {
+	
+	public static void main(String[] args)
+    {
+        Bike bike1; 
+        bike1 = new Bike();
+        Bike bike2 = new Bike(); 
+        
+        // == compare the reference of the Bike1 with the reference of the Bike2
+        System.out.println(bike1==bike2);
+     }
+}
+\end{lstlisting}
+
+
+\subsubsection{Modeling a Bike 3}
+\begin{itemize}
+\item Let's start considering the \textbf{functionalities} of the bike
+\end{itemize}
+The Bike must be able to print its state
+
+\begin{lstlisting}[language=Java,escapechar=|]
+// defines a public class called Bike 
+// the name of the class usually starts with an upper case letter
+public class Bike {
+	
+	// The attributes of the class are used to describe the state of the class and are usually private or protected 
+	// The attributes of the class usually start with lower case letters
+	private int gear=1; //default 1
+	private int cadence; //default 0
+	private int speed; //default 0
+	
+	// is the constructor of the class which allows to create a new Bike
+	// the constructor has the same name of the class and does not have a return type
+	public Bike(){
+	}
+	
+	public void printState(){
+	    // + is the String concatenation operator
+	    // the int gear, speed and cadence are automatically converted into String
+		System.out.println("gear: "+ gear + ", speed: "+speed+ ", cadence: "+cadence);
+	}
+}
+\end{lstlisting}
+
+\subsubsection{Modeling a Bike 3 - packages}
+\begin{lstlisting}[language=Java,escapechar=|]
+package transport;
+
+// defines a public class called Bike 
+// the name of the class usually starts with an upper case letter
+public class Bike {
+	
+	// The attributes of the class are used to describe the state of the class and are usually private or protected 
+	// The attributes of the class usually start with lower case letters
+	private int gear=1; //default 1
+	private int cadence; //default 0
+	private int speed; //default 0
+	
+	// is the constructor of the class which allows to create a new Bike
+	// the constructor has the same name of the class and does not have a return type
+	public Bike(){
+	}
+	
+	public void printState(){
+	    // + is the String concatenation operator
+	    // the int gear, speed and cadence are automatically converted into String
+		System.out.println("gear: "+ gear + ", speed: "+speed+ ", cadence: "+cadence);
+	}
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java,escapechar=|]
+// imports the class Bike inside the package transport
+import transport.Bike;
+
+public class Client {
+	
+	public static void main(String[] args)
+    {
+        Bike bike1; 
+        bike1 = new Bike();
+        Bike bike2 = new Bike(); 
+        
+        // == compare the reference of the Bike1 with the reference of the Bike2
+        System.out.println(bike1==bike2);
+        // invokes the method print state of the object bike1       
+          bike1.printState();
+          // invokes the method print state of the object bike2
+            bike2.printState();
+
+     }
+}
+\end{lstlisting}
+
+If we change folder of the bike class we have to change the package
+
+\subsection{Eclipse Integrated Development Environment  (20 min)}
+\begin{itemize}
+\item The procedure previously described is tedious and error prone, in particular when the complexity of the project increases, packages are added etc.
+\item for this purpose, in the software development,  Integrated Development Environment ($IDE$) are commonly used. $IDE$s remove some of the difficulties usually encountered during the compilation process and provides additional features, such as code completion.
+\item In this course we will use the $Eclipse$ $IDE$\footnote{$Netbeans$ one of the most used competitor of $Eclipse$}.  
+\end{itemize}
+
+\subsubsection{Creating your first project using Eclipse}
+\begin{itemize}
+\item double click on $Eclipse$
+\item when $Eclipse$ starts it asks the user to specify the $Workspace$. The $Workspace$ is the ``place" over which the user wants to work. The user can define different $Workspace$s each of which can contain \emph{multiple projects}.
+\item press on $Workbench$ (banco di lavoro)
+\item \textit{File} $>$ \textit{New} $>$ \textit{Project} $>$ \textit{Maven Project}
+\item check \textit{Create a simple project}
+\item type \textit{IngegneriaDelSoftware1} as Group Id and \textit{Esercitazione1} as Artifact Id
+\item choose \textit{finish}
+\end{itemize}
+
+When you create a new Project (Maven\footnote{Maven will be explained in the lab.}) in Eclipse, it automatically generates a structure for your project. In particular, 
+\begin{itemize}
+\item $src/main/java$ contains the java source code of the application under development
+\item $src/main/resources$ contains the resources used from the application
+\item $src/test/java$ contains the classes which are used to test the application under development
+\item $src/test/resources$ contains the resources used from the test classes to test the application
+\end{itemize}
+
+\subsubsection{Creating a new Package in Eclipse}
+To create a new Package in Eclipse
+\begin{itemize}
+\item right click on $src/main/java$ $>$ New $>$ package 
+\item type a name for your class ($esercitatione1$)
+\item press finish
+\end{itemize}
+
+\subsubsection{Creating a new Class in Eclipse}
+To create a new Class in Eclipse
+\begin{itemize}
+\item right click on the place in which you want to create the new class  (for example the package esercitazione1) $>$ New $>$ class 
+\item type a name for your class ($Bike$)
+\item choose the visibility of the class etc...
+\item press finish
+\end{itemize}
+As you can see the $IDE$ automatically compiles the package of the class the identifiers, etc (and it is able to do other stuff that will be explained during the course).
+
+
+\subsubsection{Running a project in Eclipse}
+\label{sec:runningAProjectInEclipse}
+To run a project in eclipse
+\begin{itemize}
+\item right click on the class that you want to run (\emph{it must contain a main method})
+\item Run As $>$ Java Application
+\end{itemize}
+
+\subsubsection{What is going on?}
+If you open your workspace and your project you will see two different folders:
+\begin{itemize}
+\item src: contains the source file of your application ($.java$ files)
+\item target: contains the bytecode files ($.class$ files) which are generated when you perform the procedure explained in~\ref{sec:runningAProjectInEclipse} and then are runned.
+\end{itemize}
+
+\subsection{Object-oriented and class-based 2 (10 min)}
+
+\subsubsection{Modeling a Bike 4}
+Add the following functionality
+\begin{itemize}
+\item it must be possible to monitor the $gear$, the $cadence$ and the $speed$ of the Bike
+\end{itemize}
+
+``Monitoring" is done through getters.\\
+Command tricks:
+\begin{itemize}
+\item Control + Space : allows to automatically complete the text and provides suggestions
+\end{itemize}
+
+\begin{lstlisting}[language=Java,escapechar=|]
+package esercitatione1;
+
+
+//defines a public class called Bike 
+//the name of the class usually starts with an upper case letter
+public class Bike {
+	
+	// The attributes of the class are used to describe the state of the class and are usually private or protected 
+	// The attributes of the class usually start with lower case letters
+	private int gear=1; //default 1
+	private int cadence; //default 0
+	private int speed; //default 0
+	
+	// is the constructor of the class which allows to create a new Bike
+	// the constructor has the same name of the class and does not have a return type
+	public Bike(){
+	}
+	
+	public void printState(){
+	    // + is the String concatenation operator
+	    // the int gear, speed and cadence are automatically converted into String
+		System.out.println("gear: "+ gear + ", speed: "+speed+ ", cadence: "+cadence);
+	}
+	
+	// returns the gear of the bike
+	public int getGear(){
+		return this.gear;
+	}
+
+	// returns the cadence of the bike
+	public int getCadence(){
+		return this.cadence;
+	}
+	
+	// returns the speed ok the bike
+	public int getSpeed(){
+		return this.speed;
+	}
+}
+\end{lstlisting}
+
+
+\begin{lstlisting}[language=Java,escapechar=|]
+package esercitatione1;
+
+public class Client {
+
+	public static void main(String[] args) {
+
+		Bike bike1;
+		bike1 = new Bike();
+		Bike bike2 = new Bike();
+
+		// == compare the reference of the Bike1 with the reference of the Bike2
+		System.out.println(bike1 == bike2);
+		// invokes the method print state of the object bike1
+		bike1.printState();
+		// invokes the method print state of the object bike2
+		bike2.printState();
+
+		System.out.println(bike1.getCadence());
+	}
+
+}
+
+\end{lstlisting}
+
+
+\subsubsection{Modeling a Bike 5}
+Add the following functionality
+\begin{itemize}
+\item increase and decrease the gear and change the cadence and update the speed consequently
+\end{itemize}
+
+``Monitoring" is done through getters.\\
+Command tricks:
+\begin{itemize}
+\item Control + Space : allows to automatically complete the text and provides suggestions
+\end{itemize}
+
+\begin{lstlisting}[language=Java,escapechar=|]
+package esercitatione1;
+
+//defines a public class called Bike 
+//the name of the class usually starts with an upper case letter
+public class Bike {
+
+	// The attributes of the class are used to describe the state of the class
+	// and are usually private or protected
+	// The attributes of the class usually start with lower case letters
+	private int gear=1; // default 1
+	private int cadence; // default 0
+	private int speed; // default 0
+
+	// is the constructor of the class which allows to create a new Bike
+	// the constructor has the same name of the class and does not have a return
+	// type
+	public Bike() {
+	}
+
+	public void printState() {
+		// + is the String concatenation operator
+		// the int gear, speed and cadence are automatically converted into
+		// String
+		System.out.println("gear: " + gear + ", speed: " + speed
+				+ ", cadence: " + cadence);
+	}
+    
+    // changes the cadence of the bike
+	public void changeCadence(int cadence) {
+		this.cadence = cadence;
+		updateSpeed();
+	}
+
+	// increment the gear
+	public void incrementGear() {
+		this.gear++;
+		this.updateSpeed();
+	}
+
+	// decrement the gear
+	public void decrementGear() {
+		this.gear--;
+		this.updateSpeed();
+	}
+
+	// every time the cadence or the gear changes the speed is updated
+	// the method is private and cannot be invoked from other external classes
+	private void updateSpeed(){
+		this.speed = this.gear * this.cadence; 
+	}
+	
+	// returns the gear of the bike
+	public int getGear() {
+		return this.gear;
+	}
+
+	// returns the cadence of the bike
+	public int getCadence() {
+		return this.cadence;
+	}
+
+	// returns the speed ok the bike
+	public int getSpeed() {
+		return this.speed;
+	}
+}
+\end{lstlisting}
+
+
+\begin{lstlisting}[language=Java,escapechar=|]
+package esercitatione1;
+
+public class Client {
+
+	public static void main(String[] args) {
+
+		Bike bike1;
+		bike1 = new Bike();
+		Bike bike2 = new Bike();
+
+		// == compare the reference of the Bike1 with the reference of the Bike2
+		System.out.println(bike1 == bike2);
+		// invokes the method print state of the object bike1
+		bike1.printState();
+		// invokes the method print state of the object bike2
+		bike2.printState();
+
+		bike1.printState();
+		bike1.incrementGear();
+		bike1.printState();
+		
+		bike1.changeCadence(10);
+		bike1.printState();
+		
+	}
+}
+\end{lstlisting}
+
+
+\subsubsection{Modeling a Bike 6}
+\begin{itemize}
+\item the gears of the type of Bike that is considered are $6$ 
+\end{itemize}
+
+\begin{lstlisting}[language=Java,escapechar=|]
+package esercitatione1;
+
+//defines a public class called Bike 
+//the name of the class usually starts with an upper case letter
+public class Bike {
+
+	// static specifies that this variable is shared from all the objects
+	// The final modifier indicates that the value of this field cannot change.
+ 	// The static modifier, in combination with the final modifier, is also used to define constants. 
+	private static final int MAX_GEAR = 6;
+	private static final int MIN_GEAR = 1;
+
+	// The attributes of the class are used to describe the state of the class
+	// and are usually private or protected
+	// The attributes of the class usually start with lower case letters
+	private int gear = 1; // default 1
+	private int cadence; // default 0
+	private int speed; // default 0
+
+	// is the constructor of the class which allows to create a new Bike
+	// the constructor has the same name of the class and does not have a return
+	// type
+	public Bike() {
+	}
+
+	public void printState() {
+		// + is the String concatenation operator
+		// the int gear, speed and cadence are automatically converted into
+		// String
+		System.out.println("gear: " + gear + ", speed: " + speed
+				+ ", cadence: " + cadence);
+	}
+
+	// changes the cadence of the bike
+	public void changeCadence(int cadence) {
+		this.cadence = cadence;
+		updateSpeed();
+	}
+
+	// increment the gear
+	public void incrementGear() {
+		if (gear < MAX_GEAR) {
+			gear++;
+			updateSpeed();
+		}
+	}
+
+	// decrement the gear
+	public void decrementGear() {
+		if (gear > MIN_GEAR) {
+			gear--;
+			updateSpeed();
+		}
+	}
+
+	// every time the cadence or the gear changes the speed is updated
+	// the method is private and cannot be invoked from other external classes
+	private void updateSpeed() {
+		this.speed = this.gear * this.cadence;
+	}
+
+	// returns the gear of the bike
+	public int getGear() {
+		return this.gear;
+	}
+
+	// returns the cadence of the bike
+	public int getCadence() {
+		return this.cadence;
+	}
+
+	// returns the speed ok the bike
+	public int getSpeed() {
+		return this.speed;
+	}
+}
+\end{lstlisting}
+
+
+\subsubsection{Modeling a Bike 7}
+\begin{itemize}
+\item change the Bike class in a way that it is possible to create a Bike with a specified gear and cadence
+\end{itemize}
+
+\begin{lstlisting}[language=Java,escapechar=|]
+package esercitatione1;
+
+//defines a public class called Bike 
+//the name of the class usually starts with an upper case letter
+public class Bike {
+
+	// static specifies that this variable is shared from all the objects
+	// The final modifier indicates that the value of this field cannot change.
+ 	// The static modifier, in combination with the final modifier, is also used to define constants. 
+	private static final int MAX_GEAR = 6;
+	private static final int MIN_GEAR = 1;
+
+	// The attributes of the class are used to describe the state of the class
+	// and are usually private or protected
+	// The attributes of the class usually start with lower case letters
+	private int gear = 1; // default 1
+	private int cadence; // default 0
+	private int speed; // default 0
+
+	// is the constructor of the class which allows to create a new Bike
+	// the constructor has the same name of the class and does not have a return
+	// type
+	// gear and cadence are the intial values of the gear and the cadence
+	public Bike(int gear, int cadence) {
+		
+		// this allows to refer to the variable gear of THIS class, otherwise gear refers to the variable passed as parameter
+		this.gear=gear;
+		this.cadence=cadence;
+		this.updateSpeed();
+	}
+
+	public void printState() {
+		// + is the String concatenation operator
+		// the int gear, speed and cadence are automatically converted into
+		// String
+		System.out.println("gear: " + gear + ", speed: " + speed
+				+ ", cadence: " + cadence);
+	}
+
+	// changes the cadence of the bike
+	public void changeCadence(int cadence) {
+		this.cadence = cadence;
+		updateSpeed();
+	}
+
+	// increment the gear
+	public void incrementGear() {
+		if (gear < MAX_GEAR) {
+			gear++;
+			updateSpeed();
+		}
+	}
+
+	// decrement the gear
+	public void decrementGear() {
+		if (gear > MIN_GEAR) {
+			gear--;
+			updateSpeed();
+		}
+	}
+
+	// every time the cadence or the gear changes the speed is updated
+	// the method is private and cannot be invoked from other external classes
+	private void updateSpeed() {
+		this.speed = this.gear * this.cadence;
+	}
+
+	// returns the gear of the bike
+	public int getGear() {
+		return this.gear;
+	}
+
+	// returns the cadence of the bike
+	public int getCadence() {
+		return this.cadence;
+	}
+
+	// returns the speed ok the bike
+	public int getSpeed() {
+		return this.speed;
+	}
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java,escapechar=|]
+package esercitatione1;
+
+public class Client {
+
+	public static void main(String[] args) {
+
+		Bike bike1;
+		bike1 = new Bike(3, 2);
+		Bike bike2 = new Bike(1, 2);
+
+		// == compare the reference of the Bike1 with the reference of the Bike2
+		System.out.println(bike1 == bike2);
+		// invokes the method print state of the object bike1
+		bike1.printState();
+		// invokes the method print state of the object bike2
+		bike2.printState();
+
+		bike1.printState();
+		bike1.incrementGear();
+		bike1.printState();
+		bike1.changeCadence(10);
+		bike1.printState();
+		
+		
+	}
+
+}
+\end{lstlisting}
+
+\clearpage
+
+% ---- Bibliography ----
+
+
+
+
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliographystyle{alpha}
+\bibliography{Intro}
+\nocite{*}
+
+
+\end{document}
+
