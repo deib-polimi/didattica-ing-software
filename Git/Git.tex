@@ -1086,5 +1086,59 @@ The remote repository should now show all the commits.
 
 \section{Git workflows}
 
+There are many possible workflows that can be used by
+developers. Selection of a workflow highly depends on the
+organizational needs, composition and the personal preferences of the
+developers. This section will give you a hint of the most common Git
+workflows and can serve as a starting point of a discussion among
+the students in each team.  
+
+Remember that these workflows are designed to be guidelines rather
+than concrete rules, ultimately choice is upon each team.
+
+\subsection{Centralized workflow}
+
+Centralized Workflow uses a central repository to serve as the single
+point-of-entry for all changes to the project. The
+default development branch is called master and all changes are
+committed into this branch. This workflow doesn't require any other
+branches besides master. 
+
+\begin{center}
+\includegraphics[scale=0.5]{figures/12.pdf}
+\end{center}
+
+Developers start by cloning the central repository. In their own local
+copies of the project, they edit files and commit changes; however,
+these new commits are stored locally—they're 
+completely isolated from the central repository. This lets developers
+defer synchronizing upstream until they’re at a convenient break
+point.
+
+To publish changes to the official project, developers “push” their
+local master branch to the central repository. 
+
+
+\subsection{Feature Branch Workflow}
+
+\begin{center}
+\includegraphics[scale=0.5]{figures/13.pdf}
+\end{center}
+
+
+\subsection{Gitflow Workflow}
+
+\begin{center}
+\includegraphics[scale=0.5]{figures/14.pdf}
+\end{center}
+
+
+\subsection{Forking Workflow}
+
+\begin{center}
+\includegraphics[scale=0.5]{figures/15.pdf}
+\end{center}
+
+
 \end{document}
 
