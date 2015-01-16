@@ -889,6 +889,202 @@ the commits. In this case there is only the master branch with 6 commits.
 
 \section{Git with Eclipse}
 
+EGit is an Eclipse plug-in (software component) which allows you to
+use the distributed version control system Git directly within the
+Eclipse IDE. 
+
+\subsection{Installation}
+Eclipse Luna, IDE that we are going to use in the class already contains
+EGit 3.4.1, therefore no installation is required. If you decide to
+use some other IDE or an older version of Eclipse you need to install
+it on your own.
+The EGit plug-in can be installed into every Eclipse IDE
+installation. Usually EGit supports the last two Eclipse releases.
+
+\subsection{Configuration}
+
+Before using Git you must configure your name and email address which
+is used to fill the author and committer information of commits you
+create. 
+
+The Git configuration settings can be adjusted via the Eclipse
+preference setting. 
+Select \\
+Window $\rightarrow$ Preferences $\rightarrow$ Team
+$\rightarrow$ Git $\rightarrow$ Configuration  (for Windows or Linux)
+or\\
+Eclipse $\rightarrow$ Preferences $\rightarrow$ Team
+$\rightarrow$ Git $\rightarrow$ Configuration (for Mac)\\
+to see the current configuration and to change it. 
+
+\begin{center}
+\includegraphics[scale=0.5]{figures/s3.png}
+\end{center}
+
+You can add entries to your Git configuration by pressing the Add
+Entries button on the Git Configuration preference page. To add your
+user, use the user.name as key and your real name as value. Repeat the
+procedure for your email address. 
+
+Optionally, you can configure the default folder for storing Git
+repositories at the\\ 
+Window $\rightarrow$ Preferences $\rightarrow$ Git $\rightarrow$ Team
+$\rightarrow$ Default Repository Folder entry (for Windows or Linux) or\\
+Eclipse $\rightarrow$ Preferences $\rightarrow$ Git $\rightarrow$ Team
+$\rightarrow$ Default  Repository Folder entry (for Mac). 
+
+
+
+\subsection{Create new project}
+
+The following section explains how to create a local Git repository
+for one project with Eclipse. Having a local repository allows you to keep track of your
+changes in the project and allows you to revert to another state at a
+later point in time.
+ 
+After that, it will explain how to push all the changes into an empty
+remote repository. In the case of the course project, material in this
+section can be applied by one team member that can carefully set up a
+maven project and the .gitignore file and perform an initial push.
+
+\begin{enumerate}
+\item Create a new maven project and set up pom.xml file (refer to the Maven guide)
+\item Create a local repository
+
+Right click on the project, then Team $\rightarrow$ Share project
+
+\begin{center}
+\includegraphics[scale=0.5]{figures/s4.png}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.5]{figures/s5.png}
+\end{center}
+
+It is recommended to separate your Git repository from any additional
+meta-data which Eclipse might create, it is recommended to place your
+Git repositories outside the Eclipse workspace. Eclipse follows this
+recommendation and the EGit plug-in proposes a directory outside your
+workspace. Placing Git repositories directly in the workspace may
+cause performance issues since the Git support in Eclipse then may
+need to scan a large number of files reachable under the workspace. 
+
+Once you click ok all the project contents in your workspace are going
+to be copied to the working directory you specified.
+
+\begin{center}
+\includegraphics[scale=0.6]{figures/s6.png}
+\end{center}
+
+You should see the project structure like in the above figure.
+The ``> '' sign means that folder or file has uncommitted changes.
+
+
+\item Edit the .gitignore file in your working directory
+
+Git can be configured to ignore certain files and directories for
+repository operations. This is configured via one or several
+.gitignore files. Typically, this file is located at the root of your
+Git repository but it can also be located in sub-directories. In the
+second case the defined rules are only valid for the sub-directory and
+below. 
+
+Here is a typical .gitignore file
+
+\begin{lstlisting}
+# ignore all bin directories
+# matches "bin" in any subfolder
+bin/
+
+# ignore all target directories
+target/
+
+# ignore all files ending with ~
+*~ 
+
+# ignore metadata directories
+.metadata
+
+# ignore DS_Store and files starting with ._ (for Mac)  
+.DS_Store
+._*
+\end{lstlisting}
+
+The rule is NEVER to commit files that can be derived
+automatically. In practice for a maven project this usually means only
+pom.xml file and src/ folder should be under version control.
+
+NOTE: You can also configure Eclipse to automatically ignore derived
+resources, e.g. class files via the 
+Window $\rightarrow$ Preferences
+$\rightarrow$ Team $\rightarrow$ Git $\rightarrow$ Projects
+$\rightarrow$ Automatically ignore derived resources  (for Windows or Linux)
+or\\
+Eclipse $\rightarrow$ Preferences
+$\rightarrow$ Team $\rightarrow$ Git $\rightarrow$ Projects
+$\rightarrow$ Automatically ignore derived resources
+
+\item Stage your changes
+
+Eclipse gives you several options to stage and commit your
+changes. The Git Staging view provides a convenient compact overview
+on all changes you have done since checking out a branch.
+
+
+
+Click on the Git repository view in the upper right corner (usually
+next the Java view which is currently selected).
+
+Select your newly created repository in the left.
+
+Than in the bottom tabs choose git staging.
+
+\begin{center}
+\includegraphics[scale=0.33]{figures/s7.png}
+\end{center}
+
+Select .gitignore, pom.xml, App.java and AppTest.java files and
+transfer them into the lower part for staging.
+
+\begin{center}
+\includegraphics[scale=0.33]{figures/s8.png}
+\end{center}
+
+\item Commit
+
+Write a commit message and press commit.
+Once you return to Java view you can the the following project
+structure. Notice that the symbols have changed to reflect that the
+current version is saved in the repository.
+
+\begin{center}
+\includegraphics[scale=0.6]{figures/s9.png}
+\end{center}
+
+NOTE: A quicker way to commit is to right click on the project, choose 
+Team $\rightarrow$ Commit... and then choose the files to stage.
+
+\item Connect and push to the remote repository
+
+Right click on the project and choose Team $\rightarrow$ Push...
+Write the correct uri path (that we are going to provide to you in the
+lab) like in the example figure: 
+
+\begin{center}
+\includegraphics[scale=0.35]{figures/s10.png}
+\end{center}
+
+Press next and then finish.
+The remote repository should now show all the commits.
+
+\end{enumerate}
+
+\subsection{Clone existing project}
+
+\subsection{Collaborate}
+
+
 \section{Git workflows}
 
 \end{document}
+
