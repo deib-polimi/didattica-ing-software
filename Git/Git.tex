@@ -209,7 +209,7 @@ The git init command creates a new Git repository. It can be used to
 convert an existing, unversioned project to a Git repository or
 initialize a new empty repository. Most of the other Git commands are
 not available outside of an initialized repository, so this is usually
-the first command you’ll run in a new project. 
+the first command you'll run in a new project. 
 
 Executing git init creates a .git subdirectory in the project root,
 which contains all of the necessary metadata for the repo. Aside from
@@ -271,7 +271,7 @@ convention.
 \subsubsection*{git config}
 
 Define the author name and email to be used for all commits in the current
-repository. Typically, you’ll want to use the --global flag to set
+repository. Typically, you'll want to use the --global flag to set
 configuration options for the current user.
 
 \begin{lstlisting}
@@ -283,8 +283,8 @@ $ git config --global user.email john@example.com
 
 The git add and git commit commands compose the fundamental Git
 workflow. These are the two commands that every Git user needs to
-understand, regardless of their team’s collaboration model. They are
-the means to record versions of a project into the repository’s
+understand, regardless of their team's collaboration model. They are
+the means to record versions of a project into the repository's
 history. Finally, git checkout is used to browse any of the previous
 commits.
 
@@ -319,8 +319,8 @@ $ git commit -m "<message>"
 
 Developing a project revolves around the basic edit/stage/commit
 pattern. First, you edit your files in the working directory. When
-you’re ready to save a copy of the current state of the project, you
-stage changes with git add. After you’re happy with the staged
+you're ready to save a copy of the current state of the project, you
+stage changes with git add. After you're happy with the staged
 snapshot, you commit it to the project history with git commit. 
 
 \begin{center}
@@ -333,7 +333,7 @@ snapshots before actually committing it to the project history. This
 means you can make all sorts of edits to unrelated files, then go back
 and split them up into logical commits by adding related changes to
 the stage and commit them piece-by-piece. As in any revision control
-system, it’s important to create atomic commits so that it’s easy to
+system, it's important to create atomic commits so that it's easy to
 track down bugs and revert changes with minimal impact on the rest of
 the project. 
 
@@ -342,7 +342,7 @@ includes modifications to tracked files (those that have been added
 with git add at some point in their history).
 
 Snapshots are always committed to the local repository. Git doesn't
-force you to interact with the central repository until you’re
+force you to interact with the central repository until you're
 ready. Just as the staging area is a buffer between the working
 directory and the project history, each developer's local repository
 is a buffer between their contributions and the central repository.
@@ -467,9 +467,6 @@ $ git log --oneline
 722c655 Added Test.java file
 \end{lstlisting}
 
-\ldots
-
-
 \subsection{Branching}
 
 Git can keep history that is non-linear. Developers can create several
@@ -529,7 +526,7 @@ The git checkout command lets you navigate between the branches
 created by git branch. Checking out a branch updates the files in the
 working directory to match the version stored in that branch, and it
 tells Git to record all new commits on that branch. Think of it as a
-way to select which line of development you’re working on.
+way to select which line of development you're working on.
 
 \begin{lstlisting}
 $ git checkout <existing branch name>
@@ -553,8 +550,8 @@ switches into a ``detached HEAD'' state.
 \includegraphics[scale=0.5]{figures/09.pdf}
 \end{center}
 
-This is a warning telling you that everything you’re doing is
-“detached” from the rest of your project’s development. If you were to
+This is a warning telling you that everything you're doing is
+``detached'' from the rest of your project's development. If you were to
 start developing a feature while in a detached HEAD state, there would
 be no branch allowing you to get back to it. When you inevitably check
 out another branch (e.g., to merge your feature in), there would be no
@@ -641,9 +638,81 @@ conflicted file(s) to tell Git they're resolved. Then, you run a
 normal git commit to generate the merge commit. 
 
 
-\textbf{Example (Creating and merging branches):}
-% create switch and merge (both fast forward and 3-way) 
-\ldots
+\textbf{Example (Creating and merging branches):}\\
+Continues from the previous example
+\begin{lstlisting}
+$ git branch
+* master
+$ git branch experimental
+$ git branch
+  experimental
+* master
+$ git checkout experimental
+Switched to branch 'experimental'
+$ echo "public class Experiment { }" > Experiment.java
+$ git add Experiment.java
+$ git commit  -m "Added experimental feature"
+[experimental 641495a] Added experimental feature
+ 1 file changed, 1 insertion(+)
+ create mode 100644 Experiment.java
+$ ls
+Experiment.java	Test.java
+$ git checkout master
+Switched to branch 'master'
+$ ls
+Test.java
+$ git merge experimental
+Updating 5afb2f7..641495a
+Fast-forward
+ Experiment.java | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 Experiment.java
+$ ls
+Experiment.java	Test.java
+$ git branch -d experimental
+Deleted branch experimental (was 641495a).
+$ git branch
+* master
+$ git branch feature
+$ git checkout feature
+Switched to branch 'feature'
+$ echo "public class Experiment { int a; }" > Experiment.java
+$ git add Experiment.java
+$ git commit  -m "Added variable a"
+[feature 80ba1c7] Added variable a
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+$ git checkout master
+Switched to branch 'master'
+$ cat Experiment.java
+public class Experiment { }
+$ echo "public class Experiment { int b; }" > Experiment.java
+$ git add Experiment.java
+$ git commit  -m "Added variable b"
+[master 4aff254] Added variable b
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+$ git merge feature
+Auto-merging Experiment.java
+CONFLICT (content): Merge conflict in Experiment.java
+Automatic merge failed; fix conflicts and then commit the result.
+$ cat Experiment.java
+<<<<<<< HEAD
+public class Experiment { int b; }
+=======
+public class Experiment { int a; }
+>>>>>>> feature
+$ echo "public class Experiment { int ab; }" > Experiment.java
+$ git add Experiment.java
+$ git commit  -m "Added variable ab"
+[master b0b4a98] Added variable ab
+$ git log --oneline
+b0b4a98 Added variable ab
+4aff254 Added variable b
+80ba1c7 Added variable a
+641495a Added experimental feature
+5afb2f7 Written the Test class
+722c655 Added Test.java file
+\end{lstlisting}
+
 
 \subsection{Synchronizing with remote repositories}
 
@@ -687,7 +756,7 @@ $ git remote add <name> <url>
 \end{lstlisting}
 
 Create a new connection to a remote repository. After adding a remote,
-you’ll be able to use <name> as a convenient shortcut for <url> in
+you'll be able to use <name> as a convenient shortcut for <url> in
 other Git commands.
 
 \begin{lstlisting}
@@ -736,7 +805,7 @@ branches.
 
 \subsubsection*{git pull}
 
-Fetch the specified remote’s copy of the current branch and
+Fetch the specified remote's copy of the current branch and
 immediately merge it into the local copy. This is the same as git
 fetch <name> followed by git merge origin/<current-branch>.
 
@@ -767,17 +836,17 @@ $ git pull <name> <branch>
 
 Push the specified branch to <name>, along with all of the necessary
 commits and internal objects. To prevent you from overwriting commits, Git
-won’t let you push when it results in a non-fast-forward merge in the
+won't let you push when it results in a non-fast-forward merge in the
 destination repository.
 
 Use for git push in the case of the course project is to publish changes
 from your local repository to the central repository. 
-After you’ve accumulated several local
+After you've accumulated several local
 commits and are ready to share them with the rest of the team, you
 push them to the central repository.
 
 \begin{center}
-\includegraphics[scale=0.6]{figures/08.pdf}
+\includegraphics[scale=0.58]{figures/08.pdf}
 \end{center}
 
 The above diagram shows what happens when your local master has
@@ -787,6 +856,39 @@ essentially the same as running git merge master from inside the
 remote repository.
 
 \textbf{Example (Synchronizing with remote repository):}
-\ldots
+
+Set up a remote repository (with bitbucket, for example).
+\begin{center}
+\includegraphics[scale=0.33]{figures/s1.png}
+\end{center}
+
+Perform the following set of commands
+\begin{lstlisting}
+$ git remote add origin https://john@bitbucket.org/john/testrepo.git
+$ git remote
+origin
+$ git push origin
+$ git push -u origin --all
+Counting objects: 18, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (10/10), done.
+Writing objects: 100% (18/18), 1.55 KiB | 0 bytes/s, done.
+Total 18 (delta 1), reused 0 (delta 0)
+To https://john@bitbucket.org/john/testrepo.git
+ * [new branch]      master -> master
+Branch master set up to track remote branch master from origin.
+$ git pull origin
+Already up-to-date.
+\end{lstlisting}
+
+You will be able to see all your branches and within each branch all
+the commits. In this case there is only the master branch with 6 commits.
+\begin{center}
+\includegraphics[scale=0.33]{figures/s2.png}
+\end{center}
+
+\section{Git with Eclipse}
+
+\section{Git workflows}
 
 \end{document}
