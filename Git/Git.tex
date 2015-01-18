@@ -141,6 +141,13 @@ There are three basic goals of a version control system (VCS):
 \item We want the keep the complete evolution of the code
 \end{enumerate}
 
+This document is a fairly complete guide to Git on topics selected
+from several
+sources\footnote{https://www.atlassian.com/git/tutorials}\footnote{Erick
+  Sink: Version Control by
+  Example}\footnote{http://www.vogella.com/tutorials/EclipseGit/article.html}
+for the purposes of collaborating development during the course.
+
 \subsection*{History}
 Broadly speaking, the history of version control tools can be divided
 into three generations.
@@ -189,7 +196,6 @@ ideas became central in later VCS designs, notably the
 representation of history as a changeset-based DAG,
 commit-before-merge operation, and the semantics of the associated
 push and pull operations.
-
 Finally, two others VCS (Mercurial and git) were launched with
 the same objective by Linux kernel developers who had had extensive
 experience with BitKeeper.\footnote{For more on history of git watch
@@ -1081,8 +1087,81 @@ The remote repository should now show all the commits.
 
 \subsection{Clone existing project}
 
+Eclipse allows you to clone an existing Git repository and to import
+existing projects from this repository into your Eclipse workspace by
+using a wizard.
+
+\begin{enumerate}
+
+\item Select File $\rightarrow$ Import $\rightarrow$ Git $\rightarrow$ Project from Git.
+
+\begin{center}
+\includegraphics[scale=0.35]{figures/s13.png}
+\end{center}
+
+\item Select URI in the next dialog. You only have to paste the URL to the first line of the dialog, the rest will be filled out automatically.
+
+\begin{center}
+\includegraphics[scale=0.35]{figures/s14.png}
+\end{center}
+
+\item After pressing the Next button the system will allow you to import the existing branches. You should select at least master as this is typically the main development branch.
+
+\begin{center}
+\includegraphics[scale=0.35]{figures/s15.png}
+\end{center}
+
+\item The next dialog allows you to specify where the project should
+  be copied to and which branch should be initially selected. As
+  recommended in the previous section, this should not be your
+  workspace directory.
+
+\begin{center}
+\includegraphics[scale=0.35]{figures/s16.png}
+\end{center}
+
+\item After the Git repository is cloned, EGit opens an additional import dialog which allows to import the Eclipse projects from the Git repository.
+
+\begin{center}
+\includegraphics[scale=0.35]{figures/s17.png}
+\end{center}
+
+\item Choose your workspace directory, start a New Project wizard
+  and then follow the instructions for creating a new maven project 
+
+\begin{center}
+\includegraphics[scale=0.35]{figures/s18.png}
+\end{center}
+
+\end{enumerate}
+
 \subsection{Collaborate}
 
+The most important operations are described in the following
+list. Right click on the project and select:
+
+Team $\rightarrow$ Add to index, to add the selected resource(s) to the index of Git
+
+Team $\rightarrow$ Commit, to open the commit dialog for committing to your Git repository
+
+Team $\rightarrow$ Ignore, to add the file to a .gitignore file
+
+Team $\rightarrow$ Show in History, to display the selected files and folders in the History view
+
+Team $\rightarrow$ Pull to pull in changes from your remote Git repository
+
+Team $\rightarrow$ Fetch to fetch the current state from the remote repository
+
+Team $\rightarrow$ Switch To to switch or create new branches
+
+Team $\rightarrow$ Push to push changes to your remote Git repository
+
+If you select a project you can use additional team operations from
+the context menu.
+
+
+
+\newpage
 
 \section{Git workflows}
 
@@ -1112,33 +1191,137 @@ Developers start by cloning the central repository. In their own local
 copies of the project, they edit files and commit changes; however,
 these new commits are stored locally—they're 
 completely isolated from the central repository. This lets developers
-defer synchronizing upstream until they’re at a convenient break
+defer synchronizing upstream until they're at a convenient break
 point.
 
-To publish changes to the official project, developers “push” their
+To publish changes to the official project, developers ``push'' their
 local master branch to the central repository. 
+If a developer's local commits diverge from the central repository,
+Git will refuse to push their changes because this would overwrite
+official commits. Before the developer can publish their feature, they
+need to fetch the updated central commits and merge their changes on
+top of them.
+
+Centralized Workflow is recommended to be used for the course due to 
+its simplicity and easy adoption among the fresh users of Git.
+But if your team is comfortable with the Centralized Workflow, but wants to
+optimize its collaboration efforts without stepping on each others'
+toes, it's definitely worth exploring the benefits of the Feature
+Branch Workflow.
 
 
 \subsection{Feature Branch Workflow}
 
+The core idea behind the Feature Branch Workflow is that all feature
+development should take place in a dedicated branch instead of the
+master branch. This encapsulation makes it easy for multiple
+developers to work on a particular feature without disturbing the main
+codebase. It also means the master branch will never contain broken
+code, which is a huge advantage for continuous integration
+environments (see Jenkins\footnote{http://jenkins-ci.org/}).
+ 
 \begin{center}
 \includegraphics[scale=0.5]{figures/13.pdf}
 \end{center}
 
+The Feature Branch Workflow still uses a central repository, and
+master still represents the official project history. But, instead of
+committing directly on their local master branch, developers create a
+new branch every time they start work on a new feature. Feature
+branches should have descriptive names, like animated-menu-items or
+issue-$\#1061$. The idea is to give a clear, highly-focused purpose to
+each branch.
+
+Feature branches can (and should) be pushed to the central
+repository. This makes it possible to share a feature with other
+developers without touching any official code.
+
+Aside from isolating feature development, branches make it possible to
+discuss changes via pull requests
+\footnote{https://www.atlassian.com/git/tutorials/making-a-pull-request/}. 
+Once someone completes a feature,
+they don't merge it into master. Instead, they push the
+feature branch to the central server and create a pull request. This
+gives other developers an opportunity to perform code review of the
+feature before it becomes a part of the main codebase.
+
+The workflow as it is, has much more overhead, therefore it is not
+recommended to be adopted in its entirety, but some groups might find
+ideas like feature branches more efficient in their collaboration. 
+
+
+
 
 \subsection{Gitflow Workflow}
 
+The Gitflow Workflow defines a strict branching model designed around
+the project release. While somewhat more complicated than the Feature
+Branch Workflow, this provides a robust framework for managing larger
+projects.
+
 \begin{center}
-\includegraphics[scale=0.5]{figures/14.pdf}
+\includegraphics[scale=0.5]{figures/16.pdf}
 \end{center}
 
+It assigns very specific roles to different branches and defines how
+and when they should interact. In addition to feature branches, it
+uses individual branches for preparing, maintaining, and recording
+releases. 
+
+You also get to leverage all the benefits of the Feature Branch
+Workflow, the only difference is the branch structure of the project.
+It uses two branches to record the history of the project. The master
+branch stores the official release history, and the develop branch
+serves as an integration branch for features.
+
+Instead of branching off of master, feature branches use develop as
+their parent branch. When a feature is complete, it gets merged back
+into develop. Features should never interact directly with master.
+
+Once develop has acquired enough features for a release (or a
+predetermined release date is approaching), you fork a release branch
+off of develop. Creating this branch starts the next release cycle, so
+no new features can be added after this point - only bug fixes,
+documentation generation, and other release - oriented tasks should go
+in this branch. Once it's ready to ship, the release gets merged into
+master and tagged with a version number. In addition, it should be
+merged back into develop, which may have progressed since the release
+was initiated.
+
+Using a dedicated branch to prepare releases makes it possible for one
+team to polish the current release while another team continues
+working on features for the next release.
+
+Maintenance or ``hotfix'' branches are used to quickly patch production
+releases. This is the only branch that should fork directly off of
+master. As soon as the fix is complete, it should be merged into both
+master and develop (or the current release branch), and master should
+be tagged with an updated version number.
 
 \subsection{Forking Workflow}
+
+The Forking Workflow is fundamentally different than the other
+workflows. Instead of using a single
+server-side repository to act as the ``central'' codebase, it gives
+every developer a server-side repository. This means that each
+contributor has not one, but two Git repositories: a private local one
+and a public server-side one.
 
 \begin{center}
 \includegraphics[scale=0.5]{figures/15.pdf}
 \end{center}
 
+The main advantage of the Forking Workflow is that contributions can
+be integrated without the need for everybody to push to a single
+central repository. Developers push to their own server-side
+repositories, and only the project maintainer can push to the official
+repository. This allows the maintainer to accept commits from any
+developer without giving them write access to the official codebase.
+
+This makes the Forking Workflow a very powerful tool for loosely-knit
+teams. Any developer can easily share changes with any other
+developer, and any branch can be efficiently merged into the official
+codebase.
 
 \end{document}
 
