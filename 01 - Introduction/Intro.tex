@@ -161,10 +161,6 @@ This lessons covers the slides ``Classi come astrazioni" and the chapter 1 of th
 \begin{itemize}
 \item \emph{Compiled} ``a compiled language is a programming language whose implementations are typically compilers (translators that generate machine code from source code), and not interpreters (step-by-step executors of source code, where no pre-runtime translation takes place)"\cite{WikipediaCompiled}.
 \item \emph{Object-oriented}: in contrast with $C$, $COBOL$ or $PASCAL$ which are based on a procedural paradigm~\footnote{Ina procedural paradigm the main building block is the function which manipulates the data of the program.} $JAVA$ is object oriented. In an object-oriented paradigm the developer reason with respect to objects, that are abstraction of concepts of the real world the developer wants to model~\footnote{$JAVA$ is also considered as multiparadigm language since it is also a procedural language (and if we consider Java 8 also functional.}.
-\item \emph{Class-based}: ``is a style of object-oriented programming in which inheritance is achieved by defining classes of objects, as opposed to the objects themselves (compare prototype-based programming)"\cite{Wikipedia}.
-\item \emph{Statically typed} ``In a statically typed language, every variable name is bound both
-to a type (at compile time, by means of a data declaration) to an object.
-The binding to an object is optional — if a name is not bound to an object, the name is said to be null"\cite{StaticallyTyped} (this concept will be discussed in the next esercitazione).
 \end{itemize}
 
 \subsubsection{Java is compiled and platform independent}
@@ -195,18 +191,23 @@ To compile the Java files you need the  Java Development Kit (JDK). The JDK incl
 
 
 
-\subsubsection{Java is class based}
-
-\begin{mydef} (Class) A \texttt{class} is a \emph{type} defined by the user that describes the operations that can be executed over that type.
-\end{mydef}
-
 \subsubsection{Java is object oriented}
-\begin{mydef} (Object) An \texttt{object} is an instance of a particular class.
+In an object oriented programming language the main building block of a program is an object.
+\begin{mydef} (Object) A Java \texttt{object} is an abstraction of a real word object, and  describes the characteristics of the real word object that are of interest for the developer.
 \end{mydef}
+In this paradigm the developer describes the \emph{the word} (the objects of the word) and how \emph{the word can change over time} (the states can change over time). This paradigm is different from procedural modeling languages where the main building block is the procedure which modifies the value of a program. In procedural modeling languages the developer specifies \emph{how to solve} a problem, while in object oriented modeling language the developer first describes the \emph{world} and \emph{how it is possible to change the world} and then find a strategy to solve the problem giving the model previously constructed. In other words, differently from languages such as $C$ in which first you think about function and then on the structure of the manipulated data, in $Java$ and in general in an object oriented language you \emph{first think on the data and modeling the problem} and then how the to change these data. 
 
-Every object has a state and a behavior.
+Every object has a state and a behavior and is described though a class.
 
-\subsubsection{Java is statically typed}
+\begin{mydef} (Class) A \texttt{class} is a \emph{type} defined by the user that describes an object. More precisely it describes how the state of the system can be identified and how the state can change in response with operations that can be executed over this object.
+\end{mydef}
+In Java a class is a description of the object of the real word and is a blueprint for the generation of the objects that can be created (instantiated) into the system.
+
+
+\emph{Statically typed} ``In a statically typed language, every variable name is bound both
+to a type (at compile time, by means of a data declaration) to an object.
+The binding to an object is optional — if a name is not bound to an object, the name is said to be null"\cite{StaticallyTyped} (this concept will be discussed in the next esercitazione).
+
 
 \section{Java Exercises proposed to Show the Java Characteristics 1 h : 20 min}
 \subsection{Portability + Compiled (20 min)}
@@ -307,13 +308,7 @@ public class WelcomeWithName {
 \end{itemize}
 
 
-\subsection{Object-orientated and class-based (30 min)}
-\begin{itemize}
-\item The object oriented programming languages have as main goal to support the development of programs based on classes.
-\item  Classes are used to \texttt{model} concepts and objects of the real word.
-\item Differently from languages such as $C$ in which first you think about function and then on the structure of the manipulated data, in $Java$ and in general in an object oriented language you \emph{first think on the data and modeling the problem} and then how the to change these data.
-\end{itemize}
-
+\subsection{Object-orientated (30 min)}
 \textbf{Problem}
 \begin{itemize}
 \item Try to model a Bike
@@ -362,6 +357,7 @@ public class Client {
     {
         Bike bike1; // defines a new reference (pointer) of class Bike with a predefined value null
         bike1 = new Bike(); // instantiate  the object
+        // the instruction new Bike() creates a new object of type Bike and returns the reference to this object which is assigned to the reference bike1
         // when the method new is invoked, the VM allocates dynamically the quantity of memory which is sufficient to contain the Bike object
         Bike bike2 = new Bike(); // defines and instantiate a new object of class Bike
      }
@@ -542,7 +538,7 @@ If you open your workspace and your project you will see two different folders:
 \item target: contains the bytecode files (\texttt{.class} files) which are generated when you perform the procedure explained in~\ref{sec:runningAProjectInEclipse} and then are runned.
 \end{itemize}
 
-\subsection{Object-oriented and class-based 2 (10 min)}
+\subsection{Object-oriented 2 (10 min)}
 
 \subsubsection{Modeling a Bike 4}
 Add the following functionality
