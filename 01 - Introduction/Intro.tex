@@ -12,6 +12,7 @@
 \usepackage{multirow}
 \usepackage{tabularx}
 \usepackage{longtable}
+\usepackage{framed}
 \usepackage{listings}
 \usepackage{subfigure}
 \usepackage{afterpage}
@@ -119,6 +120,14 @@
 \vspace{3in}
 }
 
+
+\theoremstyle{definition} 
+
+\newtheorem{mydef}{Definition}
+\newtheorem{lemma}{Lemma}
+
+\newtheorem{theorem}{Theorem}[section]
+
 \author{\textbf{\hmwkAuthorName}}
 \date{} % Insert date here if you want it to appear below your name
 
@@ -142,28 +151,45 @@
 
 %----------------------------------------------------------------------------------------
 \section{Introduction (10 min)}
-Java main feature:
+This lessons covers the slides ``Classi come astrazioni" and the chapter 1 of the book  Pellegrino Principe. “Java 8”.
+\subsection{Java main feature}
 \begin{itemize}
 \item \emph{Portability} the main goal of the language is to allow developer to \emph{write programs only once with the assurance that it is possible to execute these programs independently on the architecture on which the program is run}: ``Write Once, Run Anywhere".
 \end{itemize}
 
-Java language characteristics:
+\subsection{Java language characteristics}
 \begin{itemize}
 \item \emph{Compiled} ``a compiled language is a programming language whose implementations are typically compilers (translators that generate machine code from source code), and not interpreters (step-by-step executors of source code, where no pre-runtime translation takes place)"\cite{WikipediaCompiled}.
 \item \emph{Object-oriented}: in contrast with $C$, $COBOL$ or $PASCAL$ which are based on a procedural paradigm~\footnote{Ina procedural paradigm the main building block is the function which manipulates the data of the program.} $JAVA$ is object oriented. In an object-oriented paradigm the developer reason with respect to objects, that are abstraction of concepts of the real world the developer wants to model. Technically an Object is an \emph{instance} of a class~\footnote{$JAVA$ is also considered as multiparadigm language since it is also a procedural language (and if we consider Java 8 also functional.}.
 \item \emph{Class-based}: ``is a style of object-oriented programming in which inheritance is achieved by defining classes of objects, as opposed to the objects themselves (compare prototype-based programming)"\cite{Wikipedia}.
 \item \emph{Statically typed} ``In a statically typed language, every variable name is bound both
 to a type (at compile time, by means of a data declaration) to an object.
-The binding to an object is optional — if a name is not bound to an object, the name is said to be null"\cite{}.
+The binding to an object is optional — if a name is not bound to an object, the name is said to be null"\cite{StaticallyTyped} (this concept will be discussed in the next esercitazione).
+\end{itemize}
+
+\subsection{Elements of a Java system}
+\begin{itemize}
+\item Java Development Kit (JDK) is the environment that allows to develop  Java programs
+\item Java Run-time Environment (JRE) is the environment which allows to run Java programs
 \end{itemize}
 
 
+\subsection{Native code and Bytecode}
+\begin{itemize}
+\item Native code: is the native source Java code, before the code is compiled
+\item Byte code: is the intermediate code which is generated after the Java code is compiled
+\end{itemize}
 
 
+\subsection{Class and Objects}
 
+\begin{mydef} (Class) A \emph{class} is a \emph{type} defined by the user that describes the operations that can be executed over that type.
+\end{mydef}
 
+\begin{mydef} (Object) An \emph{object} is an instance of a particular class.
+\end{mydef}
 
-
+Every object has a state and a behavior.
 
 
 \section{Java Exercises proposed to Show the Java Characteristics 1 h : 20 min}
@@ -318,15 +344,24 @@ public class Client {
 	
 	public static void main(String[] args)
     {
-        Bike bike1; // defines a new identifier (pointer) of class Bike with a predefined value null
+        Bike bike1; // defines a new reference (pointer) of class Bike with a predefined value null
         bike1 = new Bike(); // instantiate  the object
         // when the method new is invoked, the VM allocates dynamically the quantity of memory which is sufficient to contain the Bike object
         Bike bike2 = new Bike(); // defines and instantiate a new object of class Bike
      }
 }
 \end{lstlisting}
-
 To run the program compile the Bike and the Client and run the Client
+
+\textbf{Questions?}\\
+\begin{itemize}
+\item Which is the state of the object after the instruction \emph{Bike bike1;}? the object does not exists it only exists the corresponding reference.
+\item Which is the state of the object \emph{bike1} after the instruction \emph{bike1 = new Bike();}? \emph{gear=1}, \emph{cadence=0}, \emph{speed=0}
+\item Which is the state of the object \emph{bike1} after the instruction \emph{bike2 = new Bike();}? \emph{gear=1}, \emph{cadence=0}, \emph{speed=0}
+\item Which is the state of the object \emph{bike2} after the instruction \emph{bike2 = new Bike();}? \emph{gear=1}, \emph{cadence=0}, \emph{speed=0}
+\end{itemize}
+
+
 
 \subsubsection{Modeling a Bike 2}
 \begin{lstlisting}[language=Java,escapechar=|]
@@ -344,6 +379,10 @@ public class Client {
 }
 \end{lstlisting}
 
+\textbf{Questions?}\\
+\begin{itemize}
+\item What does the instruction \emph{bike1==bike2} print? false, since the two references \emph{bike1} and \emph{bike2} refers to different objects
+\end{itemize}
 
 \subsubsection{Modeling a Bike 3}
 \begin{itemize}
@@ -681,6 +720,13 @@ public class Client {
 }
 \end{lstlisting}
 
+\textbf{Questions?}\\
+\begin{itemize}
+\item What is  the state of the object \emph{bike1} after the instruction  \emph{bike1.incrementGear();} is performed? 
+\emph{gear=2}, \emph{cadence=0}, \emph{speed=0}.
+\item What is  the state of the object \emph{bike1} after the instruction  \emph{bike1.changeCadence(10);} is performed? 
+\emph{gear=2}, \emph{cadence=10}, \emph{speed=0}.
+\end{itemize}
 
 \subsubsection{Modeling a Bike 6}
 \begin{itemize}
@@ -880,12 +926,25 @@ public class Client {
 		bike1.printState();
 		bike1.changeCadence(10);
 		bike1.printState();
-		
-		
-	}
-
+	    }
 }
 \end{lstlisting}
+\textbf{Questions?}\\
+\begin{itemize}
+\item What is  the state of the object \emph{bike1} after the instruction  \emph{bike1=new Bike(3, 2);} is performed? 
+\emph{gear=3}, \emph{cadence=2}, \emph{speed=0}.
+\item What is  the state of the object \emph{bike2} after the instruction  \emph{Bike bike2=new Bike(1, 2);} is performed? 
+\emph{gear=1}, \emph{cadence=2}, \emph{speed=0}.
+\item What is  the state of the object \emph{bike1} after the instruction  \emph{bike1.incrementGear();} is performed? 
+\emph{gear=3}, \emph{cadence=2}, \emph{speed=0}.
+\item What is  the state of the object \emph{bike1} after the instruction  \emph{bike1.changeCadence(10);} is performed? 
+\emph{gear=3}, \emph{cadence=10}, \emph{speed=0}.
+\end{itemize}
+
+\section{Curiosity}
+\begin{framed}
+The name Java reflected the teams’ love for coffee. Indeed, Java coffee refers to coffee beans produced in the Indonesian island of Java.
+\end{framed}
 
 \clearpage
 
