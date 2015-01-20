@@ -160,37 +160,53 @@ This lessons covers the slides ``Classi come astrazioni" and the chapter 1 of th
 \subsection{Java language characteristics}
 \begin{itemize}
 \item \emph{Compiled} ``a compiled language is a programming language whose implementations are typically compilers (translators that generate machine code from source code), and not interpreters (step-by-step executors of source code, where no pre-runtime translation takes place)"\cite{WikipediaCompiled}.
-\item \emph{Object-oriented}: in contrast with $C$, $COBOL$ or $PASCAL$ which are based on a procedural paradigm~\footnote{Ina procedural paradigm the main building block is the function which manipulates the data of the program.} $JAVA$ is object oriented. In an object-oriented paradigm the developer reason with respect to objects, that are abstraction of concepts of the real world the developer wants to model. Technically an Object is an \emph{instance} of a class~\footnote{$JAVA$ is also considered as multiparadigm language since it is also a procedural language (and if we consider Java 8 also functional.}.
+\item \emph{Object-oriented}: in contrast with $C$, $COBOL$ or $PASCAL$ which are based on a procedural paradigm~\footnote{Ina procedural paradigm the main building block is the function which manipulates the data of the program.} $JAVA$ is object oriented. In an object-oriented paradigm the developer reason with respect to objects, that are abstraction of concepts of the real world the developer wants to model~\footnote{$JAVA$ is also considered as multiparadigm language since it is also a procedural language (and if we consider Java 8 also functional.}.
 \item \emph{Class-based}: ``is a style of object-oriented programming in which inheritance is achieved by defining classes of objects, as opposed to the objects themselves (compare prototype-based programming)"\cite{Wikipedia}.
 \item \emph{Statically typed} ``In a statically typed language, every variable name is bound both
 to a type (at compile time, by means of a data declaration) to an object.
 The binding to an object is optional — if a name is not bound to an object, the name is said to be null"\cite{StaticallyTyped} (this concept will be discussed in the next esercitazione).
 \end{itemize}
 
-\subsection{Elements of a Java system}
+\subsubsection{Java is compiled and platform independent}
+One of the main features of Java is that it is platform independent. In C or C++ the compiler generates \emph{machine specific} instructions that can be executed. The compiled code can only be executed on the platform for which the code is compiled.
+
+The main advantage of Java is that the compilation phase produces an intermediate code called \emph{byte-code} which can be executed on different machine which as installed an interpreter which is able to ``understand" this intermediate code.
+The byte-code is an intermediate \emph{code} that is produced after the Java programs are compiled.  Byte code is different by the executable code, such as the ``.exe" files since it is an intermediate code that must be interpreted by a Java Virtual Machine.
+
+\begin{figure}[h]
+\centering
+    \includegraphics[width=0.7\textwidth]{Img/jvm-architecture.png}
+    \caption{Java architecture}
+    \label{JavaArchitecture}
+\end{figure}
+
+The architecture of Java is described in Figure~\ref{JavaArchitecture}. More precisely,
+
 \begin{itemize}
-\item Java Development Kit (JDK) is the environment that allows to develop  Java programs
-\item Java Run-time Environment (JRE) is the environment which allows to run Java programs
+\item MyProgram.java: is the native source Java code which describes the application 
+\item Compiler: takes as input the Java program (\texttt{.java}), and produced an intermediate code (\texttt{.class})
+\item Byte code: is the intermediate code which is generated after the Java code is compiled.
+\item Java Virtual Machine: is the \emph{interpreter} which executes the byte-code\footnote{Note that due to a presence of the interpreter in some sense Java is both compiled and interpreted.}.
 \end{itemize}
 
-
-\subsection{Native code and Bytecode}
-\begin{itemize}
-\item Native code: is the native source Java code, before the code is compiled
-\item Byte code: is the intermediate code which is generated after the Java code is compiled
-\end{itemize}
+To run the program on your machine you just need to have a Java Virtual Machine installed. In particular, the Java Run-time Environment (JRE) contains the virtual machine which allows to run Java programs. Different JREs are associated with different operating systems. However, once the \texttt{class} file is generated it can be executed on every system that as a virtual machine installed. \\
+To compile the Java files you need the  Java Development Kit (JDK). The JDK includes the JRE and is a set of development tools installed on the local machine that allow to write and compile the java program.
 
 
-\subsection{Class and Objects}
 
-\begin{mydef} (Class) A \emph{class} is a \emph{type} defined by the user that describes the operations that can be executed over that type.
+
+\subsubsection{Java is class based}
+
+\begin{mydef} (Class) A \texttt{class} is a \emph{type} defined by the user that describes the operations that can be executed over that type.
 \end{mydef}
 
-\begin{mydef} (Object) An \emph{object} is an instance of a particular class.
+\subsubsection{Java is object oriented}
+\begin{mydef} (Object) An \texttt{object} is an instance of a particular class.
 \end{mydef}
 
 Every object has a state and a behavior.
 
+\subsubsection{Java is statically typed}
 
 \section{Java Exercises proposed to Show the Java Characteristics 1 h : 20 min}
 \subsection{Portability + Compiled (20 min)}
@@ -224,7 +240,7 @@ public class Welcome {
 \item for Mac and Linux Users it is possible to open a folder with \emph{cd}, exit from a folder with \emph{cd ..} and show the content of a folder with \emph{ls}) 
 \item
 \end{itemize}
-\item Type \emph{javac Welcome.java}
+\item Type \texttt{javac Welcome.java}
 \item This command \textbf{compliles} the Welcom.jar file and generates a .class (or a jar) file which contains the a bytecode file that can be executed on the different platforms\footnote{The bytecode is an intermediate representation that can be interpreted by a Virtual Machine.}. This process supports \textbf{portability}.
 \item \emph{To run the javac command a JDK (Java Development Kit) must be installed in your pc\footnote{The JDK also include the Java Run-Time Environment which will be later introduced}.} The JDK allows to \emph{compile} and \emph{execute} the created programs and several \emph{libraries} which are commonly used in the development.
 \end{itemize}
@@ -232,8 +248,8 @@ public class Welcome {
 \subsubsection{Running the Java File}
 \begin{itemize}
 \item the java bytecode file (.class) can be executed on each architecture over which a Virtual Machine (which provides an \textbf{interpreter} for the $Java$ bytecode) for Java is installed. The Java JRE provides this Virtual Machine.
-\item to run the java bytecodefile run type \emph{java Welcome}
-\item the command java Welcome executes the \emph{Main} method of the class Welcome
+\item to run the java bytecodefile run type \texttt{java Welcome}
+\item the command java Welcome executes the \texttt{Main} method of the class Welcome
 \end{itemize}
 
 \subsubsection{Our first Java program}
@@ -245,16 +261,16 @@ public class Welcome {
 }
 \end{lstlisting}
 \begin{itemize}
-\item The code specified defines a \emph{class} called Welcome with a single \emph{method} called main
-\item \emph{public} is used to specify that the class and the corresponding method can be accessed by an external client (such as other classes).
-\item \emph{class} is used to specify a new type of data
-\item \emph{void} specifies that the method does not return any value
-\item \emph{static} specifies that the method can be invoked without creating the corresponding object (Welcome)
-\item \emph{main} is a ``starting method" that \textbf{must} be present in at least one class for the application to be run.
-\item \emph{args} contains the parameter of the main argument. The parameters (also called arguments) are variables that can contains values that are passed to the method when is called. The parameters must have a type
-\item \emph{String[]} (array of String) is the type of the args parameter 
+\item The code specified defines a \texttt{class} called Welcome with a single \texttt{method} called main
+\item \texttt{public} is used to specify that the class and the corresponding method can be accessed by an external client (such as other classes).
+\item \texttt{class} is used to specify a new type of data
+\item \texttt{void} specifies that the method does not return any value
+\item \texttt{static} specifies that the method can be invoked without creating the corresponding object (Welcome)
+\item \texttt{main} is a ``starting method" that \textbf{must} be present in at least one class for the application to be run.
+\item \texttt{args} contains the parameter of the main argument. The parameters (also called arguments) are variables that can contains values that are passed to the method when is called. The parameters must have a type
+\item \texttt{String[]} (array of String) is the type of the args parameter 
 \item the arg parameter is used from main to obtain arguments that can be passed when the method is invoked from command line
-\item \emph{System.out.println} writes the specified text on the screen
+\item \texttt{System.out.println} writes the specified text on the screen
 \end{itemize}
 
 \subsubsection{Our second Java program}
@@ -265,7 +281,7 @@ Change the previously described program to:
 \end{itemize}
 Solution:
 \begin{itemize}
-\item create a new Java file with name \emph{WelcomeWithName}
+\item create a new Java file with name \texttt{WelcomeWithName}
 \item type the following
 \end{itemize}
 \begin{lstlisting}[
@@ -284,17 +300,17 @@ public class WelcomeWithName {
 }
 \end{lstlisting}
 \begin{itemize}
-\item \emph{import} is used to import the \emph{class} Scanner which is contained in the \emph{java.util} package
-\item \emph{new} creates (\emph{instantiate}) a new Scanner Object
-\item \emph{scanner.nextLine()} reads the next of the current line
-\item \emph{scanner.close()} close the scanner
+\item \texttt{import} is used to import the \texttt{class} Scanner which is contained in the \texttt{java.util} package
+\item \texttt{new} creates (\texttt{instantiate}) a new Scanner Object
+\item \texttt{scanner.nextLine()} reads the next of the current line
+\item \texttt{scanner.close()} close the scanner
 \end{itemize}
 
 
 \subsection{Object-orientated and class-based (30 min)}
 \begin{itemize}
 \item The object oriented programming languages have as main goal to support the development of programs based on classes.
-\item  Classes are used to \emph{model} concepts and objects of the real word.
+\item  Classes are used to \texttt{model} concepts and objects of the real word.
 \item Differently from languages such as $C$ in which first you think about function and then on the structure of the manipulated data, in $Java$ and in general in an object oriented language you \emph{first think on the data and modeling the problem} and then how the to change these data.
 \end{itemize}
 
@@ -356,9 +372,9 @@ To run the program compile the Bike and the Client and run the Client
 \textbf{Questions?}\\
 \begin{itemize}
 \item Which is the state of the object after the instruction \emph{Bike bike1;}? the object does not exists it only exists the corresponding reference.
-\item Which is the state of the object \emph{bike1} after the instruction \emph{bike1 = new Bike();}? \emph{gear=1}, \emph{cadence=0}, \emph{speed=0}
-\item Which is the state of the object \emph{bike1} after the instruction \emph{bike2 = new Bike();}? \emph{gear=1}, \emph{cadence=0}, \emph{speed=0}
-\item Which is the state of the object \emph{bike2} after the instruction \emph{bike2 = new Bike();}? \emph{gear=1}, \emph{cadence=0}, \emph{speed=0}
+\item Which is the state of the object \texttt{bike1} after the instruction \texttt{bike1 = new Bike();}? \texttt{gear=1}, \texttt{cadence=0}, \texttt{speed=0}
+\item Which is the state of the object \texttt{bike1} after the instruction \texttt{bike2 = new Bike();}? \texttt{gear=1}, \texttt{cadence=0}, \texttt{speed=0}
+\item Which is the state of the object \texttt{bike2} after the instruction \texttt{bike2 = new Bike();}? \texttt{gear=1}, \texttt{cadence=0}, \texttt{speed=0}
 \end{itemize}
 
 
@@ -381,7 +397,7 @@ public class Client {
 
 \textbf{Questions?}\\
 \begin{itemize}
-\item What does the instruction \emph{bike1==bike2} print? false, since the two references \emph{bike1} and \emph{bike2} refers to different objects
+\item What does the instruction \texttt{bike1==bike2} print? false, since the two references \texttt{bike1} and \texttt{bike2} refers to different objects
 \end{itemize}
 
 \subsubsection{Modeling a Bike 3}
@@ -478,10 +494,10 @@ If we change folder of the bike class we have to change the package
 \item double click on $Eclipse$
 \item when $Eclipse$ starts it asks the user to specify the $Workspace$. The $Workspace$ is the ``place" over which the user wants to work. The user can define different $Workspace$s each of which can contain \emph{multiple projects}.
 \item press on $Workbench$ (banco di lavoro)
-\item \textit{File} $>$ \textit{New} $>$ \textit{Project} $>$ \textit{Maven Project}
-\item check \textit{Create a simple project}
-\item type \textit{IngegneriaDelSoftware1} as Group Id and \textit{Esercitazione1} as Artifact Id
-\item choose \textit{finish}
+\item \texttt{File} $>$ \texttt{New} $>$ \texttt{Project} $>$ \texttt{Maven Project}
+\item check \texttt{Create a simple project}
+\item type \texttt{IngegneriaDelSoftware1} as Group Id and \texttt{Esercitazione1} as Artifact Id
+\item choose \texttt{finish}
 \end{itemize}
 
 When you create a new Project (Maven\footnote{Maven will be explained in the lab.}) in Eclipse, it automatically generates a structure for your project. In particular, 
@@ -495,7 +511,7 @@ When you create a new Project (Maven\footnote{Maven will be explained in the lab
 \subsubsection{Creating a new Package in Eclipse}
 To create a new Package in Eclipse
 \begin{itemize}
-\item right click on $src/main/java$ $>$ New $>$ package 
+\item right click on \texttt{src/main/java} $>$ New $>$ package 
 \item type a name for your class ($esercitatione1$)
 \item press finish
 \end{itemize}
@@ -504,7 +520,7 @@ To create a new Package in Eclipse
 To create a new Class in Eclipse
 \begin{itemize}
 \item right click on the place in which you want to create the new class  (for example the package esercitazione1) $>$ New $>$ class 
-\item type a name for your class ($Bike$)
+\item type a name for your class (\texttt{Bike})
 \item choose the visibility of the class etc...
 \item press finish
 \end{itemize}
@@ -522,8 +538,8 @@ To run a project in eclipse
 \subsubsection{What is going on?}
 If you open your workspace and your project you will see two different folders:
 \begin{itemize}
-\item src: contains the source file of your application ($.java$ files)
-\item target: contains the bytecode files ($.class$ files) which are generated when you perform the procedure explained in~\ref{sec:runningAProjectInEclipse} and then are runned.
+\item src: contains the source file of your application (\texttt{.java} files)
+\item target: contains the bytecode files (\texttt{.class} files) which are generated when you perform the procedure explained in~\ref{sec:runningAProjectInEclipse} and then are runned.
 \end{itemize}
 
 \subsection{Object-oriented and class-based 2 (10 min)}
@@ -531,7 +547,7 @@ If you open your workspace and your project you will see two different folders:
 \subsubsection{Modeling a Bike 4}
 Add the following functionality
 \begin{itemize}
-\item it must be possible to monitor the $gear$, the $cadence$ and the $speed$ of the Bike
+\item it must be possible to monitor the \texttt{gear}, the \texttt{cadence} and the \texttt{speed} of the Bike
 \end{itemize}
 
 ``Monitoring" is done through getters.\\
@@ -722,10 +738,10 @@ public class Client {
 
 \textbf{Questions?}\\
 \begin{itemize}
-\item What is  the state of the object \emph{bike1} after the instruction  \emph{bike1.incrementGear();} is performed? 
-\emph{gear=2}, \emph{cadence=0}, \emph{speed=0}.
-\item What is  the state of the object \emph{bike1} after the instruction  \emph{bike1.changeCadence(10);} is performed? 
-\emph{gear=2}, \emph{cadence=10}, \emph{speed=0}.
+\item What is  the state of the object \texttt{bike1} after the instruction  \texttt{bike1.incrementGear();} is performed? 
+\texttt{gear=2}, \texttt{cadence=0}, \texttt{speed=0}.
+\item What is  the state of the object \texttt{bike1} after the instruction  \texttt{bike1.changeCadence(10);} is performed? 
+\texttt{gear=2}, \texttt{cadence=10}, \texttt{speed=0}.
 \end{itemize}
 
 \subsubsection{Modeling a Bike 6}
@@ -931,14 +947,14 @@ public class Client {
 \end{lstlisting}
 \textbf{Questions?}\\
 \begin{itemize}
-\item What is  the state of the object \emph{bike1} after the instruction  \emph{bike1=new Bike(3, 2);} is performed? 
-\emph{gear=3}, \emph{cadence=2}, \emph{speed=0}.
-\item What is  the state of the object \emph{bike2} after the instruction  \emph{Bike bike2=new Bike(1, 2);} is performed? 
-\emph{gear=1}, \emph{cadence=2}, \emph{speed=0}.
-\item What is  the state of the object \emph{bike1} after the instruction  \emph{bike1.incrementGear();} is performed? 
-\emph{gear=3}, \emph{cadence=2}, \emph{speed=0}.
-\item What is  the state of the object \emph{bike1} after the instruction  \emph{bike1.changeCadence(10);} is performed? 
-\emph{gear=3}, \emph{cadence=10}, \emph{speed=0}.
+\item What is  the state of the object \texttt{bike1} after the instruction  \texttt{bike1=new Bike(3, 2);} is performed? 
+\texttt{gear=3}, \texttt{cadence=2}, \texttt{speed=0}.
+\item What is  the state of the object \texttt{bike2} after the instruction  \texttt{Bike bike2=new Bike(1, 2);} is performed? 
+\texttt{gear=1}, \texttt{cadence=2}, \texttt{speed=0}.
+\item What is  the state of the object \texttt{bike1} after the instruction  \texttt{bike1.incrementGear();} is performed? 
+\texttt{gear=3}, \texttt{cadence=2}, \texttt{speed=0}.
+\item What is  the state of the object \texttt{bike1} after the instruction  \texttt{bike1.changeCadence(10);} is performed? 
+\texttt{gear=3}, \texttt{cadence=10}, \texttt{speed=0}.
 \end{itemize}
 
 \section{Curiosity}
