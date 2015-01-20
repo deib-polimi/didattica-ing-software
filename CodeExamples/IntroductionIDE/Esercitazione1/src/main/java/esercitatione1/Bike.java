@@ -27,6 +27,7 @@ public class Bike {
 		this.gear=gear;
 		this.cadence=cadence;
 		this.updateSpeed();
+
 	}
 
 	public void printState() {
