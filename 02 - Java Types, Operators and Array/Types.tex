@@ -1,0 +1,723 @@
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{hyperref}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{listings}
+\usepackage{subfigure}
+\usepackage{afterpage}
+\usepackage{amsmath,amssymb}            
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{amsthm}
+\usepackage[scriptsize]{caption} 
+\hyphenation{a-gen-tiz-za-zio-ne}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1} % Line spacing
+
+\lstset{
+  numbers=left,
+  stepnumber=5,    
+  firstnumber=1,
+  numberfirstline=true
+}
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle} % Top center head
+\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+\usepackage{listings}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{mathrsfs}
+\usepackage{framed}
+\usepackage{amssymb}
+\usepackage[figuresright]{rotating}
+\usepackage{comment}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{flushend}
+\usepackage{times}
+\usepackage{url}
+\usepackage{comment}
+\usepackage{paralist}
+\usepackage[multiple]{footmisc}
+\usepackage{amsthm}
+\usepackage{multicol}
+
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true
+  tabsize=3
+}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Types of Data, mutable and not mutable classes} % Assignment title
+\newcommand{\hmwkDueDate}{Martedi,\ Aprile 15,\ 2014} % Due date
+\newcommand{\hmwkClass}{Ingegneria del Software 1} % Course/class
+\newcommand{\hmwkClassTime}{} % Class/lecture time
+\newcommand{\hmwkClassInstructor}{Carlo Ghezzi} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{} % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+\vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+\vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+\newpage
+\tableofcontents
+\newpage
+
+\theoremstyle{definition} 
+
+\newtheorem{mydef}{Definition}
+\newtheorem{lemma}{Lemma}
+
+\newtheorem{theorem}{Theorem}[section]
+
+
+\section{Introduzione}
+Questa lezione si riferisce alle slides 16-70  o alternativamente ai capitoli 2, 3, 4 e 5 del libro  Pellegrino Principe. “Java 8”.
+
+\subsection{Variabili}
+\begin{mydef} Una variabile e' uno spazio di memoria che contiene un ``valore". 
+\end{mydef}
+Java e' fortemente tipizzato (\emph{strongly typed}), quindi \emph{ogni variabile ha un tipo}. Il compilatore durante la compilazione controlla che le variabili siano utilizzate in maniera corretta in relazione al loro tipo.\\
+
+In Java ci sono 2 tipi di variabili:
+\begin{itemize}
+\item le variabili di tipo \emph{primitivo} (int, char, bool): contengono direttamente il valore della variabile
+\item le variabili di tipo \emph{riferimento}: contengono dei riferimenti a dei ``valori"
+\end{itemize}
+
+I tipi \emph{primitivi} sono per esempio byte, shorts, int, long, boolean etc.
+
+
+I tipi di \emph{riferimento} possono essere:
+\begin{itemize}
+\item definite dall'utente (o in specifiche librerie)
+\item fornite da Java per esempio array e enumerazioni
+\item il loro valore contiene un riferimento a un \emph{oggetto}, un indirizzo di memoria dove l'oggetto e' memorizzato
+\end{itemize}
+
+
+
+\subsection{Dichiarazione di una variabile}
+Per dichiarare una variabile e' sufficiente specificare il \emph{tipo} e un \emph{identificatore}, ovvero un nome simbolico utilizzato per riferirsi alla variabile\footnote{Java e' case sensitive quindi caratteri in upper e lower case sono interpretati come caratteri differenti.}. \\
+Per esempio, l'istruzione
+\begin{lstlisting}[language=Java,escapechar=|]
+int number;
+\end{lstlisting}
+dichiara una variabile di tipo primivo ``int" con identificatore ``number", mentre l'istruzione
+\begin{lstlisting}[language=Java,escapechar=|]
+Car mycar;
+\end{lstlisting}
+dichiara una variabile di tipo riferimento ``Car" e con identificatore ``mycar".\\
+
+\emph{Qual'e' la differenza tra tipi riferimenti e puntatori (e.g., i puntatori di C)?}\\
+Ci sono varie differenze e similitudini tra riferimenti e puntatori. In genere un riferimento puo' essere interpretato come un puntatore ``ad alto livello", mentre la differenza fondamentale e' per esempio i riferimenti non consentono l'utilizzo dell'aritmetica dei puntatori. Nei riferimenti l'indirizzo di memoria non e' noto e non interessa.
+
+\subsection{Naming convention}
+In Java 
+\begin{itemize}
+\item classes must be written with the \emph{UpperCamelCase}. The identifier must start with an upper case letter. The identifier if formed by multiple words must be written as a single word where each word must start with an upper case letter.
+\item variables and methods must be written with the \emph{lowerCamelCase}. They must start with a lower case letter. When formed by multiple words it must be written as a single word where the first word start with a lower case letter and the others with an upper case letter
+\end{itemize}
+
+\subsection{Initiating a variable}
+The initialization procedure is performed with the operator $=$. The operator $=$ allows to write a value into the variable. The variable assigned to the value must be of the same type of the variable.\\
+It is possible to perform declaration and initialization in different instructions or on the same instruction.
+\begin{lstlisting}[language=Java,escapechar=|]
+// This characters are used to start a command
+// declares the variable
+int number;
+// initializes a variable
+number=0
+\end{lstlisting}
+The previous example declares and initialization the  variable number in different instructions
+
+\begin{lstlisting}[language=Java,escapechar=|]
+// This characters are used to start a command
+// declares and initializes the variable
+int number=0
+\end{lstlisting}
+The previous example declares and initializes the variable in the same instruction
+
+\subsection{Types of data}
+We can distinguish between two different types of data:
+\begin{itemize}
+\item \emph{primitive variables}: are the variables which \textbf{directly contains a value}, such as boolean, int, char
+\begin{itemize}
+\item boolean: 8 bit with a range of values \emph{true} or \emph{false}
+\item char: 16 bit with a range of values from u0000 to uFFFF
+\item byte: 8 bit from -128 to 127
+\item short: 16 bit from -32.768 to 32.767
+\item int: 32 bit from -2.147.483.648 to 2.147.483.647
+\item long: 64 bit from -9.223.372.036.854.775.808 to 9.223.372.036.854.775.807
+\item float: 32 bit from 1.4E-45 to 3.40282235E38
+\item double: 64 bit from 4.9E-324 to 1.7976931348623157E+308
+\end{itemize}
+\item \emph{references}: contain pointers to a memory areas in which the objects (that represent an instance of the classes) are allocated. 
+\end{itemize}
+
+\textbf{Where are the Java Objects allocated?}\\
+Java objects reside in an area called the heap. The heap is created when the JVM starts up and may increase or decrease in size while the application runs. When the heap becomes full, garbage is collected. During the garbage collection objects that are no longer used are cleared, thus making space for new objects.\\
+
+\textbf{What is the difference between the references and the pointers?}
+\begin{itemize}
+\item the references cannot be deallocated, they are removed from the garbage collector
+\item the reference does not directly contain the memory address in which an object is created, but a value that represent it
+\item cannot be used to perform arithmetic operations over the pointer, that is possible for example in $c$
+\end{itemize}
+
+\subsection{Variable scope}
+Two main types of variables can be identified
+\begin{itemize}
+\item \emph{local} variables: a local variable is a variable when its identifier is used only inside the block where is declared.
+For example, a method parameter, a variable declared inside a block are local variables
+\item \emph{global} variables: are the other variables. For example, attributes are global variables.
+\end{itemize}
+
+\begin{mydef} (\emph{Scope}) is the code area in which a variable is ``visible"
+\end{mydef}
+When you declare into a method a variable with the same name of an attribute of a class, the second is hidden and can be accessed through the keyword this
+\begin{lstlisting}[language=Java,escapechar=|]
+public class Car {
+
+	private double speed;
+
+	public void changeSpeed(double speed) {
+        this.speed=speed;   
+   	}
+}
+\end{lstlisting}
+In this case, if we use the identifier speed in the method changeSpeed we refer to the variable speed passed as parameter to the method. To access the field speed of the class Car it is possible to use the keyword this
+
+\subsection{Constants}
+A constant is a memory space where a value that cannot be changed is stored. To declare a constant the keyword \emph{final} is used.
+
+\begin{lstlisting}[language=Java,escapechar=|]
+final int a = 82;
+a = 90; // ERROR - cannot assign a value to final variable a
+\end{lstlisting}
+
+\subsection{Mutable and not Mutable classes}
+\begin{itemize}
+\item a class is \textbf{immutable} if the attributes of the object created using that class cannot be changed.
+\item a class is \textbf{mutable} if it is not mutable
+\end{itemize}
+
+Immutable classes
+\begin{itemize}
+\item advantages:
+\begin{itemize}
+\item easy to create build and test
+\item less error in particular in the case of concurrency
+\end{itemize}
+\item disadvantages:
+\begin{itemize}
+\item may require a lot of memory (to create a new object every time an operation is performed)
+\end{itemize}
+\end{itemize}
+
+\subsection{Object and classes}
+
+
+\section{Exercises}
+
+
+\subsection{Types of data (20 min)} 
+
+\subsubsection{Primitive vs Reference Types}
+\begin{lstlisting}[language=Java,escapechar=|]
+package esercitazione2;
+
+public class Bike {	
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java,escapechar=|]
+package esercitazione2;
+
+public class Client {
+
+	public static void main(String[] args) {
+		
+		// x is a primitive type it directly contains the value 2
+		int x=2;
+		System.out.println(x);
+		
+		// y is an array which is not a primitive type 
+		// when I print it I obtain [I@7f31245a
+		
+		// [I -> array of int
+		// 7f31245a -> memory address
+		// the part on the left of @ specifies the type of the object
+		// the part on the right of the @ is a value that is an hash code of the memory address in which the object is allocated
+		// this means that the real address of memory is changed by an hashing function before being printed
+		int y[]=new int[2];
+		System.out.println(y);
+		
+		Bike b=new Bike();
+		System.out.println(b);
+		
+	}
+}
+\end{lstlisting}
+
+\subsubsection{Complex number}
+Problem
+\begin{itemize}
+\item  design and implement a class which represents a complex number
+\end{itemize}
+
+To solve this problem you must answer two questions:
+\begin{itemize}
+\item How can you define the \textbf{state} of the bike?
+\item Which \textbf{functionalities} offers the bike?
+\end{itemize}
+ 
+\subsubsection{Complex number 1 - Attributes access modifiers}
+we can choose to use
+\begin{itemize}
+\item  the coordinates of the imaginary point
+\item the angle (angolo) and the radius (raggio)
+\end{itemize}
+
+\textbf{The functionalities of the class must not depend on how we choose to implement it}.
+
+\begin{lstlisting}[language=Java,escapechar=|]
+package esercitaionze2.mutableAndImmutable;
+
+/*
+ * Represents a complex number
+ * The class is public, it can be used by any client
+ */
+public class Complex1 {
+
+	// the attributes of the class represents the state of the object modeled by the class and are usually private or 
+	// protected
+	/* real part */
+	private double re;
+	/* imaginary part */
+	private double im;
+
+	public void printState() {
+		System.out.println("real part: " + re + " imaginary part: " + im);
+	}
+
+	// Main di test.
+	public static void main(String[] args) {
+		
+		// if a class does not have a constructor you can instantiate the class using the default constructor
+		Complex1 a = new Complex1();
+		a.printState();
+
+	}
+}
+\end{lstlisting}
+
+Do the following experiments:
+\begin{itemize}
+\item move the main into another class. Try to change the attribute visibility in private, protected and public and use it when
+\begin{itemize}
+\item the class with the main method is in the same package of the Complex class
+\item is in another package (either sub-packages and super-packages do not give access to protected methods)
+\end{itemize}
+\end{itemize}
+
+
+\subsubsection{Complex number 2 - Constructor}
+The second point is to define the functionalities that Complex number must provide
+\begin{itemize}
+\item it must be possible to create with a specified imaginary and real part 
+\item add a Constructor which takes as parameter the real and the imaginary part
+\end{itemize}
+Add in Complex
+\begin{lstlisting}[language=Java,escapechar=|]
+    // Costruttore
+	public Complex(double re, double im) {
+		// ogni valore di re, im e' valido, non faccio
+		// controlli di validita' sui parametri
+		this.re = re;
+		this.im = im;
+	}
+
+\end{lstlisting}
+\begin{itemize}
+\item this allows to remove the conflict between the local variable and the attributes of the class
+\item the constructor have the same name of the class
+\item do not have a return type
+\item show that the default constructor is not visible anymore
+\end{itemize}
+Add main
+\begin{lstlisting}[language=Java,escapechar=|]
+		// if a class does not have a constructor you can instantiate the class
+		// using the default constructor
+		Complex1 a = new Complex1(10, 15);
+		a.printState();
+\end{lstlisting}
+
+Add a default constructor
+\begin{lstlisting}[language=Java,escapechar=|]
+// Costruttore di default, costruisce lo zero
+	public Complex() {
+		// caso particolare del costruttore
+		// con due parametri
+		this(0.0d, 0.0d);
+	}
+\end{lstlisting}
+\begin{itemize}
+\item this(0.0d, 0.0d); recalls the constructor with two parameters of the Complex class
+\item this choice avoids to duplicate code un-usefully
+\end{itemize}
+
+Do the following experiments:
+\begin{itemize}
+\item move the main into another class. Try to change the attribute visibility in private, protected and public and use it when
+\begin{itemize}
+\item the class with the main method is in the same package of the Complex class
+\item is in another package (either sub-packages and super-packages do not give access to protected methods)
+\end{itemize}
+\end{itemize}
+
+What if we also want to create a Complex number from a real and imaginary part? 
+\begin{lstlisting}[language=Java,escapechar=|]
+	public Complex(double modulus, double phase) {
+	// re = ...;
+	// im = ...;
+     }
+\end{lstlisting}
+\begin{itemize}
+\item we cannot add to constructor with the same signature.. We will see later 
+\end{itemize}
+
+
+\subsubsection{Complex number 3 - Methods (observers)}
+Problem: implement the following functionality
+\begin{itemize}
+\item it must be possible to return the real and the imaginary part of the real number
+\end{itemize}
+Type
+\begin{lstlisting}[language=Java,escapechar=|]
+	// returns the real part of the complex number
+	public double re() {
+		return this.re;
+	}
+\end{lstlisting}
+\begin{itemize}
+\item note that since double is a primitive type the method returns the \textbf{value} of the real part, not a pointer!!!
+\end{itemize}
+
+For the imaginary part 
+\begin{itemize}
+\item right click $>$ Source $>$ Generate getter and Setter $>$ Select the field $>$ select the modifier ok
+\end{itemize}
+You will see the following code in your class
+\begin{lstlisting}[language=Java,escapechar=|]
+	public double getIm() {
+		return im;
+	}
+\end{lstlisting}
+
+\subsubsection{Complex number 4 - Methods (modifiers)}
+Problem: implement the following functionality
+\begin{itemize}
+\item it must be possible to change the real and the imaginary part of the Complex number
+\end{itemize}
+\begin{lstlisting}[language=Java,escapechar=|]
+	public void setIm(double im) {
+		this.im = im;
+	}
+\end{lstlisting}
+
+\subsubsection{Complex number 5 - Methods (sum-subtraction...)}
+Problem: implement the following functionality
+\begin{itemize}
+\item it must be possible to sum to the current  Complex number another complex number (the result must be stored in the current Complex number)
+\end{itemize}
+Type
+\begin{lstlisting}[language=Java,escapechar=|]
+	// restituisce la somma tra this e other.
+	public void sum(Complex1 other) {
+		this.re=this.re+ other.getRe();
+		this.im=this.im+ other.getIm();
+	}
+\end{lstlisting}
+\begin{itemize}
+\item it must be possible to sum to the current  Complex number another complex number (the result must be returned by the method in the current Complex number)
+\end{itemize}
+
+\begin{lstlisting}[language=Java,escapechar=|]
+		// restituisce la somma tra this e other.
+	public Complex sum(Complex other) {
+		return new Complex(this.re + other.re(), this.im + other.im());
+	}
+\end{lstlisting}
+\begin{itemize}
+\item  note that since Complex is not a primitive type the method returns the \textbf{pointer} to an object of type Complex which contains
+the sum of the Complex number and the parameter
+\end{itemize}
+
+\subsubsection{Complex number 5 - External libraries}
+\begin{itemize}
+\item it must be able to return the absolute vale of the complex number 
+\end{itemize}
+
+\begin{lstlisting}[language=Java,escapechar=|]
+/*
+	 * Restituisce il modulo (valore assoluto) del numero complesso.
+	 */
+	public double abs() {
+		return Math.sqrt(Math.pow(this.re, 2.0d) + Math.pow(this.im, 2.0d));
+	}
+\end{lstlisting}
+
+\begin{itemize}
+\item Math is an external library. Libraries provides functionalities. In general when available, it is preferrable to rely on libraries. 
+\end{itemize}
+
+
+
+\subsection{Equals-HashCode-ToString}
+Every Java class is a subclass of the Object class and can be useful to refine some of its methods in particular \emph{toString}, \emph{equals} and \emph{hashCode}.
+
+\subsubsection{toString()}
+Returns a string representation of the object. In general, the toString method returns a string that "textually represents" this object. The result should be a concise but informative representation that is easy for a person to read. It is recommended that all subclasses override this method.
+\begin{lstlisting}
+@Override
+public String toString(){
+    return "Complex number: ("+re+", "+im+")";
+}
+\end{lstlisting}
+Change the main into
+\begin{lstlisting}
+// Main di test.
+public static void main(String[] args) {
+
+	// if a class does not have a constructor you can instantiate the class
+	// using the default constructor
+	Complex a = new Complex(10, 10);
+	System.out.println(a.toString());
+}
+\end{lstlisting}
+
+\subsubsection{equals()}
+We have seen that the $==$ operator is used to compare the reference of two objects. The equal method of the class object indicates whether some other object is "equal to" this one. 
+\begin{itemize}
+\item Question, for the primitive types $==$ returns true  if the two object has the same value. Why?
+\end{itemize}
+
+When you define your object is a wall practice to redefine the equals method:
+\begin{lstlisting}
+@Override
+public boolean equals(Object other){
+    // check if the type of the object other is Complex
+    if(other instanceof Complex){
+    
+        // casting: convert the other object into a Complex
+        Complex otherComplex=(Complex) other;
+        return this.im==otherComplex.im && this.re==otherComplex.re;
+    }
+    else{
+        return false;
+    }
+}
+\end{lstlisting}
+
+\subsubsection{hashCode()}
+Returns a hash code value for the object. This method is supported for the benefit of hash tables such as those provided by HashMap.
+The general contract of hashCode is:
+\begin{itemize}
+\item Whenever it is invoked on the same object more than once during an execution of a Java application, the hashCode method must consistently return the same integer, provided no information used in equals comparisons on the object is modified. This integer need not remain consistent from one execution of an application to another execution of the same application.
+\item If two objects are equal according to the equals(Object) method, then calling the hashCode method on each of the two objects must produce the same integer result.
+It is not required that if two objects are unequal according to the equals(java.lang.Object) method, then calling the hashCode method on each of the two objects must produce distinct integer results. 
+\item However, the programmer should be aware that producing distinct integer results for unequal objects may improve the performance of hash tables.
+\end{itemize}
+As much as is reasonably practical, the hashCode method defined by class Object does return distinct integers for distinct objects. (This is typically implemented by converting the internal address of the object into an integer, but this implementation technique is not required by the JavaTM programming language.)
+
+To be read: \url{http://stackoverflow.com/questions/2738886/}
+
+\begin{lstlisting}
+@Override
+public int hashCode(){
+    int hash=17;
+    hash=hash*23+Double.valueOf(re).hashCode();
+     hash=hash*23+Double.valueOf(im).hashCode();
+    return hash;
+}
+\end{lstlisting}
+
+You can generate automatically hashCode and Equals using the Eclipse IDE
+\begin{itemize}
+\item right click
+\item source
+\item generate hashCode and equals
+\item choose the field to be included in the equals and the hashCode
+\end{itemize}
+
+\subsection{Mutable and Immutable classes }
+\begin{itemize}
+\item String is an \textbf{immutable} class: every time a method is invoked on a String object a \emph{new} object is created
+\item note: String is not a \emph{primitive type}
+\item other immutable classes are Integer, Double etc..
+\item Question: what is the difference between Integer and int?
+\end{itemize}
+
+\subsubsection{An example: The String class}
+\begin{lstlisting}[language=Java,escapechar=|]
+package esercitaionze2.mutableAndImmutable;
+
+public class StringDemo {
+
+	public static void main(String[] args) {
+		
+		// s1 is a pointer to a String object which contains "Ciao Mamma"
+		String s1 = "Ciao Mamma! ";
+		
+		// s2 points to the same object pointed by s1
+		String s2 = s1;
+		
+		// if you compare the two pointers the answer is true since they point to the same object
+		System.out.println(s1 == s2);
+		
+		// if you print the two object "Ciao Mamma" is printed in both the cases 
+		// why it is not displayed the reference but is printed the text? we will see...
+		System.out.println(s1);
+		System.out.println(s2);
+		
+		// s1 points to a new object which is obtained by concatenating the string pointed
+		// by s1 and the String "Guarda come mi diverto!"
+		s1 = s1 + "Guarda come mi diverto!";
+		
+		// if I print the object pointed by s1 "Ciao Mamma! Guarda come mi diverto!" is printed
+		System.out.println(s1);
+		
+		// if I compare the two pointers the answer is false
+		System.out.println(s1 == s2);
+	
+		// s3 points to a new String object which contains the String "Ciao Mamma! "
+		String s3 = "Ciao Mamma! ";
+		
+		// if I compare the pointers the answer is false since they points to different objects
+		System.out.println(s2 == s3);
+		
+		// if I print the s2 and s3 the same String is printed
+		System.out.println(s2);
+		System.out.println(s3);
+	}
+}
+\end{lstlisting}
+
+
+
+\subsubsection{An example: The Complex class}
+
+
+\subsection{Arrays}
+
+
+\clearpage
+
+% ---- Bibliography ----
+
+
+
+
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliographystyle{alpha}
+\bibliography{bib}
+\nocite{*}
+
+
+\end{document}
+
