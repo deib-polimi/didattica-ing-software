@@ -175,12 +175,21 @@ Java e' fortemente tipizzato (\emph{strongly typed}), quindi \emph{ogni variabil
 
 In Java ci sono 2 tipi di variabili:
 \begin{itemize}
-\item le variabili di tipo \emph{primitivo} (int, char, bool): contengono direttamente il valore della variabile
+\item le variabili di tipo \emph{primitivo}: contengono direttamente il valore della variabile
 \item le variabili di tipo \emph{riferimento}: contengono dei riferimenti a dei ``valori"
 \end{itemize}
 
-I tipi \emph{primitivi} sono per esempio byte, shorts, int, long, boolean etc.
-
+I tipi \emph{primitivi} sono:
+\begin{itemize}
+\item boolean: 8 bit with a range of values \emph{true} or \emph{false}
+\item char: 16 bit with a range of values from u0000 to uFFFF
+\item byte: 8 bit from -128 to 127
+\item short: 16 bit from -32.768 to 32.767
+\item int: 32 bit from -2.147.483.648 to 2.147.483.647
+\item long: 64 bit from -9.223.372.036.854.775.808 to 9.223.372.036.854.775.807
+\item float: 32 bit from 1.4E-45 to 3.40282235E38
+\item double: 64 bit from 4.9E-324 to 1.7976931348623157E+308
+\end{itemize}
 
 I tipi di \emph{riferimento} possono essere:
 \begin{itemize}
@@ -197,23 +206,21 @@ Per esempio, l'istruzione
 \begin{lstlisting}[language=Java,escapechar=|]
 int number;
 \end{lstlisting}
-dichiara una variabile di tipo primivo ``int" con identificatore ``number", mentre l'istruzione
+dichiara una variabile di tipo primivo ``int" con identificatore ``number".
+
+L'istruzione
 \begin{lstlisting}[language=Java,escapechar=|]
 Car mycar;
 \end{lstlisting}
-dichiara una variabile di tipo riferimento ``Car" e con identificatore ``mycar".\\
+dichiara una variabile di tipo riferimento ``Car" e con identificatore ``mycar". Nota la dichiarazione non alloca spazio per l'oggetto ma solo per il riferimento all'oggetto. \\
 
 \emph{Qual'e' la differenza tra tipi riferimenti e puntatori (e.g., i puntatori di C)?}\\
 Ci sono varie differenze e similitudini tra riferimenti e puntatori. In genere un riferimento puo' essere interpretato come un puntatore ``ad alto livello", mentre la differenza fondamentale e' per esempio i riferimenti non consentono l'utilizzo dell'aritmetica dei puntatori. Nei riferimenti l'indirizzo di memoria non e' noto e non interessa.
 
-\subsection{Naming convention}
-In Java 
-\begin{itemize}
-\item classes must be written with the \emph{UpperCamelCase}. The identifier must start with an upper case letter. The identifier if formed by multiple words must be written as a single word where each word must start with an upper case letter.
-\item variables and methods must be written with the \emph{lowerCamelCase}. They must start with a lower case letter. When formed by multiple words it must be written as a single word where the first word start with a lower case letter and the others with an upper case letter
-\end{itemize}
+\subsection{Inizializzazione di una variabile}
+Una variabile non puo' essere usata senza essere inizializata. Quando una variabile viene dichiarata gli viene assegnato un valore di default.
 
-\subsection{Initiating a variable}
+Il riferimento e' assegnato inizialmente il valore null, per indicare che il riferimento non e' ancora associato a un oggetto.
 The initialization procedure is performed with the operator $=$. The operator $=$ allows to write a value into the variable. The variable assigned to the value must be of the same type of the variable.\\
 It is possible to perform declaration and initialization in different instructions or on the same instruction.
 \begin{lstlisting}[language=Java,escapechar=|]
@@ -232,22 +239,7 @@ int number=0
 \end{lstlisting}
 The previous example declares and initializes the variable in the same instruction
 
-\subsection{Types of data}
-We can distinguish between two different types of data:
-\begin{itemize}
-\item \emph{primitive variables}: are the variables which \textbf{directly contains a value}, such as boolean, int, char
-\begin{itemize}
-\item boolean: 8 bit with a range of values \emph{true} or \emph{false}
-\item char: 16 bit with a range of values from u0000 to uFFFF
-\item byte: 8 bit from -128 to 127
-\item short: 16 bit from -32.768 to 32.767
-\item int: 32 bit from -2.147.483.648 to 2.147.483.647
-\item long: 64 bit from -9.223.372.036.854.775.808 to 9.223.372.036.854.775.807
-\item float: 32 bit from 1.4E-45 to 3.40282235E38
-\item double: 64 bit from 4.9E-324 to 1.7976931348623157E+308
-\end{itemize}
-\item \emph{references}: contain pointers to a memory areas in which the objects (that represent an instance of the classes) are allocated. 
-\end{itemize}
+
 
 \textbf{Where are the Java Objects allocated?}\\
 Java objects reside in an area called the heap. The heap is created when the JVM starts up and may increase or decrease in size while the application runs. When the heap becomes full, garbage is collected. During the garbage collection objects that are no longer used are cleared, thus making space for new objects.\\
@@ -258,6 +250,15 @@ Java objects reside in an area called the heap. The heap is created when the JVM
 \item the reference does not directly contain the memory address in which an object is created, but a value that represent it
 \item cannot be used to perform arithmetic operations over the pointer, that is possible for example in $c$
 \end{itemize}
+
+\subsection{Naming convention}
+In Java 
+\begin{itemize}
+\item classes must be written with the \emph{UpperCamelCase}. The identifier must start with an upper case letter. The identifier if formed by multiple words must be written as a single word where each word must start with an upper case letter.
+\item variables and methods must be written with the \emph{lowerCamelCase}. They must start with a lower case letter. When formed by multiple words it must be written as a single word where the first word start with a lower case letter and the others with an upper case letter
+\end{itemize}
+
+
 
 \subsection{Variable scope}
 Two main types of variables can be identified
