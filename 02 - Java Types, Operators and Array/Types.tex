@@ -1,5 +1,8 @@
+% !TeX spellcheck = it_IT
 \documentclass{article}
-
+\usepackage[utf8]{inputenc}
+\inputencoding{utf8}
+\usepackage[T1]{fontenc}
 \usepackage{fancyhdr} % Required for custom headers
 \usepackage{lastpage} % Required to determine the last page for the footer
 \usepackage{extramarks} % Required for headers and footers
@@ -92,7 +95,12 @@
   stringstyle=\color{mauve},
   breaklines=true,
   breakatwhitespace=true
-  tabsize=3
+  tabsize=3,
+  literate={à}{{\'a}}1
+  {è}{{\'e}}1
+  {ì}{{\'u}}1
+  {ò}{{\'o}}1
+  {ù}{{\'u}}1
 }
 
 %----------------------------------------------------------------------------------------
@@ -166,56 +174,56 @@
 
 
 \section{Introduzione}
-Questa lezione si riferisce alle slides 16-70  o alternativamente ai capitoli 2, 3, 4 e 5 del libro  Pellegrino Principe. “Java 8”.
+Questa lezione si riferisce alle slides 16-70  o alternativamente ai capitoli 2, 3, 4 e 5 del libro  Pellegrino Principe ``Java 8''.
 
 \subsection{Variabili}
-\begin{mydef} Una variabile e' uno spazio di memoria che contiene un ``valore". 
+\begin{mydef} Una variabile è uno spazio di memoria che contiene un ``valore". 
 \end{mydef}
-Java e' fortemente tipizzato (\emph{strongly typed}), quindi \emph{ogni variabile ha un tipo}. Il compilatore durante la compilazione controlla che le variabili siano utilizzate in maniera corretta in relazione al loro tipo.\\
+Java è fortemente tipizzato (\emph{strongly typed}), quindi \emph{ogni variabile ha un tipo}. Il compilatore durante la compilazione controlla che le variabili siano utilizzate in maniera corretta in relazione al loro tipo.\\
 
 In Java ci sono 2 tipi di variabili:
 \begin{itemize}
-\item le variabili di tipo \emph{primitivo} (int, char, bool): contengono direttamente il valore della variabile
-\item le variabili di tipo \emph{riferimento}: contengono dei riferimenti a dei ``valori"
+\item le variabili di tipo \emph{primitivo} (\texttt{int}, \texttt{char}, \texttt{boolean}): contengono direttamente il valore della variabile
+\item le variabili di tipo \emph{riferimento}: contengono riferimenti a ``valori"
 \end{itemize}
 
-I tipi \emph{primitivi} sono per esempio byte, shorts, int, long, boolean etc.
+I tipi \emph{primitivi} sono per esempio \texttt{byte}, \texttt{short}, \texttt{int}, \texttt{long}, \texttt{boolean} etc.
 
 
 I tipi di \emph{riferimento} possono essere:
 \begin{itemize}
 \item definite dall'utente (o in specifiche librerie)
 \item fornite da Java per esempio array e enumerazioni
-\item il loro valore contiene un riferimento a un \emph{oggetto}, un indirizzo di memoria dove l'oggetto e' memorizzato
+\item il loro valore contiene un riferimento a un \emph{oggetto}, un indirizzo di memoria dove l'oggetto è memorizzato
 \end{itemize}
 
 
 
 \subsection{Dichiarazione di una variabile}
-Per dichiarare una variabile e' sufficiente specificare il \emph{tipo} e un \emph{identificatore}, ovvero un nome simbolico utilizzato per riferirsi alla variabile\footnote{Java e' case sensitive quindi caratteri in upper e lower case sono interpretati come caratteri differenti.}. \\
+Per dichiarare una variabile è sufficiente specificare il \emph{tipo} e un \emph{identificatore}, ovvero un nome simbolico utilizzato per riferirsi alla variabile\footnote{Java è case sensitive quindi caratteri in upper e lower case sono interpretati come caratteri differenti.}. \\
 Per esempio, l'istruzione
 \begin{lstlisting}[language=Java,escapechar=|]
 int number;
 \end{lstlisting}
-dichiara una variabile di tipo primivo ``int" con identificatore ``number", mentre l'istruzione
+dichiara una variabile di tipo primitivo ``\texttt{int}" con identificatore ``\texttt{number}", mentre l'istruzione
 \begin{lstlisting}[language=Java,escapechar=|]
 Car mycar;
 \end{lstlisting}
-dichiara una variabile di tipo riferimento ``Car" e con identificatore ``mycar".\\
+dichiara una variabile di tipo riferimento ``\texttt{Car}" e con identificatore ``\texttt{mycar}".\\
 
-\emph{Qual'e' la differenza tra tipi riferimenti e puntatori (e.g., i puntatori di C)?}\\
-Ci sono varie differenze e similitudini tra riferimenti e puntatori. In genere un riferimento puo' essere interpretato come un puntatore ``ad alto livello", mentre la differenza fondamentale e' per esempio i riferimenti non consentono l'utilizzo dell'aritmetica dei puntatori. Nei riferimenti l'indirizzo di memoria non e' noto e non interessa.
+\emph{Qual'è la differenza tra tipi riferimenti e puntatori (e.g., i puntatori di C)?}\\
+Ci sono varie differenze e similitudini tra riferimenti e puntatori. In genere un riferimento può essere interpretato come un puntatore ``ad alto livello", mentre la differenza fondamentale è per esempio i riferimenti non consentono l'utilizzo dell'aritmetica dei puntatori. Nei riferimenti l'indirizzo di memoria non è noto e non interessa.
 
-\subsection{Naming convention}
-In Java 
-\begin{itemize}
-\item classes must be written with the \emph{UpperCamelCase}. The identifier must start with an upper case letter. The identifier if formed by multiple words must be written as a single word where each word must start with an upper case letter.
-\item variables and methods must be written with the \emph{lowerCamelCase}. They must start with a lower case letter. When formed by multiple words it must be written as a single word where the first word start with a lower case letter and the others with an upper case letter
-\end{itemize}
+\subsection{Convenzione di notazione}
+In Java i nomi di classi, variabili e metodi fanno uso della notazione a cammello (\emph{CamelCase}).
+La notazione a cammello è costituita dalla giustapposizione delle parole che costituiscono l'identificativo, unite con l'iniziale di ogni parola maiuscola. 
+La prima lettera dell'identificativo è maiuscola nel caso di classi e minuscola nel caso di metodi e attributi/variabili. 
 
-\subsection{Initiating a variable}
-The initialization procedure is performed with the operator $=$. The operator $=$ allows to write a value into the variable. The variable assigned to the value must be of the same type of the variable.\\
-It is possible to perform declaration and initialization in different instructions or on the same instruction.
+\subsection{Inizializzare una variabile}
+Le variabili vengono inizializzate tramite l'operatore ``$=$''. Questo operatore assegna un valore ad una variabile.
+Il tipo della variabile deve essere compatibile col tipo del valore.\\
+Dichiarazione e inizializzazione possono essere effettuate in una o  più istruzioni, a discrezione
+del programmatore.
 \begin{lstlisting}[language=Java,escapechar=|]
 // This characters are used to start a command
 // declares the variable
@@ -223,53 +231,60 @@ int number;
 // initializes a variable
 number=0
 \end{lstlisting}
-The previous example declares and initialization the  variable number in different instructions
-
+Nell'esempio precedente la dichiarazione e l'assegnamento della variabile \texttt{number} sono
+effettuati in istruzioni differenti.
 \begin{lstlisting}[language=Java,escapechar=|]
 // This characters are used to start a command
 // declares and initializes the variable
 int number=0
 \end{lstlisting}
-The previous example declares and initializes the variable in the same instruction
+In quest'ultimo esempio nella medesima istruzione \texttt{number} viene dichiarata e inizializzata.
 
-\subsection{Types of data}
-We can distinguish between two different types of data:
+\subsection{Tipi dato}
+Vi sono due categorie principali di tipi in Java:
 \begin{itemize}
-\item \emph{primitive variables}: are the variables which \textbf{directly contains a value}, such as boolean, int, char
+\item \emph{tipi primitivi}: questi tipi \textbf{contengono direttamente un valore}, come un booleano,
+un intero, etc.
 \begin{itemize}
-\item boolean: 8 bit with a range of values \emph{true} or \emph{false}
-\item char: 16 bit with a range of values from u0000 to uFFFF
-\item byte: 8 bit from -128 to 127
-\item short: 16 bit from -32.768 to 32.767
-\item int: 32 bit from -2.147.483.648 to 2.147.483.647
-\item long: 64 bit from -9.223.372.036.854.775.808 to 9.223.372.036.854.775.807
-\item float: 32 bit from 1.4E-45 to 3.40282235E38
-\item double: 64 bit from 4.9E-324 to 1.7976931348623157E+308
+\item \texttt{boolean}: mantiene un valore booleano (\emph{true} o \emph{false}) all'interno di 8 bit
+\item \texttt{char}: intero a 16 bit usato per contenere un carattere Unicode, valori tra u0000 e uFFFF
+\item \texttt{byte}: intero con segno a 8 bit (da -128 a 127)
+\item \texttt{short}: intero con segno a 16 bit (da -32.768 a 32.767)
+\item \texttt{int}: intero con segno a 32 bit (da -2.147.483.648 a 2.147.483.647)
+\item \texttt{long}: intero con segno a 64 bit (da -9.223.372.036.854.775.808 a 9.223.372.036.854.775.807)
+\item \texttt{float}: numero in virgola mobile a 32 bit (da 1.4E-45 a 3.40282235E38)
+\item \texttt{double}: numero in virgola mobile a 64 bit (da 4.9E-324 a 1.7976931348623157E+308)
 \end{itemize}
-\item \emph{references}: contain pointers to a memory areas in which the objects (that represent an instance of the classes) are allocated. 
-\end{itemize}
-
-\textbf{Where are the Java Objects allocated?}\\
-Java objects reside in an area called the heap. The heap is created when the JVM starts up and may increase or decrease in size while the application runs. When the heap becomes full, garbage is collected. During the garbage collection objects that are no longer used are cleared, thus making space for new objects.\\
-
-\textbf{What is the difference between the references and the pointers?}
-\begin{itemize}
-\item the references cannot be deallocated, they are removed from the garbage collector
-\item the reference does not directly contain the memory address in which an object is created, but a value that represent it
-\item cannot be used to perform arithmetic operations over the pointer, that is possible for example in $c$
+\item \emph{tipo riferimento}: contiene un puntatore a una zona di memoria in cui un oggetto
+(che rappresenta l'istanza di una classe) è allocato. 
 \end{itemize}
 
-\subsection{Variable scope}
-Two main types of variables can be identified
+\textbf{Dove vengono allocati gli oggetti Java?}\\
+Gli oggetti Java risiedono in una zona detta \emph{heap}. L'heap viene creato all'avvio della JVM e può cambiare dimensione durante l'esecuzione 
+dell'applicazione. A discrezione della JVM viene eseguita l'operazione di ``\emph{garbage collection}'', che consiste nella rimozione degli oggetti non più utilizzabili dal programma per fare posto ad altri.\\
+Il componente che effettua tale operazione prende il nome di ``\emph{garbage collector}''.
+
+
+\textbf{Quali sono le differenze tra puntatori e riferimenti?}
 \begin{itemize}
-\item \emph{local} variables: a local variable is a variable when its identifier is used only inside the block where is declared.
-For example, a method parameter, a variable declared inside a block are local variables
-\item \emph{global} variables: are the other variables. For example, attributes are global variables.
+\item un riferimento non può essere de-allocato dall'utente, viene rimosso dal garbage collector
+\item un riferimento non permette l'acceso all'indirizzo di memoria relativo ad un oggetto%TODO, ma a but a value that represent it
+\item non è possibile effettuare operazioni aritmetiche sul riferimento, come è possibile sui puntatori nel linguaggio C
 \end{itemize}
 
-\begin{mydef} (\emph{Scope}) is the code area in which a variable is ``visible"
+\subsection{Visibilità di una variabile}
+
+In Java le variabili possono essere distinte in due gruppi a seconda della loro visibilità.
+\begin{itemize}
+\item variabili \emph{locali}: è locale una variabile visibile soltanto all'interno del blocco dove questa è dichiarata.
+Esempi di variabili locali sono un parametro di un metodo e una variabile dichiarata in un blocco di codice.
+\item variabili \emph{globali}: tutte le altre variabili. Esempi di variabili globali sono gli attributi di una classe.
+\end{itemize}
+
+\begin{mydef} La visibilità (\emph{scope}) è la porzione di codice in cui una variabile è richiamabile
 \end{mydef}
-When you declare into a method a variable with the same name of an attribute of a class, the second is hidden and can be accessed through the keyword this
+Dichiarare all'interno di un metodo una variabile con lo stesso nome di un attributo della classe nasconde quest'ultimo.
+Per poter accedere all'attributo è necessario usare la keyword \texttt{this}.
 \begin{lstlisting}[language=Java,escapechar=|]
 public class Car {
 
@@ -280,53 +295,87 @@ public class Car {
    	}
 }
 \end{lstlisting}
-In this case, if we use the identifier speed in the method changeSpeed we refer to the variable speed passed as parameter to the method. To access the field speed of the class Car it is possible to use the keyword this
+In questo esempio, nel metodo \texttt{changeSpeed} l'identificativo \texttt{speed} si riferisce al parametro passato al metodo.
+Per accedere all'attributo \texttt{speed} relativa all'istanza corrente della classe \texttt{Car} si utilizza la keyword \texttt{this}. 
 
-\subsection{Constants}
-A constant is a memory space where a value that cannot be changed is stored. To declare a constant the keyword \emph{final} is used.
+\subsection{Costanti}
+Una costante è un valore non modificabile.
+È possibile dichiarare una costante utilizzando la keyword
+\texttt{final}. 
+%A constant is a memory space where a value that cannot be changed is %stored. To declare a constant the keyword \emph{final} is used.
 
 \begin{lstlisting}[language=Java,escapechar=|]
 final int a = 82;
-a = 90; // ERROR - cannot assign a value to final variable a
+a = 90; // ERRORE - non è possibile assegnare un valore ad una costante
 \end{lstlisting}
 
-\subsection{Mutable and not Mutable classes}
+\subsection{Classi mutabili e immutabili}
 \begin{itemize}
-\item a class is \textbf{immutable} if the attributes of the object created using that class cannot be changed.
-\item a class is \textbf{mutable} if it is not mutable
+\item una classe è definita \emph{immutabile} se gli attributi delle sue istanze non possono essere cambiate una volta create.
+\item una classe è \emph{mutabile} altrimenti
 \end{itemize}
 
-Immutable classes
+Classi immutabili
 \begin{itemize}
-\item advantages:
+\item vantaggi:
 \begin{itemize}
-\item easy to create build and test
-\item less error in particular in the case of concurrency
+\item %TODO??? easy to create build and test
+\item meno soggette a errori, specialmente in caso di programmi concorrenti
 \end{itemize}
-\item disadvantages:
+\item svantaggi:
 \begin{itemize}
-\item may require a lot of memory (to create a new object every time an operation is performed)
+\item possono richiedere molta memoria (viene creato un nuovo oggetto per ogni operazione effettuata)
+\item possono peggiorare le prestazioni in quanto molti oggetti vengono creati e il garbage collector viene sollecitato maggiormente
 \end{itemize}
 \end{itemize}
 
-\subsection{Object and classes}
+In taluni casi, in cui devono essere eseguite una lunga sequenza di operazioni, è opportuno usare classi mutabili.
+Ad esempio, nel caso si debba concatenare diverse stringhe in un ciclo è opportuno usare la classe
+\texttt{StringBuilder} (mutabile) rispetto alla classe \texttt{String} (immutabile).
 
-
-\section{Exercises}
-
-
-\subsection{Types of data (20 min)} 
-
-\subsubsection{Primitive vs Reference Types}
 \begin{lstlisting}[language=Java,escapechar=|]
-package esercitazione2;
+public class Car {
+
+private double speed;
+
+public void changeSpeed(double speed) {
+this.speed=speed;   
+}
+
+@Override
+public String toString() {
+|return "Sono una macchina. " + "La mia velocità è " + double + "km/h.";|
+}
+
+public String usingBuilder() {
+	StringBuilder builder = new StringBuilder();
+	builder.append("Sono una macchina. ");
+    builder.append("La mia velocità è: ")
+	builder.append(double);
+	builder.append("km/h.");
+}
+
+}
+\end{lstlisting}
+
+\subsection{Classi e oggetti}
+
+
+\section{Esercizi}
+
+
+\subsection{Tipi dato (20 min)} 
+
+\subsubsection{Tipi primitivi e riferimento}
+\begin{lstlisting}[language=Java,escapechar=|]
+package it.polimi.deib.se.esercitazione2;
 
 public class Bike {	
 }
 \end{lstlisting}
 
 \begin{lstlisting}[language=Java,escapechar=|]
-package esercitazione2;
+package it.polimi.deib.se.esercitazione2;
 
 public class Client {
 
@@ -354,7 +403,7 @@ public class Client {
 }
 \end{lstlisting}
 
-\subsubsection{Complex number}
+\subsubsection{Numeri complessi}
 Problem
 \begin{itemize}
 \item  design and implement a class which represents a complex number
