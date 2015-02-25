@@ -183,12 +183,22 @@ Java è fortemente tipizzato (\emph{strongly typed}), quindi \emph{ogni variabil
 
 In Java ci sono 2 tipi di variabili:
 \begin{itemize}
-\item le variabili di tipo \emph{primitivo} (\texttt{int}, \texttt{char}, \texttt{boolean}): contengono direttamente il valore della variabile
-\item le variabili di tipo \emph{riferimento}: contengono riferimenti a ``valori"
+\item le variabili di tipo \emph{primitivo}: contengono direttamente il valore della variabile
+\item le variabili di tipo \emph{riferimento}: contengono riferimenti a ``valori" 
 \end{itemize}
 
-I tipi \emph{primitivi} sono per esempio \texttt{byte}, \texttt{short}, \texttt{int}, \texttt{long}, \texttt{boolean} etc.
+I tipi \emph{primitivi} sono:
 
+	\begin{itemize}
+		\item \texttt{boolean}: mantiene un valore booleano (\emph{true} o \emph{false}) all'interno di 8 bit
+		\item \texttt{char}: intero a 16 bit usato per contenere un carattere Unicode, valori tra u0000 e uFFFF
+		\item \texttt{byte}: intero con segno a 8 bit (da -128 a 127)
+		\item \texttt{short}: intero con segno a 16 bit (da -32.768 a 32.767)
+		\item \texttt{int}: intero con segno a 32 bit (da -2.147.483.648 a 2.147.483.647)
+		\item \texttt{long}: intero con segno a 64 bit (da -9.223.372.036.854.775.808 a 9.223.372.036.854.775.807)
+		\item \texttt{float}: numero in virgola mobile a 32 bit (da 1.4E-45 a 3.40282235E38)
+		\item \texttt{double}: numero in virgola mobile a 64 bit (da 4.9E-324 a 1.7976931348623157E+308)
+	\end{itemize}
 
 I tipi di \emph{riferimento} possono essere:
 \begin{itemize}
@@ -196,8 +206,6 @@ I tipi di \emph{riferimento} possono essere:
 \item fornite da Java per esempio array e enumerazioni
 \item il loro valore contiene un riferimento a un \emph{oggetto}, un indirizzo di memoria dove l'oggetto è memorizzato
 \end{itemize}
-
-
 
 \subsection{Dichiarazione di una variabile}
 Per dichiarare una variabile è sufficiente specificare il \emph{tipo} e un \emph{identificatore}, ovvero un nome simbolico utilizzato per riferirsi alla variabile\footnote{Java è case sensitive quindi caratteri in upper e lower case sono interpretati come caratteri differenti.}. \\
@@ -209,7 +217,8 @@ dichiara una variabile di tipo primitivo ``\texttt{int}" con identificatore ``\t
 \begin{lstlisting}[language=Java,escapechar=|]
 Car mycar;
 \end{lstlisting}
-dichiara una variabile di tipo riferimento ``\texttt{Car}" e con identificatore ``\texttt{mycar}".\\
+dichiara una variabile di tipo riferimento ``\texttt{Car}" e con identificatore ``\texttt{mycar}".
+La dichiarazione non alloca spazio per l'oggetto ma solo per il riferimento all'oggetto. \\
 
 \emph{Qual'è la differenza tra tipi riferimenti e puntatori (e.g., i puntatori di C)?}\\
 Ci sono varie differenze e similitudini tra riferimenti e puntatori. In genere un riferimento può essere interpretato come un puntatore ``ad alto livello", mentre la differenza fondamentale è per esempio i riferimenti non consentono l'utilizzo dell'aritmetica dei puntatori. Nei riferimenti l'indirizzo di memoria non è noto e non interessa.
@@ -219,8 +228,11 @@ In Java i nomi di classi, variabili e metodi fanno uso della notazione a cammell
 La notazione a cammello è costituita dalla giustapposizione delle parole che costituiscono l'identificativo, unite con l'iniziale di ogni parola maiuscola. 
 La prima lettera dell'identificativo è maiuscola nel caso di classi e minuscola nel caso di metodi e attributi/variabili. 
 
-\subsection{Inizializzare una variabile}
-Le variabili vengono inizializzate tramite l'operatore ``$=$''. Questo operatore assegna un valore ad una variabile.
+\subsection{Inizializzazione di una variabile}
+Una variabile non può essere usata senza essere inizializzata. Quando un attributo viene dichiarato gli viene assegnato un valore di default.
+
+Il riferimento e' assegnato inizialmente il valore \texttt{null}, per indicare che il riferimento non e' ancora associato a un oggetto.
+e variabili vengono inizializzate tramite l'operatore ``$=$''. Questo operatore assegna un valore ad una variabile.
 Il tipo della variabile deve essere compatibile col tipo del valore.\\
 Dichiarazione e inizializzazione possono essere effettuate in una o  più istruzioni, a discrezione
 del programmatore.
@@ -240,24 +252,11 @@ int number=0
 \end{lstlisting}
 In quest'ultimo esempio nella medesima istruzione \texttt{number} viene dichiarata e inizializzata.
 
+
 \subsection{Tipi dato}
 Vi sono due categorie principali di tipi in Java:
-\begin{itemize}
-\item \emph{tipi primitivi}: questi tipi \textbf{contengono direttamente un valore}, come un booleano,
-un intero, etc.
-\begin{itemize}
-\item \texttt{boolean}: mantiene un valore booleano (\emph{true} o \emph{false}) all'interno di 8 bit
-\item \texttt{char}: intero a 16 bit usato per contenere un carattere Unicode, valori tra u0000 e uFFFF
-\item \texttt{byte}: intero con segno a 8 bit (da -128 a 127)
-\item \texttt{short}: intero con segno a 16 bit (da -32.768 a 32.767)
-\item \texttt{int}: intero con segno a 32 bit (da -2.147.483.648 a 2.147.483.647)
-\item \texttt{long}: intero con segno a 64 bit (da -9.223.372.036.854.775.808 a 9.223.372.036.854.775.807)
-\item \texttt{float}: numero in virgola mobile a 32 bit (da 1.4E-45 a 3.40282235E38)
-\item \texttt{double}: numero in virgola mobile a 64 bit (da 4.9E-324 a 1.7976931348623157E+308)
-\end{itemize}
-\item \emph{tipo riferimento}: contiene un puntatore a una zona di memoria in cui un oggetto
-(che rappresenta l'istanza di una classe) è allocato. 
-\end{itemize}
+
+
 
 \textbf{Dove vengono allocati gli oggetti Java?}\\
 Gli oggetti Java risiedono in una zona detta \emph{heap}. L'heap viene creato all'avvio della JVM e può cambiare dimensione durante l'esecuzione 
@@ -272,9 +271,11 @@ Il componente che effettua tale operazione prende il nome di ``\emph{garbage col
 \item non è possibile effettuare operazioni aritmetiche sul riferimento, come è possibile sui puntatori nel linguaggio C
 \end{itemize}
 
+
 \subsection{Visibilità di una variabile}
 
 In Java le variabili possono essere distinte in due gruppi a seconda della loro visibilità.
+
 \begin{itemize}
 \item variabili \emph{locali}: è locale una variabile visibile soltanto all'interno del blocco dove questa è dichiarata.
 Esempi di variabili locali sono un parametro di un metodo e una variabile dichiarata in un blocco di codice.
