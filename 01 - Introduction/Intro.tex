@@ -101,11 +101,11 @@
 %	NAME AND CLASS SECTION
 %----------------------------------------------------------------------------------------
 
-\newcommand{\hmwkTitle}{Introduction} % Assignment title
+\newcommand{\hmwkTitle}{Introduzione} % Assignment title
 \newcommand{\hmwkDueDate}{Martedi,\ Aprile 15,\ 2014} % Due date
 \newcommand{\hmwkClass}{Ingegneria del Software 1} % Course/class
 \newcommand{\hmwkClassTime}{} % Class/lecture time
-\newcommand{\hmwkClassInstructor}{Carlo Ghezzi} % Teacher/lecturer
+\newcommand{\hmwkClassInstructor}{Claudio Menghi} % Teacher/lecturer
 \newcommand{\hmwkAuthorName}{} % Your name
 
 %----------------------------------------------------------------------------------------
@@ -151,23 +151,22 @@
 
 %----------------------------------------------------------------------------------------
 \section{Introduction (10 min)}
-This lessons covers the slides ``Classi come astrazioni" and the chapter 1 of the book  Pellegrino Principe. “Java 8”.
-\subsection{Java main feature}
+Questa lezione copre le  slides ``Classi come astrazioni" o in alternativa il capitolo  1 del libro  Pellegrino Principe. “Java 8”.
+
+
+\subsection{Le caratteristiche di Java}
+Questa esercitazione ha come scopo quella di fornire una panoramica su Java e sulle sue caratteristiche fondamentali. In particolare Java \`e:
 \begin{itemize}
-\item \emph{Portability} the main goal of the language is to allow developer to \emph{write programs only once with the assurance that it is possible to execute these programs independently on the architecture on which the program is run}: ``Write Once, Run Anywhere".
+\item \emph{Portabile} \`e la caratteristica principale di Java. L'obiettivo di Java \`e quello di consentire allo sviluppatore di  \emph{scrivere il programma una volta sola avendo la certezza che sar\`a possibile eseguirlo ovunque indipendentemenre dall'architettura della macchina su cui viene eseguito}. La filosofia di Java \`e quindi ``Write Once, Run Anywhere".
+\item \emph{Compilato}: Java \`e un linguaggio compilato, ovvero viene ``tradotto" dal linguaggio di programmazione Java al linguaggio ``oggetto" bytecode. 
+\item \emph{Orientato agli oggetti}: in contrasto con C, COBOL or PASCAL che sono basati su un paradigma procedurale~\footnote{In un linguaggio procedurale le componenti fondamentali sono le funzioni ``procedure" che manipolano i dati del programma.} Java \`e orientato agli oggetti. In un linguaggio orientato agli oggetti lo sviluppatore ragiona in termini di oggetti ovvero astrazioni dei concetti del mondo reale che lo sviluppatore vuole modellare. In realt\`a Java \`e un linguaggio multi-paradigma dal momento che \`e anche procedurale, e se consideriamo Java 8 \`e anche funzionale.
+\item \emph{Staticamente tipizzato}: un linguaggio \`e staticamente tipizzato quando \`e necessario associare ad ogni variabile un tipo.
 \end{itemize}
 
-\subsection{Java language characteristics}
-\begin{itemize}
-\item \emph{Compiled} ``a compiled language is a programming language whose implementations are typically compilers (translators that generate machine code from source code), and not interpreters (step-by-step executors of source code, where no pre-runtime translation takes place)"\cite{WikipediaCompiled}.
-\item \emph{Object-oriented}: in contrast with $C$, $COBOL$ or $PASCAL$ which are based on a procedural paradigm~\footnote{Ina procedural paradigm the main building block is the function which manipulates the data of the program.} $JAVA$ is object oriented. In an object-oriented paradigm the developer reason with respect to objects, that are abstraction of concepts of the real world the developer wants to model~\footnote{$JAVA$ is also considered as multiparadigm language since it is also a procedural language (and if we consider Java 8 also functional.}.
-\end{itemize}
+\subsubsection{Java \`e portabile e compilato}
+La caratteristica principale di Java \`e il fatto di essere portabile/platform indipendent. Se prendiamo per esempio C il compilatore genera un linguaggio ``oggetto" che \`e dipendente dalla macchina nel quale il compilatore viene eseguito. Il codice compilat pu\`o \textbf{solo} essere eseguito sulla piattaforma per il quale il codice \`e stato compilato.
 
-\subsubsection{Java is compiled and platform independent}
-One of the main features of Java is that it is platform independent. In C or C++ the compiler generates \emph{machine specific} instructions that can be executed. The compiled code can only be executed on the platform for which the code is compiled.
-
-The main advantage of Java is that the compilation phase produces an intermediate code called \emph{byte-code} which can be executed on different machine which as installed an interpreter which is able to ``understand" this intermediate code.
-The byte-code is an intermediate \emph{code} that is produced after the Java programs are compiled.  Byte code is different by the executable code, such as the ``.exe" files since it is an intermediate code that must be interpreted by a Java Virtual Machine.
+In Java la fase di compilazione produce un codice intermedio chiamato \emph{byte-code} che pu\`o essere eseguito su macchine differenti supporto che ci sia installato sulla macchina un \emph{interprete} (Java Virtual Machine JVM) capace di capire il byte-code. In altre parole il byte-code \`e un codice intermedio prodotto dopo la compilazione. Il Byte-code differisce dal codice eseguibile (per esempio dai file ``.exe") dal momento che deve essere interpretato da una  Java Virtual Machine per essere eseguito.
 
 \begin{figure}[h]
 \centering
@@ -176,17 +175,16 @@ The byte-code is an intermediate \emph{code} that is produced after the Java pro
     \label{JavaArchitecture}
 \end{figure}
 
-The architecture of Java is described in Figure~\ref{JavaArchitecture}. More precisely,
+L'architettura del linguaggio Java \`e mostrata in Figura~\ref{JavaArchitecture}. Pi\`u precisamente,
 
 \begin{itemize}
-\item MyProgram.java: is the native source Java code which describes the application 
-\item Compiler: takes as input the Java program (\texttt{.java}), and produced an intermediate code (\texttt{.class})
-\item Byte code: is the intermediate code which is generated after the Java code is compiled.
-\item Java Virtual Machine: is the \emph{interpreter} which executes the byte-code\footnote{Note that due to a presence of the interpreter in some sense Java is both compiled and interpreted.}.
+\item MyProgram.java: \`e il codice sorgente nativo dell'applicazione Java (Il file che contiene il nostro codice)
+\item Compiler: (Compilatore) prende in input il nostro codice Java  (i nostri files \texttt{.java}), e produce dei file intermedi  (\texttt{.class}) ovvero i file contenenti il byte-code.
+\item Java Virtual Machine: \`e l'interprete che deve essere installato sulla nostra macchina locale al fine di eseguire il byte-code. Il byte-code viene interpretato dalla Java Virtual Machine. Per questo motivo alcuni testi considerano Java anche come un linguaggio interpretato.
 \end{itemize}
 
-To run the program on your machine you just need to have a Java Virtual Machine installed. In particular, the Java Run-time Environment (JRE) contains the virtual machine which allows to run Java programs. Different JREs are associated with different operating systems. However, once the \texttt{class} file is generated it can be executed on every system that as a virtual machine installed. \\
-To compile the Java files you need the  Java Development Kit (JDK). The JDK includes the JRE and is a set of development tools installed on the local machine that allow to write and compile the java program.
+Per eseguire il vostro programma su una macchina \`e sufficiente che l'utente abbia installato una macchina virtuale: Java Virtual Machine. In particolare, il Java Run-time Environment (JRE) contiene la macchina virtuale che consente di eseguire i programmi Java.  JREs differenti sono associati a sistemi operativi differenti. Tuttavia, una volta generati, i class files possono essere eseguiti su ogni sistema cha abbia una Macchina Virtuale installata. \\
+Per compilare i tuoi file Java \`e necessario avere un tool di sviluppo Java: un Java Development Kit (JDK). Il JDK include la JRE e contiene un set di tool di svilupo che constentono di scrivere e compilare i tuoi programmi Java.
 
 
 
@@ -197,20 +195,35 @@ In an object oriented programming language the main building block of a program 
 \end{mydef}
 In this paradigm the developer describes the \emph{the word} (the objects of the word) and how \emph{the word can change over time} (the states can change over time). This paradigm is different from procedural modeling languages where the main building block is the procedure which modifies the value of a program. In procedural modeling languages the developer specifies \emph{how to solve} a problem, while in object oriented modeling language the developer first describes the \emph{world} and \emph{how it is possible to change the world} and then find a strategy to solve the problem giving the model previously constructed. In other words, differently from languages such as $C$ in which first you think about function and then on the structure of the manipulated data, in $Java$ and in general in an object oriented language you \emph{first think on the data and modeling the problem} and then how the to change these data. 
 
-Every object has a state and a behavior and is described though a class.
+\begin{lstlisting}
+new Bike();
+\end{lstlisting}
+Every object is instantiated (created) with the instruction \emph{new} and is described though a class. For example, the previous instruction creates a new object of class \texttt{Bike}.
 
 \begin{mydef} (Class) A \texttt{class} is a \emph{type} defined by the user that describes an object. More precisely it describes how the state of the system can be identified and how the state can change in response with operations that can be executed over this object.
 \end{mydef}
-In Java a class is a description of the object of the real word and is a blueprint for the generation of the objects that can be created (instantiated) into the system.
 
+In Java a class is a description of the object of the real word and is a blueprint for the generation of the objects that can be created (instantiated) into the system. 
 
-\emph{Statically typed} ``In a statically typed language, every variable name is bound both
-to a type (at compile time, by means of a data declaration) to an object.
-The binding to an object is optional — if a name is not bound to an object, the name is said to be null"\cite{StaticallyTyped} (this concept will be discussed in the next esercitazione).
+\begin{lstlisting}[language=Java,escapechar=|]
+public class Bike {
 
+	public Bike(){
+	}
+}
+\end{lstlisting}
+Class are defined through the keyword \texttt{class} and describe how the state of an object is identified and how this state can change.
 
-\section{Java Exercises proposed to Show the Java Characteristics 1 h : 20 min}
-\subsection{Portability + Compiled (20 min)}
+Finally, Java is statically typed.
+\begin{mydef} (Statically typed) A language is \emph{statically typed} if every variable name is associated both
+to a type and to an object.
+\end{mydef}
+\begin{lstlisting}
+Bike bike1=new Bike();
+\end{lstlisting}
+For example, the previous instruction declares a variable \texttt{bike1} which \emph{has} type \texttt{Bike} and is associated to an object of class \texttt{Bike}. Since each variable must be associated to a type the language is statically typed.
+
+\section{Exercises}
 \begin{itemize}
 \item The goal of the first exercise is to show the main advantage of using Java and, more precisely how java supports portability.
 \item Let's crate our first Java project
