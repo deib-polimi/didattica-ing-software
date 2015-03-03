@@ -151,7 +151,7 @@
 
 %----------------------------------------------------------------------------------------
 \section{Introduction (10 min)}
-Questa lezione copre le  slides ``Classi come astrazioni" o in alternativa il capitolo  1 del libro  Pellegrino Principe. “Java 8”.
+Questa lezione copre le  slides ``Classi come astrazioni" o in alternativa al capitolo  1 del libro  Pellegrino Principe. “Java 8”.
 
 
 \subsection{Le caratteristiche di Java}
@@ -189,22 +189,26 @@ Per compilare i tuoi file Java \`e necessario avere un tool di sviluppo Java: un
 
 
 
-\subsubsection{Java is object oriented}
-In an object oriented programming language the main building block of a program is an object.
-\begin{mydef} (Object) A Java \texttt{object} is an abstraction of a real word object, and  describes the characteristics of the real word object that are of interest for the developer.
-\end{mydef}
-In this paradigm the developer describes the \emph{the word} (the objects of the word) and how \emph{the word can change over time} (the states can change over time). This paradigm is different from procedural modeling languages where the main building block is the procedure which modifies the value of a program. In procedural modeling languages the developer specifies \emph{how to solve} a problem, while in object oriented modeling language the developer first describes the \emph{world} and \emph{how it is possible to change the world} and then find a strategy to solve the problem giving the model previously constructed. In other words, differently from languages such as $C$ in which first you think about function and then on the structure of the manipulated data, in $Java$ and in general in an object oriented language you \emph{first think on the data and modeling the problem} and then how the to change these data. 
+\subsubsection{Java \`e orientato agli oggetti}
+La programmazione orientata agli oggetti implica un approccio alla programmazione completamente diverso rispetto ai normali lingguaggi procedurali. Gli oggetti sono entit\`a che hanno una ``vita propria" ed esistono indipendentemente dal come vengono utilizzate all'interno della nostra applicazione. In altre parole un 
 
+\begin{mydef} \textbf{Oggetto} \`e un astrazione di un oggetto del mondo reale e ne descrive le caratteristiche  che sono di interesse allo sviluppatore.
+\end{mydef}
+
+In altre parole in un paradigma orientato agli oggetti lo sviluppatore descrive il mondo e i suoi oggetti e come il mondo evolve nel corso del tempo. In un paradigma procedural lo sviluppatore specifica \textbf{come} risolvere un problema, mentre in un linguaggio orientato agli oggetti lo sviluppatore prima descrive ``il problema" e poi cerca una strategia per risolvere il probleam utilizzando il modello del mondo costruito.
+
+Gli oggetti vengono creati partendo da dei modelli pi\`u generali chiamati classi. 
+
+\begin{mydef} \textbf{Classi} sono dei \emph{tipi} definiti dall'utente che descrivono degli oggetti. In particolare descrivono l'oggetto, il suo \emph{stato} e come lo \emph{stato dell'oggetto} cambia in risposta a delle operazioni eseguite sull'oggetto.
+\end{mydef}
+
+Utilizzando un esempio automobilistico possiamo pensare alle classi come ai documenti di progetto di un autovettura, e agli oggetti come alle macchine realizzate partendo dai quei documenti. In altre parole le classi sono la teoria, gli oggetti sono particolari \textbf{istanze} di una specifica classe. 
+
+Gli oggetti vengono creati con l'istruzione \textbf{new}. Per esempio l'istruzione seguente crea un nuovo oggetto di tipo Bike. 
 \begin{lstlisting}
-new Bike();
+Bike myBike=new Bike();
 \end{lstlisting}
-Every object is instantiated (created) with the instruction \emph{new} and is described though a class. For example, the previous instruction creates a new object of class \texttt{Bike}.
-
-\begin{mydef} (Class) A \texttt{class} is a \emph{type} defined by the user that describes an object. More precisely it describes how the state of the system can be identified and how the state can change in response with operations that can be executed over this object.
-\end{mydef}
-
-In Java a class is a description of the object of the real word and is a blueprint for the generation of the objects that can be created (instantiated) into the system. 
-
+La descrizione del tipo bike \`e presentato nel seguito.
 \begin{lstlisting}[language=Java,escapechar=|]
 public class Bike {
 
@@ -212,10 +216,11 @@ public class Bike {
 	}
 }
 \end{lstlisting}
-Class are defined through the keyword \texttt{class} and describe how the state of an object is identified and how this state can change.
+Le classi sono definiti mediante la parola chiave (keyword) \texttt{class} e descrivono le caratteristiche dello stato di un oggetto e come lo stato pu\`o cambiare nel tempo.
 
-Finally, Java is statically typed.
-\begin{mydef} (Statically typed) A language is \emph{statically typed} if every variable name is associated both
+
+\subsubsection{Java \`e staticamente tipizzato}
+\begin{mydef} \textbf{Staticamente tipizzato} A language is \emph{statically typed} if every variable name is associated both
 to a type and to an object.
 \end{mydef}
 \begin{lstlisting}
