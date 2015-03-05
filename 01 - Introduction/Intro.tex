@@ -227,17 +227,24 @@ Bike bike1=new Bike();
 \end{lstlisting}
 Per esempio, l'istruzione precedente dichiara una variabile di tipo Bike con \textbf{identificatore} bike1, che \`e associata a un oggetto di classe Bike. In Java ogni variabile deve essere associata a un tipo.
 
-\section{Exercises}
-\begin{itemize}
-\item The goal of the first exercise is to show the main advantage of using Java and, more precisely how java supports portability.
-\item Let's crate our first Java project
-\end{itemize}
+\section{Esercizi}
+L'obiettivo di questi esercizi \`e di chiarire le caratteristiche di Java prima descritte.
 
-\subsubsection{Creating a Java File}
+\subsection{Java \`e compilato ed \`e portabile}
+Questi esercizi hanno come fine quello di mostrare il fatto che Java \`e un linguaggio compilato ed \`e portabile. 
+
+\subsubsection{Esercizio 1}
+\begin{framed}
+\textbf{Esercizio 1}: Scrivere un programma Java che stampa a video: ``Benvenuto al corso di Ingegneria del Software"
+\end{framed}
+
 \begin{itemize}
-\item Open TextEdit (for mac users), Blocco Note (for Windows users) of vi (for Linux) users.
-\item (For Mac User from TextEdit choose \textit{preferenze} $>$ \textit{Solo Testo} $>$ \textit{File} $>$ \textit{New} )
-\item Type the following Java code
+\item \textbf{Creare un file Java}
+\begin{itemize}
+\item Aprire  TextEdit (per gli utenti mac), Blocco Note (per gli utenti Windows) of vi (for Linux per gli utenti linuz) .
+\item (Per gli utenti Mac da TextEdit selezionare \textit{preferenze} $>$ \textit{Solo Testo} $>$ \textit{File} $>$ \textit{New} )
+\item Scrivere il codice  Java seguente
+\end{itemize}
 \end{itemize}
 \begin{lstlisting}
 public class Welcome {	
@@ -247,60 +254,61 @@ public class Welcome {
 }
 \end{lstlisting}
 \begin{itemize}
-\item Save the file as Welcome.java (Note: be sure that another extension is not selected).
-\end{itemize}
-
-\subsubsection{Compiling the Java File}
+\item \textbf{Descrizione del file creato}
 \begin{itemize}
-\item open the Terminal (for Mac and Linux users) or the Command Propt (for Windows users)
-\item locate the file created - useful commands 
-\begin{itemize}
-\item for Mac and Linux Users it is possible to open a folder with \emph{cd}, exit from a folder with \emph{cd ..} and show the content of a folder with \emph{ls}) 
-\item
-\end{itemize}
-\item Type \texttt{javac Welcome.java}
-\item This command \textbf{compliles} the Welcom.jar file and generates a .class (or a jar) file which contains the a bytecode file that can be executed on the different platforms\footnote{The bytecode is an intermediate representation that can be interpreted by a Virtual Machine.}. This process supports \textbf{portability}.
-\item \emph{To run the javac command a JDK (Java Development Kit) must be installed in your pc\footnote{The JDK also include the Java Run-Time Environment which will be later introduced}.} The JDK allows to \emph{compile} and \emph{execute} the created programs and several \emph{libraries} which are commonly used in the development.
-\end{itemize}
-
-\subsubsection{Running the Java File}
-\begin{itemize}
-\item the java bytecode file (.class) can be executed on each architecture over which a Virtual Machine (which provides an \textbf{interpreter} for the $Java$ bytecode) for Java is installed. The Java JRE provides this Virtual Machine.
-\item to run the java bytecodefile run type \texttt{java Welcome}
-\item the command java Welcome executes the \texttt{Main} method of the class Welcome
-\end{itemize}
-
-\subsubsection{Our first Java program}
-\begin{lstlisting}
-public class Welcome {	
-    public static void main(String[] args){	
-	 	System.out.println("Benvenuto al corso di Ingegneria del Software");
-    }
-}
-\end{lstlisting}
-\begin{itemize}
-\item The code specified defines a \texttt{class} called Welcome with a single \texttt{method} called main
-\item \texttt{public} is used to specify that the class and the corresponding method can be accessed by an external client (such as other classes).
-\item \texttt{class} is used to specify a new type of data
-\item \texttt{void} specifies that the method does not return any value
-\item \texttt{static} specifies that the method can be invoked without creating the corresponding object (Welcome)
-\item \texttt{main} is a ``starting method" that \textbf{must} be present in at least one class for the application to be run.
-\item \texttt{args} contains the parameter of the main argument. The parameters (also called arguments) are variables that can contains values that are passed to the method when is called. The parameters must have a type
+\item il codice definisce una classe (\texttt{class}) chiamata  Welcome con un singolo metodo  \texttt{method} chiamato main
+\item \texttt{public} \`e utilizzato per specificare che la classe \`e pubblica: \`e possibile accedervi dall'esterno, per esempio da altre classi.
+\item la classe ha solo un metodo statico main
+\item \texttt{void} specifica che il metodo non ritorna alcun valore
+\item \texttt{static} specifica che il metodo \`e statico: pu\`o essere invocato senza instanziare l'oggetto di classe  (Welcome)
+\item \texttt{main} \`e il ``metodo di partenza" che deve essere presente in almeno una classe affinch\`e l'applicazione sia eseguibile. 
+\item \texttt{args} contiene il parametro (anche chiamato argomento) del metodo main.
+ The parameters (also called arguments) are variables that can contains values that are passed to the method when is called. The parameters must have a type
 \item \texttt{String[]} (array of String) is the type of the args parameter 
 \item the arg parameter is used from main to obtain arguments that can be passed when the method is invoked from command line
 \item \texttt{System.out.println} writes the specified text on the screen
 \end{itemize}
-
-\subsubsection{Our second Java program}
-Change the previously described program to:
-\begin{itemize}
-\item to require the user to insert is name (for example Carlo)
-\item to print ``Ciao Carlo, Benvenuto al corso di Ingegneria del Software" 
 \end{itemize}
-Solution:
 \begin{itemize}
-\item create a new Java file with name \texttt{WelcomeWithName}
-\item type the following
+\item \textbf{Salvare il file} come Welcome.java (attenzione: non scegliere un nome differente e controllare che l'estensione del file sia .java).
+\end{itemize}
+
+\begin{itemize}
+\item \textbf{Compilare il file Java}:
+\begin{itemize}
+\item aprire il Terminale (per gli utenti Mac e Linux) o il Command Propt (per gli utenti Windows)
+\item portarsi nella cartella dove si trova il file creato mediante i seguenti comandi
+\begin{itemize}
+\item per gli utenti  Mac and Linux Users \`e possibile aprire e chiudere una cartella mediante i comandi \emph{cd}, e \emph{cd ..}, rispettivamente e mostrare il contenuto di una cartella con il comando \emph{ls}) 
+\end{itemize}
+\item Digitare \texttt{javac Welcome.java}
+\item il comando \texttt{javac}  \textbf{compila} il file Welcom.jar file e genera un file .class (o un jar) che contiene il bytecode file che \`e possibile eseguire su qualunque piattaforma\footnote{Ricordiamo che il bytecode \`e una rappresentazione intermedia che pu\`o essere interpretata da una macchina virtuale Virtual Machine.}. Questo processo supporta la  \textbf{portabilit\a`}. 
+\item \emph{Per eseguire con successo il comando \emph{javac} \`e necessario avere una JDK (Java Development Kit) istallata sul proprio pc\footnote{Nota che la JDK include anche il Java Run-Time Environment}.} La JDK permette quindi di  \emph{compilare} e \emph{eseguire} il programma creato.
+\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\item \textbf{Eseguire il file Java}
+\begin{itemize}
+\item il java bytecode (.class) pu\`o essere eseguito in qualsiasi architettura dove \`e installata una Virtual Machine (la quale fornisce un  \textbf{interprete} per il $Java$ bytecode) . In particolare la Java JRE fornisce questa Virtual Machine.
+\item per eseguire il file bytecodefile eseguire il comando \texttt{java Welcome}
+\item questo comando esegue il   \texttt{Main} method della classe Welcome
+\end{itemize}
+\end{itemize}
+
+
+
+
+\subsubsection{Esercizio 2}
+\begin{framed}
+\textbf{Esercizio 2}: Richiedere all'utente di inserire il proprio nome (per esempio Carlo) e stampare ``Ciao Carlo, Benvenuto al corso di Ingegneria del Software"
+\end{framed}
+\begin{itemize}
+\item \textbf{Creare un file Java}
+\begin{itemize}
+\item crea un file Java con nome \texttt{WelcomeWithName}
+\item scrivere il seguente codice Java
+\end{itemize}
 \end{itemize}
 \begin{lstlisting}[
     language=Java,escapechar=|]
@@ -318,31 +326,37 @@ public class WelcomeWithName {
 }
 \end{lstlisting}
 \begin{itemize}
+\item \textbf{Descrizione del file creato}
+\begin{itemize}
 \item \texttt{import} is used to import the \texttt{class} Scanner which is contained in the \texttt{java.util} package
 \item \texttt{new} creates (\texttt{instantiate}) a new Scanner Object
 \item \texttt{scanner.nextLine()} reads the next of the current line
 \item \texttt{scanner.close()} close the scanner
 \end{itemize}
-
-
-\subsection{Object-orientated (30 min)}
-\textbf{Problem}
-\begin{itemize}
-\item Try to model a Bike
 \end{itemize}
 
-To design your Bike you (or the client) must answer two main questions:
 \begin{itemize}
-\item How can you define the \textbf{state} of the bike?
-\item Which \textbf{functionalities} offers the bike?
+\item  \textbf{Compilare ed eseguire il file creato}
+\begin{itemize}
+\item \texttt{javac WelcomeWithName.java}
+\item \texttt{java WelcomeWithName}
+\end{itemize}
 \end{itemize}
 
+\subsection{Java \`e orientato agli oggetti e staticamente tipizzato}
 
-\subsubsection{Modeling a Bike 1}
+
+\subsubsection{Esercizio 1}
+\begin{framed}
+\textbf{Esercizio 2}: Modellizzare in Java una bicicletta, una bicicletta (in un particolare istante temporale) ha una determinata velocit\`a, che dipende dalla marcia inserita e dal ritmo di pedalata
+\end{framed}
+
+Per progettare le vostre classi in Java \`e necessario rispondere a due quesiti:
 \begin{itemize}
-\item Let's start considering the \textbf{state} of the bike
+\item Come \`e possibile descrivere lo \emph{stato} degli oggetti relativi a una determinata classe?
+\item Quali sono le \emph{funzionalit\`a} che gli oggetti di una determinata classe devono fornire?
 \end{itemize}
-A bike has a certain SPEED that depends on the GEAR (marcia) and on the CADENCE (ritmo di pedalata).
+
 
 \begin{lstlisting}[language=Java,escapechar=|]
 // defines a public class called Bike 
@@ -362,10 +376,13 @@ public class Bike {
 }
 \end{lstlisting}
 
-\textbf{Implementing a client}
-\begin{itemize}
-\item A client (generally) is a generic user of classes (e.g., a class provided of a Main method).
-\end{itemize}
+
+\subsubsection{Esercizio 2}
+\begin{framed}
+\textbf{Esercizio 2}: Implementare un client per la classe bicicletta
+\end{framed}
+Un Java si utilizza l'espressione client per indicare una generica classe, che utilizza la classe da noi progettata (nel nostro caso la classe Bicicletta). 
+
 
 \begin{lstlisting}[language=Java,escapechar=|]
 public class Client {
@@ -380,19 +397,24 @@ public class Client {
      }
 }
 \end{lstlisting}
-To run the program compile the Bike and the Client and run the Client
-
-\textbf{Questions?}\\
 \begin{itemize}
-\item Which is the state of the object after the instruction \emph{Bike bike1;}? the object does not exists it only exists the corresponding reference.
-\item Which is the state of the object \texttt{bike1} after the instruction \texttt{bike1 = new Bike();}? \texttt{gear=1}, \texttt{cadence=0}, \texttt{speed=0}
-\item Which is the state of the object \texttt{bike1} after the instruction \texttt{bike2 = new Bike();}? \texttt{gear=1}, \texttt{cadence=0}, \texttt{speed=0}
-\item Which is the state of the object \texttt{bike2} after the instruction \texttt{bike2 = new Bike();}? \texttt{gear=1}, \texttt{cadence=0}, \texttt{speed=0}
+\item compilare ed eseguire il programma
+\end{itemize}
+
+\begin{itemize}
+\item 
+\textbf{Quesiti:}\\
+\begin{itemize}
+\item Qual'\`e lo stat dell'oggetto dopo l'istruzione \emph{Bike bike1;}?\emph{l'oggetto non ha uno stato, visto che non esiste esiste solamente il suo reference.}
+\item Qual'\`e lo stato dell'oggetto  \texttt{bike1} dopo l'istruzione  \texttt{bike1 = new Bike()}? \texttt{gear=1}, \texttt{cadence=0}, \texttt{speed=0}
+\item Qual'\`e lo stato dell'oggetto  \texttt{bike1} dopo l'istruzione \texttt{bike2 = new Bike()}? \texttt{gear=1}, \texttt{cadence=0}, \texttt{speed=0}
+\item Qual'\`e lo stato dell'oggetto  \texttt{bike1} dopo l'istruzione \texttt{bike2 = new Bike()}? \texttt{gear=1}, \texttt{cadence=0}, \texttt{speed=0}
+\end{itemize}
 \end{itemize}
 
 
 
-\subsubsection{Modeling a Bike 2}
+\subsubsection{Esercizio 3}
 \begin{lstlisting}[language=Java,escapechar=|]
 public class Client {
 	
@@ -408,16 +430,15 @@ public class Client {
 }
 \end{lstlisting}
 
-\textbf{Questions?}\\
 \begin{itemize}
-\item What does the instruction \texttt{bike1==bike2} print? false, since the two references \texttt{bike1} and \texttt{bike2} refers to different objects
+\item Che cosa stampa l'istruzione  \texttt{bike1==bike2}? \emph{false, visto che i references ai due oggetti  \texttt{bike1} e \texttt{bike2} si riferiscono al medesimo oggetto}
 \end{itemize}
 
-\subsubsection{Modeling a Bike 3}
-\begin{itemize}
-\item Let's start considering the \textbf{functionalities} of the bike
-\end{itemize}
-The Bike must be able to print its state
+
+\subsubsection{Esercizio 4}
+\begin{framed}
+\textbf{Esercizio 4}: Aggiungere alla bicicletta una funzionalit\`a che permette all'oggetto di stampare il suo stato
+\end{framed}
 
 \begin{lstlisting}[language=Java,escapechar=|]
 // defines a public class called Bike 
@@ -443,7 +464,10 @@ public class Bike {
 }
 \end{lstlisting}
 
-\subsubsection{Modeling a Bike 3 - packages}
+\subsubsection{Esercizio 5}
+\begin{framed}
+\textbf{Esercizio 5}: Cambiare il package delle classi e compilare
+\end{framed}
 \begin{lstlisting}[language=Java,escapechar=|]
 package transport;
 
@@ -496,78 +520,81 @@ public class Client {
 If we change folder of the bike class we have to change the package
 
 \subsection{Eclipse Integrated Development Environment  (20 min)}
-\begin{itemize}
-\item The procedure previously described is tedious and error prone, in particular when the complexity of the project increases, packages are added etc.
-\item for this purpose, in the software development,  Integrated Development Environment ($IDE$) are commonly used. $IDE$s remove some of the difficulties usually encountered during the compilation process and provides additional features, such as code completion.
-\item In this course we will use the $Eclipse$ $IDE$\footnote{$Netbeans$ one of the most used competitor of $Eclipse$}.  
-\end{itemize}
+La gestione di un progetto man mano che la complessit\`a aumenta diventa sempre pi\`u difficile. Per questo, nello sviluppo softeware  Integrated Development Environment ($IDE$) sono comunemente utilizzati. Gli $IDE$s rimuovono alcune delle difficolt\`a solitamente incontrate nel processo di sviluppo e forniscono funzionalit\`a aggiuntive come il completamento automatico del codice. In questo corso e in paricolare nel laboratorio useremo $Eclipse IDE$ come ambiente di sviluppo\footnote{$Netbeans$ one of the most used competitor of $Eclipse$}.  
 
-\subsubsection{Creating your first project using Eclipse}
+\subsubsection{Esercizio 6}
+\begin{framed}
+\textbf{Esercizio 6}: Crea il tuo primo progetto in Eclipse
+\end{framed}
+
 \begin{itemize}
-\item double click on $Eclipse$
-\item when $Eclipse$ starts it asks the user to specify the $Workspace$. The $Workspace$ is the ``place" over which the user wants to work. The user can define different $Workspace$s each of which can contain \emph{multiple projects}.
-\item press on $Workbench$ (banco di lavoro)
+\item \textbf{Creare un progetto in eclipse}
+\begin{itemize}
+\item apri $Eclipse$
+\item non appena $Eclipse$ si avvia richiede all'utente di selezionare il $Workspace$. Il $Workspace$ \`e l'are di lavoro dell'utente, contiene i file creati etc. L'utente pu\`o definire varit $Workspace$s ognuno dei quali pu\`o contenere pi\`u progetti.
+\item clicca su $Workbench$ 
 \item \texttt{File} $>$ \texttt{New} $>$ \texttt{Project} $>$ \texttt{Maven Project}
-\item check \texttt{Create a simple project}
-\item type \texttt{IngegneriaDelSoftware1} as Group Id and \texttt{Esercitazione1} as Artifact Id
-\item choose \texttt{finish}
+\item seleziona \texttt{Create a simple project}
+\item digita \texttt{IngegneriaDelSoftware1} as Group Id and \texttt{Esercitazione1} as Artifact Id
+\item scegli \texttt{finish}
+\item Quando create il vostro nuovo progetto Maven (Maven\footnote{Maven sar\`a spiegato nel corso del laboratorio.}) in Eclipse, eclise crea automaticamente la struttura del vostro progetto. In particolare, 
+\begin{itemize}
+\item $src/main/java$ contiene il codice sorgente Java dell'applicazione in via di sviluppo.
+\item $src/main/resources$ contiene le ``risorse" utilizzate dalla vostra applicazione, file di configurazione etc
+\item $src/test/java$ contiene le cassi usate per testare la vostra applicazione
+\item $src/test/resources$ contiene le risorse necessarie a testare la vostra applicazione
+\end{itemize}
+\end{itemize}
 \end{itemize}
 
-When you create a new Project (Maven\footnote{Maven will be explained in the lab.}) in Eclipse, it automatically generates a structure for your project. In particular, 
-\begin{itemize}
-\item $src/main/java$ contains the java source code of the application under development
-\item $src/main/resources$ contains the resources used from the application
-\item $src/test/java$ contains the classes which are used to test the application under development
-\item $src/test/resources$ contains the resources used from the test classes to test the application
-\end{itemize}
 
-\subsubsection{Creating a new Package in Eclipse}
-To create a new Package in Eclipse
+
 \begin{itemize}
-\item right click on \texttt{src/main/java} $>$ New $>$ package 
-\item type a name for your class ($esercitatione1$)
+\item \textbf{Creare un package}
+\begin{itemize}
+\item tasto destro su \texttt{src/main/java} $>$ New $>$ package 
+\item scegliere il nome del package ($esercitatione1$)
 \item press finish
 \end{itemize}
-
-\subsubsection{Creating a new Class in Eclipse}
-To create a new Class in Eclipse
-\begin{itemize}
-\item right click on the place in which you want to create the new class  (for example the package esercitazione1) $>$ New $>$ class 
-\item type a name for your class (\texttt{Bike})
-\item choose the visibility of the class etc...
-\item press finish
 \end{itemize}
-As you can see the $IDE$ automatically compiles the package of the class the identifiers, etc (and it is able to do other stuff that will be explained during the course).
 
-
-\subsubsection{Running a project in Eclipse}
-\label{sec:runningAProjectInEclipse}
-To run a project in eclipse
 \begin{itemize}
-\item right click on the class that you want to run (\emph{it must contain a main method})
+\item \textbf{Creare una nuova classe in Eclipse}
+\begin{itemize}
+\item tasto destro sul package dove si desidera creare la classe  $>$ New $>$ class 
+\item scegliere il nome della classe (\texttt{Bike})
+\item scegliere i modificatori di accesso della classe etc...
+\item premere finish
+\end{itemize}
+\end{itemize}
+Come noti  Eclipse automaticamente aggiunge il package, gli identificatori etc
+
+\begin{itemize}
+\item \textbf{Running a project in Eclipse}
+\begin{itemize}
+\item cliccare con il tasto destro sulla classe che si desidera eseguire (\emph{deve contenere il metodo  main})
 \item Run As $>$ Java Application
 \end{itemize}
-
-\subsubsection{What is going on?}
-If you open your workspace and your project you will see two different folders:
-\begin{itemize}
-\item src: contains the source file of your application (\texttt{.java} files)
-\item target: contains the bytecode files (\texttt{.class} files) which are generated when you perform the procedure explained in~\ref{sec:runningAProjectInEclipse} and then are runned.
 \end{itemize}
 
-\subsection{Object-oriented 2 (10 min)}
-
-\subsubsection{Modeling a Bike 4}
-Add the following functionality
 \begin{itemize}
-\item it must be possible to monitor the \texttt{gear}, the \texttt{cadence} and the \texttt{speed} of the Bike
+\item \textbf{Che cosa succede?}
+\begin{itemize}
+\item se apriamo il workspace notiamo che il nostro progetto contiene varie cartelle: 
+\begin{itemize}
+\item src: contiene i file sorgenti delle nostre applicazioni (\texttt{.java} files)
+\item target: contains i file che contengono il bytecode (\texttt{.class} files) che sono generati dopo aver eseguito la procedura appena descritta. La compilazione ed esecuzione \`e resa trasparente all'utente
+\end{itemize}
+\end{itemize}
 \end{itemize}
 
-``Monitoring" is done through getters.\\
-Command tricks:
-\begin{itemize}
-\item Control + Space : allows to automatically complete the text and provides suggestions
-\end{itemize}
+\subsection{Java \`e orientato agli oggetti 2 e staticamente tipizzato}
+
+\subsubsection{Esercizio 7}
+\begin{framed}
+\textbf{Esercizio 7}: Deve essere possibile monitorare la velocit\`a la marcia inserita e il ritmo di pedalata di una bicicletta 
+\end{framed}
+
 
 \begin{lstlisting}[language=Java,escapechar=|]
 package esercitatione1;
@@ -611,6 +638,12 @@ public class Bike {
 }
 \end{lstlisting}
 
+Il ``Monitoring" di un oggetto \`e eseguito mediante i metodi getters.\\
+Command tricks:
+\begin{itemize}
+\item il comando Control + Space permette di completare automaticamente il testo e fornisce suggerimenti al riguardo
+\end{itemize}
+
 
 \begin{lstlisting}[language=Java,escapechar=|]
 package esercitatione1;
@@ -638,17 +671,10 @@ public class Client {
 \end{lstlisting}
 
 
-\subsubsection{Modeling a Bike 5}
-Add the following functionality
-\begin{itemize}
-\item increase and decrease the gear and change the cadence and update the speed consequently
-\end{itemize}
-
-``Monitoring" is done through getters.\\
-Command tricks:
-\begin{itemize}
-\item Control + Space : allows to automatically complete the text and provides suggestions
-\end{itemize}
+\subsubsection{Esercizio 8}
+\begin{framed}
+\textbf{Esercizio 8}: Deve essere possibile incrementare la marcia inserita e il ritmo di pedalata, in tal caso la velocit\`a deve aumentare di conseguenza
+\end{framed}
 
 \begin{lstlisting}[language=Java,escapechar=|]
 package esercitatione1;
@@ -749,19 +775,20 @@ public class Client {
 }
 \end{lstlisting}
 
-\textbf{Questions?}\\
 \begin{itemize}
-\item What is  the state of the object \texttt{bike1} after the instruction  \texttt{bike1.incrementGear();} is performed? 
+\item \textbf{Quesiti}
+\begin{itemize}
+\item Qual'\`e lo stato dell'oggetto \texttt{bike1} dopo che l'istruzione \texttt{bike1.incrementGear();} \`e eseguita? 
 \texttt{gear=2}, \texttt{cadence=0}, \texttt{speed=0}.
-\item What is  the state of the object \texttt{bike1} after the instruction  \texttt{bike1.changeCadence(10);} is performed? 
+\item Qual'\`e lo stato dell'oggetto  \texttt{bike1} dopo che l'istruzione \texttt{bike1.changeCadence(10);} \`e eseguita? 
 \texttt{gear=2}, \texttt{cadence=10}, \texttt{speed=0}.
 \end{itemize}
-
-\subsubsection{Modeling a Bike 6}
-\begin{itemize}
-\item the gears of the type of Bike that is considered are $6$ 
 \end{itemize}
 
+\subsubsection{Esercizio 9}
+\begin{framed}
+\textbf{Esercizio 8}: La classe di biciclette considerate ha $6$ marce
+\end{framed}
 \begin{lstlisting}[language=Java,escapechar=|]
 package esercitatione1;
 
@@ -842,10 +869,10 @@ public class Bike {
 \end{lstlisting}
 
 
-\subsubsection{Modeling a Bike 7}
-\begin{itemize}
-\item change the Bike class in a way that it is possible to create a Bike with a specified gear and cadence
-\end{itemize}
+\subsubsection{Esercizio 9}
+\begin{framed}
+\textbf{Esercizio 9}: Modificare la classe bicibletta affinch\`e sia possibile creare una bicicletta con un numero di marce  un dato ritmo di pedalata
+\end{framed}
 
 \begin{lstlisting}[language=Java,escapechar=|]
 package esercitatione1;
@@ -958,21 +985,21 @@ public class Client {
 	    }
 }
 \end{lstlisting}
-\textbf{Questions?}\\
+\textbf{Quesiti:}\\
 \begin{itemize}
-\item What is  the state of the object \texttt{bike1} after the instruction  \texttt{bike1=new Bike(3, 2);} is performed? 
+\item Qual'\`e lo stato dell'oggetto \texttt{bike1} dopo che l'istruzione   \texttt{bike1=new Bike(3, 2);} \`e eseguita? 
 \texttt{gear=3}, \texttt{cadence=2}, \texttt{speed=0}.
-\item What is  the state of the object \texttt{bike2} after the instruction  \texttt{Bike bike2=new Bike(1, 2);} is performed? 
+\item Qual'\`e lo stato dell'oggetto  \texttt{bike2} dopo che l'istruzione  \texttt{Bike bike2=new Bike(1, 2);} \`e eseguita? 
 \texttt{gear=1}, \texttt{cadence=2}, \texttt{speed=0}.
-\item What is  the state of the object \texttt{bike1} after the instruction  \texttt{bike1.incrementGear();} is performed? 
+\item Qual\`e lo stato dell'oggetto \texttt{bike1} dopo che l'istruzione \texttt{bike1.incrementGear();} \`e eseguita? 
 \texttt{gear=3}, \texttt{cadence=2}, \texttt{speed=0}.
-\item What is  the state of the object \texttt{bike1} after the instruction  \texttt{bike1.changeCadence(10);} is performed? 
+\item Qual\`e lo stato dell'oggetto \texttt{bike1} dopo che l'istruzione   \texttt{bike1.changeCadence(10);} \`e eseguita? 
 \texttt{gear=3}, \texttt{cadence=10}, \texttt{speed=0}.
 \end{itemize}
 
 \section{Curiosity}
 \begin{framed}
-The name Java reflected the teams’ love for coffee. Indeed, Java coffee refers to coffee beans produced in the Indonesian island of Java.
+Il nome  Java riflette la passione del teams di sviluppatori per il caff\`e. Java \`e un particolare tipo di chicco di caff\`e prodotto nell'isola  Indonesian  di Java.
 \end{framed}
 
 \clearpage
