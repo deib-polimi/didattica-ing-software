@@ -151,7 +151,7 @@
 
 %----------------------------------------------------------------------------------------
 \section{Introduzione}
-Questa lezione copre le  slides ``Classi come astrazioni" o in alternativa al capitolo  1 del libro  Pellegrino Principe. “Java 8”.
+Questa lezione copre le  slides ``Classi come astrazioni" o in alternativa al capitolo  1- 2, 3, 4 e 5 del libro  Pellegrino Principe. “Java 8”.
 
 
 \subsection{Le caratteristiche di Java}
@@ -227,10 +227,156 @@ Bike bike1=new Bike();
 \end{lstlisting}
 Per esempio, l'istruzione precedente dichiara una variabile di tipo Bike con \textbf{identificatore} bike1, che \`e associata a un oggetto di classe Bike. In Java ogni variabile deve essere associata a un tipo.
 
+
+\subsection{Variabili e tipi di riferimento}
+Prima di discutere le variabili e i tipi di riferimento ricordiamo che la memoria in Java 
+
+\begin{itemize}
+\item \textbf{Stack} e \textbf{Heap}:  Lo stack e lo heap sono due aree di memoria che sono utilizzate per contenere le nostre variabili e i nostri oggetti.
+\begin{itemize}
+\item \textbf{Stack} \`e un area di memoria dove \`e possibile memorizzare informazioni. E' molto rapido e basato su un LIFO pattern.
+\item \textbf{Heap} \`e uno spazio di memoria assegnabile al progetto e facilmente 
+estendibile. 
+\item Lo stack ha una dimensione fissa assegnata prima di eseguire il programma ``durante la fase di startup". Lo heap non ha uno specifico pattern, lo rende molto flessibile (\`e estendibile) ma \`e pi\`u lento. 
+\end{itemize}
+
+
+\begin{mydef} Una variabile è uno spazio di memoria che contiene un ``valore". 
+\end{mydef}
+Java è fortemente tipizzato (\emph{strongly typed}), quindi \emph{ogni variabile ha un tipo}. Il compilatore durante la compilazione controlla che le variabili siano utilizzate in maniera corretta in relazione al loro tipo.\\
+
+\item \textbf{Variabili primitive}: le variabili primitive definiscono una ``cella di memoria" che contiene direttamente il valore della variabile. Le variabili primitive di Java sono:
+\begin{itemize}
+\item \emph{byte}: 8 bit, \emph{short}: 16 bit, \emph{int}: 32 bit, \emph{long}: 64 bit, \emph{float}: 32 bit, \emph{double}: 64 bit, \emph{char}: 16 bit \emph{boolean}: true/false
+\end{itemize}
+\item \textbf{Variabili riferimento}: le altre variabili contengono un riferimento alle aree di memoria cha contengono il ``valore": l'\textbf{oggetto}. I tipi di riferimento 1) possono essere definiti dall'utente mediante classi e interfacce, 2) includono gli array e le enumerazioni.
+\item variabili primitive e di riferimento possono essere utilizzate nella stesso modo: come attributi, restituiti o passati a metodi.
+\end{itemize}
+
+Le \emph{variabili}:
+\begin{itemize}
+\item consentono di accedere agli oggetti
+\item sono allocate sullo stack a run-time quando si chiama il metodo su cui si sono dichiarate
+\item sono deallocate quando il sottoprogramma ritorna al chiamante
+\item gli \emph{oggetti} sono invece allocati sullo heap.
+\end{itemize}
+
+
+
+\textbf{Dove vengono allocati gli oggetti Java?}\\
+Gli oggetti Java risiedono in una zona detta \emph{heap}. L'heap viene creato all'avvio della JVM e può cambiare dimensione durante l'esecuzione 
+dell'applicazione. A discrezione della JVM viene eseguita l'operazione di ``\emph{garbage collection}'', che consiste nella rimozione degli oggetti non più utilizzabili dal programma per fare posto ad altri. Il componente che effettua tale operazione prende il nome di ``\emph{garbage collector}''.
+
+
+\textbf{Quali sono le differenze tra puntatori e riferimenti?}
+\begin{itemize}
+\item un riferimento non pu\`o essere de-allocato dall'utente, viene rimosso dal garbage collector
+\item un riferimento non permette l'acceso all'indirizzo di memoria relativo ad un oggetto%TODO, ma a but a value that represent it
+\item non \`e possibile effettuare operazioni aritmetiche sul riferimento, come \`e possibile sui puntatori nel linguaggio C
+\end{itemize}
+
+
+
+
+
+
+
+\subsubsection{Dichiarazione di una variabile}
+Per dichiarare una variabile \`e sufficiente specificare il \emph{tipo} e un \emph{identificatore}, ovvero un nome simbolico utilizzato per riferirsi alla variabile\footnote{Java è case sensitive quindi caratteri in upper e lower case sono interpretati come caratteri differenti.}. \\
+Per esempio, l'istruzione
+\begin{lstlisting}[language=Java,escapechar=|]
+int number;
+\end{lstlisting}
+dichiara una variabile di tipo primitivo ``\texttt{int}" con identificatore ``\texttt{number}", mentre l'istruzione
+\begin{lstlisting}[language=Java,escapechar=|]
+Car mycar;
+\end{lstlisting}
+dichiara una variabile di tipo riferimento ``\texttt{Car}" e con identificatore ``\texttt{mycar}".
+La dichiarazione non alloca spazio per l'oggetto ma solo per il riferimento all'oggetto. \\
+
+\emph{Qual'è la differenza tra tipi riferimenti e puntatori (e.g., i puntatori di C)?}\\
+Ci sono varie differenze e similitudini tra riferimenti e puntatori. In genere un riferimento pu\`o essere interpretato come un puntatore ``ad alto livello", mentre la differenza fondamentale \`e per esempio i riferimenti non consentono l'utilizzo dell'aritmetica dei puntatori. Nei riferimenti l'indirizzo di memoria non \`e noto e non interessa.
+
+\subsubsection{Convenzione di notazione}
+In Java i nomi di classi, variabili e metodi fanno uso della notazione a cammello (\emph{CamelCase}).
+La notazione a cammello \`e costituita dalla giustapposizione delle parole che costituiscono l'identificativo, unite con l'iniziale di ogni parola maiuscola. 
+La prima lettera dell'identificativo è maiuscola nel caso di classi e minuscola nel caso di metodi e attributi/variabili. 
+
+\subsubsection{Inizializzazione di una variabile}
+Una variabile non pu\`o essere usata senza essere inizializzata. Quando un attributo viene dichiarato gli viene assegnato un valore di default.
+
+Il riferimento \`e assegnato inizialmente il valore \texttt{null}, per indicare che il riferimento non \`e ancora associato a un oggetto.
+e variabili vengono inizializzate tramite l'operatore ``$=$''. Questo operatore assegna un valore ad una variabile.
+Il tipo della variabile deve essere compatibile col tipo del valore.\\
+Dichiarazione e inizializzazione possono essere effettuate in una o  pi\`u istruzioni, a discrezione
+del programmatore.
+\begin{lstlisting}[language=Java,escapechar=|]
+// This characters are used to start a command
+// declares the variable
+int number;
+// initializes a variable
+number=0
+\end{lstlisting}
+Nell'esempio precedente la dichiarazione e l'assegnamento della variabile \texttt{number} sono
+effettuati in istruzioni differenti.
+\begin{lstlisting}[language=Java,escapechar=|]
+// This characters are used to start a command
+// declares and initializes the variable
+int number=0
+\end{lstlisting}
+In quest'ultimo esempio nella medesima istruzione \texttt{number} viene dichiarata e inizializzata.
+
+\subsubsection{Creazione di un nuovo oggetto}
+La creazione di un nuovo oggetto si effettua con l'operatore new. Il metodo new costruisce un nuovo oggetto del tipo specificato e ritorna il suo riferimento
+\begin{lstlisting}[language=Java,escapechar=|]
+Car auto=new Car();
+\end{lstlisting}
+Effettuando new Car() viene creato un nuovo oggetto di tipo auto e viene ritornato il corrispettivo reference, che nel caso specifico viene assegnato alla variabile di riferimento auto mediante l'operatore di assegnamento $=$.
+
+\subsection{Costruttori}
+\begin{mydef} \textbf{Costruttore} un costruttore \`e un metodo della classe che ha il \emph{suo stesso nome} e \emph{non} ha tipi o valori di ritorno. Lo scopo del costruttore \`e quello di creare un nuovo ogggetto relativo a una classe.
+\end{mydef}
+
+\begin{itemize}
+\item se una classe non ha un costruttore ne viene automaticamente uno di default senza argomenti che all'atto della creazione doll'oggetto richiama il costruttore di default senza argomenti della super classe.
+\item se per\`o vengono creati dei costruttori il costruttore di default non risulta pi\`u disponibile a meno che definito dall'utente. 
+\item l'uso di costruttori diversi permette di creare un tipo di oggetto passando argomenti diversi 
+\end{itemize}
+
+Un costruttore alloca + inizializza
+\begin{itemize}
+\item alloca lo spazio per gli attributi di tipo \emph{primitivo}
+\item alloca lo spazio per i \emph{riferimenti} agli attributi definiti dall'utente
+\item inizializza i riferimenti e gli attibuti. Se un riferimento non \`e inizializzato gli viene associato il valore null. Se una variabile numerica non \`e inizializzata gli viene associato il valore zero. Ai boolean viene assegnato il valore false
+\end{itemize}
+
+
+\subsection{Array}
+\begin{itemize}
+\item Un array \`e una variabile di tipo reference: contiene un reference a un area di memoria dove ci sono un insime di variabili dello stesso tipo.
+\item un array ha una natura \emph{statica} mantiene la propria dimensione ovvero il numero di elementi che contiene.
+\end{itemize}
+
+Vari tipi di array possono essere dichiarati:
+\begin{itemize}
+\item array monodimensionali (anche noti come vettori)
+\begin{itemize}
+\item possono essere dichiarati come \texttt{type nomeVariabile[]} o come \texttt{type[] nomeVariabile} dove type indica il tipo di dato contenuti negli elementi dell'array mentre le parentesi poste dopo l'identificatore o dopo il tipo indicano che la variabile \`e di tipo array.
+\item ovviamente in mancanza di \emph{inizializzazione} la dichiarazione di un array non alloca spazio per gli elementi dell'array
+\item l'allocazione si realizza come \texttt{int[] i=new int[10];} dove 10 \'e il numero di elementi dell'array
+\end{itemize}
+\item Per quanto riguarda gli array multidimensionali la dichiarazione e l'inizializzazione avviene in maniera analoga \texttt{float[][] f=new float[10][10];}
+\end{itemize}
+
+
+
+
 \section{Esercizi}
 L'obiettivo di questi esercizi \`e di chiarire le caratteristiche di Java prima descritte.
 
 \subsection{Java \`e compilato ed \`e portabile}
+Una variabile \`e una posizione di memoria che contiene un valore e pu\`o essere modificato. In Java esistono due tipi di variabili: 
+
 Questi esercizi hanno come fine quello di mostrare il fatto che Java \`e un linguaggio compilato ed \`e portabile. 
 
 \subsubsection{Esercizio 1}
@@ -787,7 +933,7 @@ public class Client {
 
 \subsubsection{Esercizio 9}
 \begin{framed}
-\textbf{Esercizio 8}: La classe di biciclette considerate ha $6$ marce
+\textbf{Esercizio 9}: La classe di biciclette considerate ha $6$ marce
 \end{framed}
 \begin{lstlisting}[language=Java,escapechar=|]
 package esercitatione1;
@@ -869,9 +1015,106 @@ public class Bike {
 \end{lstlisting}
 
 
-\subsubsection{Esercizio 9}
+
+
+\subsection{Variabili e tipi di riferimento}
+
+\subsubsection{Esercizio 10}
 \begin{framed}
-\textbf{Esercizio 9}: Modificare la classe bicibletta affinch\`e sia possibile creare una bicicletta con un numero di marce  un dato ritmo di pedalata
+\textbf{Esercizio 10}: Analizzare che cosa succede eseguendo il seguente codice
+\end{framed}
+\begin{lstlisting}[language=Java,escapechar=|]
+package esercitatione1;
+
+public class Client {
+
+	public static void main(String[] args) {
+
+        // dichiaro una variabile di tipo reference con identificativo bike1
+        Bike bike1;
+        // creo un nuovo oggetto di tipo Bike e assegno il reference ritornato alla variabile bike1
+        bike1 = new Bike();
+        // creo un nuovo oggetto di tipo Bike e assegno il reference ritornato alla variabile bike2
+        Bike bike2 = new Bike();
+        
+        // vengono stampati due reference diversi relativi alle variabili bike1 e bike2
+    	System.out.println(bike1);
+    	System.out.println(bike2);
+    	
+    	// copia il reference contenuto nella variabile bike2 nella variabile bike1
+    	bike1 = bike2;
+    
+       // vengono stampati i due reference
+       System.out.println(bike1);
+       System.out.println(bike2);	
+       }
+}
+\end{lstlisting}
+Per avere una visualizzazione migliore di quanto accade utilizzeremo il debugger di eclipse. Il debugger vi consente di eseguire passo passo il vostro codice e vi assiste nell'individuazione e nella correzioni di errore in un programma.
+
+\begin{itemize}
+\item cliccare con il tasto destro del mouse sulla barra vertical a fianco a \texttt{public static void main}
+\item cliccare su \texttt{toggle breakpoing}
+\item cliccare con il tasto destro sulla nostra classe (Client.java)
+\item cliccare su debug as Java Application
+\item se viene chiesto se aprire il perspective di debug rispondere Yes
+\end{itemize}
+Nella View variables \`e possibile vedere passo passo le variabili sullo stack. Se una variabile \`e di tipo reference \`e possibile esplorare il corrispondente oggetto (e di conseguenza lo heap)
+
+\`E possibile proseguire nell'esecuzione del codice (un passo alla volta) premendo sul pulsante step over (la freccia gialla posta al centro delle le tre in alto a sinistra)\footnote{Un utilizzo pi\`u dettagliato del debugger verr\`a descritto nel corso del laboratorio}.
+
+\subsubsection{Esercizio 11}
+\begin{framed}
+\textbf{Esercizio 11}: Analizzare che cosa succede eseguendo il seguente codice
+\end{framed}
+\begin{lstlisting}[language=Java,escapechar=|]
+package esercitatione1;
+
+public class Client {
+
+	public static void creatingANewBike() {
+		// dichiaro una variabile di tipo reference con identificativo bike1
+		Bike bike1;
+		// creo un nuovo oggetto di tipo Bike e assegno il reference ritornato
+		// alla variabile bike1
+		bike1 = new Bike(4, 5);
+	}
+
+	public static void main(String[] args) {
+
+		// dichiaro una variabile di tipo reference con identificativo bike1
+		Bike bike1;
+		// creo un nuovo oggetto di tipo Bike e assegno il reference ritornato
+		// alla variabile bike1
+		bike1 = new Bike(4, 5);
+		// creo un nuovo oggetto di tipo Bike e assegno il reference ritornato
+		// alla variabile bike2
+		Bike bike2 = new Bike(2, 3);
+
+		// vengono stampati due reference diversi relativi alle variabili bike1
+		// e bike2
+		System.out.println(bike1);
+		System.out.println(bike2);
+
+		// copia il reference contenuto nella variabile bike2 nella variabile
+		// bike1
+
+		bike1 = bike2;
+
+		// vengono stampati i due reference
+		System.out.println(bike1);
+		System.out.println(bike2);
+		
+		creatingANewBike();
+    }
+}
+\end{lstlisting}
+
+
+\subsection{Costruttori}
+\subsubsection{Esercizio 12}
+\begin{framed}
+\textbf{Esercizio 12}: Modificare la classe bicibletta affinch\`e sia possibile creare una bicicletta con un numero di marce  un dato ritmo di pedalata
 \end{framed}
 
 \begin{lstlisting}[language=Java,escapechar=|]
@@ -997,10 +1240,152 @@ public class Client {
 \texttt{gear=3}, \texttt{cadence=10}, \texttt{speed=0}.
 \end{itemize}
 
+\subsubsection{Esercizio 13}
+\begin{framed}
+\textbf{Esercizio 13}: Modificare la classe bicibletta affinch\`e sia possibile creare una bicicletta con un dato numero di marce 
+\end{framed}
+
+\begin{lstlisting}[language=Java,escapechar=|]
+package esercitatione1;
+
+//defines a public class called Bike 
+//the name of the class usually starts with an upper case letter
+public class Bike {
+
+	// static specifies that this variable is shared from all the objects
+	// The final modifier indicates that the value of this field cannot change.
+ 	// The static modifier, in combination with the final modifier, is also used to define constants. 
+	private static final int MAX_GEAR = 6;
+	private static final int MIN_GEAR = 1;
+
+	// The attributes of the class are used to describe the state of the class
+	// and are usually private or protected
+	// The attributes of the class usually start with lower case letters
+	private int gear = 1; // default 1
+	private int cadence; // default 0
+	private int speed; // default 0
+
+	// is the constructor of the class which allows to create a new Bike
+	// the constructor has the same name of the class and does not have a return
+	// type
+	// gear and cadence are the intial values of the gear and the cadence
+	public Bike(int gear, int cadence) {
+		
+		// this allows to refer to the variable gear of THIS class, otherwise gear refers to the variable passed as parameter
+		this.gear=gear;
+		this.cadence=cadence;
+		this.updateSpeed();
+	}
+	
+	public Bike(int gear) {
+		
+		// this allows to refer to the variable gear of THIS class, otherwise gear refers to the variable passed as parameter
+		this.gear=gear;
+		this.cadence=0;
+		this.speed=0;
+	}
+
+	public void printState() {
+		// + is the String concatenation operator
+		// the int gear, speed and cadence are automatically converted into
+		// String
+		System.out.println("gear: " + gear + ", speed: " + speed
+				+ ", cadence: " + cadence);
+	}
+
+	// changes the cadence of the bike
+	public void changeCadence(int cadence) {
+		this.cadence = cadence;
+		updateSpeed();
+	}
+
+	// increment the gear
+	public void incrementGear() {
+		if (gear < MAX_GEAR) {
+			gear++;
+			updateSpeed();
+		}
+	}
+
+	// decrement the gear
+	public void decrementGear() {
+		if (gear > MIN_GEAR) {
+			gear--;
+			updateSpeed();
+		}
+	}
+
+	// every time the cadence or the gear changes the speed is updated
+	// the method is private and cannot be invoked from other external classes
+	private void updateSpeed() {
+		this.speed = this.gear * this.cadence;
+	}
+
+	// returns the gear of the bike
+	public int getGear() {
+		return this.gear;
+	}
+
+	// returns the cadence of the bike
+	public int getCadence() {
+		return this.cadence;
+	}
+
+	// returns the speed ok the bike
+	public int getSpeed() {
+		return this.speed;
+	}
+}
+\end{lstlisting}
+
+
+\subsection{Array}
+\subsubsection{Esercizio 14}
+\begin{framed}
+\textbf{Esercizio 14}: Creare un array di bike, riempirlo e stampare la pi\`u veloce
+\end{framed}
+
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ArrayOfBikes {
+	private static void printFastBikes(Bike [] bikes){
+		for (Bike bike: bikes){
+			if (bike != null && bike.getSpeed() > 10)
+				bike.printState();
+		}
+	}
+	public static void main(String [] args){
+		// definiamo una dimensione fissa 
+		// tutti gli elementi degli array hanno valore null
+		Bike [] arr1 = new Bike[10]; 
+		Bike [] arr2 = new Bike[10];
+		
+		arr1[0] = new Bike(3, 20);
+		arr1[1] = new Bike(3, 10);
+		arr1[2] = new Bike(1, 1);
+		System.out.println("Print fast bikes in arr1");
+		printFastBikes(arr1);
+		int k = 0;
+		for (Bike b: arr1){
+			if (b!= null){
+				Bike b2 = new Bike(b.getGear(),b.getSpeed());
+				b2.changeCadence(b2.getCadence() + 5);
+				arr2[k++] = b2;
+			}				
+		}
+		System.out.println("Print fast bikes in arr2");
+		printFastBikes(arr2);
+	}
+}
+\end{lstlisting}
 \section{Curiosity}
 \begin{framed}
 Il nome  Java riflette la passione del teams di sviluppatori per il caff\`e. Java \`e un particolare tipo di chicco di caff\`e prodotto nell'isola  Indonesian  di Java.
 \end{framed}
+
+\section{Esercizi per casa}
+\begin{itemize}
+\item 
+\end{itemize}
 
 \clearpage
 
