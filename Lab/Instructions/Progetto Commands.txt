@@ -1,0 +1,15 @@
+LOGIN TO THE REMOTE CLOUD VM 
+ssh -l azureuser ing-software.cloudapp.net
+P0litecnic0
+
+/usr/local/sbin:
+/usr/local/bin:
+/usr/sbin:/usr/bin:
+/sbin:/bin:/usr/games:/usr/local/games:
+/home/Claudio/bin:
+/usr/local/java/jdk1.7.0_21/bin:
+/home/Claudio/bin:
+/usr/local/java/jre1.7.0_21/bin:
+/usr/local/java/jdk1/8/0/bin
+
+P0litecnic0

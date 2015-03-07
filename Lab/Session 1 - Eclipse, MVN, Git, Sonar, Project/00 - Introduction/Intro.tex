@@ -1,0 +1,217 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beamer Presentation
+% LaTeX Template
+% Version 1.0 (10/11/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+
+\documentclass{beamer}
+
+\mode<presentation> {
+
+% The Beamer class comes with a number of default slide themes
+% which change the colors and layouts of slides. Below this is a list
+% of all the themes, uncomment each in turn to see what they look like.
+
+%\usetheme{default}
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{Dresden}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+
+% As well as themes, the Beamer class has a number of color themes
+% for any slide theme. Uncomment each of these in turn to see how it
+% changes the colors of your current slide theme.
+
+%\usecolortheme{albatross}
+%\usecolortheme{beaver}
+%\usecolortheme{beetle}
+%\usecolortheme{crane}
+%\usecolortheme{dolphin}
+%\usecolortheme{dove}
+%\usecolortheme{fly}
+%\usecolortheme{lily}
+%\usecolortheme{orchid}
+%\usecolortheme{rose}
+%\usecolortheme{seagull}
+%\usecolortheme{seahorse}
+%\usecolortheme{whale}
+%\usecolortheme{wolverine}
+
+%\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
+%\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+
+%\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+}
+\usepackage[T1]{fontenc}
+
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title[Introduzione]{Introduzione} % The short title appears at the bottom of every slide, the full title is only on the title page
+
+\author{Sr\dj{}an Krsti\'c, Marco Scavuzzo} % Your name
+\institute[] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
+{
+Politecnico di Milano \\ % Your institution for the title page
+\medskip
+\textit{srdan.krstic@polimi.it, marco.scavuzzo@.polimi.it} % Your email address
+}
+\date{\today} % Date, can be changed to a custom date
+
+\begin{document}
+
+\begin{frame}
+\titlepage % Print the title page as the first slide
+\end{frame}
+
+\begin{frame}
+\frametitle{Overview} % Table of contents slide, comment this block out to remove it
+\tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+%	PRESENTATION SLIDES
+%----------------------------------------------------------------------------------------
+
+
+\section{Obiettivo}
+\begin{frame}
+\frametitle{Obiettivo}
+La prova finale consiste nella preparazione, in autonomia ma sotto la guida del docente e dei responsabili di laboratorio, di un elaborato software da svolgere in Java. Il tema dell'elaborato,  proposto dal docente, sar\`a  di carattere interdisciplinare e riassuntivo dell'intero triennio, ma con particolare riferimento alle metodologie dell'Ingegneria del Software. Le esercitazioni introdurranno metodi e strumenti per la progettazione del software, quali ad esempio:
+\begin{itemize}
+\item L'ambiente Eclipse.
+\item Strumenti di testing (JUnit)
+\item Strumenti UML per Eclipse (Arhitexa, Papyrus)
+\item Strumenti di collaborazione (Git)
+\item Strumenti di gestione di build e dipendenze  dei progetti (Maven)
+\item ecc \ldots
+\end{itemize}
+\end{frame}
+
+
+\section{Modalit\' a di svolgimento del laboratorio}
+\begin{frame}
+\frametitle{Modalit\` a di svolgimento del laboratorio}
+
+%Obiettivo dell'attivit\` a di laboratorio \`e lo sviluppo di un elaborato da realizzare in Java.\\
+
+ Lo studente deve dimostrare, tramite l'elaborato e opportune prove in
+ laboratorio, la propria conoscenza dei \textbf{linguaggi},
+ \textbf{metodi} e \textbf{strumenti} introdotti nelle esercitazioni e
+ nell'ambito degli altri insegnamenti del corso di studi, con
+ particolare riferimento all'insegnamento di Ingegneria del Software,
+ e la propria capacit\` a di utilizzarli per la progettazione del
+ software.\\
+
+ L'attivit\` a di laboratorio \`e assistita dai responsabili, ma
+ l'elaborato deve essere sviluppato dallo studente in modo autonomo.
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Modalit\` a di svolgimento del laboratorio}
+\begin{itemize}
+\item \` e richiesto il lavoro in team
+\item composti da al pi\' u 3 persone
+  (gruppi da due studenti sono consigliati)
+\item la presenza \`e obbligatoria (1-2 assenze sono tollerabili) 
+\item non \` e possibile creare gruppi che contengono studenti di
+  scaglioni diversi
+\item non copiate il codice tra diversi team (gli strumenti a disposizione
+  permettono di capire se i diversi gruppi hanno copiato)
+\item invece discussioni della progettazione tra diversi team sono incoraggiati
+\end{itemize}
+\end{frame}
+
+\section{Valutazione}
+\begin{frame}
+\frametitle{Valutazione}
+La valutazione dallo studente viene effettuata sul complesso del lavoro svolto e deriva dalla frequente interazione informale docente/studente. La frequenza al laboratorio assume quindi una particolare importanza. La mancata partecipazione ad alcune sessioni di laboratorio, in particolare a quelle in cui ci sono le valutazioni, pu\` o pertanto pregiudicare l'esito finale. Contattare tempestivamente i responsabili di laboratorio se si prevede di non potere seguire alcune sessioni.\\
+
+\textbf{Non \`e previsto il recupero del laboratorio. Pertanto in caso di valutazione insufficiente lo studente dovr\`a ripetere il corso nell'anno accademico successivo.}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Valutazione}
+La valutazione include
+\begin{itemize}
+\item  interazione informale docente/studente
+\item frequenza al laboratorio (parzialmente)
+\item utilizzo dei tool messi a disposizione
+\item progetto (ha il maggiore impatto sulla valutazione)
+\end{itemize}
+\end{frame}
+
+
+\section{Calendario}
+\begin{frame}
+\frametitle{Calendario}
+\begin{itemize}
+
+
+% \item  \textbf{15 aprile} Java, Eclipse, Junit, Debugging
+% \item  \textbf{29 aprile} SVN, Maver, Sonar, Jenkins
+% \item \textbf{13 maggio} DESIGN (UML)
+% \item \textbf{20 maggio}  IMPLEMENTAZIONE 
+% \item \textbf{27 maggio} CLIENT SERVER (Socket + RMI) 
+% \item \textbf{3 giugno} INTERFACCIA GRAFICA (Swing)
+% \item \textbf{10 giugno} CONCLUSIONE / VALUTAZIONE 
+% \item \textbf{17 giugno} VALUTAZIONE
+
+\item  \textbf{21 April} Tool introduction (Eclipse, Git, Maven, Sonar)
+\item  \textbf{28 April} Design of the problem domain (UML, Design patterns)
+\item \textbf{5 May} Architectural design (UML, Architectural patterns)
+\item \textbf{12 May} Implementation and Testing (JUnit, Mockito, TDD)
+\item \textbf{19 May} Communication paradigms and design (Socket, RMI) 
+\item \textbf{26 May} General discussion
+\item \textbf{9 June} GUI design (Java Swing)
+\item \textbf{16 June} General discussion
+\item \textbf{23 June} Project evaluation
+
+\end{itemize}
+
+Come si pu\`o vedere il calendario \`e molto denso, quindi si deve dedicare molto tempo per passare il corso.
+\end{frame}
+
+
+%----------------------------------------------------------------------------------------
+
+\end{document} 

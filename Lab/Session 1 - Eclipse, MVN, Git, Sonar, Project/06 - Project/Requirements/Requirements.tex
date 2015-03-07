@@ -1,0 +1,277 @@
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{hyperref}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle} % Top center head
+\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+\usepackage{listings}
+\usepackage{color}
+\usepackage[applemac]{inputenc}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\usepackage{array,multirow,graphicx}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true
+  tabsize=3
+}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Progetto} % Assignment title
+\newcommand{\hmwkDueDate}{Martedi,\ Aprile 15,\ 2014} % Due date
+\newcommand{\hmwkClass}{Ingegneria del Software 1} % Course/class
+\newcommand{\hmwkClassTime}{} % Class/lecture time
+\newcommand{\hmwkClassInstructor}{} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{} % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+\vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+\vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+\newpage
+\tableofcontents
+\newpage
+
+
+
+%----------------------------------------------------------------------------------------
+\section{Introduzione}
+Il progetto consiste nello sviluppo di una versione software del gioco da tavolo sheepland.
+
+Il progetto finale dovr\` a includere:
+\begin{itemize}
+\item diagramma UML iniziale dell'applicazione
+\item diagrammi UML che mostrino come \` e stato progettato il software;
+\item implementazione funzionante del gioco conforme alle regole del gioco e alle specifiche presenti in questo documento
+\item codice sorgente dell'implementazione
+\item codice sorgente dei test di unit\`a
+\end{itemize}
+
+
+
+\textbf{La data di consegna e valutazione 17 Giugno 2014 (durante il laboratorio).}
+
+\section{Regole del gioco}
+Le regole del gioco sono descritte nel file Progetto di Laboratorio, caricato su BeeP. In aggiunta vengono aggiunte le seguenti \textbf{regole addizionali}. 
+
+\subsection{Regole Addizionali}
+\label{RegoleAddizionali}
+\begin{itemize}
+\item \textbf{Lupo}: UN lupo si muove in modo casuale (tirando un dado) da una regione ad una limitrofa. Il lupo si muove dopo che tutti i giocatori hanno effettuato il loro turno. Se il lupo si sposta in una regione con delle pecore ne mangia (casualmente) una. Il lupo si pu\`o muovere da una regione all'altra solo se non esiste un recinto sulla strada che separa due regioni. Se il lupo si trova in una regione con tutti i cancelli chiusi allora salter\`a sopra uno dei cancelli (si muover\`a nella direzione indicata dal lancio di dadi nonostante il cancello sia chiuso). Inizialmente il lupo si trova a Sheepsburg.
+\end{itemize}
+
+Le seguenti \textbf{azioni addizionali} possono essere eseguite  in alternativa a muovere il pastore, la pecora o comprare il terreno, seguendo le regole tradizionali del gioco.
+\begin{itemize}
+\item \textbf{Accoppiamento 1}: se il pastore \` e in una strada vicino a una regione con almeno 2 pecore, pu\` o eseguire una azione di accoppiamento. Il pastore tira il dado, se il numero equivale a quello della cella sopra cui \` e posto una nuova pecora viene generata e aggiunta nella regione. Nota che se il pastore \` e vicino a due regioni entrambe con due o pi\` u pecore deve decidere in quale delle due regioni eseguire l'azione di accoppiamento. 
+\item \textbf{Accoppiamento 2}: oltre alle pecore sono presenti montoni e agnelli. Il pastore pu\` o eseguire l'azione di accoppiamento solo se nella stessa regione ci sono almeno un montone e una pecora. Se l'accoppiamento ha successo un nuovo agnello viene generato. L'agnello diventa in maniera randomica montone o pecora dopo due cambi giocatore di gioco (Nota che quando viene inizializzato il gioco ogni pecora posizionata su un terreno pu\' o essere randomicamente agnello, montone o pecora).
+\item \textbf{Abbattimento 1}: se un pastore \` e su una strada vicino un terreno con almeno una pecora, un montone o un agnello pu\` o  decidere di abbatterlo. Tira il dado, se il dado corrisponde al numero della strada pu\' o decidere di abbattere \emph{a suo piacimento} una pecora,  un montone o un agnello.
+\item \textbf{Abbattimento 2}:  quando un pastore esegue una azione di abbattimento tutti gli altri pastori in una strada limitrofa (direttamente connessa) a quella del pastore tireranno il dado. Il pastore che ha abbattuto il capo dar\` a due denari a tutti quei pastori che hanno ottenuto un punteggio maggiore o uguale di 5 nel lancio del dado in cambio del loro silenzio. L'azione di abbattimento pu\' o essere eseguita solamente nel caso in cui il numero di denari del pastore sia sufficiente a comprare il silenzio dei pastori nelle strade limitrofe. Questo controllo viene eseguito prima che l'azione di abbattimento abbia inizio.
+\item \textbf{Market}: dopo che tutti i giocatori hanno giocato il loro turno di ogni turno c'\`e la fase del mercato. Partendo dal  primo giocatore  fino all'ultimo ogni giocatore pu\' o scegliere i terreni che intende vendere e il prezzo richiesto per ognuno di essi (da 1 a 4 denari). Quando TUTTI i giocatori hanno scelto quali terreni vendere, partendo da un giocatore a caso e seguendo l'ordine di gioco ogni giocatore  pu\' o comprare i terreni messi in vendita dagli altri pastori .
+\end{itemize}
+
+\section{Funzionalita Avanzate}
+\label{FunzionalitaAvanzate}
+Di seguito sono proposte alcune funzionalit\`a avanzate che concorrono alla valutazione.  Attenzione: il loro contributo non \`e  necessariamente additivo. Design e codice verranno comunque valutati in quanto tali e contribuiranno al giudizio globale.
+
+\begin{itemize}
+\item \textbf{Gestione degli utenti}. Realizzare un sistema di gestione degli utenti che supporti il login dei giocatori, conservi per ciascuno le statistiche di gioco (numero di vittorie, tempo di gioco, numero di sconfitte numero medio di denari ottenuti in ogni partita) e produca una classifica ordinata prima per numero di vittorie e quindi per numero di denari ottenuti in carriera. Inoltre per ogni parita si desidera memorizzare in un frame laterale la sequenza di mosse effettuate dai vari giocatori in ordine di occorrenza.
+\item  \textbf{Stateful server}. implementare la possibilit\`a di salvare lo stato del server su disco e di ricaricarlo all'avvio successivo. In particolare il server potr\`a inviare un comando pause ai client per indicare il su spegnimento e da li in vanati non accetter\`a ulteriori comandi, salver\`a lo stato su disco e terminer\`a la sua esecuzione. Al riavvio dovr\`a ricaricare la partita dal punto in cui si \`e interrotta. 
+\item \textbf{Generazione automatica delle configurazioni di gioco}. il server deve essere in grado di generare automaticamente una configurazione del gioco partendo da alcuni parametri dati. Per esempio dato il numero  dei terreni e numero di regioni per  ogni tipo di terreno il server deve generare una mappa random, consigliare un numero di giocatori adeguato. Il server deve anche consentire di progettare mediante un editor opportuno delle mappe da memorizzare sul server.
+\end{itemize}
+
+
+\section{Valutazione}
+Il progetto dovr\`a essere svolto in gruppi di due studenti e terminato entro il laboratorio del 17-06-2014. La tabella~\ref{TabellaDiValutazione} presenta le funzionalit\`a da implementare nel caso di gruppi da 1,2 e 3 studenti. I gruppi da 1 e 3 studenti sono \textbf{sconsigliati}.
+
+Saranno oggetto di valutazione
+\begin{itemize}
+\item la qualit\` a della progettazione con particolare riferimento a un uso appropriato di interfacce, ereditariet\`a, composizione tra classi, uso dei design pattern;
+\item il livello di autonomia e impegno nello svolgimento del progetto;
+\item la stabilit\` a dell'implementazione e la sua conformit\` a alle specifiche date;
+\item la qualit\` a e la leggibilit\` a del codice scritto, con particolare riferimento a nomi di variabili/metodi/classi/package, all'inserimento di commenti e documentazione JavaDoc (preferibilmente in inglese), la mancanza di codice ripetuto e metodi di eccessiva lunghezza;
+\item la qualit\` a e la copertura dei casi di test: il nome e i commenti ogni test dovranno chiaramente specificare le funzionalit\` a testate e i componenti
+ coinvolti.
+ \item il rispetto delle metriche sonar
+ \item il corretto utilizzo di SVN 
+\end{itemize}
+
+I gruppi da 1,2,3 studenti devono implementare  le specifiche descritte in tabella~\ref{TabellaDiValutazione} in relazione al punteggio desiderato. Nota: in tabella sono rappresentati i \textbf{massimi} punteggi ottenibili in relazione alle features implementate. Per esempio, per un gruppo di 2 studenti e un punteggio desiderato di al massimo 24 punti \`e necessario implementare RMI, Socket, Command Line Client e static GUI.
+
+\begin{table}
+\caption{Tabella Di Valutazione}
+\label{TabellaDiValutazione}
+\begin{tabular}{   p{1cm}  p{1cm} | p{4cm} | p{4cm} | p{4cm}  |}
+\cline{3-5} 
+&& \multicolumn{3}{|c|}{Numero studenti} \\
+  \cline{3-5}
+   && 1 & 2 & 3 \\
+   \hline
+\parbox[t]{2mm}{\multirow{3}{*}{\rotatebox[origin=c]{90}{Punteggio Max}}} &  0-22 &
+ RMI+ \newline Command Line Client      & 
+ RMI+\newline \textbf{Socket} +\newline Command Line Client                                                   
+ &      RMI+\newline Socket + \newline Command Line Client  +\newline \textbf{Static GUI}       \\
+  \cline{2-5} 
+&  0-24 & Static GUI                                         &
+Static GUI                                                   
+&       Dynamic GUI       \\
+\cline{2-5}  
+ & 0-26 & Dynamic GUI                                    
+ &  Dynamic GUI                                               
+ &    Regole addizionali  \\
+\cline{2-5} 
+&  0-30L & 
+Regole addizionali   &
+Regole addizionali   &   
+1 Funzionalit\`a Avanzata\\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{itemize}
+\item \textbf{Command Line Client}: il client e' implementato come un interfaccia testuale e i vari giocatori che si alternano nei turni utilizzeranno la tastiera. Per gli studenti che intendono proseguire nell'implementazione con l'interfaccia grafica \'e necessario utilizzare in maniera ragionata il paradigma Model-View-Controller (MVC) e gli altri pattern in modo da sostituire in maniera semplice la parte della logica di gioco dalla parte di interazione con i giocatori.
+\item \textbf{Static GUI}: consiste in un interfaccia grafica  swing minimale, semplice e senza particolari "effetti grafici"
+\item \textbf{Dynamic GUI}: consiste in un interfaccia grafica pi\`u complessa che consente di eseguire azioni come per esempio zoom, rotazione della mappa etc.
+\item \textbf{Regole Addizionali}: sono le regole presentate in sezione~\ref{RegoleAddizionali}
+\item \textbf{Funzionalit\`a avanzate}: sono presentate in sezione~\ref{FunzionalitaAvanzate}
+\item \textbf{Socket}: la comunicazione avviene mediante scambiati attraverso socket. Lo studente deve autonomamente definire e implementare un protocollo di comunicazione tra il client e il server.
+\end{itemize}
+
+Le funzionalit\`a avanzate possono essere implementate dai gruppi da 1 e da 2 studenti e comportano dei punteggi aggiuntivi. Ovviamente per implementare queste funzionalit\`a \`e necessario che TUTTO il resto del progetto sia implementato in maniera COMPLETA e ADEGUATA (copertura con test, ben commentata etc).
+
+
+\section{Specifiche implementative}
+
+In questa sezione vengono presentati i requisiti tecnici dell'applicazione che deve funzionare in rete secondo il paradigma client-server. Si raccomanda l'utilizzo del pattern \textbf{MVC} (Model-View-Controller) per progettare l'intero sistema.
+
+
+\subsection{Client}
+\begin{itemize}
+\item I client devono essere sviluppati utilizzando JavaSE. 
+\item L'interfaccia grafica deve essere realizzata obbligatoriamente in Swing, 
+\item il client deve supportare RMI e Socket in relazione al numero di studenti del gruppo come specificato in tabella~\ref{TabellaDiValutazione}. 
+\item Nel caso in cui sia richiesta sia l'implementazione RMI che per mezzo di socket, l'applicazione all'avvio deve permettere all'utente di selezionare il metodo utilizzato per la comunicazione.
+\end{itemize}
+
+\subsection{Server}
+Il server deve gestire le partite. Deve permettere di 
+\begin{itemize}
+\item creare una nuova partita, inizializzarla, giocarla e concluderla secondo le regole del gioco.
+\item deve essere in grado di gestire pi\`u partite contemporaneamente
+\item deve essere implementato secondo la logica JavaSE
+\item nel caso in cui sia l'implementazione via soket che RMI sia richiesta all'avvio deve essere possibile scegliere il metodo utilizzato per la comunicazione
+\end{itemize}
+
+\subsection{Avvio della partita}
+L'assunzione base \`e che ogni client che voglia partecipare a una partita conosca l'indirizzo (numerico o simbolico) del server. Quando un giocatore si connette al server, 
+\begin{itemize}
+\item se c\`e una partita in fase di avvio di un giocatore viene automaticamente aggiunto alla partita
+\item quando la partita raggiunge 6 giocatori oppure quando viene raggiunto un timeout  e ci sono almeno 2 giocatori la partita inizia
+\item se non ci sono partite in fase di avvio una nuova partita viene creata.
+\end{itemize}
+Si precisa che una nuova partita viene creata solamente quando un utente si connette e non ci sono partite in attesa altrimenti l'utente entra automaticamente a far parte della partita in fase di avvio.
+
+\subsection{Gioco}
+Il server consente ai vari giocatori di svolgere i propri turni secondo le regole di sheepland e le regole addizionali presentate in questo documento. E' necessario gestire il caso in cui i client si disconnettano. Ai giocatori \`e permesso abbandonare temporaneamente la partita per via della perdita di connettivit\`a.
+\begin{itemize}
+\item se un giocatore va offline il server sospende la partita per un periodo di tempo fissato a priori
+\item se il giocatore si riconnette prima del tempo prestabilito la partita riprende da dove \`e stata interrotta
+\item trascorso il periodo di tempo il server sospende il giocatore (nota il giocatore non esegue mosse ma viene comunque considerato nel conteggio dei punti etc.)
+\item dopo la sospensione del giocatore il gioco ricomincia senza il giocatore sospeso
+\item in caso di sospensione tutti i giocatori vengono notificati e non possono interagire con il gioco
+\item se il giocatore si riconnette prima della fine della partita pu\`o ricominciare a giocare, come se nulla fosse successo (ovviamente perde i turni durante i quali non ha giocato
+\end{itemize}
+
+
+
+
+
+
+\end{document}

@@ -1,0 +1,313 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{hyperref}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\ (\hmwkClassInstructor): \hmwkTitle} % Top center head
+\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true
+  tabsize=3
+}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+
+\newcommand{\hmwkTitle}{Debugging in Eclipse} % Assignment title
+\newcommand{\hmwkDueDate}{Aprile 21, 2015} % Due date
+\newcommand{\hmwkClass}{Ingegneria del Software 1} % Course/class
+\newcommand{\hmwkClassTime}{} % Class/lecture time
+\newcommand{\hmwkClassInstructor}{Sr\dj{}an Krsti\'c and Marco Scavuzzo} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{} % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Da completare entro \hmwkDueDate}\\
+\vspace{0.1in}\large{\textit{\hmwkClassInstructor}}
+\vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+\newpage
+\tableofcontents
+\newpage
+
+
+
+%----------------------------------------------------------------------------------------
+\section{Preliminaries}
+Il \emph{debugging} (o semplicemente debug), in informatica, indica l'attivit\' a   che consiste nell'individuazione della porzione di software affetta da errore (bug) rilevata nei software a seguito dell'utilizzo del programma.
+
+Un \emph{breakpoint} nel codice sorgente specifica dove l'esecuzione di un programma si deve fermare. Un volta raggiunto il breakpoint \' e possibile analizzare le variabili, cambiare il loro valore etc.
+
+Un \emph{watchpoint} \' e un break point su un campo. Il debugger si ferma quando il campo \' e letto o modificato
+
+\subsection{Fraction Class}
+\begin{lstlisting}
+package org.ingsoft.debugging;
+
+/**
+ * A class representing a fraction of integer values. The class provides functionality for simplifying the fraction and performing the basic fraction computations.
+ * @author Claudio
+ */
+public class Fraction {
+	
+	
+	private int numerator;
+	private int denominator;
+	
+	/**
+	 * Constructs a fraction with the specified numerator and denominator
+	 * @param numerator the numerator of the fraction
+	 * @param denominator the denominator of the fraction
+	 */
+	public Fraction(int numerator, int denominator){
+		this.numerator=numerator;
+		this.denominator=denominator;
+	}
+	
+	/**
+	 * Constructs a fraction with the specified numerator and a denominator of 1
+	 * @param numerator the numerator of the fraction
+	 */
+	public Fraction(int numerator){
+		this(numerator,1);
+	}
+	
+	/**
+	 * @return the numerator
+	 */
+	public int getNumerator() {
+		return numerator;
+	}
+	/**
+	 * @param numerator the numerator to set
+	 */
+	public void setNumerator(int numerator) {
+		this.numerator = numerator;
+	}
+	/**
+	 * @return the denominator
+	 */
+	public int getDenominator() {
+		return denominator;
+	}
+	/**
+	 * @param denominator the denominator to set
+	 */
+	public void setDenominator(int denominator) {
+		this.denominator = denominator;
+	}
+
+	/**
+	 * Add this fraction to the specified fraction and returns it as a new fraction (not simplified). 
+	 * It does not modify this fraction.
+	 * @param f the fraction to be added to this fraction
+	 * @return a new fraction equivalent to this fraction plus the parameter
+	 */
+	public Fraction add(Fraction f)
+	{
+		int num= (this.numerator * f.denominator) + (this.denominator * f.numerator);
+		int den= this.denominator * f.denominator;
+		Fraction sum=null;
+		sum.setNumerator(num);
+		sum.setDenominator(den);
+		//Fraction sum=new Fraction(num, den);		
+		
+		return sum;
+	}
+	
+	@Override
+	public String toString(){
+		return this.numerator+"/"+this.denominator;
+	}
+}
+\end{lstlisting}
+
+\subsection{Main}
+\begin{lstlisting}
+package org.ingsoft.debugging;
+
+public class FractionMain {
+
+	public static void main(String[] args) {
+		Fraction f=new Fraction(3,4);
+		Fraction g=new Fraction(5);
+		Fraction[] myfractions=new Fraction[5];
+		
+		//add the fractions and store the result
+		Fraction sum=f.add(g);
+		
+		myfractions[0]=f;
+		myfractions[1]=g;
+		myfractions[4]=sum;
+		
+		// Print the result
+		System.out.println(myfractions[4].toString());
+	}
+}
+\end{lstlisting}
+
+
+\section{Interfaccia di Debug (Debug perspective)}
+\begin{itemize}
+\item \emph{call stack} mostra le parti del codice che sono in esecuzione e come sono legate le une alle altre
+\item \emph{Breakpoints}: mostra l'insieme dei break point del vostro programma. Consente di rimovere, attivare e deattivare un break point. \`E possibile anche deattivare tutti i breakpoint cliccando su skip all breakpoints (pallino azzurro barrato)
+\item \emph{Variables} mostra attributi e variabili (cliccando sulla freccetta in alto a destra \`e possibile selezionare  tra le altre
+\begin{itemize}
+\item campi da mostrare (Java)
+\item il tipo di ogni variabile (Layout)
+\end{itemize}
+\end{itemize}
+
+
+\section{Utilizzare il debugger}
+Prima di tutto assicuriamoci che il debugger consideri solo il "nostro" codice ed eliminiamo il  debug di altro codice (e.g., librerie java).
+Cliccare su preferences $>$ java debug $>$ step filtering $>$ use step filters $>$ check everything $>$ finish
+
+\subsection{Aggiungere rimuovere e disabilitare un break point su un istruzione}
+\begin{itemize}
+\item Per \textit{aggiungere} un break point \`e sufficiente fare doppio click sul bordo della riga dove vogliamo aggiungerlo. Il break point indica la riga sulla quale si desidera che la computazione venga fermata.
+\item  Per \textit{disabilitare} un break point cliccare con il tasto destro sul break point e premere disable break point.
+\item  Per \textit{eliminare} un break point cliccare due volte su di esso.
+\end{itemize}
+
+\subsection{Breakpoint properties}
+dopo aver aggiunto un breakpoint puoi selezionare le propriet\`a del break point (per esempio \`e possibile specificare che un breakpoint deve divenire attivo dopo  essere stato raggiunto 12 volte o quando una particolare condizione \`e verificata)
+\begin{itemize}
+\item \textit{right click} $>$ \textit{breakpoint properties}
+\end{itemize}
+
+
+\subsection{Aggiungere un break point su un metodo}
+\`E possibile aggiungere un break point su un metodo facendo doppio click sul margine sinistro del metodo.
+\`E possibile configurare se il debugger deve fermarsi quando il metodo \`e lasciato o quando si entra nel metodo agendo sulle propriet\`a.
+
+\subsection{Aggiungere un watchpoint}
+\begin{itemize}
+\item posso settare un watch point cliccando due volte sul margine destro
+\item  nelle propriet\`a posso configurare che l'esecuzione deve fermarsi durante la lettura (Field access)  o la modifica (Field Modification) o entrambi.
+\end{itemize}
+
+\subsection{Lanciare il debugger}
+\begin{itemize}
+\item Per lanciare il debugger \`e sufficiente cliccare sul bug (insetto) presente a fianco del pulsante run o alternativamente andare su \textit{run} $>$ \textit{debug}
+\item Una volta lanciato il debug, eclipse automaticamente ci porta nella debug perspective.
+\item la linea evidenziata in verde corrisponde alla linea di codice che sta per essere eseguita (nota che tale linea non \`e ancora stata eseguita).
+\end{itemize}
+
+\subsection{Comandi di debugging}
+
+\begin{itemize}
+\item \textit{step into} consente di valutare nelle linee di codice che eseguono una data operazione. Per esempio se la linea di codice selezionata chiama un particolare metodo, cliccando su step into si va a valutare il codice interno a quel metodo
+\item \textit{step over} esegue le line di codice ma non mostra il comportamento interno di quelle linee. (e.g., se viene chiamato un metodo salta il debugging delle linee di codice di quel metodo).
+\item \textit{step return} permette di ritornare da un metodo nel quale e' stata eseguita una step into.
+\item \textit{use step filters} se cliccato abilita l'utilizzo dei step filters (si consiglia di tenerlo abilitato per evitare di debuggare codice java nativo)
+\item \textit{resume} viene utilizzato quando sono inseriti pi\' u break points per andare al break point successivo
+\end{itemize}
+
+\subsection{Cambiare il valore delle variabili}
+Per cambiare il valore a una variabile durante il debug \`e sufficiente cliccare all'interno del campo value (nota viene utilizzato il metodo toString() per mostrare il contenuto della variabile)
+
+
+\subsection{Espressioni}
+\`E possibile durante il debug valutare il valore di alcune espressioni (porzioni di codice). In particolare, due diverse azioni possono essere eseguite.
+
+\begin{itemize}
+\item selezionando un espressione per esempio this.numerator*f.denominator e cliccando su watch \`e possibile vedere  il valore dell'espressione
+\item si possono anche aggiungere nuove espressioni cliccando su add e aggiungendo una data espressione
+\item si possono anche aggiungere altre espressioni (this.numerator*10)
+\end{itemize}
+
+ Nota che e' anche possibile cambiare il valore delle variabili mentre il codice e' eseguito
+
+
+\end{document}

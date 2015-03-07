@@ -1,0 +1,35 @@
+INSTALLING JENKINS
+
+wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -
+sudo sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list'
+sudo apt-get update
+sudo apt-get install jenkins
+
+
+
+ENTER JENKINS
+connect to http://ing-software-polimi.cloudapp.net:8080/
+
+
+SETTING THE ADMINISTRATOR
+1)Go to the Configure Global Security screen (http://server/jenkins/configureSecurity/) and choose "enable security". 
+An alternate URL to try is http://server:8080/configureSecurity.
+
+2) Select "Jenkins's own user database" as the security realm
+3) Place a check mark next to "Allow users to sign up"
+4) Select "Matrix-based security" as the authorization
+5) Give anonymous user the read access
+6) In the text box below the table, type in your user name (you'd be creating this later) and click "add"
+7) Give yourself a full access by checking the entire row for your user name
+8) Scroll all the way to the bottom, click "save"
+
+CREATE YOUR ACCOUNT
+http://ing-software-polimi.cloudapp.net:8080/signup
+
+Click "login" link at the top right portion of the page
+Choose "create an account"
+Use the user name you've used in the above step, and fill in the rest.
+
+CREATING A NEW JOB
+1) New Item
+2) Item Name

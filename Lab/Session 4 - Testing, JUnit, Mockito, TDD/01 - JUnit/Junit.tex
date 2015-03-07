@@ -1,0 +1,346 @@
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{hyperref}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle} % Top center head
+\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true
+  tabsize=3
+}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Junit} % Assignment title
+\newcommand{\hmwkDueDate}{Martedi,\ Aprile 15,\ 2014} % Due date
+\newcommand{\hmwkClass}{Ingegneria del Software 1} % Course/class
+\newcommand{\hmwkClassTime}{} % Class/lecture time
+\newcommand{\hmwkClassInstructor}{} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{} % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+\vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+\vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+\newpage
+\tableofcontents
+\newpage
+
+
+
+%----------------------------------------------------------------------------------------
+\section{Preliminaries}
+\subsection{Test di unit\`a}
+Consentono di testare una singola entit\`a (classe o metodo). 
+\subsection{JUnit}
+JUnit \`e un framework per il test di unita per il linguaggio Java e consente di seguire un paradigma di programmazione test-driven.
+
+\subsection{Unit test case}
+\begin{itemize}
+\item porzione di codice che assicura che un altra parte di codice (in genere un metodo) funziona come aspettato.
+\item un test formale ben scritto \`e caratterizzato da un input noto e un output atteso che \`e stabilito prima dell'esecuzione del test.
+\item in genere per ogni requisito (funzionalit\`a implementate) devono esserci \textbf{almeno} due test. Uno positivo e l'altro negativo
+\item junit consente di utilizzare le annotazioni per identificare i metodi di test.
+\item le asserzioni servono a confrontare i risultati ottenuti con quelli attesi
+\end{itemize}
+
+\subsection{Caratteristiche di JUnit}
+JUnit fornisce le seguenti features:
+\begin{itemize}
+\item \emph{Fixture}: \`e possibile settare uno stato predefinito degli oggetti prima di eseguire un test. L'obbiettivo \`e di assicurare che l'ambiente nel quale i test sono eseguiti \`e noto e fissato in modo che i test siano ripetibili (@Before (setting), @After (pulizia)). 
+\item \emph{Test runner}: \`e utilizzato per eseguire i test (trasparente all'utente)
+\end{itemize}
+
+
+
+
+\section{Problem}
+Vogliamo creare un metodo che converte dollari in franchi svizzeri (CHF).
+
+\textbf{Requisito base}.
+Dobbiamo essere capaci di moltiplicare un numero per un altro. 
+Esempio se il cambio Dollari-CHF 2 :1, 5 Dollari vengono convertiti in 10 franchi.
+
+\begin{itemize}
+\item Visto che siamo test driven partiamo dai test e non dagli oggetti
+\item File $>$ new $>$ Junit Test Case (Test)
+\item scegliamo il nome del test TestMultiplication. Nota il nome del test deve iniziare con la parola \textbf{Test} e deve essere chiara la funzionalit\`a testata
+\end{itemize}
+\section{Step 1}
+\subsection{Step 1.1 Creating the test}
+
+\begin{lstlisting}
+package org.ingsoft.junit;
+
+import static org.junit.Assert.*;
+
+import org.ingsoft.junit.tdd.Dollar;
+import org.junit.Test;
+
+public class TestMultiplication {
+	@Test
+	public void test() {
+		Dollar five=new Dollar(5);
+		five.times(2);
+		assertEquals(10, five.amount);
+	}
+}
+\end{lstlisting}
+
+Problemi: public fields, side effects, integer for monetary amounts.
+
+Vogliamo compilare il prima possibile. Cosa dobbiamo fare?
+\begin{itemize}
+\item Creare la classe dollaro
+\item Creare un costruttore
+\item Creare il metodo times
+\item Creare l'attributo pubblico  amount
+\end{itemize}
+
+\subsection {Step 1.2 Making the test running}
+\begin{lstlisting}
+package org.ingsoft.junit.tdd;
+public class Dollar {
+	
+	public int amount=0;
+	
+	public Dollar(int value){
+		
+	}
+	public void times(int value){
+		
+	}
+}
+\end{lstlisting}
+Compila perfetto. Problema il test non \`e passato.
+
+\begin{lstlisting}
+package org.ingsoft.junit.tdd;
+public class Dollar {
+	
+	public int amount=10;
+	
+	public Dollar(int value){
+		
+	}
+	public void times(int value){
+		
+	}
+}
+\end{lstlisting}
+Compila perfetto il test \`e passato.
+
+\subsection {Step 1.3 Refactor}
+C'\`e una dipendenza tra il codice e il test. Ovvero abbiamo del codice duplicato (il numero 10). Come possiamo eliminarlo?
+\begin{itemize}
+\item Passo  1: nel metodo  times scriviamo this.amount = 5*2 
+\item Passo 2: da dove possiamo ottenere il 5?  
+\begin{itemize}
+\item Mettiamo nel costruttore this.amount=value;
+\item Mettiamo nella metodo times  this.amount = this.amount*2 
+\end{itemize}
+\item Passo 3: da dove possiamo ottenere il 2?
+\begin{itemize}
+\item mettiamo nel metodo times  this.amount = this.amount* value
+\end{itemize}
+\item Passo 4: rimuoviamo il codice replicato
+\begin{itemize}
+\item  replace amount = amount* value with amount *= value
+\end{itemize}
+\end{itemize}
+
+\section{Step 2}
+Problema dopo aver eseguito un operazione l'oggetto dollaro cambia.
+\subsection{Step 2.1 Creating the test}
+\begin{lstlisting}
+package org.ingsoft.junit;
+
+import static org.junit.Assert.*;
+
+import org.ingsoft.junit.tdd.Dollar;
+import org.junit.Test;
+
+public class TestMultiplication {
+	@Test
+	public void test() {
+		Dollar five=new Dollar(5);
+		five.times(2);
+		assertEquals(10, five.amount);
+		five.times(3);
+		assertEquals(15, five.amount);
+	}
+}
+\end{lstlisting}
+
+
+\subsection{Step 2.2 Making the test running}
+Cambiare l'interfaccia della classe dollaro per fagli ritornare un nuovo oggetto.
+\begin{lstlisting}
+@Test
+	public void test() {
+		Dollar five=new Dollar(5);
+		Dollar product=five.times(2);
+		assertEquals(10, product.amount);
+		product=five.times(3);
+		assertEquals(15, product.amount);
+	}
+\end{lstlisting}
+
+\begin{lstlisting}
+package org.ingsoft.junit.tdd;
+
+public class Dollar {
+	
+	public int amount;
+	
+	public Dollar(int value){
+		this.amount=value;
+	}
+	public Dollar times(int value){
+		this.amount *= value;
+		return null;
+	}
+}
+\end{lstlisting}
+
+
+\begin{lstlisting}
+public Dollar times(int value){
+		return new Dollar(this.amount *= value);
+	}
+\end{lstlisting}
+
+
+
+\subsection{Step 2.3 Refactor}
+Posso mettere l'attributo amount come privato.
+
+
+\section{Best Practices}
+\begin{itemize}
+\item non utilizzare il costruttore del test case per settare il test case.
+\item non assumere di conoscere l'ordine nel quale i test case vengono eseguiti (anche all'interno del singolo junit).
+\item non scrivere test cases che hanno side effects 
+\item scrivere i test che leggono dati da locazioni del file sistem utilizzando path relativi
+\item memorizzare i dati che sono necessari per i test assieme ai test stessi
+\item assicurati che i nomi dei test sono time-indipendent
+\item scegliere i nomi dei  test nel modo corretto
+\begin{itemize}
+\item il nome del test deve iniziare con la parola Test (esempio \emph{TestClassUnderTest})
+\item il nome dei metodi nel test case devono descrivere cosa viene testato (esempio \emph{testLoggingEmptyMessage()})
+\end{itemize}
+\item utilizza i metodi assert e fail di junit nel modo corretto per mantenere il codice pulito. Considera per esempio la leggibilit\' a di assertEquals ("The number of credentials should be 3", 3, creds); rispetto a assert (creds == 3); 
+\item commentare i test con la javadoc
+\item mantieni i test piccoli e veloci
+\end{itemize}
+
+\section{Testing private methods}
+Per testare dei metodi privati ci sono 2 strade possibili:
+\begin{itemize}
+\item testarlo attraverso un altro metodo pubblico che lo utilizza
+%\item utilizzare la \emph{reflection} (nel caso sia proprio necessario).
+\end{itemize}
+%in pratica conviene testare solo la parte di codice visibile da un ipotetico “client” completamente esterno al codice, e quindi trascurare i metodi protetti
+
+\section{Che cosa testare?}
+Non \`e una regola assoluta, ma il principio generale \`e: \emph{quanto pi\`u una parte di codice \`e visibile dall'esterno, tanto pi\`u deve essere testata}
+
+
+
+
+\end{document}
+
+
+
