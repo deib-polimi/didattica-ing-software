@@ -92,7 +92,7 @@
 %	NAME AND CLASS SECTION
 %----------------------------------------------------------------------------------------
 
-\newcommand{\hmwkTitle}{Eclipse and Java} % Assignment title
+\newcommand{\hmwkTitle}{Eclipse} % Assignment title
 \newcommand{\hmwkDueDate}{Aprile 21, 2015} % Due date
 \newcommand{\hmwkClass}{Ingegneria del Software 1} % Course/class
 \newcommand{\hmwkClassInstructor}{Sr\dj{}an Krsti\'c and Marco Scavuzzo} % Teacher/lecturer
@@ -203,7 +203,7 @@
 \item apri il terminale
 \item  verifica il versione java con "\texttt{java -version}"
 \begin{itemize}
-\item se il versione \`e "1.7.0\_ 75" ha finito.
+\item se il versione \`e "1.7.0\_75" ha finito.
 \item se no, proseguire...
 \end{itemize}
 \item removi openjdk se \`e installato con \texttt{sudo apt-get purge openjdk-*}
@@ -211,14 +211,14 @@
   \href{http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html}{\ULurl{Oracle}}
 \item scegli correttamente tra x64/x86 (controlla l'architettura con:  "\texttt{file /sbin/init}")
 \item crea la cartella \texttt{sudo mkdir -p /usr/local/java}
-\item scegli la cartella dove \`e l'archivio, per esempio \texttt{cd /home/"your\_ user\_ name"/Downloads}
+\item scegli la cartella dove \`e l'archivio, per esempio \texttt{cd /home/"your\_user\_name"/Downloads}
 \item copiarlo nella cartella di installazione	\texttt{sudo cp -r jdk-7u75-linux-x64.tar.gz /usr/local/java}
 \item scegli la cartella di installazione \texttt{cd /usr/local/java}
 \item rendere eseguibile l'archivio \texttt{sudo chmod a+x jre-7u75-linux-x64.tar.gz}
 \item estrarlo \texttt{sudo tar -zxvf jdk-7u75-linux-x64.tar.gz}
 \item Modificare le variabile con \texttt{sudo nano /etc/profile}  e
   aggiungi: \\
-\texttt{JAVA\_HOME=/usr/local/java/jdk1.7.0\_ 75} \\
+\texttt{JAVA\_HOME=/usr/local/java/jdk1.7.0\_75} \\
 \texttt{export JAVA\_HOME}\\
 \texttt{PATH=\$PATH:\$ JAVA\_HOME/bin}\\
 \texttt{export PATH}
@@ -226,9 +226,9 @@
 \item applica i nuovi valori \texttt{sudo bash /etc/profile}
 \item informa aptitude (apt) di nuova versione Java installata
 \begin{itemize}
-\item \texttt{sudo update-alternatives --install "/usr/bin/java" "java" "/usr/local/java/jdk1.7.0\_ 51/bin/java" 1}
-\item \texttt{sudo update-alternatives --install "/usr/bin/javaws" "javaws" "/usr/local/java/jdk1.7.0\_ 51/bin/javaws" 1}
-\item \texttt{sudo update-alternatives --set java /usr/local/java/jdk1.7.0\_ 51/bin/java}
+\item \texttt{sudo update-alternatives --install "/usr/bin/java" "java" "/usr/local/java/jdk1.7.0\_75/bin/java" 1}
+\item \texttt{sudo update-alternatives --install "/usr/bin/javaws" "javaws" "/usr/local/java/jdk1.7.0\_75/bin/javaws" 1}
+\item \texttt{sudo update-alternatives --set java /usr/local/java/jdk1.7.0\_75/bin/java}
 \end{itemize} 
 \item verifica il versione \texttt{java -version}
 \item reboot \texttt{sudo reboot}
@@ -271,6 +271,7 @@ del codice mentre
 Le perspectives sono organizzate in viste. Le viste sono riquadri che offrono supporto per organizzare e stendere il codice. Per modificare la vista (aggiungere, rimuovere viste) basta andare sotto 
 \textit{window} $>$ \textit{show views}
 
+
 \subsection{La Java perspective}
 \begin{itemize}
 \item Workspace: cartella che contiene i progetti realizzati
@@ -281,406 +282,408 @@ Le perspectives sono organizzate in viste. Le viste sono riquadri che offrono su
 \item Console: mostra vari tipi di output, tra i quali gli output su console dell'applicazione.
 \end{itemize}
 
-\hrule
-\section{Primi passi con eclipse}
-\subsection{Creare un nuovo Progetto}
-\begin{itemize}
-\item clicca File $>$ New $>$ Project $>$ Java project
-\item scegli il nome del progetto.
-\item clicca Finish.
-\end{itemize}
+% \hrule
+% \section{Primi passi con eclipse}
+% \subsection{Creare un nuovo Progetto}
+% \begin{itemize}
+% \item clicca File $>$ New $>$ Project $>$ Java project
+% \item scegli il nome del progetto.
+% \item clicca Finish.
+% \end{itemize}
 
-\subsection{Creare un nuovo parkage}
-\begin{itemize}
-\item cliccando il tasto destro su src/main/java 
-\item new $>$ package 
-\item scegliere il nome del package 
-\item cliccare Finish
-\end{itemize}
-Il nome di un package \`e generalmente  scelto utilizzando la seguenti regole: 
-\begin{itemize}
-\item  deve contenere solo lettere  minuscole;
-\item deve corrispondere al nome di dominio Internet dell'autore scritto in ordine inverso (it.polimi.ingegneria.software.lab);
-\item deve avere una specificazione dettagliata specie se vi sono pi\`u sottodomini
-\end{itemize}
-
-
-\subsection{Creare una nuova Classe}
-\begin{itemize}
-\item click destro sul package (nella vista package explorer)
-\item click su New $>$ Class
-\item inserire nel campo name il nome della classe (Ricorda, il nome delle classi deve inisiare con la lettera maiuscola)
-\item spunta \emph{public static void main} se desideri che il metodo main venga inserito nella classe
-\item eventualmente \`e possibile aggiungere il package della classe.
-\item \`e possibile specificare se la classe \`e  pubblica astratta etc
-\item la classe creata appare all'interno del package explorer e l'editor mostra il codice generato
-\end{itemize}
+% \subsection{Creare un nuovo parkage}
+% \begin{itemize}
+% \item cliccando il tasto destro su src/main/java 
+% \item new $>$ package 
+% \item scegliere il nome del package 
+% \item cliccare Finish
+% \end{itemize}
+% Il nome di un package \`e generalmente  scelto utilizzando la seguenti regole: 
+% \begin{itemize}
+% \item  deve contenere solo lettere  minuscole;
+% \item deve corrispondere al nome di dominio Internet dell'autore scritto in ordine inverso (it.polimi.ingegneria.software.lab);
+% \item deve avere una specificazione dettagliata specie se vi sono pi\`u sottodomini
+% \end{itemize}
 
 
-\begin{lstlisting}
-package org.sonatype.examples;
+% \subsection{Creare una nuova Classe}
+% \begin{itemize}
+% \item click destro sul package (nella vista package explorer)
+% \item click su New $>$ Class
+% \item inserire nel campo name il nome della classe (Ricorda, il nome delle classi deve inisiare con la lettera maiuscola)
+% \item spunta \emph{public static void main} se desideri che il metodo main venga inserito nella classe
+% \item eventualmente \`e possibile aggiungere il package della classe.
+% \item \`e possibile specificare se la classe \`e  pubblica astratta etc
+% \item la classe creata appare all'interno del package explorer e l'editor mostra il codice generato
+% \end{itemize}
 
-/**
-* Thic class describes a music instument
-* @author the author name
-*/
-public class MusicInstrument {
+
+% \begin{lstlisting}
+% package org.sonatype.examples;
+
+% /**
+% * Thic class describes a music instument
+% * @author the author name
+% */
+% public class MusicInstrument {
 	
-}
-\end{lstlisting}
+% }
+% \end{lstlisting}
 
-\subsection{Aggiungere degli attributi}
-\begin{itemize}
-\item per aggiungere degli attributi \`e sufficiente aggiungere il relativo testo
-\item ricorda, gli attributi iniziano con la lettera minuscola
-\end{itemize}
-\begin{lstlisting}
-package org.sonatype.examples;
+% \subsection{Aggiungere degli attributi}
+% \begin{itemize}
+% \item per aggiungere degli attributi \`e sufficiente aggiungere il relativo testo
+% \item ricorda, gli attributi iniziano con la lettera minuscola
+% \end{itemize}
+% \begin{lstlisting}
+% package org.sonatype.examples;
 
-public class MusicInstrument {
+% public class MusicInstrument {
 
-	/**
-	 * The musicInstrument's name
-	 */
-	private String name;
+% 	/**
+% 	 * The musicInstrument's name
+% 	 */
+% 	private String name;
 
-	/**
-	 * The MusicInstrument's price
-	 */
-	private int price;
-}
-\end{lstlisting}
+% 	/**
+% 	 * The MusicInstrument's price
+% 	 */
+% 	private int price;
+% }
+% \end{lstlisting}
 
-\subsection{Creare getters and setters}
-\begin{itemize}
-\item click destro sul nome del attributo, Refactor $>$ Encapsulate
-  field...
-\item clicca Ok.
-\end{itemize}
+% \subsection{Creare getters and setters}
+% \begin{itemize}
+% \item click destro sul nome del attributo, Refactor $>$ Encapsulate
+%   field...
+% \item clicca Ok.
+% \end{itemize}
 
-\begin{lstlisting}
-package org.sonatype.examples;
+% \begin{lstlisting}
+% package org.sonatype.examples;
 
-public class MusicInstrument {
+% public class MusicInstrument {
 
-	/**
-	 * The musicInstrument's name
-	 */
-	private String name;
+% 	/**
+% 	 * The musicInstrument's name
+% 	 */
+% 	private String name;
 
-	/**
-	 * The MusicInstrument's price
-	 */
-	private int price;
+% 	/**
+% 	 * The MusicInstrument's price
+% 	 */
+% 	private int price;
 	
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
+% 	/**
+% 	 * @return the name
+% 	 */
+% 	public String getName() {
+% 		return name;
+% 	}
 
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+% 	/**
+% 	 * @param name the name to set
+% 	 */
+% 	public void setName(String name) {
+% 		this.name = name;
+% 	}
 	
-	/**
-	 * @return the price
-	 */
-	public int getPrice() {
-		return price;
-	}
+% 	/**
+% 	 * @return the price
+% 	 */
+% 	public int getPrice() {
+% 		return price;
+% 	}
 	
-	/**
-	 * @param price the price to set
-	 */
-	public void setPrice(int price) {
-		this.price = price;
-	}	
-}
+% 	/**
+% 	 * @param price the price to set
+% 	 */
+% 	public void setPrice(int price) {
+% 		this.price = price;
+% 	}	
+% }
 
-\end{lstlisting}
+% \end{lstlisting}
 
 
-\subsection{Aggiungere un costruttore}
+% \subsection{Aggiungere un costruttore}
 
-\begin{lstlisting}
-public class MusicInstrument {
-	...
-	/**
-	 * Creates a MusicInstrument
-	 * @param name: is the name of the instrument
-	 * @param price: price of the instrument
-	 */
-	public MusicInstrument(String name, int price)
-	{
-		this.name=name;
-		this.price=price;
-	}
-}
+% \begin{lstlisting}
+% public class MusicInstrument {
+% 	...
+% 	/**
+% 	 * Creates a MusicInstrument
+% 	 * @param name: is the name of the instrument
+% 	 * @param price: price of the instrument
+% 	 */
+% 	public MusicInstrument(String name, int price)
+% 	{
+% 		this.name=name;
+% 		this.price=price;
+% 	}
+% }
 
- public static void main( String[] args )
-    {
-    	MusicInstrument g1=new MusicInstrument("Charvel", 1000);
-    	MusicInstrument g2=new MusicInstrument("Schecter", 500);
+%  public static void main( String[] args )
+%     {
+%     	MusicInstrument g1=new MusicInstrument("Charvel", 1000);
+%     	MusicInstrument g2=new MusicInstrument("Schecter", 500);
     	
-    	System.out.println(g1.getName());
-    	g1.play();
-    }
-\end{lstlisting}
+%     	System.out.println(g1.getName());
+%     	g1.play();
+%     }
+% \end{lstlisting}
 
-\subsection{Istanziare una nuova classe}
-\begin{itemize}
-\item differenza tra dichiarazione e istanziazione
-\item class Guitar
-\item pi\`u istanze del class Guitar
-\end{itemize}
+% \subsection{Istanziare una nuova classe}
+% \begin{itemize}
+% \item differenza tra dichiarazione e istanziazione
+% \item class Guitar
+% \item pi\`u istanze del class Guitar
+% \end{itemize}
 
 
-\begin{lstlisting}
-public class App 
-{
-    public static void main( String[] args )
-    {
-    	MusicInstrument g1=new MusicInstrument("Charvel",1000);
+% \begin{lstlisting}
+% public class App 
+% {
+%     public static void main( String[] args )
+%     {
+%     	MusicInstrument g1=new MusicInstrument("Charvel",1000);
     	
-    	MusicInstrument g2=new MusicInstrument("Schecter", 500);
+%     	MusicInstrument g2=new MusicInstrument("Schecter", 500);
     	
-    	System.out.println(g1.getName());
-    }
-}
-\end{lstlisting}
+%     	System.out.println(g1.getName());
+%     }
+% }
+% \end{lstlisting}
 
 
 
 
-%--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-% METHODS
-%--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+% %--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+% % METHODS
+% %--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-\subsection{Aggiungere un metodo}
-Ricorda, i metodi iniziano con la lettera minuscola
+% \subsection{Aggiungere un metodo}
+% Ricorda, i metodi iniziano con la lettera minuscola
 
-\begin{lstlisting}
-public class MusicInstrument {
-	...
+% \begin{lstlisting}
+% public class MusicInstrument {
+% 	...
 
-	/**
-	 *  plays the instrument
-	 */
-	public void play(){
-		System.out.println("The instrument "+name+" is playing ");
-	}
-}
+% 	/**
+% 	 *  plays the instrument
+% 	 */
+% 	public void play(){
+% 		System.out.println("The instrument "+name+" is playing ");
+% 	}
+% }
 
-public class App 
-{
-    public static void main( String[] args )
-    {
-    	g1.play();
+% public class App 
+% {
+%     public static void main( String[] args )
+%     {
+%     	g1.play();
     	
-    }
-}
-\end{lstlisting}
+%     }
+% }
+% \end{lstlisting}
 
-\subsection{Overloading}
+% \subsection{Overloading}
 
-\begin{lstlisting}
-/**
-	 * plays the song
-	 * @param song: contains the song to be played
-	 */
-public class MusicInstrument {
-	...
+% \begin{lstlisting}
+% /**
+% 	 * plays the song
+% 	 * @param song: contains the song to be played
+% 	 */
+% public class MusicInstrument {
+% 	...
 
-	public void play(String song){
-		System.out.println("The instrument "+name+" is playing the song: "+song);
-	}
-}
+% 	public void play(String song){
+% 		System.out.println("The instrument "+name+" is playing the song: "+song);
+% 	}
+% }
 
-public static void main( String[] args )
-    {
-    	MusicIntrument g1=new MusicIntrument("Charvel", 1000);
-    	MusicIntrument g2=new MusicIntrument("Schecter", 500);
+% public static void main( String[] args )
+%     {
+%     	MusicIntrument g1=new MusicIntrument("Charvel", 1000);
+%     	MusicIntrument g2=new MusicIntrument("Schecter", 500);
     	
-    	System.out.println(g1.getName());
-    	g1.play();
-    	g1.play("Inno alla gioia");
-    }
-\end{lstlisting}
+%     	System.out.println(g1.getName());
+%     	g1.play();
+%     	g1.play("Inno alla gioia");
+%     }
+% \end{lstlisting}
 
-\subsection{Hierarchy: extends}
+% \subsection{Hierarchy: extends}
 
-\begin{lstlisting}
-public class Guitar extends MusicInstrument{
+% \begin{lstlisting}
+% public class Guitar extends MusicInstrument{
 	
 	
-	public Guitar(String name, int price) {
-		super(name, price);
-	}
-}
+% 	public Guitar(String name, int price) {
+% 		super(name, price);
+% 	}
+% }
 
-public static void main( String[] args )
-    {
-    	MusicIntrument g1=new MusicIntrument("Charvel", 1000);
-    	MusicIntrument g2=new Guitar("Schecter", 500);
+% public static void main( String[] args )
+%     {
+%     	MusicIntrument g1=new MusicIntrument("Charvel", 1000);
+%     	MusicIntrument g2=new Guitar("Schecter", 500);
     	
-    	System.out.println(g1.getName());
-    	g1.play();
-    	g1.play("Inno alla gioia");
-    	g2.play("Inno alla gioia");
-     }
-\end{lstlisting}
+%     	System.out.println(g1.getName());
+%     	g1.play();
+%     	g1.play("Inno alla gioia");
+%     	g2.play("Inno alla gioia");
+%      }
+% \end{lstlisting}
 
-\subsection{Aggiungere un attributo e metodi nella sottoclasse}
-\begin{itemize}
-\item Riferimento g2 deve essere il tipo Guitar per chiamare setTuned
-  o isTuned
-\end{itemize}
-\begin{lstlisting}
-public class Guitar extends MusicInstrument{
+% \subsection{Aggiungere un attributo e metodi nella sottoclasse}
+% \begin{itemize}
+% \item Riferimento g2 deve essere il tipo Guitar per chiamare setTuned
+%   o isTuned
+% \end{itemize}
+% \begin{lstlisting}
+% public class Guitar extends MusicInstrument{
 	
-	/**
-	 * Contains the state of the guitar: if it is tuned or not
-	 */
-	private boolean tuned;
+% 	/**
+% 	 * Contains the state of the guitar: if it is tuned or not
+% 	 */
+% 	private boolean tuned;
 	
-	public Guitar(String name, int price) {
-		super(name, price);
-		tuned=false;
-	}
+% 	public Guitar(String name, int price) {
+% 		super(name, price);
+% 		tuned=false;
+% 	}
 	
-	/**
-	 * @return the tuned
-	 */
-	public boolean isTuned() {
-		return tuned;
-	}
+% 	/**
+% 	 * @return the tuned
+% 	 */
+% 	public boolean isTuned() {
+% 		return tuned;
+% 	}
 
-	/**
-	 * @param tuned the tuned to set
-	 */
-	public void setTuned(boolean tuned) {
-		this.tuned = tuned;
-	}
-}
+% 	/**
+% 	 * @param tuned the tuned to set
+% 	 */
+% 	public void setTuned(boolean tuned) {
+% 		this.tuned = tuned;
+% 	}
+% }
 
- public static void main( String[] args )
-    {
-    	MusicInstrument g1=new MusicInstrument("Charvel", 1000);
-    	Guitar g2=new Guitar("Schecter", 500);
-      	g2.setTuned(true);
+%  public static void main( String[] args )
+%     {
+%     	MusicInstrument g1=new MusicInstrument("Charvel", 1000);
+%     	Guitar g2=new Guitar("Schecter", 500);
+%       	g2.setTuned(true);
         
     	
-    	System.out.println(g1.getName());
-    	g1.play();
-    	g1.play("Inno alla gioia");
-    	g2.play("Inno alla gioia");
-    }
-\end{lstlisting}
+%     	System.out.println(g1.getName());
+%     	g1.play();
+%     	g1.play("Inno alla gioia");
+%     	g2.play("Inno alla gioia");
+%     }
+% \end{lstlisting}
 
 
-\subsection{Overriding}
-\begin{lstlisting}
-public class Guitar extends MusicInstrument{
-/**
-	 * Checks if the guitar is tuned and in that case plays the song
-	 * @param song: contains the song to be played
-	 */
-	@Override
-	public void play(String song){
-		if(tuned)
-		{
-				System.out.println("The instrument "+name+" is playing the song: "+song);
-		}
-		else
-		{
-			System.out.println("The instrument "+this.getName()+" is not tune, I cannot playing the song: "+song);
-		}
-	}
-}
+% \subsection{Overriding}
+% \begin{lstlisting}
+% public class Guitar extends MusicInstrument{
+% /**
+% 	 * Checks if the guitar is tuned and in that case plays the song
+% 	 * @param song: contains the song to be played
+% 	 */
+% 	@Override
+% 	public void play(String song){
+% 		if(tuned)
+% 		{
+% 				System.out.println("The instrument "+name+" is playing the song: "+song);
+% 		}
+% 		else
+% 		{
+% 			System.out.println("The instrument "+this.getName()+" is not tune, I cannot playing the song: "+song);
+% 		}
+% 	}
+% }
 	
-public class App 
-{
-    public static void main( String[] args )
-    {
-    	Guitar g1=new Guitar("Charvel", 1000);
-    	Guitar g2=new Guitar("Schecter", 500);
-      	g2.setTuned(false);
-        g1.setTuned(true);
+% public class App 
+% {
+%     public static void main( String[] args )
+%     {
+%     	Guitar g1=new Guitar("Charvel", 1000);
+%     	Guitar g2=new Guitar("Schecter", 500);
+%       	g2.setTuned(false);
+%         g1.setTuned(true);
     	
-    	g1.play("Inno alla gioia");
-    	g2.play("Inno alla gioia");
+%     	g1.play("Inno alla gioia");
+%     	g2.play("Inno alla gioia");
     	
-    }
-}
+%     }
+% }
 
-\end{lstlisting}
+% \end{lstlisting}
 
-\subsection{Utilizzo di super}
-\begin{lstlisting}
-public class Guitar extends MusicInstrument{
-/**
-	 * Checks if the guitar is tuned and in that case plays the song
-	 * @param song: contains the song to be played
-	 */
-	@Override
-	public void play(String song){
-		if(tuned)
-		{
-		    super.play(song);
-		}
-		else
-		{
-			System.out.println("The instrument "+this.getName()+" is not tune, I cannot playing the song: "+song);
-		}
-	}
-}
-\end{lstlisting}
+% \subsection{Utilizzo di super}
+% \begin{lstlisting}
+% public class Guitar extends MusicInstrument{
+% /**
+% 	 * Checks if the guitar is tuned and in that case plays the song
+% 	 * @param song: contains the song to be played
+% 	 */
+% 	@Override
+% 	public void play(String song){
+% 		if(tuned)
+% 		{
+% 		    super.play(song);
+% 		}
+% 		else
+% 		{
+% 			System.out.println("The instrument "+this.getName()+" is not tune, I cannot playing the song: "+song);
+% 		}
+% 	}
+% }
+% \end{lstlisting}
 
-\hrule
+% \hrule
 
 
-\section{Refactoring del codice}
-Permette di modificare (riscrivere) del codice preservandone il funzionamento (e.g., modificare il nome di una variabile).
-\begin{itemize}
-\item Click destro sulla variabile $>$ Refactor 
-\item Oppure \textit{Alt + Shift + R}
-\end{itemize}
+% \section{Refactoring del codice}
+% Permette di modificare (riscrivere) del codice preservandone il funzionamento (e.g., modificare il nome di una variabile).
+% \begin{itemize}
+% \item Click destro sulla variabile $>$ Refactor 
+% \item Oppure \textit{Alt + Shift + R}
+% \end{itemize}
 
-\hrule
-\section{Gestione di un progetto}
-\subsection{Eseguire un progetto}
-\begin{itemize}
-\item tasto destro sul progetto 
-\item Run as $>$ Run configurations
-\item new Run Configuration 
-\item scegliere il nome
-\item Scegliere Java Application
-\item specificare sotto Main il nome della main class (la classe dove e' contenuto il main)
-\item e' possibile specificare eventuali argomenti utilizzando Arguments 
-\item premere run
-\end{itemize}
+% \hrule
+% \section{Gestione di un progetto}
+% \subsection{Eseguire un progetto}
+% \begin{itemize}
+% \item tasto destro sul progetto 
+% \item Run as $>$ Run configurations
+% \item new Run Configuration 
+% \item scegliere il nome
+% \item Scegliere Java Application
+% \item specificare sotto Main il nome della main class (la classe dove e' contenuto il main)
+% \item e' possibile specificare eventuali argomenti utilizzando Arguments 
+% \item premere run
+% \end{itemize}
 
-\subsection{Esportare un progetto}
-I progetti in java vengono solitamente esportati come file jar. I file jar sono simili ai file \"zip\".
-\begin{itemize}
-\item nella vista package explorer cliccare con il tasto destro
-\item cliccare su export
-\item cliccare su Jar file (se si desidera creare un file jar contenente il codice dell'applicazione) o su Runnable JAR file se si desidera creare un file jar che puo' essere eseguito (non contiene i sorgenti)
-\item scegliere destinazione e nome del jar file
-\item cliccare su finish
-\end{itemize}
+% \subsection{Esportare un progetto}
+% I progetti in java vengono solitamente esportati come file jar. I file jar sono simili ai file \"zip\".
+% \begin{itemize}
+% \item nella vista package explorer cliccare con il tasto destro
+% \item cliccare su export
+% \item cliccare su Jar file (se si desidera creare un file jar contenente il codice dell'applicazione) o su Runnable JAR file se si desidera creare un file jar che puo' essere eseguito (non contiene i sorgenti)
+% \item scegliere destinazione e nome del jar file
+% \item cliccare su finish
+% \end{itemize}
 
-\subsection{Importare un progetto}
-\begin{itemize}
-\item cliccare su file $>$ import  $>$ existing projects into the workspace  $>$ next 
-\item cliccare su select archive file  $>$  browse e selezionare il percorso del jar
-\item selezionare il progetto da importare
-\item cliccare su finish
-\end{itemize}
-\end{document}
+% \subsection{Importare un progetto}
+% \begin{itemize}
+% \item cliccare su file $>$ import  $>$ existing projects into the workspace  $>$ next 
+% \item cliccare su select archive file  $>$  browse e selezionare il percorso del jar
+% \item selezionare il progetto da importare
+% \item cliccare su finish
+% \end{itemize}
+
+
+ \end{document}
 
