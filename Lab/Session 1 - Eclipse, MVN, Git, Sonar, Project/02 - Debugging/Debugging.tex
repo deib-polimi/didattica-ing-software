@@ -240,7 +240,7 @@ public class FractionMain {
 \section{Interfaccia di Debug (Debug perspective)}
 \begin{itemize}
 \item \emph{call stack} mostra le parti del codice che sono in esecuzione e come sono legate le une alle altre
-\item \emph{Breakpoints}: mostra l'insieme dei break point del vostro programma. Consente di rimovere, attivare e deattivare un break point. \`E possibile anche deattivare tutti i breakpoint cliccando su skip all breakpoints (pallino azzurro barrato)
+\item \emph{Breakpoints}: mostra l'insieme dei break point del vostro programma. Consente di rimovere, attivare e disattivare un break point. \`E possibile anche disattivare tutti i breakpoint cliccando su ``skip all breakpoints'' (pallino azzurro barrato)
 \item \emph{Variables} mostra attributi e variabili (cliccando sulla freccetta in alto a destra \`e possibile selezionare  tra le altre
 \begin{itemize}
 \item campi da mostrare (Java)
@@ -256,12 +256,12 @@ Cliccare su preferences $>$ java debug $>$ step filtering $>$ use step filters $
 \subsection{Aggiungere rimuovere e disabilitare un break point su un istruzione}
 \begin{itemize}
 \item Per \textit{aggiungere} un break point \`e sufficiente fare doppio click sul bordo della riga dove vogliamo aggiungerlo. Il break point indica la riga sulla quale si desidera che la computazione venga fermata.
-\item  Per \textit{disabilitare} un break point cliccare con il tasto destro sul break point e premere disable break point.
+\item  Per \textit{disabilitare} un break point cliccare con il tasto destro sul break point e premere ``disable break point''.
 \item  Per \textit{eliminare} un break point cliccare due volte su di esso.
 \end{itemize}
 
 \subsection{Breakpoint properties}
-dopo aver aggiunto un breakpoint puoi selezionare le propriet\`a del break point (per esempio \`e possibile specificare che un breakpoint deve divenire attivo dopo  essere stato raggiunto 12 volte o quando una particolare condizione \`e verificata)
+Dopo aver aggiunto un breakpoint puoi selezionare le propriet\`a del break point (per esempio \`e possibile specificare che un breakpoint deve divenire attivo dopo  essere stato raggiunto 12 volte o quando una particolare condizione \`e verificata)
 \begin{itemize}
 \item \textit{right click} $>$ \textit{breakpoint properties}
 \end{itemize}
@@ -269,17 +269,17 @@ dopo aver aggiunto un breakpoint puoi selezionare le propriet\`a del break point
 
 \subsection{Aggiungere un break point su un metodo}
 \`E possibile aggiungere un break point su un metodo facendo doppio click sul margine sinistro del metodo.
-\`E possibile configurare se il debugger deve fermarsi quando il metodo \`e lasciato o quando si entra nel metodo agendo sulle propriet\`a.
+\`E possibile configurare se il debugger debba fermarsi quando all'uscita o all'entrata del metodo, agendo sulle propriet\`a.
 
 \subsection{Aggiungere un watchpoint}
 \begin{itemize}
 \item posso settare un watch point cliccando due volte sul margine destro
-\item  nelle propriet\`a posso configurare che l'esecuzione deve fermarsi durante la lettura (Field access)  o la modifica (Field Modification) o entrambi.
+\item  Posso configurare le propriet\`a per far in modo che l'esecuzione si fermi durante la lettura (Field access)  o la modifica (Field Modification) di un campo, o entrambi.
 \end{itemize}
 
 \subsection{Lanciare il debugger}
 \begin{itemize}
-\item Per lanciare il debugger \`e sufficiente cliccare sul bug (insetto) presente a fianco del pulsante run o alternativamente andare su \textit{run} $>$ \textit{debug}
+\item Per lanciare il debugger \`e sufficiente cliccare sul bug (insetto) presente a fianco del pulsante run o, alternativamente, andare su \textit{run} $>$ \textit{debug}
 \item Una volta lanciato il debug, eclipse automaticamente ci porta nella debug perspective.
 \item la linea evidenziata in verde corrisponde alla linea di codice che sta per essere eseguita (nota che tale linea non \`e ancora stata eseguita).
 \end{itemize}
@@ -287,11 +287,11 @@ dopo aver aggiunto un breakpoint puoi selezionare le propriet\`a del break point
 \subsection{Comandi di debugging}
 
 \begin{itemize}
-\item \textit{step into} consente di valutare nelle linee di codice che eseguono una data operazione. Per esempio se la linea di codice selezionata chiama un particolare metodo, cliccando su step into si va a valutare il codice interno a quel metodo
+\item \textit{step into} consente di valutare le linee di codice che eseguono una data operazione. Per esempio se la linea di codice selezionata chiama un particolare metodo, cliccando su step into si va a valutare il codice contenuto in quel metodo
 \item \textit{step over} esegue le line di codice ma non mostra il comportamento interno di quelle linee. (e.g., se viene chiamato un metodo salta il debugging delle linee di codice di quel metodo).
 \item \textit{step return} permette di ritornare da un metodo nel quale e' stata eseguita una step into.
 \item \textit{use step filters} se cliccato abilita l'utilizzo dei step filters (si consiglia di tenerlo abilitato per evitare di debuggare codice java nativo)
-\item \textit{resume} viene utilizzato quando sono inseriti pi\' u break points per andare al break point successivo
+\item \textit{resume} viene utilizzato, quando sono inseriti pi\' u break points, per andare al break point successivo
 \end{itemize}
 
 \subsection{Cambiare il valore delle variabili}
@@ -299,15 +299,15 @@ Per cambiare il valore a una variabile durante il debug \`e sufficiente cliccare
 
 
 \subsection{Espressioni}
-\`E possibile durante il debug valutare il valore di alcune espressioni (porzioni di codice). In particolare, due diverse azioni possono essere eseguite.
+\`E possibile, durante il debug, valutare il valore di alcune espressioni (porzioni di codice). In particolare, due diverse azioni possono essere eseguite:
 
 \begin{itemize}
-\item selezionando un espressione per esempio this.numerator*f.denominator e cliccando su watch \`e possibile vedere  il valore dell'espressione
-\item si possono anche aggiungere nuove espressioni cliccando su add e aggiungendo una data espressione
-\item si possono anche aggiungere altre espressioni (this.numerator*10)
+\item selezionando un espressione per esempio this.numerator*f.denominator e cliccando su watch \`e possibile vedere  il valore dell'espressione;
+\item si possono anche aggiungere nuove espressioni cliccando su add e aggiungendo una data espressione;
+\item si possono anche aggiungere altre espressioni (this.numerator*10).
 \end{itemize}
 
- Nota che e' anche possibile cambiare il valore delle variabili mentre il codice e' eseguito
+ Nota che e' anche possibile cambiare il valore delle variabili mentre il codice e' in esecuzione.
 
 
 \end{document}
