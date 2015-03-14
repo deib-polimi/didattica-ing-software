@@ -172,9 +172,36 @@
 
 \newtheorem{theorem}{Theorem}[section]
 
+\section{Ripasso degli elementi del linguaggio Java}
+\subsection{Java come linguaggio orientato agli oggetti}
+Tra le caratteristiche del linguaggio Java, 
+per gli scopi di questo corso spicca il fatto di essere \emph{orientato agli oggetti}.
+In un linguaggio orientato agli oggetti i principali componenti
+di un programma sono gli oggetti.
 
-\section{Introduzione}
-Questa lezione si riferisce alle slides 16-70  o alternativamente ai capitoli 2, 3, 4 e 5 del libro  Pellegrino Principe ``Java 8''.
+\begin{mydef} (Oggetto) Un \texttt{oggetto} in Java è un'astrazione
+	di un oggetto del mondo reale che modella l'oggetto reale
+	relativamente alle caratteristiche di interesse per il programmatore.
+\end{mydef}
+In questo paradigma il programmatore descrive \emph{il mondo}
+(gli oggetti del mondo) e come \emph{il mondo cambi nel tempo}.
+Questo paradigma differisce da quello procedurale
+in cui il mattone principale è costituito dalle procedure
+che modificano i valori del programma.
+Nei linguaggi procedurali lo sviluppatore specifica \emph{come risolvere} un problema, mentre nei linguaggi orientati agli oggetti
+prima vengono definiti i relativi concetti e le loro interazioni e solo dopo viene elaborata una strategia di risoluzione attraverso
+gli oggetti precedentemente definiti.
+In altri termini mente in $C$ l'uso delle procedure passa in primo piano rispetto alla gestione dei dati,
+in $Java$ e più in generale nei linguaggi orientati agli oggetti 
+prima vengono modellate le entità relative al problema e le loro interazioni.
+
+Ogni oggetto ha uno stato e un comportamento ed è specificato da una classe.
+
+\begin{mydef} (Classe) Una \texttt{classe} è un \emph{tipo} 
+definito dall'utente che descrive un oggetto.
+Più precisamente specifica in che modo lo stato dell'oggetto nel sistema possa essere identificato e come lo stato cambi in risposta a operazioni eseguite sull'oggetto.
+\end{mydef}
+In Java una classe è una descrizione di entità reali ed è uno stampo per la creazione di oggetti che possano essere creati(istanziati) nel sistema.
 
 \subsection{Variabili}
 \begin{mydef} Una variabile è uno spazio di memoria che contiene un ``valore". 
@@ -320,7 +347,7 @@ Classi immutabili
 \begin{itemize}
 \item vantaggi:
 \begin{itemize}
-\item %TODO??? easy to create build and test
+\item facili da utilizzare e testare, non essendo soggette a \emph{side-effect} indesiderati.
 \item meno soggette a errori, specialmente in caso di programmi concorrenti
 \end{itemize}
 \item svantaggi:
@@ -361,400 +388,855 @@ public String usingBuilder() {
 
 \subsection{Classi e oggetti}
 
+Le classi rappresentano dei tipi definiti dall'utente.
+Come tipi sono caratterizzati da:
+\begin{itemize}
+	\item \emph{attributi}: i dati che contengono
+	\item \emph{metodi}: le operazioni che offrono/svolgono
+\end{itemize}
+
+Un oggetto costituisce ua realizzazione concreta di una classe.
+Possiamo pensare ad una classe come al modello di
+un modulo e agli oggetti come fogli con stampato il modulo:
+
+
+\subsection{Array}
+
+In Java, come in C, è presente un tipo \emph{array} che rappresenta
+un vettore di elementi dello stesso tipo.
+
+Dato un tipo \texttt{T} è possibile dichiarare un array di \texttt{T}
+anteponendo o postponendo \texttt{[]} al nome della variabile
+dichiarata.
+\begin{lstlisting}[language=Java,escapechar=|]
+T[] a;
+T b[];
+int foo[];
+\end{lstlisting}
+Come in C, è possibile dichiarare array multidimensionali:
+\begin{lstlisting}[language=Java,escapechar=|]
+double[][] multiarray;
+\end{lstlisting}
+È possibile inizializzare direttamente un array fornendo
+la lista degli elementi contenuti separati da virgola
+all'interno di parentesi graffe.
+\begin{lstlisting}[language=Java,escapechar=|]
+int[] pipppo = {1,2,3,4};
+double[][] multarray = {{1.0,2.0},{4.5,12}};
+\end{lstlisting} 
+Se l'inizializzazione non è presente assieme alla dichiarazione,
+l'array non viene allocato.
+È altrimenti possibile inizializzare dinamicamente un array tramite 
+l'operatore \texttt{new},
+in questo caso la dichiarazione e 'inizializzazione possono essere
+poste in istruzioni differenti.
+\begin{lstlisting}[language=Java,escapechar=|]
+int[] pipppo1 = new int[42];
+double[][] multarray1 = now double[10][10];
+\end{lstlisting} 
+L'array risulta a tutti gli effetti un tipo riferimento, come
+tale può essere inizializzato a \texttt{null}.
+Nel caso di operatore \texttt{new}, l'array viene inizializzato 
+impostando tutti gli elementi al valore di default relativo al
+loro tipo.
+Quindi se gli elementi dell'array sono di tipo riferimento, 
+questi vengono inizializzati col valore \texttt{null}.
+In tal caso il programmatore dovrà successivamente
+inizializzare ciascun elemento dell'array invocando 
+il costruttore appropriato.
+
+\subsection{Enumerazioni}
+
+Da Java 5, sono disponibili i tipi enumerati, che
+ricalcano gli \texttt{enum} del C estendendoli con
+ulteriori operazioni.
+Mentre in C le enumerazioni semplicemente definiscono delle
+costanti intere, in Java sono vere è proprie classi,
+costituite da un numero prefissato di istanze associate.
+\begin{lstlisting}[language=Java,escapechar=|]
+enum Colors{RED, GREEN, BLUE};
+\end{lstlisting}  
+In questo caso la classe \texttt{Color}
+ha come uniche istanze gli oggetti \texttt{RED},
+\texttt{GREEN} e \texttt{BLUE}.
+Non è quindi possibile costruirne altre mentre è possibile
+usare l'operatore ``=='' per confrontarne i valori.
+
+Essendo una vera e propria classe, è possibile aggiungere
+attributi metodi e
+costruttori personalizzati (quest'ultimi in ogni caso non utilizzabili per inizializzare ulteriori oggetti).
+
+Le enumerazioni ereditano la classe \texttt{Enum},
+la quale offre i metodi \texttt{valueOf} e \texttt{toString}
+che rispettivamente restituiscono l'oggetto desiderato
+a partire dal nome e la stringa contenente il nome dell'elemento.
+
+Inoltre tramite l'attributo \texttt{values} è possibile ottenere
+l'array contenente tutti gli oggetti dell'enumerazione.
+
+\subsection{Attributi e metodi statici}
+
+Un attributo statico è condiviso tra tutti gli elementi della classe.
+Quindi mentre i normali attributi hanno un valore relativo
+alla specifica istanza, gli attributi statici hanno un unico
+valore visibile e modificabile per tutte le istanze.
+Per dichiarare un attributo statico questo deve essere seguito
+dalla keyword \texttt{static}.
+Un esempio d'uso di attributi statici
+è un contatore legato al numero di istanze della classe. 
+\begin{lstlisting}[language=Java,escapechar=|]
+class Foo{
+static int counter = 0;
+int number;
+
+public Foo(){
+	number = counter++;
+}
+
+}
+\end{lstlisting} 
+In questo caso la classe \texttt{Foo} ha due attributi:
+\begin{itemize}
+	\item \texttt{counter} che tiene traccia del numero totale
+		di istanze della classe ed è quindi statico.
+	\item \texttt{number} che mi rappresenta il numero relativo 
+		alla singola istanza.
+\end{itemize}
+
+Sempre tramite la keyword \texttt{static}
+è possibile dichiarare metodi statici (o di classe).
+Tali metodi non vengono invocati su una particolare
+istanza della classe.
+Ovviamente un attributo statico non può chiamare
+attributi/metodi non statici (perchè?).
+La sintassi per accedere/invocare un attributo/metodo statico
+di una classe è
+nome classe.nome metodo/attributo
 
 \section{Esercizi}
 
+\subsection{Insieme di interi}
+Problema:
+\begin{itemize}
+	\item  progettare e implementare una classe che rappresenti un insieme di interi
+\end{itemize}
+Per insieme si intende una collezione:
+\begin{itemize}
+	\item \textbf{non ordinata} non è definito alcun ordinamento esplicito (basato sulle proprietà degli elementi),
+	ne implicito (basato ad esempio sull'ordine di inserimento).
+	\item \textbf{priva di ripetizioni} non è possibile contenere lo stesso elemento più volte
+\end{itemize}
 
-\subsection{Tipi dato (20 min)} 
+Per risolverlo è necessario rispondere a due domande:
+\begin{itemize}
+		\item Che \textbf{funzionalità} deve offrire?
+	\item Come può essere rappresentato lo \textbf{stato} di un insieme di interi?
 
-\subsubsection{Tipi primitivi e riferimento}
+\end{itemize}
+
+\subsubsection{Operazioni richieste}
+
+Quali operazioni è ragionevole che l'implementazione di insieme fornisca?
+
+Le operazioni possono essere suddivise in categorie a seconda che
+queste semplicemente forniscano informazioni sullo stato dell'oggetto senza modificarlo (accessori),
+alterino in qualche modo lo stato dell'oggetto (modificatori) o
+generino un nuovo oggetto a partire dall'istanza  corrente (produttori).
+
+Nel nostro caso un accessore ragionevole è un metodo \texttt{contains(num)} che,
+dato in ingresso un intero \texttt{num}, ritorna \texttt{true} se l'intero è contenuto nell'insieme.
+
+Un altro metodo ragionevole è \texttt{insert(num)} che inserisce \texttt{num} nell'insieme
+e \texttt{remove(num)} che rimuove un numero presente nell'insieme.
+Per questi metodi è necessario specificare il comportamento nel caso di
+inserimento di duplicato o rimozione di valore non presente.
+Un comportamento ragionevole per tali casi può essere semplicemente ignorare l'operazione.
+
+Queste operazioni possono essere implementate come:
+\begin{description}
+	\item[produttori] ritornano un nuovo oggetto con l'operazione richiesta. Vengono di solito usati nelle classi immutabili.
+	\item[modificatori] applicano la modifica all'oggetto corrente, solitamente non ritornando alcun valore. Ovviamente rendono la classe mutabile.
+\end{description}
+In questo esercizio utilizzeremo una classe \textbf{mutabile}.
+
+\subsubsection{Rappresentazione}
+
+Come è possibile rappresentare internamente l'insieme?
+È necessario memorizzare il numero di elementi contenuti all'interno dell'insieme.
+
+Un modo consiste nel salvare gli elementi in un array.
+In questo caso inizializzeremo l'array ad una dimensione prefissata
+e terremo traccia degli numero di elementi effettivamente presenti all'interno di una variabile intera.
+
+\subsubsection{Esempio commentato}
+
 \begin{lstlisting}[language=Java,escapechar=|]
-package it.polimi.deib.se.esercitazione2;
+package it.polimi.deib.se.ex1.intset;
 
-public class Bike {	
-}
-\end{lstlisting}
-
-\begin{lstlisting}[language=Java,escapechar=|]
-package it.polimi.deib.se.esercitazione2;
-
-public class Client {
-
-	public static void main(String[] args) {
+public class IntSet {
+	// Rappresentazione interna: array di interi
+	private final int[] elements;
+	
+	// dimensione effettiva dell'insieme
+	private int currentSize;
+	
+	// costante che rappresenta la dimensione massima del set
+	private final static int MAX_SIZE = 100;
+	
+	// costruttore di default, caso particolare
+	// del costruttore che ha come argomento la
+	// dimensione dell'insieme.
+	public IntSet() {
+		this(MAX_SIZE);
+	}
+	
+	// costruttore che prende come argomento
+	// la dimensione dell'insieme.
+	public IntSet(int size) {
+		this.currentSize = 0;
+		this.elements = new int[size];
+	}
+	
+	// Aggiunge un intero all'insieme.
+	public void add(int n) throws Exception {
+		// invoco il metodo che controlla
+		// la presenza dell'elemento nel set.
+		boolean containsElement = this.contains(n);
 		
-		// x is a primitive type it directly contains the value 2
-		int x=2;
-		System.out.println(x);
+		// se e' gia' presente non faccio nulla
+		if (containsElement)
+		return;
 		
-		// y is an array which is not a primitive type 
-		// when I print it I obtain [I@7f31245a
-		
-		// [I -> array of int
-		// 7f31245a -> memory address
-		// the part on the left of @ specifies the type of the object
-		// the part on the right of the @ is a value that is an hash code of the memory address in which the object is allocated
-		// this means that the real address of memory is changed by an hashing function before being printed
-		int y[]=new int[2];
-		System.out.println(y);
-		
-		Bike b=new Bike();
-		System.out.println(b);
-		
+		/* controllo che il set non sia pieno */
+		if (this.currentSize < elements.length) {
+			this.elements[currentSize] = n;
+			this.currentSize++;
+		} else {
+		throw new Exception("Set is full");
 	}
 }
+
+// controlla che l'elemento sia contenuto nell'insieme
+public boolean contains(int n) {
+	for (int i = 0; i < this.currentSize; i++) {
+		if (elements[i]==n)
+		return true;
+	}
+	/*
+	* // alternativa NON CORRETTA
+	*
+	* for (int i: elements) { if (i==n){ return true; } }
+	*/
+	
+	/* default: non trovato */
+	return false;
+}
+
+// rimuove un elemento dall'insieme.
+public void remove(int element) {
+	// recupero l'elemento
+	int pos = find(element);
+	
+	if (pos >= 0) {
+		/*
+		* Altra soluzione:
+		* for (int i = pos; i < this.currentSize - 1; i++)
+		*	elements[i] = elements[i + 1];
+		*	this.currentSize = this.currentSize - 1;
+		*/						
+		this.currentSize = this.currentSize - 1;
+		elements[pos] = elements[currentSize];
+	}
+}
+
+// metodo privato. restituisce la posizione
+// di un elemento nell'array se esiste (ed e'
+// entro this.size), -1 altrimenti
+private int find(int n) {
+	for (int i = 0; i < this.currentSize; i++) {
+		if (elements[i]==n)
+		return i;
+	}
+	/* default */
+	return -1;
+	// Perche' non ha senso che questo metodo sia pubblico?
+}
+
+// restituisce la dimensione dell'insieme
+public int size() {
+	return this.currentSize;
+}
+
+public boolean isFull() {
+	return currentSize < MAX_SIZE;
+}
+
+public String toString() {
+	StringBuilder builder = new StringBuilder();
+	builder.append("[");
+	for(int i=0; i< currentSize; i++){
+		if(i>0){
+			builder.append(", ");
+		}
+		builder.append(elements[i]);
+		
+	}
+	builder.append("]");
+	return builder.toString();
+}
+
+}
 \end{lstlisting}
 
-\subsubsection{Numeri complessi}
-Problem
+\subsubsection{Approfondimenti e spunti (per casa)}
 \begin{itemize}
-\item  design and implement a class which represents a complex number
+	\item Quando possibile è buona prassi seguire il principio ``non ripetersi'', ovvero riutilizzare il più possibile il codice già scritto.
+	Secondo questo principio riscrivere il metodo \texttt{contains}
+	richiamando opportunamente il metodo \texttt{find}.
+	\item Aggiungere un metodo \texttt{toArray} che restituisca un array contenente gli interi presenti nell'insieme.
+	\item In questa implementazione il set fornito ha un limite
+	sul numero massimo di elementi contenuti.
+	Riscrivere l'esempio eliminando questo limite (suggerimento:
+	usare il metodo statico \texttt{Arrays.copyOf(T[] original, int newLength)} dalla classe \texttt{java.util.Arrays}).
+	\item Questa classe è mutabile, in quanto è possibile modificarne lo stato dopo la creazione. Ridefinire la classe \texttt{IntSet}
+	in modo da renderla immutabile.	
 \end{itemize}
 
-To solve this problem you must answer two questions:
+\subsection{Contatore di istanze}
+
+Problema:
+
 \begin{itemize}
-\item How can you define the \textbf{state} of the bike?
-\item Which \textbf{functionalities} offers the bike?
-\end{itemize}
- 
-\subsubsection{Complex number 1 - Attributes access modifiers}
-we can choose to use
-\begin{itemize}
-\item  the coordinates of the imaginary point
-\item the angle (angolo) and the radius (raggio)
+	\item  progettare e implementare una classe che associ ad ogni sua istanza un intero crescente sulla base dell'ordine di creazione.
 \end{itemize}
 
-\textbf{The functionalities of the class must not depend on how we choose to implement it}.
+\subsubsection{Operazioni richieste}
+
+Per questa classe è necessario fornire un metodo che restituisca
+il numero associato alla specifica istanza, \texttt{getNum}.
+Inoltre viene implementato il metodo \texttt{toString} per fornire
+una comoda rappresentazione testuale dell'oggetto.
+
+\subsubsection{Rappresentazione}
+
+È necessario utilizzare un attributo di tipo intero per memorizzare
+l'identificativo della specifica istanza.
+Come tengo il conto delle istanze create? È necessario utilizzare
+una variabile visibile e condivisa da tutte le istanze.
+Quindi si deve introdurre una variabile \emph{statica} che funga da contatore del numero di oggetti.
+
+\subsubsection{Esempio commentato}
+\begin{lstlisting}[language=Java,escapechar=|]
+package it.polimi.deib.se.ex1.counter;
+
+
+public class Counter {
+	
+	//Contatore condiviso tra tutte le istanze
+	private static int counter = 0;
+	
+	//Numero dell'oggetto
+	private int num = ++counter;
+	
+	public int getNum() {
+		return num;
+	}
+	
+	@Override
+	public String toString(){
+		return num + " of " + counter;
+	}
+	
+	public static void main(String[] args) {
+		Counter c1 = new Counter();
+		Counter c2 = new Counter();
+		System.out.println(c1);
+		System.out.println(c2);
+	}
+	
+}
+\end{lstlisting}
+
+\subsection{Numeri complessi}
+Problema:
+\begin{itemize}
+\item  progettare e implementare una classe che rappresenti un numero complesso
+\end{itemize}
+
+Per risolverlo è necessario rispondere a due domande:
+\begin{itemize}
+\item Come può essere rappresentato lo \textbf{stato} di un numero complesso?
+\item Che \textbf{funzionalità} deve offrire?
+\end{itemize}
+
+\subsubsection{Operazioni richieste}
+
+Per questa classe è necessario fornire le operazioni
+ragionevolmente richieste ad un numero complesso
+(somma, differenza, prodotto, uguaglianza, radice n-esima, etc.) .
+Decidiamo inoltre che tale classe debba essere immutabile.
+
+\subsubsection{Rappresentazione}
+
+Possiamo scegliere tra due rappresentazioni:
+parte reale e parte immaginaria o modulo e fase.
+In questo caso optiamo per la prima,
+utilizzando due variabili in virgola mobile a doppia precisione
+\texttt{im} e \texttt{real}.
+
+\textbf{Le funzionalità della classe devono essere indipendenti dall'implementazione}.
+
+\subsubsection{Note di implementazione}
+
+Dobbiamo definire un costruttore per inizializzare l'oggetto.
+Scegliamo di passagli direttamente i valori di parte reale e immaginaria.
+Non possiamo però definire un altro costruttore che prenda come ingresso
+modulo e fase, dato che andrebbe in conflitto con la segnatura di quest'ultimo.
+Per ovviare a ciò definiamo il metodo statico \texttt{fromPolarForm}.
+Ovviamente tale metodo deve essere statico in quanto non vi è
+alcuna istanza della classe prima della sua esecuzione (altrimenti
+per poter creare un complesso tramite modulo e fase dovrei creare un altro complesso
+non legato a quest'ultimo).
+
+Riguardo all'operazione di uguaglianza tra complessi non è consigliabile
+utilizzare l'operatore ``=='', poiché in tal modo basterebbe un errore
+di arrotondamento per far risultare due numeri diversi.
+Per ovviare a ciò si utilizza un parametro \texttt{precision} che indica la tolleranza da
+adottare.
+
 
 \begin{lstlisting}[language=Java,escapechar=|]
-package esercitaionze2.mutableAndImmutable;
+package it.polimi.deib.se.ex1.complex;
 
 /*
- * Represents a complex number
- * The class is public, it can be used by any client
- */
-public class Complex1 {
-
-	// the attributes of the class represents the state of the object modeled by the class and are usually private or 
-	// protected
-	/* real part */
-	private double re;
-	/* imaginary part */
-	private double im;
-
-	public void printState() {
-		System.out.println("real part: " + re + " imaginary part: " + im);
+* Rappresenta un numero complesso.
+* Scelgo di implementare questa classe in modo che gli attributi
+* che la rappresentano non cambino mai (gli oggetti sono immutabili).
+* Nessun metodo cambia il valore degli attributi privati re, im.
+*/
+public class Complex {
+	
+	/* parte reale */
+	private final double re;
+	/* parte immaginaria */
+	private final double im;
+	
+	// Costruttore di default, costruisce lo zero
+	public Complex() {
+		// caso particolare del costruttore
+		// con due parametri
+		this(0.0d, 0.0d);
 	}
-
-	// Main di test.
-	public static void main(String[] args) {
-		
-		// if a class does not have a constructor you can instantiate the class using the default constructor
-		Complex1 a = new Complex1();
-		a.printState();
-
-	}
-}
-\end{lstlisting}
-
-Do the following experiments:
-\begin{itemize}
-\item move the main into another class. Try to change the attribute visibility in private, protected and public and use it when
-\begin{itemize}
-\item the class with the main method is in the same package of the Complex class
-\item is in another package (either sub-packages and super-packages do not give access to protected methods)
-\end{itemize}
-\end{itemize}
-
-
-\subsubsection{Complex number 2 - Constructor}
-The second point is to define the functionalities that Complex number must provide
-\begin{itemize}
-\item it must be possible to create with a specified imaginary and real part 
-\item add a Constructor which takes as parameter the real and the imaginary part
-\end{itemize}
-Add in Complex
-\begin{lstlisting}[language=Java,escapechar=|]
-    // Costruttore
+	
+	// Costruttore
 	public Complex(double re, double im) {
 		// ogni valore di re, im e' valido, non faccio
 		// controlli di validita' sui parametri
 		this.re = re;
 		this.im = im;
 	}
-
-\end{lstlisting}
-\begin{itemize}
-\item this allows to remove the conflict between the local variable and the attributes of the class
-\item the constructor have the same name of the class
-\item do not have a return type
-\item show that the default constructor is not visible anymore
-\end{itemize}
-Add main
-\begin{lstlisting}[language=Java,escapechar=|]
-		// if a class does not have a constructor you can instantiate the class
-		// using the default constructor
-		Complex1 a = new Complex1(10, 15);
-		a.printState();
-\end{lstlisting}
-
-Add a default constructor
-\begin{lstlisting}[language=Java,escapechar=|]
-// Costruttore di default, costruisce lo zero
-	public Complex() {
-		// caso particolare del costruttore
-		// con due parametri
-		this(0.0d, 0.0d);
+	
+	// Non posso avere un costruttore con la stessa signature
+	// di quello sopra.
+	// public Complex(double modulus, double phase) {
+		// re = ...;
+		// im = ...;
+		// }
+	
+	// uso un metodo di classe:
+	/*
+	* Produce un numero complesso a partire dalla sua forma polare
+	*/
+	public static Complex fromPolarForm(double abs, double phase) {
+		/* ricorda : z = modulus * (cos(phase) + i sin(phase)) */
+		double realPart = abs * Math.cos(phase);
+		double imaginaryPart = abs * Math.sin(phase);
+		return new Complex(realPart, imaginaryPart);
 	}
-\end{lstlisting}
-\begin{itemize}
-\item this(0.0d, 0.0d); recalls the constructor with two parameters of the Complex class
-\item this choice avoids to duplicate code un-usefully
-\end{itemize}
-
-Do the following experiments:
-\begin{itemize}
-\item move the main into another class. Try to change the attribute visibility in private, protected and public and use it when
-\begin{itemize}
-\item the class with the main method is in the same package of the Complex class
-\item is in another package (either sub-packages and super-packages do not give access to protected methods)
-\end{itemize}
-\end{itemize}
-
-What if we also want to create a Complex number from a real and imaginary part? 
-\begin{lstlisting}[language=Java,escapechar=|]
-	public Complex(double modulus, double phase) {
-	// re = ...;
-	// im = ...;
-     }
-\end{lstlisting}
-\begin{itemize}
-\item we cannot add to constructor with the same signature.. We will see later 
-\end{itemize}
-
-
-\subsubsection{Complex number 3 - Methods (observers)}
-Problem: implement the following functionality
-\begin{itemize}
-\item it must be possible to return the real and the imaginary part of the real number
-\end{itemize}
-Type
-\begin{lstlisting}[language=Java,escapechar=|]
-	// returns the real part of the complex number
+	
+	// restituisce la parte reale del numero complesso
 	public double re() {
 		return this.re;
 	}
-\end{lstlisting}
-\begin{itemize}
-\item note that since double is a primitive type the method returns the \textbf{value} of the real part, not a pointer!!!
-\end{itemize}
-
-For the imaginary part 
-\begin{itemize}
-\item right click $>$ Source $>$ Generate getter and Setter $>$ Select the field $>$ select the modifier ok
-\end{itemize}
-You will see the following code in your class
-\begin{lstlisting}[language=Java,escapechar=|]
-	public double getIm() {
+	
+	// restituisce la parte immaginaria del numero complesso
+	public double im() {
 		return im;
 	}
-\end{lstlisting}
-
-\subsubsection{Complex number 4 - Methods (modifiers)}
-Problem: implement the following functionality
-\begin{itemize}
-\item it must be possible to change the real and the imaginary part of the Complex number
-\end{itemize}
-\begin{lstlisting}[language=Java,escapechar=|]
-	public void setIm(double im) {
-		this.im = im;
-	}
-\end{lstlisting}
-
-\subsubsection{Complex number 5 - Methods (sum-subtraction...)}
-Problem: implement the following functionality
-\begin{itemize}
-\item it must be possible to sum to the current  Complex number another complex number (the result must be stored in the current Complex number)
-\end{itemize}
-Type
-\begin{lstlisting}[language=Java,escapechar=|]
-	// restituisce la somma tra this e other.
-	public void sum(Complex1 other) {
-		this.re=this.re+ other.getRe();
-		this.im=this.im+ other.getIm();
-	}
-\end{lstlisting}
-\begin{itemize}
-\item it must be possible to sum to the current  Complex number another complex number (the result must be returned by the method in the current Complex number)
-\end{itemize}
-
-\begin{lstlisting}[language=Java,escapechar=|]
-		// restituisce la somma tra this e other.
-	public Complex sum(Complex other) {
-		return new Complex(this.re + other.re(), this.im + other.im());
-	}
-\end{lstlisting}
-\begin{itemize}
-\item  note that since Complex is not a primitive type the method returns the \textbf{pointer} to an object of type Complex which contains
-the sum of the Complex number and the parameter
-\end{itemize}
-
-\subsubsection{Complex number 5 - External libraries}
-\begin{itemize}
-\item it must be able to return the absolute vale of the complex number 
-\end{itemize}
-
-\begin{lstlisting}[language=Java,escapechar=|]
-/*
-	 * Restituisce il modulo (valore assoluto) del numero complesso.
-	 */
+	
+	/*
+	* Restituisce il modulo (valore assoluto) del numero complesso.
+	*/
 	public double abs() {
 		return Math.sqrt(Math.pow(this.re, 2.0d) + Math.pow(this.im, 2.0d));
 	}
-\end{lstlisting}
-
-\begin{itemize}
-\item Math is an external library. Libraries provides functionalities. In general when available, it is preferrable to rely on libraries. 
-\end{itemize}
-
-
-
-\subsection{Equals-HashCode-ToString}
-Every Java class is a subclass of the Object class and can be useful to refine some of its methods in particular \emph{toString}, \emph{equals} and \emph{hashCode}.
-
-\subsubsection{toString()}
-Returns a string representation of the object. In general, the toString method returns a string that "textually represents" this object. The result should be a concise but informative representation that is easy for a person to read. It is recommended that all subclasses override this method.
-\begin{lstlisting}
-@Override
-public String toString(){
-    return "Complex number: ("+re+", "+im+")";
-}
-\end{lstlisting}
-Change the main into
-\begin{lstlisting}
-// Main di test.
-public static void main(String[] args) {
-
-	// if a class does not have a constructor you can instantiate the class
-	// using the default constructor
-	Complex a = new Complex(10, 10);
-	System.out.println(a.toString());
-}
-\end{lstlisting}
-
-\subsubsection{equals()}
-We have seen that the $==$ operator is used to compare the reference of two objects. The equal method of the class object indicates whether some other object is "equal to" this one. 
-\begin{itemize}
-\item Question, for the primitive types $==$ returns true  if the two object has the same value. Why?
-\end{itemize}
-
-When you define your object is a wall practice to redefine the equals method:
-\begin{lstlisting}
-@Override
-public boolean equals(Object other){
-    // check if the type of the object other is Complex
-    if(other instanceof Complex){
-    
-        // casting: convert the other object into a Complex
-        Complex otherComplex=(Complex) other;
-        return this.im==otherComplex.im && this.re==otherComplex.re;
-    }
-    else{
-        return false;
-    }
-}
-\end{lstlisting}
-
-\subsubsection{hashCode()}
-Returns a hash code value for the object. This method is supported for the benefit of hash tables such as those provided by HashMap.
-The general contract of hashCode is:
-\begin{itemize}
-\item Whenever it is invoked on the same object more than once during an execution of a Java application, the hashCode method must consistently return the same integer, provided no information used in equals comparisons on the object is modified. This integer need not remain consistent from one execution of an application to another execution of the same application.
-\item If two objects are equal according to the equals(Object) method, then calling the hashCode method on each of the two objects must produce the same integer result.
-It is not required that if two objects are unequal according to the equals(java.lang.Object) method, then calling the hashCode method on each of the two objects must produce distinct integer results. 
-\item However, the programmer should be aware that producing distinct integer results for unequal objects may improve the performance of hash tables.
-\end{itemize}
-As much as is reasonably practical, the hashCode method defined by class Object does return distinct integers for distinct objects. (This is typically implemented by converting the internal address of the object into an integer, but this implementation technique is not required by the JavaTM programming language.)
-
-To be read: \url{http://stackoverflow.com/questions/2738886/}
-
-\begin{lstlisting}
-@Override
-public int hashCode(){
-    int hash=17;
-    hash=hash*23+Double.valueOf(re).hashCode();
-     hash=hash*23+Double.valueOf(im).hashCode();
-    return hash;
-}
-\end{lstlisting}
-
-You can generate automatically hashCode and Equals using the Eclipse IDE
-\begin{itemize}
-\item right click
-\item source
-\item generate hashCode and equals
-\item choose the field to be included in the equals and the hashCode
-\end{itemize}
-
-\subsection{Mutable and Immutable classes }
-\begin{itemize}
-\item String is an \textbf{immutable} class: every time a method is invoked on a String object a \emph{new} object is created
-\item note: String is not a \emph{primitive type}
-\item other immutable classes are Integer, Double etc..
-\item Question: what is the difference between Integer and int?
-\end{itemize}
-
-\subsubsection{An example: The String class}
-\begin{lstlisting}[language=Java,escapechar=|]
-package esercitaionze2.mutableAndImmutable;
-
-public class StringDemo {
-
-	public static void main(String[] args) {
-		
-		// s1 is a pointer to a String object which contains "Ciao Mamma"
-		String s1 = "Ciao Mamma! ";
-		
-		// s2 points to the same object pointed by s1
-		String s2 = s1;
-		
-		// if you compare the two pointers the answer is true since they point to the same object
-		System.out.println(s1 == s2);
-		
-		// if you print the two object "Ciao Mamma" is printed in both the cases 
-		// why it is not displayed the reference but is printed the text? we will see...
-		System.out.println(s1);
-		System.out.println(s2);
-		
-		// s1 points to a new object which is obtained by concatenating the string pointed
-		// by s1 and the String "Guarda come mi diverto!"
-		s1 = s1 + "Guarda come mi diverto!";
-		
-		// if I print the object pointed by s1 "Ciao Mamma! Guarda come mi diverto!" is printed
-		System.out.println(s1);
-		
-		// if I compare the two pointers the answer is false
-		System.out.println(s1 == s2);
 	
-		// s3 points to a new String object which contains the String "Ciao Mamma! "
-		String s3 = "Ciao Mamma! ";
+	/*
+	* Restituisce la fase (argomento) del numero complesso.
+	*/
+	public double phase() {
+		// a bit of spaghetti code...
+		if (this.re != 0) {
+			double tmp = Math.atan(this.im / this.re);
+			if (this.re < 0 && this.im >= 0)
+			tmp += Math.PI;
+			if (this.re < 0 && this.im < 0)
+			tmp += -Math.PI;
+			return tmp;
+		} else { /* this.re == 0 */
+		if (this.im < 0)
+		return -Math.PI;
+		/* if (this.im >= 0) (default) */
+		return Math.PI;
+	}
+	// TODO: Cercate nella documentazione di java.lang.Math un modo per
+	// implementare questo metodo in modo piu' conciso .
+}
+
+// restituisce il complesso coniugato di un numero.
+public Complex conjugate() {
+	return new Complex(this.re, -this.im);
+}
+
+// restituisce la somma tra this e other.
+public Complex sum(Complex other) {
+	return new Complex(this.re + other.re(), this.im + other.im());
+}
+
+// restituisce la differenza tra this e other
+public Complex diff(Complex other) {
+	return new Complex(this.re - other.re(), this.im - other.im());
+}
+
+// restituisce il prodotto tra this e other
+public Complex mult(Complex other) {
+	double productRe = this.re() * other.re() - this.im() * other.im();
+	double productIm = this.re() * other.im() + this.im() * other.re();
+	return new Complex(productRe, productIm);
+}
+
+// Uguaglianza approssimata, a meno di precision,
+// tra due numeri complessi
+public boolean almostEquals(Complex other, double precision) {
+	// controlla che la differenza in valore assoluto
+	// tra i due numeri complessi sia minore di precision
+	return (this.diff(other).abs() < precision);
+}
+
+@Override
+public String toString() {
+	return "Complex number: (" + re + ", " + im + ")";
+}
+
+}
+\end{lstlisting}
+
+
+\subsection{Insieme di numeri complessi}
+
+Problema:
+
+Modificare il codice del primo esercizio affinché mantenga un insieme
+di numeri complessi.
+Nella costruzione di tale insieme viene definita un certo valore di precisione
+che è utilizzato per determinare l'uguaglianza tra due numeri (vedere l'esercizio precedente).
+
+\begin{lstlisting}[language=Java,escapechar=|]
+package it.polimi.deib.se.ex1.complex;
+
+/* Un insieme di dimensione massima FISSA
+* di numeri complessi distinti
+* a meno di un dato errore.
+* Gli oggetti di questa classe
+* sono mutabili: lo stato dell'oggetto puo'
+* cambiare invocando i metodi add(Complex)
+* e remove(Complex).
+*/
+public class ComplexSet {
+	
+	// Rappresentazione interna: array di elementi
+	private final Complex[] elements;
+	// dimensione effettiva dell'insieme
+	private int currentSize;
+	// precisione per controllare l'uguaglianza
+	private final double precision;
+	// costante che rappresenta la dimensione massima del set
+	private final static int MAX_SIZE = 100;
+	
+	// costruttore di default, caso particolare
+	// del costruttore che ha come argomento la
+	// precisione.
+	public ComplexSet() {
+		this(2.0d * Double.MIN_VALUE);
+	}
+	
+	// costruttore che prende come argomento
+	// una precisione per il controllo dell'uguaglianza
+	public ComplexSet(double precision) {
+		this.currentSize = 0;
+		this.elements = new Complex[MAX_SIZE];
+		this.precision = precision;
+	}
+	
+	// Aggiunge un numero complesso all'insieme.
+	public void add(Complex element) throws Exception {
+		// invoco il metodo che controlla
+		// la presenza dell'elemento nel set.
+		boolean containsElement = this.contains(element);
 		
-		// if I compare the pointers the answer is false since they points to different objects
-		System.out.println(s2 == s3);
+		// se e' gia' presente non faccio nulla
+		if (containsElement)
+		return;
 		
-		// if I print the s2 and s3 the same String is printed
-		System.out.println(s2);
-		System.out.println(s3);
+		/* controllo che il set non sia pieno */
+		if (this.currentSize < elements.length) {
+			this.elements[currentSize] = element;
+			this.currentSize++;
+		} else {
+		throw new Exception("Set is full");
 	}
 }
+
+// controlla che l'elemento sia contenuto nell'insieme
+public boolean contains(Complex element) {
+	for (int i = 0; i < this.currentSize; i++) {
+		if (elements[i].almostEquals(element, this.precision))
+		return true;
+	}
+	/*
+	* // alternativa NON CORRETTA
+	*
+	* for (Complex c: elements) { if (c.approximatelyEquals(element,
+		* this.precision)) return true; }
+	*/
+	
+	/* default: non trovato */
+	return false;
+}
+
+// rimuove un elemento dall'insieme.
+public void remove(Complex element) {
+	// recupero l'elemento
+	int pos = find(element);
+	
+	// shift elementi: evito di lasciare un buco
+	// nell'array
+	if (pos >= 0) {
+		for (int i = pos; i < this.currentSize - 1; i++)
+		elements[i] = elements[i + 1];
+		this.currentSize = this.currentSize - 1;
+	}
+}
+
+// metodo privato. restituisce la posizione
+// di un elemento nell'array se esiste (ed e'
+// entro this.size), -1 altrimenti
+private int find(Complex element) {
+	for (int i = 0; i < this.currentSize; i++) {
+		if (elements[i].almostEquals(element, this.precision))
+		return i;
+	}
+	/* default */
+	return -1;
+	// Perche' non ha senso che questo metodo sia pubblico?
+}
+// restituisce la dimensione dell'insieme
+public int size() {
+	return this.currentSize;
+}
+
+public boolean isFull() {
+	return currentSize < MAX_SIZE;
+}
+
+}
 \end{lstlisting}
 
+\begin{lstlisting}[language=Java,escapechar=|]
+// Main di test.
+public static void main(String[] args) {
+// costruisco un complesso a partire da parte reale e immaginaria
+Complex a = new Complex(0.0, 1.0);
+// costruisco lo stesso complesso a partire dalla forma polare
+Complex b = Complex.fromPolarForm(1.0d, Math.PI / 2);
+
+// stampo i due complessi
+System.out.println(" a = " + a.re() + " + i * (" + a.im() + ")");
+System.out.println(" b = " + b.re() + " + i * (" + b.im() + ")");
+// controllo che a e b siano uguali a meno di un errore di 0.01
+System.out.print("a e b sono uguali a meno di 0.01 ? ");
+System.out.println(a.almostEquals(b, 1e-2));
+}
+
+\end{lstlisting}
+
+\subsubsection{Approfondimenti e spunti (per casa)}
+\begin{itemize}
+	\item Aggiungere un metodo \texttt{public ComplexSet getRoots(int degree)} alla classe \texttt{Complex}
+	che restituisca le radici i-esime dell'oggetto (radici quadrate per \texttt{degree} uguale a 2, cubiche per 3, etc.).
+	Assumere che \texttt{degree} sia maggiore di 0.
+	\textbf{Suggerimento:} Per l'algoritmo di radice n-esima consultare \url{http://en.wikipedia.org/wiki/Complex_number}.
+\end{itemize}
 
 
-\subsubsection{An example: The Complex class}
+\subsection{Persona e studente}
 
+Problema:
 
-\subsection{Arrays}
+Si vuole realizzare un'applicazione che rappresenti la situazione accademica di uno studente.
+Deve essere possibile disaccoppiare la gestione dell'anagrafica dello studente (per semplificare
+costituita da nome e data di nascita) dalla suo profilo accademico, ad es., per poter
+riutilizzare la gestione dell'anagrafica anche per modellare i docenti.
+Bisogna tener traccia degli esami sostenuti e del voto relativo.
 
+\subsubsection{Raffinamento}
+Il primo passo da effettuare consiste nell'identificare le entità in gioco.
+In questo caso, supponiamo vengano considerate le entità di persona, studente e voto.
+Per ognuna di queste si dovrà implementare la relativa classe che ne modelli il comportamento.
+Avremo quindi le classi \texttt{Person}, \texttt{Student} e \texttt{Grade}.
+Relativamente alle operazioni richieste
+
+\subsubsection{Note di implementazione}
+
+L'implementazione non dovrebbe risultare complicata, una volta stabilite
+le funzionalità richieste.
+L'aspetto più interessante è costituito dalla validazione dei parametri:
+si veda ad esempio il costruttore della classe \texttt{Person}, che si assicura
+che gli argomenti passati non siano nulli, o al costruttore della classe \texttt{Grade},
+che implementa controlli più approfonditi (derivanti dalla conoscenza del dominio applicativo).
+Inoltre viene effettuata una copia difensiva della data di nascita nella classe \texttt{Person},
+in quanto il chiamante del costruttore potrebbe modificare in seguito tale data.
+
+La classe \texttt{Person} deve contenere nome e data di nascita relativi a una persona e.
+La classe \texttt{Grade} deve contenere il superamento di un esame identificato da nome, crediti e voto.
+La classe \texttt{Student} deve estendere \texttt{Person} aggiungendo la lista di esami superati e deve
+fornire la media pesata degli esami, i crediti totali dello studente e se questi possa laurearsi (abbia crediti sufficienti).
+
+\subsubsection{Esempio}
+
+\begin{lstlisting}[language=Java,escapechar=|]
+package it.polimi.deib.se.ex1.student;
+
+import java.util.Calendar;
+
+public class Person {
+private final String name;
+private final Calendar birthday;
+
+public Person(String name, Calendar birthday) {
+if (name == null || birthday == null) {
+throw new IllegalArgumentException("Parameters must be not-null");
+}
+this.name = name;
+/*
+* Calendar e' un tipo di dato mutabile. Per evitare che dall'esterno
+* qualcuno possa modificare il compleanno della persona dobbiamo
+* crearne una copia.
+*/
+this.birthday = (Calendar) birthday.clone();
+}
+
+public String getName() {
+return name;
+}
+
+public Calendar getBirthday() {
+// Anche qui non vogliamo esporre un riferimento all'oggetto ma
+// solamente una sua copia
+return (Calendar) birthday.clone();
+}
+
+@Override
+public String toString() {
+return "Hi, I'm " + name;
+}
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java,escapechar=|]
+package it.polimi.deib.se.ex1.student;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+/*
+* Rappresentiamo uno studente come una persona cui e' associata
+* una lista di esami.
+*/
+public class Student extends Person {
+private static final int GRADUATION_CREDITS = 180;
+private final List<Grade> grades = new ArrayList<Grade>();
+
+public Student(String name, Calendar birthday) {
+super(name, birthday);
+}
+
+// Aggiunge una valutazione alla carriera dello studente.
+public void addGrade(Grade grade) {
+grades.add(grade);
+}
+
+// Controlla se lo studente ha abbastanza crediti per potersi laureare.
+public boolean canGraduate() {
+return totalCredits() >= GRADUATION_CREDITS;
+}
+
+// Calcola la media pesata.
+public double getWeightedGradeAverage() {
+double sumOfWeightedPoints = 0;
+for (Grade grade : grades) {
+sumOfWeightedPoints += grade.getCredits() * grade.getPoints();
+}
+return sumOfWeightedPoints / totalCredits();
+}
+
+// Calcola il numero di crediti sostenuti dallo studente.
+private int totalCredits() {
+int totalCredits = 0;
+for (Grade grade : grades) {
+totalCredits += grade.getCredits();
+}
+return totalCredits;
+}
+
+@Override
+public String toString() {
+return super.toString() + " and I am a student";
+}
+
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java,escapechar=|]
+package it.polimi.deib.se.ex1.student;
+
+public class Grade {
+private final String subject; // La materia dell'esame
+private final int points;	// La valutazione ricevuta
+private final int credits;	// Il valore in crediti dell'esame
+
+public Grade(String subject, int points, int credits) {
+if (subject == null || points < 18 || points > 30 || credits < 0) {
+throw new IllegalArgumentException();
+}
+this.subject = subject;
+this.points = points;
+this.credits = credits;
+}
+
+public String getSubject() {
+return subject;
+}
+
+public int getPoints() {
+return points;
+}
+
+public int getCredits() {
+return credits;
+}
+
+}
+\end{lstlisting}
 
 \clearpage
 
