@@ -1237,6 +1237,195 @@ return credits;
 
 }
 \end{lstlisting}
+\subsection{Morra cinese:}
+
+Problema:
+
+Implementare il gioco della morra cinese (carta, forbice, sasso).
+L'applicazione deve chiedere la scelta al giocatore, generare una scelta e stampare a video il risultato del 
+giocatore (vittoria, pareggio, sconfitta).
+
+\subsubsection{Raffinamento}
+
+Suddivideremo il gioco in tre classi: 
+\begin{itemize}
+	\item \texttt{Choice}, che modella una scelta
+	\item \texttt{Outcome}, che modella un risultato rispetto il giocatore
+	\item \texttt{GameLogic}, che racchiude tutta la logica di gioco
+\end{itemize}
+
+Rispetto a \texttt{Choice} e \texttt{Outcome}, dato che modellano un numero limitato di oggetti e noto a priori,
+utilizzeremo un \texttt{enum}.
+
+\texttt{Choice} sarà caratterizzata da questi metodi:
+\begin{itemize}
+	\item \texttt{Outcome resultAgainst(Choice other)} ritornerà il risultato nei confronti del giocatore umano quando \texttt{other} è la scelta del computer.
+	\item \texttt{static Choice parseInput(String input)} ritorna la scelta identificata dalla stringa \texttt{input} o un'eccezione
+	se non ve ne è alcuna.
+	\item \texttt{static Choice getRandomChoice(Random random)} ritornerà una scelta casuale.
+\end{itemize}
+
+\texttt{Outcome}, invece, avrà questi metodi:
+
+\begin{itemize}
+	\item \texttt{static Outcome winsIfTrue(boolean condition)} ritornerà il risultato di vittoria o pareggio a seconda della condizione.
+\end{itemize}
+Inoltre \texttt{Outcome} avrà un attributo \texttt{message} che conterrà il messaggio stampato a video.
+
+La classe \texttt{GameLogic} gestirà lo svolgimento di una partita.
+Ogni partita è caratterizzata da un certo numero di round, 
+dove in ogni round verrà richiesta una scelta dall'utente, si genererà una scelta in maniera casuale
+e si stamperà a video il risultato del confronto.
+
+Il metodo \texttt{static void main(String[] args)} inizializzerà la classe \texttt{GameLogic},
+e gestirà in sequenza una serie di round, tramite il metodo \texttt{boolean round()}.
+Il risultato di tale metodo indicherà se la partita debba continuare o meno.
+
+All'interno del metodo \texttt{round} verrà gestito quindi il singolo round.
+Un paio di note:
+\begin{itemize}
+	\item La classe \texttt{java.util.Random} viene utilizzata per generare numeri pseudo-casuali.
+	\item Il metodo \texttt{next} della classe \texttt{java.util.Scanner} viene utilizzata per recuperare la stringa di testo digitata
+	dall'utente.
+	\item L'eccezione \texttt{IllegalArgumentException} viene lanciata quando la stringa inserita dell'utente non corrisponde ad alcuna
+	scelta.
+\end{itemize}
+
+\subsubsection{Esempio di implementazione}
+
+
+\begin{lstlisting}[language=Java,escapechar=|]
+package it.polimi.deib.se.ex2.morracinese;
+
+import java.util.Random;
+
+
+public enum Choice {
+CARTA, FORBICE, SASSO;
+
+public Outcome resultAgainst(Choice other){
+if(this==other){
+return Outcome.DRAW;
+}
+switch(this){
+case CARTA:
+return Outcome.winsIfTrue(other==Choice.SASSO);		
+case FORBICE:
+return Outcome.winsIfTrue(other==Choice.CARTA);		
+case SASSO:
+return Outcome.winsIfTrue(other==Choice.FORBICE);	
+default:
+throw new RuntimeException("Unexpected case!");		
+}		
+}
+
+public static Choice parseInput(String input){
+return Enum.valueOf(Choice.class, input.toUpperCase());
+}
+
+public static Choice getRandomChoice(Random random){
+Choice[] values = Choice.values();
+return values[random.nextInt(values.length)];
+}
+
+@Override
+public String toString() {
+return super.toString().toLowerCase();
+}
+
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java,escapechar=|]
+package it.polimi.deib.se.ex2.morracinese;
+
+public enum Outcome {
+WINNER("Hai vinto!"), LOSER("Hai perso!"), DRAW("Parità!");
+private final String message;
+
+private Outcome(String message){
+this.message = message;
+}
+
+@Override
+public String toString() {
+return message;
+}
+
+public static Outcome winsIfTrue(boolean condition){
+return (condition)?Outcome.WINNER:Outcome.LOSER;
+}
+
+
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java,escapechar=|]
+package it.polimi.deib.se.ex2.morracinese;
+
+import java.io.InputStream;
+import java.util.Random;
+import java.util.Scanner;
+
+public class GameLogic {	
+
+private final Scanner scanner;
+
+public GameLogic(InputStream input) {
+this.scanner = new Scanner(input);
+}
+
+private Outcome choiceSubmitted(Choice userChoice){
+Choice computerChoice = Choice.getRandomChoice(new Random());
+System.out.println("Ho scelto " + computerChoice + "!");
+return userChoice.resultAgainst(computerChoice);
+}
+
+public void close() {
+scanner.close();		
+}
+
+public boolean round() {
+System.out.println("Che scelta fai?");
+String input = scanner.next();
+try{
+Choice choice = Choice.parseInput(input);
+System.out.println("Hai scelto " + choice + "!");
+System.out.println(choiceSubmitted(choice));
+}catch(IllegalArgumentException e){
+System.out.println("Scelta non valida!");
+}
+return true; 
+}
+
+public static void main(String[] args) {
+GameLogic gameLogic = new GameLogic(System.in);
+boolean cont;
+do{
+cont = gameLogic.round();
+}while(cont);
+gameLogic.close();
+}
+
+}
+\end{lstlisting}
+
+\subsubsection{Approfondimenti e spunti (per casa)}
+
+\begin{itemize}
+	\item Attualmente il gioco continua all'infinito. Modificare l'implementazione per chiedere all'utente se desidera continuare o meno.
+	\item Estendere il gioco aggiungendo le scelte aggiuntive \textbf{LIZARD} e \textbf{SPOCK}. Le combinazioni sono:
+	\begin{itemize}
+			\item Le forbici tagliano la carta
+			\item La carta avvolge il sasso
+			\item Il sasso rompe le forbici
+			\item Le forbici decapitano Lizard
+			\item Lizard mangia la carta
+			\item La carta invalida Spock
+			\item Spock vaporizza il sasso
+			\item Il sasso schiaccia Lizard
+			\item Lizard avvelena Spock
+			\item Spock rompe le forbici
+	\end{itemize}
+\end{itemize}
 
 \clearpage
 
