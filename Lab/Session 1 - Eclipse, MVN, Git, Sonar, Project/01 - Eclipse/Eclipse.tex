@@ -144,7 +144,7 @@
 \subsection{Eclipse}
 \begin{itemize}
 \item Eclipse \`e un ambiente di sviluppo (IDE)  \textit{multilinguaggio} e \textit{multipiattaforma} scritto in Java. Un ambiente di sviluppo \` e un software che consente di scrivere altro software. Eclipse \` e multilinguaggio visto che supporta la scrittura di  codice in diversi linguaggi. E' multipiattaforma visto che pu\` o essere eseguito su diverse piattaforme (Linux, Windows, Mac).
-\item Eclipse \`e  software \textit{open source} i cui autori (pi\`u precisamente i detentori dei diritti) ne permettono e favoriscono il libero studio e l'apporto di modifiche da parte di altri programmatori indipendenti.
+\item Eclipse \`e software \textit{open source} i cui autori (pi\`u precisamente i detentori dei diritti) ne permettono e favoriscono il libero studio e l'apporto di modifiche da parte di altri programmatori indipendenti.
 \item Pu\`o essere esteso con \textit{plug-in}. Plug-in software che permette l'utilizzo di nuove funzioni non presenti nel software principale.
 \end{itemize}
 
@@ -157,20 +157,20 @@
 \subsection{Mac OSx}
 \textbf{Istallazione Java JDK SE 7u75}
 \begin{itemize}
-\item connettiti a sito di
+\item connettiti al sito di
   \href{http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html}{\ULurl{Oracle}}
-\item clicca su accept the license agreement
+\item clicca su ``accept the license agreement''
 \item scarica \textit{JDK 7} (SE 7u75) per Mac OS X
 \item installa
 \end{itemize}
 
 \textbf{Istallazione di Eclipse}
 \begin{itemize}
-\item apri applications (applicazioni) sul tuo mac
-\item crea la cartella eclipse
-\item connettiti a sito di \href{https://eclipse.org/downloads/}{\ULurl{Eclipse}}
+\item apri ``applications'' (applicazioni) sul tuo mac
+\item crea la cartella ``eclipse''
+\item connettiti al sito di \href{https://eclipse.org/downloads/}{\ULurl{Eclipse}}
 \item scarica Eclipse Luna SR2 (4.4.2) per Mac OS X
-\item copia il file scaricato nella cartella eclipse creata precedentemente
+\item copia il file scaricato nella cartella ``eclipse'' creata precedentemente
 \item estrai il file
 \end{itemize}
 
@@ -178,71 +178,71 @@
 \subsection{Windows}
 \textbf{Istallazione Java JDK SE 7u75}
 \begin{itemize}
-\item connettiti a sito di
+\item connettiti al sito di
   \href{http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html}{\ULurl{Oracle}}
-\item clicca su accept the license agreement
+\item clicca su ``accept the license agreement''
 \item scarica \textit{JDK 7} (SE 7u75) per Windows
 \item scegli correttamente tra Windows x64/x86
-\item installa (nota che di default la jre \`e installata sotto Program Files/Java)
+\item installa (nota che di default la jre \`e installata sotto ``Program Files/Java'')
 \end{itemize}
 
 \textbf{Istallazione di Eclipse}
 \begin{itemize}
 \item apri Program Files (C://Program Files)
-\item crea la cartella eclipse
-\item connettiti a sito di \href{https://eclipse.org/downloads/}{\ULurl{Eclipse}}
+\item crea la cartella ``eclipse''
+\item connettiti al sito di \href{https://eclipse.org/downloads/}{\ULurl{Eclipse}}
 \item scarica Eclipse Luna SR2 (4.4.2) per Windows
 \item clicca sulla freccia verde rivolta verso il basso
-\item clicca su open
-\item copia contenuto della cartella eclipse nella cartella C://Program Files precedentemente creata
+\item clicca su ``open''
+\item copia il contenuto della cartella ``eclipse'' nella cartella ``C://Program Files'' precedentemente creata
 \end{itemize}
 
 \subsection{Linux (testato con Ubuntu 12.04)}
 \textbf{Istallazione Java JDK SE 7u75}
 \begin{itemize}
 \item apri il terminale
-\item  verifica il versione java con "\texttt{java -version}"
+\item  verifica la versione di java con ``\texttt{java -version}''
 \begin{itemize}
-\item se il versione \`e "1.7.0\_75" ha finito.
-\item se no, proseguire...
+\item se la versione \`e "1.7.0\_75" hai finito.
+\item se no, continua la procedura
 \end{itemize}
-\item removi openjdk se \`e installato con \texttt{sudo apt-get purge openjdk-*}
-\item connettiti a sito di
+\item rimuovi openjdk se installato con \texttt{sudo apt-get purge openjdk-*}
+\item connettiti al sito di
   \href{http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html}{\ULurl{Oracle}}
 \item scegli correttamente tra x64/x86 (controlla l'architettura con:  "\texttt{file /sbin/init}")
 \item crea la cartella \texttt{sudo mkdir -p /usr/local/java}
-\item scegli la cartella dove \`e l'archivio, per esempio \texttt{cd /home/"your\_user\_name"/Downloads}
-\item copiarlo nella cartella di installazione	\texttt{sudo cp -r jdk-7u75-linux-x64.tar.gz /usr/local/java}
+\item scegli la cartella dove \`e presente l'archivio, per esempio \texttt{cd /home/"your\_user\_name"/Downloads}
+\item copia l'archivio nella cartella di installazione	\texttt{sudo cp -r jdk-7u75-linux-x64.tar.gz /usr/local/java}
 \item scegli la cartella di installazione \texttt{cd /usr/local/java}
-\item rendere eseguibile l'archivio \texttt{sudo chmod a+x jre-7u75-linux-x64.tar.gz}
-\item estrarlo \texttt{sudo tar -zxvf jdk-7u75-linux-x64.tar.gz}
-\item Modificare le variabile con \texttt{sudo nano /etc/profile}  e
+\item rendi eseguibile l'archivio \texttt{sudo chmod a+x jre-7u75-linux-x64.tar.gz}%TODO Are you sure?
+\item estraetelo \texttt{sudo tar -zxvf jdk-7u75-linux-x64.tar.gz}
+\item Modifica le variabili con \texttt{sudo nano /etc/profile}  e
   aggiungi: \\
 \texttt{JAVA\_HOME=/usr/local/java/jdk1.7.0\_75} \\
 \texttt{export JAVA\_HOME}\\
 \texttt{PATH=\$PATH:\$ JAVA\_HOME/bin}\\
 \texttt{export PATH}
-\item chudi l'editore \texttt{ctrl + o} \texttt{enter} \texttt{ctrl + x}
-\item applica i nuovi valori \texttt{sudo bash /etc/profile}
-\item informa aptitude (apt) di nuova versione Java installata
+\item chiudi l'editor (\texttt{ctrl + o} \texttt{enter} \texttt{ctrl + x})
+\item applica i nuovi valori (\texttt{sudo bash /etc/profile})
+\item informa aptitude (apt) della nuova versione di Java installata
 \begin{itemize}
 \item \texttt{sudo update-alternatives --install "/usr/bin/java" "java" "/usr/local/java/jdk1.7.0\_75/bin/java" 1}
 \item \texttt{sudo update-alternatives --install "/usr/bin/javaws" "javaws" "/usr/local/java/jdk1.7.0\_75/bin/javaws" 1}
 \item \texttt{sudo update-alternatives --set java /usr/local/java/jdk1.7.0\_75/bin/java}
 \end{itemize} 
-\item verifica il versione \texttt{java -version}
-\item reboot \texttt{sudo reboot}
+\item verifica la versione \texttt{java -version}
+\item riavvia il sistema \texttt{sudo reboot}
 \end{itemize}
 
 \textbf{Istallazione di Eclipse}
 \begin{itemize}
-\item crea la cartella eclipse
-\item connettiti a sito di \href{https://eclipse.org/downloads/}{\ULurl{Eclipse}}
+\item crea la cartella ``eclipse''
+\item connettiti al sito di \href{https://eclipse.org/downloads/}{\ULurl{Eclipse}}
 \item scegli correttamente tra x64/x86 (controlla l'architettura con:
   "\texttt{file /sbin/init}")
 \item scarica Eclipse Luna SR2 (4.4.2) per Linux
-\item estrarlo  \texttt{tar -zxvf eclipse-java-luna-SR2-linux-gtk-x86\_64.tar.gz}
-\item eseguirlo \texttt{./eclipse \&}
+\item estrailo  \texttt{tar -zxvf eclipse-java-luna-SR2-linux-gtk-x86\_64.tar.gz}
+\item eseguilo \texttt{./eclipse \&}
 \end{itemize}
 
 %-----------------------------------------------------------------------------------------------------------------
@@ -250,25 +250,25 @@
 \hrule
 \section{Avvia Eclipse}
 \begin{itemize}
-\item Eclipse non necessita di istallazione. Per eseguire eclipse \` e sufficiente eseguire eclipse.exe (nella cartella applicazioni o program files a seconda sel sistema operativo)
+\item Eclipse non necessita di istallazione. Per eseguire eclipse \` e sufficiente eseguire ``eclipse.exe'' (nella cartella applicazioni o program files a seconda del sistema operativo)
 \item Al primo avvio viene chiesto dove salvare il workspace, ovvero la cartella  che conterr\` a tutti i progetti realizzati (\`e possibile modificare il workspace anche in seguito)
 \end{itemize}
 
 \begin{itemize}
-\item Eclipse all'avvio cerca la JVM del sistema  e setta il Path di default in base a  questa, quindi non \`e necesario  impostare alcun Path per iniziare a  lavorare.
-\item Se un progetto dovesse utilizzare una versione di JVM diversa da quella di  default \`e necessario modificare il Path di quel progetto.
+\item Eclipse all'avvio cerca la JVM del sistema  e setta il Path di default in base a  questa, quindi non \`e necessario  impostare alcun Path per iniziare a  lavorare.
+\item Se un progetto dovesse utilizzare una versione della JVM diversa da quella di  default \`e necessario modificare il Path del progetto.
 \end{itemize}
 \hrule
 \section{Descrizione del Eclipse}
 
 \subsection{Perspectives e Viste}
-L'interfaccia grafica di Eclipse \`e organizzata a  perspectives. Le perspectives raggruppano funzionalità dell'IDE, per facilitare delle specifiche  operazioni di sviluppo. 
+L'interfaccia grafica di Eclipse \`e organizzata in perspectives. Le perspectives raggruppano diverse funzionalità dell'IDE, per facilitare delle specifiche  operazioni di sviluppo. 
 \begin{itemize}
 \item La Java perspective ad esempio riunisce strumenti di stesura e organizzazione 
 del codice mentre 
 \item la Debug perspective fornisce strumenti in fase di debug.
 \end{itemize}
-Le perspectives sono organizzate in viste. Le viste sono riquadri che offrono supporto per organizzare e stendere il codice. Per modificare la vista (aggiungere, rimuovere viste) basta andare sotto 
+Le perspectives sono organizzate in viste. Le viste sono riquadri che offrono supporto per organizzare e scrivere il codice. Per modificare la vista (aggiungere, rimuovere viste) basta andare sotto 
 \textit{window} $>$ \textit{show views}
 
 
@@ -278,7 +278,7 @@ Le perspectives sono organizzate in viste. Le viste sono riquadri che offrono su
 \item Package Explorer: mostra i progetti del workspace, le relative classi e i package 
 \item Type Hierarchy View: permette di analizzare la gerarchia di una classe consultandone sotto e super-tipi.
 \item Outline: mostra i metodi  implementati e le variabile  definite.
-\item Editor: mosra il sorgente dell'applicazione, fornisce funzionalit\` a come per esempio, la gestione del testo (colori), l'assistenza nella scrittura di codice e nella formattazione, nell'inclusione di pacchetti etc.
+\item Editor: mostra il sorgente dell'applicazione, fornisce funzionalit\` a come per esempio, la gestione del testo (colori), l'assistenza nella scrittura di codice e nella formattazione, nell'inclusione di pacchetti etc.
 \item Console: mostra vari tipi di output, tra i quali gli output su console dell'applicazione.
 \end{itemize}
 
