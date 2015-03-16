@@ -515,7 +515,7 @@ nome classe.nome metodo/attributo
 
 \section{Esercizi}
 
-\subsection{Esercizio 1}
+\subsection{Esercizio 1: Final}
 
 \begin{framed}
 \textbf{Esercizio 1}: Progettare e implementare una classe che rappresenti un \emph{insieme} di interi di dimensione massima fissata
@@ -726,50 +726,73 @@ public class IntSet {
 
 
 
-\subsection{Esercizio 3}
+\subsection{Esercizio 3: Static}
+\begin{framed}
+\textbf{Esercizio 3}: Progettare e implementare una classe che rappresenti uno Walkman. Ogni Walkman ha un \emph{unico} numero di serie. Un numero di serie (o numero seriale) è un numero identificativo assegnato in maniera univoca per distinguere un esemplare di una serie.
+\end{framed}
 
-Problema:
+
+
+\subsubsection{Scelta delle funzionalit\`a}
 
 \begin{itemize}
-	\item  progettare e implementare una classe che associ ad ogni sua istanza un intero crescente sulla base dell'ordine di creazione.
+\item \emph{accessori}: 
+\begin{itemize}
+\item \texttt{getSN()}: ritorna il numero di serie del Walkman
+\item \texttt{toString()}:  fornirsce una comoda rappresentazione testuale dell'oggetto.
+\end{itemize}
+\item \emph{modificatori}: non esistono modificatori, il numero di serie non pu\`o essere cambiato
+\item \emph{produttori}: dalla consegna non risulta sia necessario creare un oggetto partendo da una sua istanza.
 \end{itemize}
 
-\subsubsection{Operazioni richieste}
 
-Per questa classe è necessario fornire un metodo che restituisca
-il numero associato alla specifica istanza, \texttt{getNum}.
-Inoltre viene implementato il metodo \texttt{toString} per fornire
-una comoda rappresentazione testuale dell'oggetto.
+\subsubsection{Scelta dello stato}
+\begin{itemize}
+\item Quali strutture dai consentono di memorizzare le funzionalit\`a desiderate in maniera effieciente?
+\begin{itemize}
+\item per memorizzare il numero seriale scelgo di utilizzare un intero
+\item utilizzo un altro intero per tenere conto delle istanze gi\`a create. \`E necessario che questa variabile sia \emph{condivisa} (leggibile e modificabile) da tutte le istanze della classe quindi questa variabile deve essere statica e \emph{non} final
+\end{itemize}
+\end{itemize}
 
-\subsubsection{Rappresentazione}
 
-È necessario utilizzare un attributo di tipo intero per memorizzare
-l'identificativo della specifica istanza.
-Come tengo il conto delle istanze create? È necessario utilizzare
-una variabile visibile e condivisa da tutte le istanze.
-Quindi si deve introdurre una variabile \emph{statica} che funga da contatore del numero di oggetti.
 
 \subsubsection{Esempio commentato}
 \begin{lstlisting}[language=Java,escapechar=|]
 package it.polimi.deib.se.ex1.counter;
 
-
-public class Counter {
+public class WalkMan {
 	
 	//Contatore condiviso tra tutte le istanze
 	private static int counter = 0;
 	
-	//Numero dell'oggetto
-	private int num = ++counter;
+	// contiene il codice seriale dell WalkMan
+	private int serialNumber;
 	
-	public int getNum() {
-		return num;
+	//Crea un nuovo WalkMan. Il costruttore potrebbe anche prendere come parametro un colore...
+	public WalkMan(){
+	    serialNumber=counter;
+	    counter=counter+1
+	}
+	
+	// ACCESSORI
+	// ritorna il serial number dello WalkMan
+	public int getSN() {
+		return serialNumber;
 	}
 	
 	@Override
 	public String toString(){
-		return num + " of " + counter;
+		return serialNumber + " of " + counter;
 	}
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java,escapechar=|]
+package it.polimi.deib.se.ex1.counter;
+
+
+public class Main {
 	
 	public static void main(String[] args) {
 		Counter c1 = new Counter();
@@ -777,11 +800,11 @@ public class Counter {
 		System.out.println(c1);
 		System.out.println(c2);
 	}
-	
 }
 \end{lstlisting}
 
-\subsection{Numeri complessi}
+
+\subsection{Esercizio 4: Classi immutabili}
 Problema:
 \begin{itemize}
 \item  progettare e implementare una classe che rappresenti un numero complesso
