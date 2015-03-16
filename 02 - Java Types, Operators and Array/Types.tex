@@ -515,58 +515,74 @@ nome classe.nome metodo/attributo
 
 \section{Esercizi}
 
-\subsection{Insieme di interi}
-Problema:
+\subsection{Esercizio 1}
+
+\begin{framed}
+\textbf{Esercizio 1}: Progettare e implementare una classe che rappresenti un \emph{insieme} di interi di dimensione massima fissata
+\end{framed}
+
+Un insieme \`e una collezione di oggetti:
 \begin{itemize}
-	\item  progettare e implementare una classe che rappresenti un insieme di interi
-\end{itemize}
-Per insieme si intende una collezione:
-\begin{itemize}
-	\item \textbf{non ordinata} non è definito alcun ordinamento esplicito (basato sulle proprietà degli elementi),
+	\item \emph{non ordinata} non è definito alcun ordinamento esplicito (basato sulle proprietà degli elementi),
 	ne implicito (basato ad esempio sull'ordine di inserimento).
-	\item \textbf{priva di ripetizioni} non è possibile contenere lo stesso elemento più volte
+	\item \emph{priva di ripetizioni} non è possibile contenere lo stesso elemento più volte
 \end{itemize}
 
-Per risolverlo è necessario rispondere a due domande:
+Come sempre \`e per progettare la nostra classe \`e necessario rispondere a due domande:
 \begin{itemize}
 		\item Che \textbf{funzionalità} deve offrire?
 	\item Come può essere rappresentato lo \textbf{stato} di un insieme di interi?
-
 \end{itemize}
 
-\subsubsection{Operazioni richieste}
+\subsubsection{Scelta delle Funzionalit\`a}
+In generale nella scelta delle funzionalit\`a \`e consigliato considerare tre tipi di operazioni:
 
-Quali operazioni è ragionevole che l'implementazione di insieme fornisca?
+\begin{itemize}
+\item \emph{accessori}: forniscono informazioni sullo stato dell'oggetto
+\item \emph{modificatori}: modificano lo stato di un oggetto
+\item \emph{produttori}: generano un nuovo oggetto partendo dall'istanza corrente
+\end{itemize}
 
-Le operazioni possono essere suddivise in categorie a seconda che
-queste semplicemente forniscano informazioni sullo stato dell'oggetto senza modificarlo (accessori),
-alterino in qualche modo lo stato dell'oggetto (modificatori) o
-generino un nuovo oggetto a partire dall'istanza  corrente (produttori).
+Nel nostro caso immaginiamo di definire le seguenti funzionalit\`a:
+\begin{itemize}
+\item \emph{accessori}:
+\begin{itemize}
+\item \texttt{contains(num)}: dato in ingresso un intero \texttt{num}, ritorna \texttt{true} se l'intero è contenuto nell'insieme.
+\item \texttt{isFull()}: ritorna \texttt{true} se il set \`e pieno
+\item \texttt{size()}: ritorna la dimension effettiva del set
+\end{itemize}
+\item \emph{modificatori/modificatori}:
+\begin{itemize}
+\item  \texttt{insert(num)}: inserisce \texttt{num} nell'insieme (Cosa succede se l'elemento esiste gi\`a nell'insieme?
+Che cosa succede se l'insieme ha gi\`a raggiunto la dimension massima?)
+\item \texttt{remove(num)}: rimuove un numero presente nell'insieme (Cosa succede se l'elemento non esiste  nell'insieme?).
+\item nel nostro caso se l'elemento esiste gi\`a nell'insieme o non esiste l'operazione viene  ignorata.
+\end{itemize}
+\end{itemize}
 
-Nel nostro caso un accessore ragionevole è un metodo \texttt{contains(num)} che,
-dato in ingresso un intero \texttt{num}, ritorna \texttt{true} se l'intero è contenuto nell'insieme.
 
-Un altro metodo ragionevole è \texttt{insert(num)} che inserisce \texttt{num} nell'insieme
-e \texttt{remove(num)} che rimuove un numero presente nell'insieme.
-Per questi metodi è necessario specificare il comportamento nel caso di
-inserimento di duplicato o rimozione di valore non presente.
-Un comportamento ragionevole per tali casi può essere semplicemente ignorare l'operazione.
+Le funzionalit\`a \texttt{insert(num)} e \texttt{remove(num)} possono essere implementate come:
+\begin{itemize}
+	\item produttori ritornano un nuovo oggetto con l'operazione richiesta. Vengono di solito usati nelle classi immutabili.
+	\item modificatori applicano la modifica all'oggetto corrente, solitamente non ritornando alcun valore. Ovviamente rendono la classe mutabile.
+\end{itemize}
+In questo esercizio utilizzeremo una classe \emph{mutabile}.
 
-Queste operazioni possono essere implementate come:
-\begin{description}
-	\item[produttori] ritornano un nuovo oggetto con l'operazione richiesta. Vengono di solito usati nelle classi immutabili.
-	\item[modificatori] applicano la modifica all'oggetto corrente, solitamente non ritornando alcun valore. Ovviamente rendono la classe mutabile.
-\end{description}
-In questo esercizio utilizzeremo una classe \textbf{mutabile}.
+\subsubsection{Scelta dello stato}
+In generale nella scelta dello stato \`e necessario porsi le seguenti domande:
+\begin{itemize}
+\item quali \emph{strutture dati} consentono di memorizzare e/o fornire le funzionalit\`a selezionate in maniera efficiente?
+\item esistono \emph{attributi} sono costanti (\texttt{final})?
+\item \`e necessario specificare attributi di classe (\texttt{static})?
+\end{itemize}
 
-\subsubsection{Rappresentazione}
+Nel nostro caso effettuiamo le seguenti scelte:
+\begin{itemize}
+\item scegliamo di memorizzare l'insieme di interi come un array con una dimensione massima fissata.
+\item scegliamo di specificare come \texttt{final} l'attributo contenente il reference corrispondente all'array di interi. La Keyword final specifica che il reference all'array di interi non puo' cambiare durante l'esecuzione: una volta inizializzato l'array non e' possibile associare il reference elements a un nuovo array 
+\item memorizziamo in un intero il numero di elementi contenuti all'interno dell'insieme
+\end{itemize}
 
-Come è possibile rappresentare internamente l'insieme?
-È necessario memorizzare il numero di elementi contenuti all'interno dell'insieme.
-
-Un modo consiste nel salvare gli elementi in un array.
-In questo caso inizializzeremo l'array ad una dimensione prefissata
-e terremo traccia degli numero di elementi effettivamente presenti all'interno di una variabile intera.
 
 \subsubsection{Esempio commentato}
 
@@ -574,18 +590,126 @@ e terremo traccia degli numero di elementi effettivamente presenti all'interno d
 package it.polimi.deib.se.ex1.intset;
 
 public class IntSet {
-	// Rappresentazione interna: array di interi
-	private final int[] elements;
+    // Rappresentazione interna: array di interi
+    // Solo i primi currentSize elementi contengono gli elementi del set
+    // La Keyword final specifica che il reference all'array di interi non puo' cambiare durante l'esecuzione: una volta inizializzato l'array non e' possibile associare il reference elements a un nuovo array
+    private final int[] elements;
+    
+    // dimensione effettiva dell'insieme
+    private int currentSize;
+    
+    // costante che rappresenta la dimensione massima del set
+    private final static int MAX_SIZE = 100;
+    
+    // costruttore di default
+    public IntSet() {
+        this.currentSize = 0;
+        this.elements = new int[MAX_SIZE];
+   }
+
+    // ACCESSORI
+    // controlla che l'elemento sia contenuto nell'insieme
+    public boolean contains(int n) {
+	    for (int i = 0; i < this.currentSize; i++) {
+		    if (elements[i]==n){
+		            return true;
+                }
+	    }
+	    /*
+	    * // alternativa NON CORRETTA
+	    *
+	    * for (int i: elements) { if (i==n){ return true; } }
+	    */
 	
-	// dimensione effettiva dell'insieme
-	private int currentSize;
+	    /* default: non trovato */
+	    return false;
+    }
+    
+    // restituisce la dimensione dell'insieme
+    public int size() {
+        return this.currentSize;
+    }
+    
+    public boolean isFull() {
+        return currentSize < MAX_SIZE;
+    }
+    
+    // MODIFICATORI
+    // Aggiunge un intero all'insieme.
+    public void add(int n) {
+        // invoco il metodo che controlla
+        // la presenza dell'elemento nel set.
+        boolean containsElement = this.contains(n);
+        
+        // se e' gia' presente non faccio nulla
+        if (containsElement){
+		    return;
+    	}
+    	/* controllo che il set non sia pieno */
+    	if (this.currentSize < elements.length) {
+    	    // inserisco l'elemento
+    	    this.elements[currentSize] = n;
+    	    // aggiorno contatore elementi
+    	    this.currentSize++;
+    	} 
+    }
+
+     // rimuove un elemento dall'insieme.
+    public void remove(int element) {
+        // recupero l'elemento
+        int pos = find(element);
 	
-	// costante che rappresenta la dimensione massima del set
-	private final static int MAX_SIZE = 100;
+    	if (pos >= 0) {
+    	    /*
+    	    * Altra soluzione:
+    	    * for (int i = pos; i < this.currentSize - 1; i++)
+    	    *	elements[i] = elements[i + 1];
+    	    *	this.currentSize = this.currentSize - 1;
+    	    */						
+    	    this.currentSize = this.currentSize - 1;
+    	    elements[pos] = elements[currentSize];
+    	}
+    }
+    // metodo privato. restituisce la posizione
+    // di un elemento nell'array se esiste (ed e'
+    // entro this.size), -1 altrimenti
+    private int find(int n) {
+        for (int i = 0; i < this.currentSize; i++) {
+            if (elements[i]==n){
+                return i;
+            }
+        }
+        /* default */
+        return -1;
+        // Perche' non ha senso che questo metodo sia pubblico?
+    }
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("[");
+        for(int i=0; i< currentSize; i++){
+            if(i>0){
+                builder.append(", ");
+            }
+         builder.append(elements[i]);
+         }
+         builder.append("]");
+         return builder.toString();
+    }
+}
+\end{lstlisting}
+
+\subsection{Esercizio 2}
+
+\begin{framed}
+\textbf{Esercizio 2}: Modificare l'insieme di interi per consentire la \emph{creazione} di sets di dimensioni variabili ma minore della dimensione massima fissata
+\end{framed}
+
+
+\begin{lstlisting}[language=Java,escapechar=|]
+package it.polimi.deib.se.ex1.intset;
+
+public class IntSet {
 	
-	// costruttore di default, caso particolare
-	// del costruttore che ha come argomento la
-	// dimensione dell'insieme.
 	public IntSet() {
 		this(MAX_SIZE);
 	}
@@ -597,112 +721,12 @@ public class IntSet {
 		this.elements = new int[size];
 	}
 	
-	// Aggiunge un intero all'insieme.
-	public void add(int n) throws Exception {
-		// invoco il metodo che controlla
-		// la presenza dell'elemento nel set.
-		boolean containsElement = this.contains(n);
-		
-		// se e' gia' presente non faccio nulla
-		if (containsElement)
-		return;
-		
-		/* controllo che il set non sia pieno */
-		if (this.currentSize < elements.length) {
-			this.elements[currentSize] = n;
-			this.currentSize++;
-		} else {
-		throw new Exception("Set is full");
-	}
-}
-
-// controlla che l'elemento sia contenuto nell'insieme
-public boolean contains(int n) {
-	for (int i = 0; i < this.currentSize; i++) {
-		if (elements[i]==n)
-		return true;
-	}
-	/*
-	* // alternativa NON CORRETTA
-	*
-	* for (int i: elements) { if (i==n){ return true; } }
-	*/
-	
-	/* default: non trovato */
-	return false;
-}
-
-// rimuove un elemento dall'insieme.
-public void remove(int element) {
-	// recupero l'elemento
-	int pos = find(element);
-	
-	if (pos >= 0) {
-		/*
-		* Altra soluzione:
-		* for (int i = pos; i < this.currentSize - 1; i++)
-		*	elements[i] = elements[i + 1];
-		*	this.currentSize = this.currentSize - 1;
-		*/						
-		this.currentSize = this.currentSize - 1;
-		elements[pos] = elements[currentSize];
-	}
-}
-
-// metodo privato. restituisce la posizione
-// di un elemento nell'array se esiste (ed e'
-// entro this.size), -1 altrimenti
-private int find(int n) {
-	for (int i = 0; i < this.currentSize; i++) {
-		if (elements[i]==n)
-		return i;
-	}
-	/* default */
-	return -1;
-	// Perche' non ha senso che questo metodo sia pubblico?
-}
-
-// restituisce la dimensione dell'insieme
-public int size() {
-	return this.currentSize;
-}
-
-public boolean isFull() {
-	return currentSize < MAX_SIZE;
-}
-
-public String toString() {
-	StringBuilder builder = new StringBuilder();
-	builder.append("[");
-	for(int i=0; i< currentSize; i++){
-		if(i>0){
-			builder.append(", ");
-		}
-		builder.append(elements[i]);
-		
-	}
-	builder.append("]");
-	return builder.toString();
-}
-
 }
 \end{lstlisting}
 
-\subsubsection{Approfondimenti e spunti (per casa)}
-\begin{itemize}
-	\item Quando possibile è buona prassi seguire il principio ``non ripetersi'', ovvero riutilizzare il più possibile il codice già scritto.
-	Secondo questo principio riscrivere il metodo \texttt{contains}
-	richiamando opportunamente il metodo \texttt{find}.
-	\item Aggiungere un metodo \texttt{toArray} che restituisca un array contenente gli interi presenti nell'insieme.
-	\item In questa implementazione il set fornito ha un limite
-	sul numero massimo di elementi contenuti.
-	Riscrivere l'esempio eliminando questo limite (suggerimento:
-	usare il metodo statico \texttt{Arrays.copyOf(T[] original, int newLength)} dalla classe \texttt{java.util.Arrays}).
-	\item Questa classe è mutabile, in quanto è possibile modificarne lo stato dopo la creazione. Ridefinire la classe \texttt{IntSet}
-	in modo da renderla immutabile.	
-\end{itemize}
 
-\subsection{Contatore di istanze}
+
+\subsection{Esercizio 3}
 
 Problema:
 
@@ -1425,6 +1449,23 @@ gameLogic.close();
 			\item Lizard avvelena Spock
 			\item Spock rompe le forbici
 	\end{itemize}
+\end{itemize}
+
+\section{Esercizi per casa}
+\begin{itemize}
+\item Esercizio 1: modificare la soluzione dell'esercizio 1 come segue:
+\begin{itemize}
+	\item Quando possibile è buona prassi seguire il principio ``non ripetersi'', ovvero riutilizzare il più possibile il codice già scritto.
+	Secondo questo principio riscrivere il metodo \texttt{contains}
+	richiamando opportunamente il metodo \texttt{find}.
+	\item Aggiungere un metodo \texttt{toArray} che restituisca un array contenente gli interi presenti nell'insieme.
+	\item In questa implementazione il set fornito ha un limite
+	sul numero massimo di elementi contenuti.
+	Riscrivere l'esempio eliminando questo limite (suggerimento:
+	usare il metodo statico \texttt{Arrays.copyOf(T[] original, int newLength)} dalla classe \texttt{java.util.Arrays}).
+	\item Questa classe è mutabile, in quanto è possibile modificarne lo stato dopo la creazione. Ridefinire la classe \texttt{IntSet}
+	in modo da renderla immutabile.	
+\end{itemize}
 \end{itemize}
 
 \clearpage
