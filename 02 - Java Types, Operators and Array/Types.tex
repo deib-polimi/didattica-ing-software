@@ -361,6 +361,16 @@ In taluni casi, in cui devono essere eseguite una lunga sequenza di operazioni, 
 Ad esempio, nel caso si debba concatenare diverse stringhe in un ciclo è opportuno usare la classe
 \texttt{StringBuilder} (mutabile) rispetto alla classe \texttt{String} (immutabile).
 
+
+The following rules define a simple strategy for creating immutable objects. Not all classes documented as "immutable" follow these rules. This does not necessarily mean the creators of these classes were sloppy — they may have good reason for believing that instances of their classes never change after construction. However, such strategies require sophisticated analysis and are not for beginners.
+
+Don't provide "setter" methods — methods that modify fields or objects referred to by fields.
+Make all fields final and private.
+Don't allow subclasses to override methods. The simplest way to do this is to declare the class as final. A more sophisticated approach is to make the constructor private and construct instances in factory methods.
+If the instance fields include references to mutable objects, don't allow those objects to be changed:
+Don't provide methods that modify the mutable objects.
+Don't share references to the mutable objects. Never store references to external, mutable objects passed to the constructor; if necessary, create copies, and store references to the copies. Similarly, create copies of your internal mutable objects when necessary to avoid returning the originals in your methods.
+
 \begin{lstlisting}[language=Java,escapechar=|]
 public class Car {
 
@@ -728,7 +738,7 @@ public class IntSet {
 
 \subsection{Esercizio 3: Static}
 \begin{framed}
-\textbf{Esercizio 3}: Progettare e implementare una classe che rappresenti uno Walkman. Ogni Walkman ha un \emph{unico} numero di serie. Un numero di serie (o numero seriale) è un numero identificativo assegnato in maniera univoca per distinguere un esemplare di una serie.
+\textbf{Esercizio 3}: Progettare e implementare una classe che rappresenti un WalkMan. Ogni WalkMan ha un \emph{unico} numero di serie. Un numero di serie (o numero seriale) è un numero identificativo assegnato in maniera univoca per distinguere un esemplare di una serie.
 \end{framed}
 
 
@@ -738,7 +748,7 @@ public class IntSet {
 \begin{itemize}
 \item \emph{accessori}: 
 \begin{itemize}
-\item \texttt{getSN()}: ritorna il numero di serie del Walkman
+\item \texttt{getSN()}: ritorna il numero di serie del WalkMan
 \item \texttt{toString()}:  fornirsce una comoda rappresentazione testuale dell'oggetto.
 \end{itemize}
 \item \emph{modificatori}: non esistono modificatori, il numero di serie non pu\`o essere cambiato
@@ -772,7 +782,7 @@ public class WalkMan {
 	//Crea un nuovo WalkMan. Il costruttore potrebbe anche prendere come parametro un colore...
 	public WalkMan(){
 	    serialNumber=counter;
-	    counter=counter+1
+	    counter=counter+1;
 	}
 	
 	// ACCESSORI
@@ -791,7 +801,6 @@ public class WalkMan {
 \begin{lstlisting}[language=Java,escapechar=|]
 package it.polimi.deib.se.ex1.counter;
 
-
 public class Main {
 	
 	public static void main(String[] args) {
@@ -805,53 +814,43 @@ public class Main {
 
 
 \subsection{Esercizio 4: Classi immutabili}
-Problema:
+\begin{framed}
+\textbf{Esercizio 4}:  progettare e implementare una classe che rappresenti un numero complesso
+\end{framed}
+
+
+\subsubsection{Scelta delle funzionalit\`a}
+In classe vedremo solo alcune delle funzionalit\`a presenti nella classe, si consiglia di guardare l'implementazione delle altre autonomamente a casa.
 \begin{itemize}
-\item  progettare e implementare una classe che rappresenti un numero complesso
+\item \emph{accessori:} 
+\begin{itemize}
+\item \texttt{gerRe()}: ritorna la parte reale del numero complesso
+\item \texttt{getIm()}: ritorna la parte immaginaria del numero complesso
+\item \texttt{abs()}: ritorna il modulo del numero complesso
+\end{itemize}
+\item \emph{modificatori:}
+\begin{itemize}
+\item una classe immutable non pu\`o contenere metodi modificatori
+\end{itemize}
+\item \emph{produttori}
+\begin{itemize}
+\item \texttt{sum(Complex other)}: somma il numero complesso su cui \`e chiamato con other
+\end{itemize}
 \end{itemize}
 
-Per risolverlo è necessario rispondere a due domande:
-\begin{itemize}
-\item Come può essere rappresentato lo \textbf{stato} di un numero complesso?
-\item Che \textbf{funzionalità} deve offrire?
-\end{itemize}
 
-\subsubsection{Operazioni richieste}
-
-Per questa classe è necessario fornire le operazioni
-ragionevolmente richieste ad un numero complesso
-(somma, differenza, prodotto, uguaglianza, radice n-esima, etc.) .
-Decidiamo inoltre che tale classe debba essere immutabile.
-
-\subsubsection{Rappresentazione}
-
+\subsubsection{Scelta dello stato}
 Possiamo scegliere tra due rappresentazioni:
-parte reale e parte immaginaria o modulo e fase.
-In questo caso optiamo per la prima,
-utilizzando due variabili in virgola mobile a doppia precisione
-\texttt{im} e \texttt{real}.
+\begin{itemize}
+\item parte reale e parte immaginaria 
+\item modulo e fase.
+\end{itemize}
 
-\textbf{Le funzionalità della classe devono essere indipendenti dall'implementazione}.
+In questo caso optiamo per la prima, utilizzando due variabili in virgola mobile a doppia precisione \texttt{im} e \texttt{real}.
+
+\emph{Le funzionalità della classe devono essere indipendenti dall'implementazione!}.
 
 \subsubsection{Note di implementazione}
-
-Dobbiamo definire un costruttore per inizializzare l'oggetto.
-Scegliamo di passagli direttamente i valori di parte reale e immaginaria.
-Non possiamo però definire un altro costruttore che prenda come ingresso
-modulo e fase, dato che andrebbe in conflitto con la segnatura di quest'ultimo.
-Per ovviare a ciò definiamo il metodo statico \texttt{fromPolarForm}.
-Ovviamente tale metodo deve essere statico in quanto non vi è
-alcuna istanza della classe prima della sua esecuzione (altrimenti
-per poter creare un complesso tramite modulo e fase dovrei creare un altro complesso
-non legato a quest'ultimo).
-
-Riguardo all'operazione di uguaglianza tra complessi non è consigliabile
-utilizzare l'operatore ``=='', poiché in tal modo basterebbe un errore
-di arrotondamento per far risultare due numeri diversi.
-Per ovviare a ciò si utilizza un parametro \texttt{precision} che indica la tolleranza da
-adottare.
-
-
 \begin{lstlisting}[language=Java,escapechar=|]
 package it.polimi.deib.se.ex1.complex;
 
@@ -881,24 +880,6 @@ public class Complex {
 		// controlli di validita' sui parametri
 		this.re = re;
 		this.im = im;
-	}
-	
-	// Non posso avere un costruttore con la stessa signature
-	// di quello sopra.
-	// public Complex(double modulus, double phase) {
-		// re = ...;
-		// im = ...;
-		// }
-	
-	// uso un metodo di classe:
-	/*
-	* Produce un numero complesso a partire dalla sua forma polare
-	*/
-	public static Complex fromPolarForm(double abs, double phase) {
-		/* ricorda : z = modulus * (cos(phase) + i sin(phase)) */
-		double realPart = abs * Math.cos(phase);
-		double imaginaryPart = abs * Math.sin(phase);
-		return new Complex(realPart, imaginaryPart);
 	}
 	
 	// restituisce la parte reale del numero complesso
@@ -938,46 +919,93 @@ public class Complex {
 	}
 	// TODO: Cercate nella documentazione di java.lang.Math un modo per
 	// implementare questo metodo in modo piu' conciso .
-}
+    }
 
-// restituisce il complesso coniugato di un numero.
-public Complex conjugate() {
-	return new Complex(this.re, -this.im);
-}
+    // restituisce la somma tra this e other.
+    public Complex sum(Complex other) {
+    	return new Complex(this.re + other.re(), this.im + other.im());
+    }
 
-// restituisce la somma tra this e other.
-public Complex sum(Complex other) {
-	return new Complex(this.re + other.re(), this.im + other.im());
-}
+    // restituisce il complesso coniugato di un numero.
+    public Complex conjugate() {
+	    return new Complex(this.re, -this.im);
+    }
 
-// restituisce la differenza tra this e other
-public Complex diff(Complex other) {
-	return new Complex(this.re - other.re(), this.im - other.im());
-}
+    // restituisce la differenza tra this e other
+    public Complex diff(Complex other) {
+	    return new Complex(this.re - other.re(), this.im - other.im());
+    }
 
-// restituisce il prodotto tra this e other
-public Complex mult(Complex other) {
-	double productRe = this.re() * other.re() - this.im() * other.im();
-	double productIm = this.re() * other.im() + this.im() * other.re();
-	return new Complex(productRe, productIm);
-}
+    // restituisce il prodotto tra this e other
+    public Complex mult(Complex other) {
+	    double productRe = this.re() * other.re() - this.im() * other.im();
+	    double productIm = this.re() * other.im() + this.im() * other.re();
+	    return new Complex(productRe, productIm);
+    }
 
-// Uguaglianza approssimata, a meno di precision,
-// tra due numeri complessi
-public boolean almostEquals(Complex other, double precision) {
-	// controlla che la differenza in valore assoluto
-	// tra i due numeri complessi sia minore di precision
-	return (this.diff(other).abs() < precision);
-}
+    /* Uguaglianza approssimata, a meno di precision, tra due numeri complessi Riguardo all'operazione di uguaglianza tra complessi non e' consigliabile utilizzare l'operatore ==, poiche' in tal modo basterebbe un errore di arrotondamento per far risultare due numeri diversi. Per ovviare a cio' si utilizza un parametro  che indica la tolleranza da adottare.*/
+    public boolean almostEquals(Complex other, double precision) {
+    	// controlla che la differenza in valore assoluto
+	    // tra i due numeri complessi sia minore di precision
+	    return (this.diff(other).abs() < precision);
+    }
 
-@Override
-public String toString() {
-	return "Complex number: (" + re + ", " + im + ")";
-}
-
+    @Override
+    public String toString() {
+	    return "Complex number: (" + re + ", " + im + ")";
+    }
 }
 \end{lstlisting}
 
+
+
+
+
+
+\subsection{Esercizio 5: Creare due costruttori con gli stessi parametri}
+\begin{framed}
+\textbf{Esercizio 5}:  Aggiungere un costruttore che permette di creare un numero complesso da module e fase
+\end{framed}
+
+Dobbiamo definire un costruttore per inizializzare l'oggetto.
+Scegliamo di passagli direttamente i valori di parte reale e immaginaria.
+Non possiamo per\`o definire un altro costruttore che prenda come ingresso
+modulo e fase, dato che andrebbe in conflitto con la segnatura di quest'ultimo.
+Per ovviare a ciò definiamo il metodo statico \texttt{fromPolarForm}.
+Ovviamente tale metodo deve essere statico in quanto non vi è
+alcuna istanza della classe prima della sua esecuzione (altrimenti
+per poter creare un complesso tramite modulo e fase dovrei creare un altro complesso
+non legato a quest'ultimo).
+\begin{lstlisting}[language=Java,escapechar=|]
+
+/*
+* Rappresenta un numero complesso.
+* Scelgo di implementare questa classe in modo che gli attributi
+* che la rappresentano non cambino mai (gli oggetti sono immutabili).
+* Nessun metodo cambia il valore degli attributi privati re, im.
+*/
+public class Complex {
+	
+	
+	
+	// Non posso avere un costruttore con la stessa signature
+	// di quello sopra.
+	// public Complex(double modulus, double phase) {
+		// re = ...;
+		// im = ...;
+		// }
+	
+	// uso un metodo di classe:
+	/*
+	* Produce un numero complesso a partire dalla sua forma polare
+	*/
+	public static Complex fromPolarForm(double abs, double phase) {
+		/* ricorda : z = modulus * (cos(phase) + i sin(phase)) */
+		double realPart = abs * Math.cos(phase);
+		double imaginaryPart = abs * Math.sin(phase);
+		return new Complex(realPart, imaginaryPart);
+	}
+\end{lstlisting}
 
 \subsection{Insieme di numeri complessi}
 
