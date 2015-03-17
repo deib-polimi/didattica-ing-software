@@ -128,10 +128,10 @@
 %----------------------------------------------------------------------------------------
 
 \newcommand{\hmwkTitle}{Types of Data, mutable and not mutable classes} % Assignment title
-\newcommand{\hmwkDueDate}{Martedi,\ Aprile 15,\ 2014} % Due date
+\newcommand{\hmwkDueDate}{Martedi,\ Marzo 17,\ 2014} % Due date
 \newcommand{\hmwkClass}{Ingegneria del Software 1} % Course/class
 \newcommand{\hmwkClassTime}{} % Class/lecture time
-\newcommand{\hmwkClassInstructor}{Carlo Ghezzi} % Teacher/lecturer
+\newcommand{\hmwkClassInstructor}{Claudio Menghi, Alessandro Rizzi} % Teacher/lecturer
 \newcommand{\hmwkAuthorName}{} % Your name
 
 %----------------------------------------------------------------------------------------
@@ -140,11 +140,12 @@
 
 \title{
 \vspace{2in}
-\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
-\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+\textmd{\textbf{\hmwkClass:\ \\ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{\hmwkDueDate}\\
 \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
 \vspace{3in}
 }
+
 
 \author{\textbf{\hmwkAuthorName}}
 \date{} % Insert date here if you want it to appear below your name
@@ -443,7 +444,7 @@ ricalcano gli \texttt{enum} del C estendendoli con
 ulteriori operazioni.
 Mentre in C le enumerazioni semplicemente definiscono delle
 costanti intere, in Java sono vere è proprie classi,
-costituite da un numero prefissato di istanze associate.
+costituite da un numero prefissato di istanze associate. Le enumerazioni possono essere utilizzate per esempio per specificare le scelte di un menu, i flag command line \ldots
 \begin{lstlisting}[language=Java,escapechar=|]
 enum Colors{RED, GREEN, BLUE};
 \end{lstlisting}  
@@ -837,7 +838,7 @@ package it.polimi.deib.se.ex1.complex;
 * che la rappresentano non cambino mai (gli oggetti sono immutabili).
 * Nessun metodo cambia il valore degli attributi privati re, im.
 */
-public class Complex {
+public final class Complex {
 	
 	/* parte reale */
 	private final double re;
@@ -954,7 +955,6 @@ alcuna istanza della classe prima della sua esecuzione (altrimenti
 per poter creare un complesso tramite modulo e fase dovrei creare un altro complesso
 non legato a quest'ultimo).
 \begin{lstlisting}[language=Java,escapechar=|]
-
 /*
 * Rappresenta un numero complesso.
 * Scelgo di implementare questa classe in modo che gli attributi
@@ -982,11 +982,59 @@ public class Complex {
 	}
 \end{lstlisting}
 
+\subsection{Esercizio 6: Enum}
+\begin{lstlisting}[language=Java,escapechar=|]
+public enum Planet {
+    MERCURY (3.303e+23, 2.4397e6),
+    VENUS   (4.869e+24, 6.0518e6),
+    EARTH   (5.976e+24, 6.37814e6),
+    MARS    (6.421e+23, 3.3972e6),
+    JUPITER (1.9e+27,   7.1492e7),
+    SATURN  (5.688e+26, 6.0268e7),
+    URANUS  (8.686e+25, 2.5559e7),
+    NEPTUNE (1.024e+26, 2.4746e7);
+
+    private final double mass;   // in kilograms
+    private final double radius; // in meters
+    Planet(double mass, double radius) {
+        this.mass = mass;
+        this.radius = radius;
+    }
+    private double mass() { return mass; }
+    private double radius() { return radius; }
+
+    // universal gravitational constant  (m3 kg-1 s-2)
+    public static final double G = 6.67300E-11;
+
+    double surfaceGravity() {
+        return G * mass / (radius * radius);
+    }
+    double surfaceWeight(double otherMass) {
+        return otherMass * surfaceGravity();
+    }
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java,escapechar=|]
+public class Main {
+   public static void main(String[] args) {
+        if (args.length != 1) {
+            System.err.println("Usage: java Planet <earth_weight>");
+            System.exit(-1);
+        }
+        double earthWeight = Double.parseDouble(args[0]);
+        double mass = earthWeight/EARTH.surfaceGravity();
+        for (Planet p : Planet.values())
+           System.out.printf("Your weight on %s is %f%n",
+                             p, p.surfaceWeight(mass));
+    }
+}
+\end{lstlisting}
 
 
-\subsection{Esercizio 6: ComplexSet}
+\subsection{Esercizio 7: ComplexSet}
 \begin{framed}
-\textbf{Esercizio 6}:  Modificare il codice del secondo esercizio affinch\`e mantenga un insieme
+\textbf{Esercizio 7}:  Modificare il codice del secondo esercizio affinch\`e mantenga un insieme
 di numeri complessi. Nella costruzione di tale insieme viene definita un certo valore di precisione
 che è utilizzato per determinare l'uguaglianza tra due numeri (vedere l'esercizio 4).
 \end{framed}
@@ -1123,10 +1171,10 @@ System.out.println(a.almostEquals(b, 1e-2));
 
 \end{lstlisting}
 
-\subsection{Eserzizio 7: Riepilogo - Negozio}
-\subsubsection{Esercizio 7a: CD-Final-Immutabile}
+\subsection{Eserzizio 8: Riepilogo - Negozio}
+\subsubsection{Esercizio 8a: CD-Final-Immutabile}
 \begin{framed}
-\textbf{Esercizio 1}: Progettare e implementare una classe che rappresenti un CD. Ogni CD ha un \emph{unico} numero di serie. Un numero di serie (o numero seriale) è un numero identificativo assegnato in maniera univoca per distinguere un esemplare di una serie. Un cd ha un titolo, un autore e un prezzo.
+\textbf{Esercizio 8a}: Progettare e implementare una classe che rappresenti un CD. Ogni CD ha un \emph{unico} numero di serie. Un numero di serie (o numero seriale) è un numero identificativo assegnato in maniera univoca per distinguere un esemplare di una serie. Un cd ha un titolo, un autore e un prezzo.
 \end{framed}
 
 Come sempre \`e per progettare la nostra classe \`e necessario rispondere a due domande:
@@ -1150,7 +1198,7 @@ Nel nostro caso immaginiamo di definire le seguenti funzionalit\`a:
 \begin{itemize}
 \item \emph{accessori}:
 \begin{itemize}
-\item \texttt{String getTitolo()}: ritorna il titolo del cd
+\item \texttt{String getTitolo()}: ritorna il titolo del CD
 \item \texttt{float getPrezzo()}: ritorna il prezzo del CD
 \item \texttt{String getAutore()}: ritorna l' autore del CD
 \item \texttt{int getSN()}: ritorna il numero seriale del CD
@@ -1253,9 +1301,9 @@ public class CD {
 \end{lstlisting}
 
 
-\subsubsection{Esercizio 7b: Enum: tipo del CD}
+\subsubsection{Esercizio 8b: Enum: tipo del CD}
 \begin{framed}
-\textbf{Esercizio 7b}: Un CD ha un tipo. Il tipo del cd pu\`o essere pop, country oppure dance.
+\textbf{Esercizio 8b}: Un CD ha un tipo. Il tipo del cd pu\`o essere pop, country oppure dance.
 \end{framed}
 
 \begin{lstlisting}[language=Java,escapechar=|]
@@ -1345,6 +1393,19 @@ public class CD {
 
 	public CDType getCdType() {
 		return cdType;
+	}
+	
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CD other = (CD) obj;
+		if (sn != other.sn)
+			return false;
+		return true;
 	}
 }
 
@@ -1442,7 +1503,7 @@ public class Shelf {
 	// controlla che l'elemento sia contenuto nell'insieme
 	public boolean contains(CD element) {
 		for (int i = 0; i < this.currentSize; i++) {
-			if (cds[i]==element)
+			if (cds[i].equals(element))
 				return true;
 		}
 		/* default: non trovato */
@@ -1470,7 +1531,7 @@ public class Shelf {
 	// entro this.size), -1 altrimenti
 	private int find(CD element) {
 		for (int i = 0; i < this.currentSize; i++) {
-			if (cds[i]==element)
+			if (cds[i].equals(element))
 				return i;
 		}
 		/* default */
@@ -1512,9 +1573,9 @@ public class Shelf {
 }
 \end{lstlisting}
 
-\subsubsection{Esercizio 7c: Riuso del costruttore: scaffale di dimensione definita nel costruttore}
+\subsubsection{Esercizio 8c: Riuso del costruttore: scaffale di dimensione definita nel costruttore}
 \begin{framed}
-\textbf{Esercizio  7c}: Modificare la classe \texttt{Shelf} per consentire la \emph{creazione} di uno scaffale con una dimensione passata come parametro al costruttore ma minore della dimensione massima fissata
+\textbf{Esercizio  8c}: Modificare la classe \texttt{Shelf} per consentire la \emph{creazione} di uno scaffale con una dimensione passata come parametro al costruttore ma minore della dimensione massima fissata
 \end{framed}
 
 
@@ -1537,9 +1598,9 @@ public class IntSet {
 }
 \end{lstlisting}
 
-\subsubsection{Esercizio 7d: Cliente}
+\subsubsection{Esercizio 8d: Cliente}
 \begin{framed}
-\textbf{Esercizio 7d}: Un cliente ha un nome,  e un codice fiscale
+\textbf{Esercizio 8d}: Un cliente ha un nome,  e un codice fiscale
 \end{framed}
 \begin{lstlisting}[language=Java,escapechar=|]
 package esercitazione2;
@@ -1582,12 +1643,11 @@ public class Cliente {
 		return "Cliente [name=" + name + ", codiceFiscale=" + codiceFiscale+ "]";
 	}
 }
-
 \end{lstlisting}
 
-\subsubsection{Esercizio 7e: Negozio}
+\subsubsection{Esercizio 8e: Negozio}
 \begin{framed}
-\textbf{Esercizio  7e}: Il negozio vuole tenere traccia dei CD venduti, per ogni CD vuole tenere traccia dell'acquirente
+\textbf{Esercizio  8e}: Il negozio vuole tenere traccia dei CD venduti, per ogni CD vuole tenere traccia dell'acquirente
 \end{framed}
 \begin{lstlisting}[language=Java,escapechar=|]
 package esercitazione2;
@@ -1642,9 +1702,9 @@ public class Negozio {
 
 \end{lstlisting}
 
-\subsubsection{Esercizio 7f: Implementare un client per il negozio}
+\subsubsection{Esercizio 8f: Implementare un client per il negozio}
 \begin{framed}
-\textbf{Esercizio 7f}: Il negozio vuole tenere traccia dei CD venduti, per ogni CD vuole tenere traccia dell'acquirente
+\textbf{Esercizio 8f}: Il negozio vuole tenere traccia dei CD venduti, per ogni CD vuole tenere traccia dell'acquirente
 \end{framed}
 \begin{lstlisting}[language=Java,escapechar=|]
 package esercitazione2;
@@ -1674,9 +1734,9 @@ public class Main {
 }
 \end{lstlisting}
 
-\subsection{Esercizio 8: Riepilogo - Morra Cinese}
+\subsection{Esercizio 9: Riepilogo - Morra Cinese}
 \begin{framed}
-\textbf{Esercizio 8}: Implementare il gioco della morra cinese (carta, forbice, sasso).
+\textbf{Esercizio 9}: Implementare il gioco della morra cinese (carta, forbice, sasso).
 L'applicazione deve chiedere la scelta al giocatore, generare una scelta e stampare a video il risultato del 
 giocatore (vittoria, pareggio, sconfitta).
 \end{framed}
@@ -1738,61 +1798,54 @@ import java.util.Random;
 
 
 public enum Choice {
-CARTA, FORBICE, SASSO;
+    CARTA, FORBICE, SASSO;
+    public Outcome resultAgainst(Choice other){
+        if(this==other){
+            return Outcome.DRAW;
+        }
+        switch(this){
+            case CARTA:
+                return Outcome.winsIfTrue(other==Choice.SASSO);		
+            case FORBICE:
+                return Outcome.winsIfTrue(other==Choice.CARTA);		
+            case SASSO:
+                return Outcome.winsIfTrue(other==Choice.FORBICE);	
+            default:
+                return null;
+        }		
+    }
 
-public Outcome resultAgainst(Choice other){
-if(this==other){
-return Outcome.DRAW;
-}
-switch(this){
-case CARTA:
-return Outcome.winsIfTrue(other==Choice.SASSO);		
-case FORBICE:
-return Outcome.winsIfTrue(other==Choice.CARTA);		
-case SASSO:
-return Outcome.winsIfTrue(other==Choice.FORBICE);	
-default:
-throw new RuntimeException("Unexpected case!");		
-}		
-}
-
-public static Choice parseInput(String input){
-return Enum.valueOf(Choice.class, input.toUpperCase());
-}
-
-public static Choice getRandomChoice(Random random){
-Choice[] values = Choice.values();
-return values[random.nextInt(values.length)];
-}
-
-@Override
-public String toString() {
-return super.toString().toLowerCase();
-}
-
+    public static Choice parseInput(String input){
+        return Enum.valueOf(Choice.class, input.toUpperCase());
+    }
+    public static Choice getRandomChoice(Random random){
+        Choice[] values = Choice.values();
+        return values[random.nextInt(values.length)];
+    }
+    @Override
+    public String toString() {
+        return super.toString().toLowerCase();
+    }
 }
 \end{lstlisting}
 \begin{lstlisting}[language=Java,escapechar=|]
 package it.polimi.deib.se.ex2.morracinese;
 
 public enum Outcome {
-WINNER("Hai vinto!"), LOSER("Hai perso!"), DRAW("Parità!");
-private final String message;
-
-private Outcome(String message){
-this.message = message;
-}
-
-@Override
-public String toString() {
-return message;
-}
-
-public static Outcome winsIfTrue(boolean condition){
-return (condition)?Outcome.WINNER:Outcome.LOSER;
-}
-
-
+    WINNER("Hai vinto!"), LOSER("Hai perso!"), DRAW("Parità!");
+    private final String message;
+    
+    private Outcome(String message){
+        this.message = message;
+    }
+    
+    @Override
+    public String toString() {
+        return message;
+    }
+    public static Outcome winsIfTrue(boolean condition){
+        return (condition)?Outcome.WINNER:Outcome.LOSER;
+    }
 }
 \end{lstlisting}
 \begin{lstlisting}[language=Java,escapechar=|]
@@ -1804,44 +1857,35 @@ import java.util.Scanner;
 
 public class GameLogic {	
 
-private final Scanner scanner;
-
-public GameLogic(InputStream input) {
-this.scanner = new Scanner(input);
-}
-
-private Outcome choiceSubmitted(Choice userChoice){
-Choice computerChoice = Choice.getRandomChoice(new Random());
-System.out.println("Ho scelto " + computerChoice + "!");
-return userChoice.resultAgainst(computerChoice);
-}
-
-public void close() {
-scanner.close();		
-}
-
-public boolean round() {
-System.out.println("Che scelta fai?");
-String input = scanner.next();
-try{
-Choice choice = Choice.parseInput(input);
-System.out.println("Hai scelto " + choice + "!");
-System.out.println(choiceSubmitted(choice));
-}catch(IllegalArgumentException e){
-System.out.println("Scelta non valida!");
-}
-return true; 
-}
-
-public static void main(String[] args) {
-GameLogic gameLogic = new GameLogic(System.in);
-boolean cont;
-do{
-cont = gameLogic.round();
-}while(cont);
-gameLogic.close();
-}
-
+    private final Scanner scanner;
+    public GameLogic(InputStream input) {
+        this.scanner = new Scanner(input);
+    }
+    private Outcome choiceSubmitted(Choice userChoice){
+        Choice computerChoice = Choice.getRandomChoice(new Random());
+        System.out.println("Ho scelto " + computerChoice + "!");
+        return userChoice.resultAgainst(computerChoice);
+    }
+    
+    public void close() {
+        scanner.close();		
+    }
+    public boolean round() {
+        System.out.println("Che scelta fai?");
+        String input = scanner.next();
+        Choice choice = Choice.parseInput(input);
+        System.out.println("Hai scelto " + choice + "!");
+        System.out.println(choiceSubmitted(choice));
+         return true; 
+     }
+     public static void main(String[] args) {
+         GameLogic gameLogic = new GameLogic(System.in);
+         boolean cont;
+         do{
+             cont = gameLogic.round();
+        }while(cont);
+        gameLogic.close();
+      }
 }
 \end{lstlisting}
 
@@ -2014,7 +2058,7 @@ gameLogic.close();
 
 \section{Esercizi per casa}
 \begin{itemize}
-\item Esercizio 1: modificare la soluzione dell'esercizio 1 come segue:
+\item Esercizio 1: modificare la soluzione dell'esercizio 2 come segue:
 \begin{itemize}
 	\item Quando possibile è buona prassi seguire il principio ``non ripetersi'', ovvero riutilizzare il più possibile il codice già scritto.
 	Secondo questo principio riscrivere il metodo \texttt{contains}
@@ -2027,7 +2071,7 @@ gameLogic.close();
 	\item Questa classe è mutabile, in quanto è possibile modificarne lo stato dopo la creazione. Ridefinire la classe \texttt{IntSet}
 	in modo da renderla immutabile.	
 \end{itemize}
-\item Esercizio 2: Modificare il gioco della Mora cinese come seguer:
+\item Esercizio 2: Modificare il gioco della Morra cinese come segue:
 \begin{itemize}
 	\item Attualmente il gioco continua all'infinito. Modificare l'implementazione per chiedere all'utente se desidera continuare o meno.
 	\item Estendere il gioco aggiungendo le scelte aggiuntive \textbf{LIZARD} e \textbf{SPOCK}. Le combinazioni sono:
@@ -2049,7 +2093,7 @@ gameLogic.close();
 \item Cercare nella documentazione di java.lang.Math un modo pi\`u conciso per calcolare la fase di un numero complesso
 \url{http://docs.oracle.com/javase/7/docs/index.html}
 \end{itemize}
-\item Esercizio 4: modificare la soluzione dell'esercizio n come segue:
+\item Esercizio 4: modificare la soluzione dell'esercizio 7 come segue:
 \begin{itemize}
 	\item Aggiungere un metodo \texttt{public ComplexSet getRoots(int degree)} alla classe \texttt{Complex}
 	che restituisca le radici i-esime dell'oggetto (radici quadrate per \texttt{degree} uguale a 2, cubiche per 3, etc.).
