@@ -698,7 +698,7 @@ public class IntSet {
     }
     
     public boolean isFull() {
-        return currentSize < MAX_SIZE;
+        return currentSize >= MAX_SIZE;
     }
     
     // MODIFICATORI
@@ -801,8 +801,8 @@ In classe vedremo solo alcune delle funzionalit\`a presenti nella classe, si con
 \begin{itemize}
 \item \emph{accessori:} 
 \begin{itemize}
-\item \texttt{gerRe()}: ritorna la parte reale del numero complesso
-\item \texttt{getIm()}: ritorna la parte immaginaria del numero complesso
+\item \texttt{double re()}: ritorna la parte reale del numero complesso
+\item \texttt{double im()}: ritorna la parte immaginaria del numero complesso
 \item \texttt{abs()}: ritorna il modulo del numero complesso
 \end{itemize}
 \item \emph{modificatori:}
@@ -811,7 +811,7 @@ In classe vedremo solo alcune delle funzionalit\`a presenti nella classe, si con
 \end{itemize}
 \item \emph{produttori}
 \begin{itemize}
-\item \texttt{sum(Complex other)}: somma il numero complesso su cui \`e chiamato con other
+\item \texttt{Complex sum(Complex other)}: somma il numero complesso su cui \`e chiamato con other
 \end{itemize}
 \end{itemize}
 
@@ -823,7 +823,7 @@ Possiamo scegliere tra due rappresentazioni:
 \item modulo e fase.
 \end{itemize}
 
-In questo caso optiamo per la prima, utilizzando due variabili in virgola mobile a doppia precisione \texttt{im} e \texttt{real}.
+In questo caso optiamo per la prima, utilizzando due variabili in virgola mobile a doppia precisione \texttt{re} e \texttt{im}.
 
 \emph{Le funzionalità della classe devono essere indipendenti dall'implementazione!}.
 
@@ -1151,7 +1151,7 @@ Nel nostro caso immaginiamo di definire le seguenti funzionalit\`a:
 \item \emph{accessori}:
 \begin{itemize}
 \item \texttt{String getTitolo()}: ritorna il titolo del cd
-\item \texttt{foat getPrezzo()}: ritorna il prezzo del CD
+\item \texttt{float getPrezzo()}: ritorna il prezzo del CD
 \item \texttt{String getAutore()}: ritorna l' autore del CD
 \item \texttt{int getSN()}: ritorna il numero seriale del CD
 \end{itemize}
@@ -1255,7 +1255,7 @@ public class CD {
 
 \subsubsection{Esercizio 7b: Enum: tipo del CD}
 \begin{framed}
-\textbf{Esercizio 7b}: Un ha un tipo. Il tipo del cd pu\`o essere pop, country oppure dance.
+\textbf{Esercizio 7b}: Un CD ha un tipo. Il tipo del cd pu\`o essere pop, country oppure dance.
 \end{framed}
 
 \begin{lstlisting}[language=Java,escapechar=|]
@@ -2009,9 +2009,7 @@ gameLogic.close();
 
 
 \section{Curiosity}
-\begin{itemize}
- 
-\begin{itemize}
+
 
 
 \section{Esercizi per casa}
