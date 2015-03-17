@@ -507,9 +507,9 @@ nome classe.nome metodo/attributo
 \section{Esercizi}
 
 
-\subsection{Esercizio 1: WalkMan}
+\subsection{Esercizio 1: LettoreMP3}
 \begin{framed}
-\textbf{Esercizio 1}: Progettare e implementare una classe che rappresenti un WalkMan. Ogni WalkMan ha un \emph{unico} numero di serie. Un numero di serie (o numero seriale) è un numero identificativo assegnato in maniera univoca per distinguere un esemplare di una serie.
+\textbf{Esercizio 1}: Progettare e implementare una classe che rappresenti un WalkMan. Ogni LettoreMP3 ha un \emph{unico} numero di serie. Un numero di serie (o numero seriale) \`e un numero identificativo assegnato in maniera univoca per distinguere un esemplare di una serie. I numeri di serie sono associati in modo incrementale. Il LettoreMP3 ha una meroria e puo' essere ascoltato.
 \end{framed}
 
 
@@ -520,9 +520,11 @@ nome classe.nome metodo/attributo
 \item \emph{accessori}: 
 \begin{itemize}
 \item \texttt{getSN()}: ritorna il numero di serie del WalkMan
+\item \texttt{ascolta()}: ritorna il numero di serie del WalkMan
 \item \texttt{toString()}:  fornirsce una comoda rappresentazione testuale dell'oggetto.
 \end{itemize}
 \item \emph{modificatori}: non esistono modificatori, il numero di serie non pu\`o essere cambiato
+\item \emph{costruttori}: il costruttore prende come parametro le dimensioni della memoria del LettoreMP3
 \item \emph{produttori}: dalla consegna non risulta sia necessario creare un oggetto partendo da una sua istanza.
 \end{itemize}
 
@@ -542,30 +544,43 @@ nome classe.nome metodo/attributo
 \begin{lstlisting}[language=Java,escapechar=|]
 package it.polimi.deib.se.ex1.counter;
 
-public class WalkMan {
+public class LettoreMP3 {
 	
 	//Contatore condiviso tra tutte le istanze
 	private static int counter = 0;
 	
-	// contiene il codice seriale dell WalkMan
-	private int serialNumber;
+	// contiene il codice seriale dell LettoreMP3
+	private final int serialNumber;
+
+    private final int memoria;	
 	
-	//Crea un nuovo WalkMan. Il costruttore potrebbe anche prendere come parametro un colore...
-	public WalkMan(){
+	
+	//Crea un nuovo LettoreMP3. Il costruttore potrebbe anche prendere come parametro un colore...
+	public LettoreMP3(int memoria){
 	    serialNumber=counter;
 	    counter=counter+1;
+	    this.memoria=memoria
 	}
 	
 	// ACCESSORI
-	// ritorna il serial number dello WalkMan
+	// ritorna il serial number dello LettoreMP3
 	public int getSN() {
 		return serialNumber;
 	}
-	
-	@Override
-	public String toString(){
-		return serialNumber + " of " + counter;
-	}
+    
+    public int getMemoria(){
+        return this.memoria;
+    }
+    
+    public void ascolta(){
+        System.out.println("Track: 01");
+    }	
+    
+    // nota il metodo toString puo' essere generato automaticamente in eclipse sfruttando source > generateToString();
+    @Override
+    public String toString(){
+        return serialNumber + " of " + counter;
+   }
 }
 \end{lstlisting}
 
@@ -575,10 +590,11 @@ package it.polimi.deib.se.ex1.counter;
 public class Main {
 	
 	public static void main(String[] args) {
-		Counter c1 = new Counter();
-		Counter c2 = new Counter();
+		LettoreMP3 c1 = new LettoreMP3();
+		LettoreMP3 c2 = new LettoreMP3();
 		System.out.println(c1);
 		System.out.println(c2);
+		c1.ascolta();
 	}
 }
 \end{lstlisting}
