@@ -367,13 +367,13 @@ Ad esempio, nel caso si debba concatenare diverse stringhe in un ciclo è opport
 Per creare degli oggetti immutabili \`e bene seguire le regole seguenti. Nota che queste regole non sono seguite da tutte le classi documentate come immutabili. In questi casi ci sono altre ragioni per credere  che le istanze create non cambieranno mai dopo la loro costruzione. Tuttavia, in questi casi vengono utilizzate strategie pi\`u complicate per garantire l'immutabilit\`a. Le regole basilari per garantire l'immutabilit\`a sono le seguenti:
 \begin{itemize}
 \item non fornire metodi setter (che possono modificare gli attributi o oggetti che sono referenziati gali attributi)
-\item rendi tutti gli attributi \texttt{finali} e \texttt{private}
+\item rendere tutti gli attributi \texttt{finali} e \texttt{private}
 \item non consentire alle sottoclassi di eseguire overriding: dichiara la classe come \texttt{final} (alternarivamente puoi rendere il costruttore privato e obbligare l'esecuzione di factory methods nella creazione degli oggetti)
-\item se il vostro oggetto include references a oggetti mutabili non consentire di cambiare questi oggetti:
+\item se il vostro oggetto contiene attributi che sono references a oggetti mutabili \`e necessario non consentire di cambiare questi oggetti:
 \begin{itemize}
 \item non fornire metodi che cambiano questi oggetti
 \item non condividere i references di questi oggetti: ritornare i references mediante getters (in tal caso creare degli oggetti copia)
-\item non inserire i reference degli attributi all'interno di oggetti passati come parametri (in tal caso creare degli oggetti copia) o oggetti poi ritornati
+\item non settare i reference degli attributi con oggetti passati come parametri (in tal caso creare degli oggetti copia)
 \end{itemize} 
 \end{itemize}  
 
@@ -509,22 +509,31 @@ nome classe.nome metodo/attributo
 
 \subsection{Esercizio 1: LettoreMP3}
 \begin{framed}
-\textbf{Esercizio 1}: Progettare e implementare una classe che rappresenti un WalkMan. Ogni LettoreMP3 ha un \emph{unico} numero di serie. Un numero di serie (o numero seriale) \`e un numero identificativo assegnato in maniera univoca per distinguere un esemplare di una serie. I numeri di serie sono associati in modo incrementale. Il LettoreMP3 ha una meroria e puo' essere ascoltato.
+\textbf{Esercizio 1}: Progettare e implementare una classe che rappresenti un LettoreMP3. Ogni LettoreMP3 ha un \emph{unico} numero di serie. Un numero di serie (o numero seriale) \`e un numero identificativo assegnato in maniera univoca per distinguere un esemplare di una serie. I numeri di serie sono associati in modo incrementale. Il LettoreMP3 ha una meroria e puo' essere ascoltato.
 \end{framed}
 
 
 
 \subsubsection{Scelta delle funzionalit\`a}
+In generale nella scelta delle funzionalit\`a \`e consigliato considerare quattro tipi di operazioni:
+\begin{itemize}
+\item \emph{accessori}: forniscono informazioni sullo stato dell'oggetto
+\item \emph{modificatori}: modificano lo stato di un oggetto
+\item \emph{costruttori}:  permettono di creare un oggetto
+\item \emph{produttori}: generano un nuovo oggetto partendo dall'istanza corrente
+\end{itemize}
 
+Per il nostro caso specifico
 \begin{itemize}
 \item \emph{accessori}: 
 \begin{itemize}
-\item \texttt{getSN()}: ritorna il numero di serie del WalkMan
-\item \texttt{ascolta()}: ritorna il numero di serie del WalkMan
-\item \texttt{toString()}:  fornirsce una comoda rappresentazione testuale dell'oggetto.
+\item \texttt{int getSN()}: ritorna il numero di serie del LettoreMP3
+\item \texttt{int getMemoria()}: ritorna la memoria del LettoreMP3
+\item \texttt{void ascolta()}: ritorna il numero di serie del LettoreMP3
+\item \texttt{String toString()}:  fornirsce una comoda rappresentazione testuale dell'oggetto.
 \end{itemize}
 \item \emph{modificatori}: non esistono modificatori, il numero di serie non pu\`o essere cambiato
-\item \emph{costruttori}: il costruttore prende come parametro le dimensioni della memoria del LettoreMP3
+\item \emph{costruttori}: il costruttore prende come parametro le dimensioni della memoria del LettoreMP3 \texttt{LettoreMP3(int memoria)}
 \item \emph{produttori}: dalla consegna non risulta sia necessario creare un oggetto partendo da una sua istanza.
 \end{itemize}
 
@@ -534,7 +543,7 @@ nome classe.nome metodo/attributo
 \item Quali strutture dai consentono di memorizzare le funzionalit\`a desiderate in maniera effieciente?
 \begin{itemize}
 \item per memorizzare il numero seriale scelgo di utilizzare un intero
-\item utilizzo un altro intero per tenere conto delle istanze gi\`a create. \`E necessario che questa variabile sia \emph{condivisa} (leggibile e modificabile) da tutte le istanze della classe quindi questa variabile deve essere statica e \emph{non} final
+\item utilizzo un altro intero per tenere conto delle istanze gi\`a create. \`E necessario che questa variabile sia \emph{condivisa} (leggibile e modificabile) da tutte le istanze della classe quindi questa variabile deve essere \texttt{static} e \emph{non} \texttt{final}
 \end{itemize}
 \end{itemize}
 
@@ -551,36 +560,32 @@ public class LettoreMP3 {
 	
 	// contiene il codice seriale dell LettoreMP3
 	private final int serialNumber;
-
-    private final int memoria;	
 	
+	// contiene la memoria del lettore MP3
+	private final int memoria;	
 	
 	//Crea un nuovo LettoreMP3. Il costruttore potrebbe anche prendere come parametro un colore...
 	public LettoreMP3(int memoria){
 	    serialNumber=counter;
 	    counter=counter+1;
-	    this.memoria=memoria
+	    this.memoria=memoria;
 	}
-	
 	// ACCESSORI
 	// ritorna il serial number dello LettoreMP3
 	public int getSN() {
-		return serialNumber;
+	    return serialNumber;
 	}
-    
-    public int getMemoria(){
-        return this.memoria;
-    }
-    
-    public void ascolta(){
-        System.out.println("Track: 01");
-    }	
-    
-    // nota il metodo toString puo' essere generato automaticamente in eclipse sfruttando source > generateToString();
-    @Override
-    public String toString(){
-        return serialNumber + " of " + counter;
-   }
+	public int getMemoria(){
+	    return this.memoria;
+	}
+	public void ascolta(){
+	    System.out.println("Track: 01");
+	}	
+	// nota il metodo toString puo' essere generato automaticamente in eclipse sfruttando source > generateToString();
+	@Override
+	public String toString(){
+	    return serialNumber + " of " + counter;
+	}
 }
 \end{lstlisting}
 
@@ -620,27 +625,20 @@ Come sempre \`e per progettare la nostra classe \`e necessario rispondere a due 
 \end{itemize}
 
 \subsubsection{Scelta delle Funzionalit\`a}
-In generale nella scelta delle funzionalit\`a \`e consigliato considerare tre tipi di operazioni:
-
-\begin{itemize}
-\item \emph{accessori}: forniscono informazioni sullo stato dell'oggetto
-\item \emph{modificatori}: modificano lo stato di un oggetto
-\item \emph{produttori}: generano un nuovo oggetto partendo dall'istanza corrente
-\end{itemize}
 
 Nel nostro caso immaginiamo di definire le seguenti funzionalit\`a:
 \begin{itemize}
 \item \emph{accessori}:
 \begin{itemize}
-\item \texttt{contains(num)}: dato in ingresso un intero \texttt{num}, ritorna \texttt{true} se l'intero è contenuto nell'insieme.
-\item \texttt{isFull()}: ritorna \texttt{true} se il set \`e pieno
-\item \texttt{size()}: ritorna la dimension effettiva del set
+\item \texttt{boolean contains(int num)}: dato in ingresso un intero \texttt{num}, ritorna \texttt{true} se l'intero è contenuto nell'insieme.
+\item \texttt{boolean isFull()}: ritorna \texttt{true} se il set \`e pieno
+\item \texttt{int size()}: ritorna la dimension effettiva del set
 \end{itemize}
 \item \emph{modificatori/modificatori}:
 \begin{itemize}
-\item  \texttt{insert(num)}: inserisce \texttt{num} nell'insieme (Cosa succede se l'elemento esiste gi\`a nell'insieme?
+\item  \texttt{boolean insert(int num)}: inserisce \texttt{num} nell'insieme (Cosa succede se l'elemento esiste gi\`a nell'insieme?
 Che cosa succede se l'insieme ha gi\`a raggiunto la dimension massima?)
-\item \texttt{remove(num)}: rimuove un numero presente nell'insieme (Cosa succede se l'elemento non esiste  nell'insieme?).
+\item \texttt{boolean remove(int num)}: rimuove un numero presente nell'insieme (Cosa succede se l'elemento non esiste  nell'insieme?).
 \item nel nostro caso se l'elemento esiste gi\`a nell'insieme o non esiste l'operazione viene  ignorata.
 \end{itemize}
 \end{itemize}
@@ -648,7 +646,7 @@ Che cosa succede se l'insieme ha gi\`a raggiunto la dimension massima?)
 
 Le funzionalit\`a \texttt{insert(num)} e \texttt{remove(num)} possono essere implementate come:
 \begin{itemize}
-	\item produttori ritornano un nuovo oggetto con l'operazione richiesta. Vengono di solito usati nelle classi immutabili.
+	\item produttori ritornano un nuovo Set di interi (oggetto) con l'operazione richiesta. Vengono di solito usati nelle classi immutabili.
 	\item modificatori applicano la modifica all'oggetto corrente, solitamente non ritornando alcun valore. Ovviamente rendono la classe mutabile.
 \end{itemize}
 In questo esercizio utilizzeremo una classe \emph{mutabile}.
@@ -784,7 +782,7 @@ public class IntSet {
 
 \subsection{Esercizio 3: Riuso dei costruttori}
 \begin{framed}
-\textbf{Esercizio 3}: Modificare l'insieme di interi per consentire la \emph{creazione} di sets di dimensioni variabili ma minore della dimensione massima fissata
+\textbf{Esercizio 3}: Modificare l'insieme di interi per consentire la \emph{creazione} di sets di dimensioni variabili ma minore della dimensione massima fissata al momento della creazione dell'insieme
 \end{framed}
 
 
@@ -820,7 +818,7 @@ In classe vedremo solo alcune delle funzionalit\`a presenti nella classe, si con
 \begin{itemize}
 \item \texttt{double re()}: ritorna la parte reale del numero complesso
 \item \texttt{double im()}: ritorna la parte immaginaria del numero complesso
-\item \texttt{abs()}: ritorna il modulo del numero complesso
+\item \texttt{double abs()}: ritorna il modulo del numero complesso
 \end{itemize}
 \item \emph{modificatori:}
 \begin{itemize}
@@ -1220,6 +1218,7 @@ Nel nostro caso immaginiamo di definire le seguenti funzionalit\`a:
 \item \texttt{int getSN()}: ritorna il numero seriale del CD
 \end{itemize}
 \item \emph{modificatori/modificatori}:
+\item \texttt{void setPrezzo(float prezzo)}: setta il prezzo del CD (se il prezzo e' minore di 0?)
 \item \emph{costruttori}:
 \begin{itemize}
 \item \texttt{public CD(String titolo, String autore, float prezzo)} crea un nuovo cd con uno specificato titolo, autore e prezzo
@@ -1290,7 +1289,9 @@ public class CD {
 	// setta il prezzo del cd
 	// che cosa succede se il prezzo e' minore di 0
 	public void setPrezzo(float prezzo) {
-		this.prezzo = prezzo;
+	    if(prezzo>=0){
+			this.prezzo = prezzo;
+	    }
 	}
 
 	// ritorna il SN del cd
@@ -1616,7 +1617,7 @@ public class IntSet {
 
 \subsubsection{Esercizio 8d: Cliente}
 \begin{framed}
-\textbf{Esercizio 8d}: Un cliente ha un nome,  e un codice fiscale
+\textbf{Esercizio 8d}: Un cliente ha un nome,  un codice fiscale, un array di CD acquistati. Un cliente pu\`o acquistare al massimo 10 CD.
 \end{framed}
 \begin{lstlisting}[language=Java,escapechar=|]
 package esercitazione2;
@@ -1737,7 +1738,7 @@ public class Main {
 			int clienteCorrente=0;
 			while(true){
 				Cliente cliente=clienti[clienteCorrente];
-				System.out.println("Ciao "+cliente+" che libro vuoi comprare?");
+				System.out.println("Ciao "+cliente+" che CD vuoi comprare?");
 				negozio.printBooks();
 				int sn=scanner.nextInt();
 				CD cd=negozio.getCD(sn);
@@ -2069,8 +2070,10 @@ public class GameLogic {
 
 
 \section{Curiosity}
-
-
+\begin{framed}
+Classes should be immutable unless there's a very good reason to make them mutable\ldots If a class cannot be made immutable, limit its mutability as much as possible.\\
+\emph{``Joshua Bloch – Effective Java"}
+\end{framed}
 
 \section{Esercizi per casa}
 \begin{itemize}
