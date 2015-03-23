@@ -231,8 +231,17 @@ All Tech &
 \bottomrule
 \end{tabular}
 \end{table}
-La tabella di valutazione presenta le funzionalit\`a da implementare nel caso di gruppi da 1,2 e 3 studenti. I gruppi da 1 e 3 studenti sono \textbf{sconsigliati}.
+La tabella di valutazione presenta le funzionalit\`a da implementare
+nel caso di gruppi da 1,2 e 3 studenti.
+Gli studenti di telecomunicazioni, possono fare i gruppi insieme di un
+massimo di 4 persone ed i requisiti applicati corrisponderanno il
+gruppo con una persona in meno, con l'eccezione di un gruppo di 1
+persona. 
+
 \end{frame}
+
+
+
 \begin{frame}
 \frametitle{Valutazione}
 I gruppi da 1,2,3 studenti devono implementare  le specifiche
@@ -255,7 +264,7 @@ Le funzionalit\`a avanzate possono essere implementate dai tutti gruppi e compor
 \begin{itemize}
 \item \textbf{Command Line Client (CLC)}: il client e' implementato come un interfaccia testuale e i vari giocatori che si alternano nei turni utilizzeranno la tastiera.
 \item \textbf{GUI}: consiste in un interfaccia grafica swing
-\item \textbf{RMI} la comunicazione avviene mediante ``Remote method invocation''
+\item \textbf{RMI:} la comunicazione avviene mediante ``Remote method invocation''
 \item \textbf{Socket}: la comunicazione avviene mediante scambiati
   attraverso socket. Lo studente deve autonomamente definire e
   implementare un protocollo di comunicazione tra il client e il
@@ -285,9 +294,27 @@ Di seguito sono proposte alcune funzionalit\`a avanzate che concorrono alla valu
 \begin{frame}
 \frametitle{Funzionalita Avanzate}
 \begin{itemize}
-\item  \textbf{Stateful server}. implementare la possibilit\`a di salvare lo stato del server su disco e di ricaricarlo all'avvio successivo. In particolare il server potr\`a inviare un comando pause ai client per indicare il su spegnimento e da li in vanati non accetter\`a ulteriori comandi, salver\`a lo stato su disco e terminer\`a la sua esecuzione. Al riavvio dovr\`a ricaricare la partita dal punto in cui si \`e interrotta. 
+\item  \textbf{Stateful server}. Implementare la possibilit\`a di
+  salvare lo stato del server su disco e di ricaricarlo all'avvio
+  successivo. In particolare il server potr\`a inviare un comando
+  pause ai client per indicare il su spegnimento e da li in vanati non
+  accetter\`a ulteriori comandi, salver\`a lo stato su disco e
+  terminer\`a la sua esecuzione. Al riavvio dovr\`a ricaricare la
+  partita dal punto in cui si \`e interrotta.  
+\item \textbf{Stateful client}. Ai giocatori \`e permesso abbandonare
+  temporaneamente la partita per via della perdita di connettivit\`a.
+  Se il giocatore si riconnette prima della fine della partita pu\`o
+  ricominciare a giocare, come se nulla fosse successo (ovviamente
+  perde i turni durante i quali non ha giocato).
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Funzionalita Avanzate}
+\begin{itemize}
 \item \textbf{Generazione automatica delle configurazioni di
-    gioco}. il server deve essere in grado di generare automaticamente
+    gioco}. Il server deve essere in grado di generare automaticamente
   una configurazione del gioco partendo da alcuni parametri dati. Per
   esempio dato il numero dei terreni e numero di Escape Hatches il
   server deve generare una mappa random, consigliare un numero di
@@ -296,6 +323,7 @@ Di seguito sono proposte alcune funzionalit\`a avanzate che concorrono alla valu
 \end{itemize}
 
 \end{frame}
+
 
 \section{Specifiche implementative}
 \begin{frame}
@@ -355,33 +383,25 @@ utente si connette e non ci sono partite in attesa altrimenti l'utente
 entra automaticamente a far parte della partita in fase di avvio.
 \end{frame}
 
-\subsection{Gioco}
+\subsection{Corso della partita}
 \begin{frame}
-\frametitle{Gioco}
-%Perhaps this can be additional functionality
+\frametitle{Corso della partita}
 Il server consente ai vari giocatori di svolgere i propri turni
-secondo le regole di giocco. E' necessario gestire il caso in cui i
-client si disconnettano. Ai giocatori \`e permesso abbandonare
-temporaneamente la partita per via della perdita di connettivit\`a.
+secondo le regole di gioco. E' necessario gestire il caso in cui i
+client si disconnettano.
 \begin{itemize}
-\item se un giocatore va offline il server sospende la partita per un periodo di tempo fissato a priori
-\item se il giocatore si riconnette prima del tempo prestabilito la partita riprende da dove \`e stata interrotta
-\item trascorso il periodo di tempo il server sospende il giocatore (nota il giocatore non esegue mosse ma viene comunque considerato nel conteggio dei punti etc.)
+\item ogni giocatore ha un periodo di tempo fissato a priori per  eseguire le mosse 
+\item se un giocatore va offline il server attende per questo periodo
+  dopo il quale sospende il giocatore (nota il giocatore non esegue
+  mosse ma viene comunque considerato nel conteggio dei punti etc.) 
+\item tutti i giocatori vengono notificati che un giocatore manca
+\item il gioco continua, saltando i giri del giocatore sospeso
+\item il cliente può riconnettersi e continuare il gioco se si sceglie
+  di implementare il ``stateful client'' funzionalit\`a 
 \end{itemize}
 \end{frame}
 
-\begin{frame}
-\frametitle{Gioco}
-\begin{itemize}
-\item dopo la sospensione del giocatore il gioco ricomincia senza il
-  giocatore sospeso
-\item in caso di sospensione tutti i giocatori vengono notificati e
-  non possono interagire con il gioco 
-\item se il giocatore si riconnette prima della fine della partita
-  pu\`o ricominciare a giocare, come se nulla fosse successo
-  (ovviamente perde i turni durante i quali non ha giocato)
-\end{itemize}
-\end{frame}
+
 
 
 {
@@ -395,3 +415,4 @@ temporaneamente la partita per via della perdita di connettivit\`a.
 
 
 \end{document} 
+
