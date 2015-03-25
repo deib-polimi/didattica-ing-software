@@ -127,11 +127,11 @@
 %	NAME AND CLASS SECTION
 %----------------------------------------------------------------------------------------
 
-\newcommand{\hmwkTitle}{Ereditarietà} % Assignment title
-\newcommand{\hmwkDueDate}{Martedi,\ Aprile 15,\ 2014} % Due date
+\newcommand{\hmwkTitle}{Ereditariet\`a e Interfacce} % Assignment title
+\newcommand{\hmwkDueDate}{Martedi,\ Marzo 24,\ 2015} % Due date
 \newcommand{\hmwkClass}{Ingegneria del Software 1} % Course/class
 \newcommand{\hmwkClassTime}{} % Class/lecture time
-\newcommand{\hmwkClassInstructor}{Carlo Ghezzi} % Teacher/lecturer
+\newcommand{\hmwkClassInstructor}{Claudio Menghi, Alessandro Rizzi} % Teacher/lecturer
 \newcommand{\hmwkAuthorName}{} % Your name
 
 %----------------------------------------------------------------------------------------
@@ -222,7 +222,12 @@ Per questo motivo in Java si distingue tra tipo statico e tipo dinamico.
 \end{itemize}
 
 In Java è possibile assegnare a una variabile di classe $T$ un'istanza di classe $S$
-dove $S$ eredita $T$.
+dove $S$ eredita $T$. Consideriamo le seguenti istruzioni
+
+\begin{lstlisting}[language=Java,escapechar=|]
+Automobile myCar=new AutomobileElettrica();
+\end{lstlisting}
+Il tipo statico di \texttt{myCar} \`e \texttt{Automobile}, il suo tipo dinamico \`e \texttt{AutomobileElettrica}.
 
 %Viceversa è possibile assegnare un istanza di $T$ a una variabile di classe $S$ effettuando un casting:
 
@@ -237,7 +242,10 @@ dove $S$ eredita $T$.
 
 \subsection{Binding}
 
-Si definisce con \emph{binding} l'associazione di un determinato metodo a una invocazione.
+Si definisce con \emph{binding} l'associazione della chiamata di un determinato \emph{metodo} all'effettivo codice associato al metodo.\\
+
+A compile time, il compilatore non genera il codice per eseguire il metodo, ma il codice per cercare l'\emph{implementazione} corretta in base al tipo \emph{dinamico} dell'oggetto su cui il metodo \`e invocato.
+
 Per effettuare il binding Java utilizza il seguente algoritmo.
 Ipotizziamo di chiamare un metodo \texttt{foo} sull'oggetto \texttt{o}
 
@@ -574,7 +582,7 @@ public class Alfiere extends Pezzo {
 				return false;
 			}
 			// controlla tutte le caselle sulla diagonale, se in una di queste c'e' un pezzo ritorna false
-			for(int i=1;i<deltaX;i++){
+			for(int i=1;i<Math.abs(deltaX);i++){
 				if(!scacchiera.getCasella(new Coordinata(this.getCasella().getX()+Integer.signum(deltaX)*i, this.getCasella().getY()+Integer.signum(deltaY)*i)).isEmpty()){
 					return false;
 				}
@@ -626,14 +634,14 @@ public class Torre extends Pezzo {
 			}
 			if(deltaY==0){
 				// controlla tutte le caselle sulla diagonale, se in una di queste c'e' un pezzo ritorna false
-				for(int i=1;i<deltaX;i++){
+				for(int i=1;i<Math.abs(deltaX);i++){
 					if(!scacchiera.getCasella(new Coordinata(this.getCasella().getX() +i, this.getCasella().getY())).isEmpty()){
 						return false;
 					}
 				}
 			}
 			if(deltaX==0){
-				for(int i=1;i<deltaX;i++){
+				for(int i=1;i<Math.abs(deltaX);i++){
 					if(!scacchiera.getCasella(new Coordinata(this.getCasella().getX(), this.getCasella().getY()+i)).isEmpty()){
 						return false;
 					}
@@ -727,7 +735,7 @@ public class Donna extends Pezzo {
 			if (Math.abs(deltaX) == Math.abs(deltaY)) {
 				// controlla tutte le caselle sulla diagonale, se in una di
 				// queste c'e' un pezzo ritorna false
-				for (int i = 1; i < deltaX; i++) {
+				for (int i = 1; i < Math.abs(deltaX); i++) {
 					if (!scacchiera.getCasella(
 							new Coordinata(this.getCasella().getX()
 									+ Integer.signum(deltaX) * i, this
@@ -743,7 +751,7 @@ public class Donna extends Pezzo {
 				if (deltaY == 0) {
 					// controlla tutte le caselle sulla diagonale, se in una di
 					// queste c'e' un pezzo ritorna false
-					for (int i = 1; i < deltaX; i++) {
+					for (int i = 1; i < Math.abs(deltaX); i++) {
 						if (!scacchiera.getCasella(
 								new Coordinata(this.getCasella().getX() + i,
 										this.getCasella().getY())).isEmpty()) {
@@ -752,7 +760,7 @@ public class Donna extends Pezzo {
 					}
 				}
 				if (deltaX == 0) {
-					for (int i = 1; i < deltaX; i++) {
+					for (int i = 1; i < Math.abs(deltaX); i++) {
 						if (!scacchiera.getCasella(
 								new Coordinata(this.getCasella().getX(), this
 										.getCasella().getY() + i)).isEmpty()) {
@@ -1283,6 +1291,38 @@ public interface TwoDimensionalCanvas {
 \end{lstlisting}
 
 
+\subsubsection{Point}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class Point {
+	private final double x;
+	private final double y;
+
+	public Point(double x, double y) {
+		this.x = x;
+		this.y = y;
+	}
+
+	public double getX() {
+		return x;
+	}
+
+	public double getY() {
+		return y;
+	}
+
+	public Point rotate(Point center, double degrees) {
+		double rotatedX = center.x + (x - center.x) * Math.cos(degrees) - (y - center.y) * Math.sin(degrees);
+		double rotatedY = center.y + (x - center.x) * Math.sin(degrees) + (y - center.y) * Math.cos(degrees);
+		return new Point(rotatedX, rotatedY);
+	}
+	
+	public String toString(){
+		return "x = " + x + " y = " + y;
+	}
+}
+\end{lstlisting}
+
+
 \subsubsection{Shape}
 Prima di tutto definiamo la classe astratta \texttt{Shape}. 
 Perch\`e usiamo una classe astratta?
@@ -1365,36 +1405,6 @@ public class Circle extends Shape{
 }
 \end{lstlisting}
 
-\subsubsection{Point}
-\begin{lstlisting}[language=Java,escapechar=|]
-public class Point {
-	private final double x;
-	private final double y;
-
-	public Point(double x, double y) {
-		this.x = x;
-		this.y = y;
-	}
-
-	public double getX() {
-		return x;
-	}
-
-	public double getY() {
-		return y;
-	}
-
-	public Point rotate(Point center, double degrees) {
-		double rotatedX = center.x + (x - center.x) * Math.cos(degrees) - (y - center.y) * Math.sin(degrees);
-		double rotatedY = center.y + (x - center.x) * Math.sin(degrees) + (y - center.y) * Math.cos(degrees);
-		return new Point(rotatedX, rotatedY);
-	}
-	
-	public String toString(){
-		return "x = " + x + " y = " + y;
-	}
-}
-\end{lstlisting}
 
 \subsubsection{Square}
 \begin{lstlisting}[language=Java,escapechar=|]
@@ -1480,8 +1490,454 @@ public class ShapeClient {
 }
 \end{lstlisting}
 
+
+
 \subsection{Esercizio 4: Animali (Interfacce)}
+
+
+\subsection{Esercizio 5: Forme Geometriche (Resizable, Rotatable)}
+\begin{framed}
+\textbf{Esercizio 5}: Deve essere possibile ruotare e ridimensionare gli oggetti shape. A seconda della loro natura (e.g., un cerchio non pu\`o essere ruotato ma pu\`o essere ridimensionato)
+\end{framed}
+
+\subsubsection{Rotatable}
+\begin{lstlisting}[language=Java,escapechar=|]
+public interface Rotatable {
+	public Shape rotate(double angle);
+}
+\end{lstlisting}
+
+\subsubsection{Resizable}
+\begin{lstlisting}[language=Java,escapechar=|]
+public interface Resizable {
+	public Shape resize(double scale);
+}
+\end{lstlisting}
+
+\subsubsection{Square}
+
+\begin{lstlisting}[language=Java,escapechar=|]
+public class Square extends Shape implements Resizable, Rotatable{
+     //...
+      @Override
+       public Square rotate(double angle) {
+             return new Square(initialPoint, orientation+angle, sideLength);
+       }
+       @Override
+        public Square resize(double scale) {
+             return new Square(initialPoint, orientation, sideLength*scale);
+       }
+}
+\end{lstlisting}
+
+\subsubsection{Circle}
+
+
+
+\begin{lstlisting}[language=Java,escapechar=|]
+public class Circle extends Shape implements Resizable { 
+    //..
+    @Override
+    public Circle resize(double scale) {
+    return new Circle(center, radius*scale);
+    }
+}
+\end{lstlisting}
+
+\subsection{Esercizio 6: Tipo statico e tipo dinamico}
+Dire cosa stampa il seguente programma 
+\begin{lstlisting}[language=Java,escapechar=|]
+public static void main(String[] args) {
+		ClassA a1, a2;
+		ClassB b1;
+		ClassC c1;
+
+		a1 = new ClassB();
+		b1 = new ClassB();
+		c1 = new ClassC();
+		a2 = new ClassC();
+
+		/*
+		 * b1 e' di classe ClassB, viene chiesto di invocare il metodo stampa su
+		 * un parametro b1 di tipo statico ClassB. A compile scelgo la signature
+		 * "compatibile" e piu' "vicina", considerando i tipi statici delle
+		 * variabili. In particolare in questo caso la signature scelta e'
+		 * public void stampa(ClassB p).
+		 * 
+		 * A run time b1 e' di classe classB e e il parametro p, che equivale a
+		 * B1 e' anch'esso di classe ClassB per cui viene chiamato il metodo
+		 * public void stampa(ClassB p) di class B (stampa BBB)
+		 */
+		b1.stampa(b1);
+		/*
+		 * a1 e' di classe ClassA, viene chiesto di invocare il metodo stampa su
+		 * un parametro b1 di tipo statico ClassB. A compile scelgo la signature
+		 * "compatibile" e piu' "vicina", considerando i tipi statici delle
+		 * variabili. In particolare in questo caso la signature scelta e'
+		 * public void stampa(ClassA p) della classe ClassA.
+		 * 
+		 * A run-time a1 e' di classe ClassB. Per questo partendo da classB e
+		 * risalendo nella gerarchia di raffinamento cerco un metodo che matchi
+		 * la signature public void stampa(ClassA p). In questo caso il metodo
+		 * e' gia' presente in ClassB. Quindi viene invocato il metodo public
+		 * void stampa(ClassA p) della classe ClassB (Stampa AAA/BBB)
+		 */
+		a1.stampa(b1);
+
+		/*
+		 * b1 e' di classe ClassB, viene chiesto di invocare il metodo stampa su
+		 * un parametro c1 di tipo statico ClassC. A compile scelgo la signature
+		 * "compatibile" e piu' "vicina", considerando i tipi statici delle
+		 * variabili (ClassB). In particolare in questo caso la signature scelta
+		 * all'interno di ClassB e' public void stampa(ClassA p) della classe
+		 * ClassB.
+		 * 
+		 * A run-time b1 e' di classe ClassB, c1 e' di classe ClassC. Per questo
+		 * partendo da classB e risalendo nella gerarchia di raffinamento cerco
+		 * un metodo che matchi la signature public void stampa(ClassA p). In
+		 * questo caso il metodo e' gia' presente in ClassB. Quindi viene
+		 * invocato il metodo public void stampa(ClassA p) della classe ClassB
+		 * (Stampa AAA/BBB)
+		 */
+		b1.stampa(c1);
+
+		/*
+		 * c1 e' di classe statica ClassC, viene chiesto di invocare il metodo stampa su
+		 * un parametro c1 di tipo statico ClassC. A compile scelgo la signature
+		 * "compatibile" e piu' "vicina", considerando i tipi statici delle
+		 * variabili (ClassC). In particolare in questo caso la signature scelta
+		 * all'interno di ClassC e' public void stampa(ClassC p) della classe
+		 * ClassC.
+		 * 
+		 * A run-time c1 e' di classe ClassC, c1 e' di classe ClassC. Per questo
+		 * partendo da ClassC e risalendo nella gerarchia di raffinamento cerco
+		 * un metodo che matchi la signature public void stampa(ClassC p). In
+		 * questo caso il metodo e' gia' presente in ClassC. Quindi viene
+		 * invocato il metodo public void stampa(ClassC p) della classe ClassC
+		 * (Stampa CCC)
+		 */
+		c1.stampa(c1);
+		
+		/*
+		 * c1 e' di classe statica ClassC, viene chiesto di invocare il metodo stampa su
+		 * un parametro a1 di tipo statico ClassA. A compile scelgo la signature
+		 * "compatibile" e piu' "vicina", considerando i tipi statici delle
+		 * variabili. In particolare in questo caso la signature scelta
+		 * all'interno di ClassC e' public void stampa(ClassA p) della classe
+		 * ClassC.
+		 * 
+		 * A run-time c1 e' di classe ClassC, a1 e' di classe ClassB. Per questo
+		 * partendo da ClassC e risalendo nella gerarchia di raffinamento cerco
+		 * un metodo che matchi la signature public void stampa(ClassA p). In
+		 * questo caso il metodo e' gia' presente in ClassC. Quindi viene
+		 * invocato il metodo public void stampa(ClassA p) della classe ClassC
+		 * (Stampa AAA/CCC)
+		 */
+		c1.stampa(a1);
+
+		/*
+		 * a2 e' di classe statica ClassA, viene chiesto di invocare il metodo stampa su
+		 * un parametro c1 di tipo statico ClassC. A compile scelgo la signature
+		 * "compatibile" e piu' "vicina", considerando i tipi statici delle
+		 * variabili. In particolare in questo caso la signature scelta
+		 * all'interno di ClassA e' public void stampa(ClassA p) della classe
+		 * ClassA.
+		 * 
+		 * A run-time a2 e' di classe ClassC, c1 e' di classe ClassC. Per questo
+		 * partendo da ClassC e risalendo nella gerarchia di raffinamento cerco
+		 * un metodo che matchi la signature public void stampa(ClassA p). In
+		 * questo caso il metodo e' gia' presente in ClassC. Quindi viene
+		 * invocato il metodo public void stampa(ClassA p) della classe ClassC
+		 * (Stampa AAA/CCC)
+		 */
+		a2.stampa(c1);
+	}
+\end{lstlisting}
+dove 
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassA {
+
+	public void stampa(ClassA p){
+		System.out.println("AAA");
+	}
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassB extends ClassA {
+	public void stampa(ClassB p){
+		System.out.println("BBB");
+	}
+	public void stampa(ClassA p){
+		System.out.println("AAA/BBB");
+	}
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassC extends ClassA {
+	public void stampa(ClassC p){
+		System.out.println("CCC");
+	}
+	public void stampa(ClassA p){
+		System.out.println("AAA/CCC");
+	}
+}
+\end{lstlisting}
+
+\subsubsection{Esercizio 6a}
+\begin{framed}
+\textbf{Esercizio 6a}: Cosa succede se \texttt{ClassC} eredita da \texttt{ClassB} e non da \texttt{ClassA}
+\end{framed}
+\begin{lstlisting}[language=Java,escapechar=|]
+package tipostaticoedinamico;
+
+public class Main {
+
+	public static void main(String[] args) {
+		ClassA a1, a2;
+		ClassB b1;
+		ClassC c1;
+
+		a1 = new ClassB();
+		b1 = new ClassB();
+		c1 = new ClassC();
+		a2 = new ClassC();
+
+		/*
+		 * b1 e' di classe ClassB, viene chiesto di invocare il metodo stampa su
+		 * un parametro b1 di tipo statico ClassB. A compile scelgo la signature
+		 * "compatibile" e piu' "vicina", considerando i tipi statici delle
+		 * variabili. In particolare in questo caso la signature scelta e'
+		 * public void stampa(ClassB p).
+		 * 
+		 * A run time b1 e' di classe classB e e il parametro p, che equivale a
+		 * B1 e' anch'esso di classe ClassB per cui viene chiamato il metodo
+		 * public void stampa(ClassB p) di class B (stampa BBB)
+		 */
+		b1.stampa(b1);
+		/*
+		 * a1 e' di classe ClassA, viene chiesto di invocare il metodo stampa su
+		 * un parametro b1 di tipo statico ClassB. A compile scelgo la signature
+		 * "compatibile" e piu' "vicina", considerando i tipi statici delle
+		 * variabili. In particolare in questo caso la signature scelta e'
+		 * public void stampa(ClassA p) della classe ClassA.
+		 * 
+		 * A run-time a1 e' di classe ClassB. Per questo partendo da classB e
+		 * risalendo nella gerarchia di raffinamento cerco un metodo che matchi
+		 * la signature public void stampa(ClassA p). In questo caso il metodo
+		 * e' gia' presente in ClassB. Quindi viene invocato il metodo public
+		 * void stampa(ClassA p) della classe ClassB (Stampa AAA/BBB)
+		 */
+		a1.stampa(b1);
+
+		/*
+		 * b1 e' di classe ClassB, viene chiesto di invocare il metodo stampa su
+		 * un parametro c1 di tipo statico ClassC. A compile scelgo la signature
+		 * "compatibile" e piu' "vicina", considerando i tipi statici delle
+		 * variabili (ClassB). In particolare in questo caso la signature scelta
+		 * all'interno di ClassB e' public void stampa(ClassB p) della classe
+		 * ClassB.
+		 * 
+		 * A run-time b1 e' di classe ClassB, c1 e' di classe ClassC. Per questo
+		 * partendo da classB e risalendo nella gerarchia di raffinamento cerco
+		 * un metodo che matchi la signature public void stampa(ClassB p). In
+		 * questo caso il metodo e' gia' presente in ClassB. Quindi viene
+		 * invocato il metodo public void stampa(ClassB p) della classe ClassB
+		 * (Stampa BBB)
+		 */
+		b1.stampa(c1);
+
+		/*
+		 * c1 e' di classe statica ClassC, viene chiesto di invocare il metodo stampa su
+		 * un parametro c1 di tipo statico ClassC. A compile scelgo la signature
+		 * "compatibile" e piu' "vicina", considerando i tipi statici delle
+		 * variabili (ClassC). In particolare in questo caso la signature scelta
+		 * all'interno di ClassC e' public void stampa(ClassC p) della classe
+		 * ClassC.
+		 * 
+		 * A run-time c1 e' di classe ClassC, c1 e' di classe ClassC. Per questo
+		 * partendo da ClassC e risalendo nella gerarchia di raffinamento cerco
+		 * un metodo che matchi la signature public void stampa(ClassC p). In
+		 * questo caso il metodo e' gia' presente in ClassC. Quindi viene
+		 * invocato il metodo public void stampa(ClassC p) della classe ClassC
+		 * (Stampa CCC)
+		 */
+		c1.stampa(c1);
+		
+		/*
+		 * c1 e' di classe statica ClassC, viene chiesto di invocare il metodo stampa su
+		 * un parametro a1 di tipo statico ClassA. A compile scelgo la signature
+		 * "compatibile" e piu' "vicina", considerando i tipi statici delle
+		 * variabili. In particolare in questo caso la signature scelta
+		 * all'interno di ClassC e' public void stampa(ClassA p) della classe
+		 * ClassC.
+		 * 
+		 * A run-time c1 e' di classe ClassC, a1 e' di classe ClassB. Per questo
+		 * partendo da ClassC e risalendo nella gerarchia di raffinamento cerco
+		 * un metodo che matchi la signature public void stampa(ClassA p). In
+		 * questo caso il metodo e' gia' presente in ClassC. Quindi viene
+		 * invocato il metodo public void stampa(ClassA p) della classe ClassC
+		 * (Stampa AAA/CCC)
+		 */
+		c1.stampa(a1);
+
+		/*
+		 * a2 e' di classe statica ClassA, viene chiesto di invocare il metodo stampa su
+		 * un parametro c1 di tipo statico ClassC. A compile scelgo la signature
+		 * "compatibile" e piu' "vicina", considerando i tipi statici delle
+		 * variabili. In particolare in questo caso la signature scelta
+		 * all'interno di ClassA e' public void stampa(ClassA p) della classe
+		 * ClassA.
+		 * 
+		 * A run-time a2 e' di classe ClassC, c1 e' di classe ClassC. Per questo
+		 * partendo da ClassC e risalendo nella gerarchia di raffinamento cerco
+		 * un metodo che matchi la signature public void stampa(ClassA p). In
+		 * questo caso il metodo e' gia' presente in ClassC. Quindi viene
+		 * invocato il metodo public void stampa(ClassA p) della classe ClassC
+		 * (Stampa AAA/CCC)
+		 */
+		a2.stampa(c1);
+	}
+}
+\end{lstlisting}
+
+\subsection{Esercizio 7: Tipo statico e tipo dinamico}
+Dire cosa stampa il seguente programma 
+\begin{lstlisting}[language=Java,escapechar=|]
+public class Main {
+
+	public static void main(String[] args) {
+		Figura f1, f2;
+		Quadrato q=new Rettangolo();
+		Rettangolo r=new Rettangolo();
+		f1=new Quadrato();
+		f2=new Rettangolo();
+		
+		/*
+		 * f1 e' di classe statica Figura, viene chiesto di invocare il metodo stampa su
+		 * un parametro f2 di tipo statico Figura. A compile scelgo la signature
+		 * "compatibile" e piu' "vicina", considerando i tipi statici delle
+		 * variabili. In particolare in questo caso la signature scelta
+		 * all'interno di Figura e' public void stampa(Figura p) della classe
+		 * Figura.
+		 * 
+		 * A run-time f1 e' di classe Quadrato, f2 e' di classe Rettangolo. Per questo
+		 * partendo da Quadrato e risalendo nella gerarchia di raffinamento cerco
+		 * un metodo che matchi la signature public void stampa(Figura p). In
+		 * questo caso il metodo e' presente solo in Figura. Quindi viene
+		 * invocato il metodo public void stampa(Figura p) della classe Figura
+		 * (Stampa Figura)
+		 */
+		f1.stampa(f2);
+		
+		/*
+		 * q e' di classe statica Quadrato, viene chiesto di invocare il metodo stampa su
+		 * un parametro r di tipo statico Rettangolo. A compile scelgo la signature
+		 * "compatibile" e piu' "vicina", considerando i tipi statici delle
+		 * variabili. In particolare in questo caso la signature scelta
+		 * all'interno di Quadrato e' public void stampa(Rettangolo p) della classe
+		 * Quadrato.
+		 * 
+		 * A run-time q e' di classe Rettangolo, r e' di classe Rettangolo. Per questo
+		 * partendo da Rettangolo e risalendo nella gerarchia di raffinamento cerco
+		 * un metodo che matchi la signature public void stampa(Rettangolo p). In
+		 * questo caso il metodo e' presente in Rettangolo. Quindi viene
+		 * invocato il metodo public void stampa(Rettangolo p) della classe Rettangolo
+		 * (Stampa Rettangolo Particolare)
+		 */
+		q.stampa(r);
+		
+		/*
+		 * f1 e' di classe statica Figura, viene chiesto di invocare il metodo stampa su
+		 * un parametro q di tipo statico Quadrato. A compile scelgo la signature
+		 * "compatibile" e piu' "vicina", considerando i tipi statici delle
+		 * variabili. In particolare in questo caso la signature scelta
+		 * all'interno di Figura e' public void stampa(Figura p) della classe
+		 * Figura.
+		 * 
+		 * A run-time f1 e' di classe Quadrato, q e' di classe Rettangolo. Per questo
+		 * partendo da Quadrato e risalendo nella gerarchia di raffinamento cerco
+		 * un metodo che matchi la signature public void stampa(Figura p). In
+		 * questo caso il metodo e' presente in Figura. Quindi viene
+		 * invocato il metodo public void stampa(Figura p) della classe Figura
+		 * (Stampa Figura)
+		 */
+		f1.stampa(q);
+		
+		/*
+		 * q e' di classe statica Quadrato, viene chiesto di invocare il metodo stampa su
+		 * un parametro f1 di tipo statico Figura. A compile scelgo la signature
+		 * "compatibile" e piu' "vicina", considerando i tipi statici delle
+		 * variabili. In particolare in questo caso la signature scelta
+		 * all'interno di Quadrato e' public void stampa(Figura q) della classe
+		 * Figura.
+		 * 
+		 * A run-time q e' di classe Rettangolo, f1 e' di classe Quadrato. Per questo
+		 * partendo da Rettangolo e risalendo nella gerarchia di raffinamento cerco
+		 * un metodo che matchi la signature public void stampa(Figura p). In
+		 * questo caso il metodo e' presente in Rettangolo. Quindi viene
+		 * invocato il metodo public void stampa(Figura p) della classe Rettangolo
+		 * (Stampa Figura particolare)
+		 */
+		q.stampa(f1);
+		
+		/*
+		 * q e' di classe statica Quadrato, viene chiesto di invocare il metodo stampa su
+		 * un parametro q di tipo statico Quadrato. A compile scelgo la signature
+		 * "compatibile" e piu' "vicina", considerando i tipi statici delle
+		 * variabili. In particolare in questo caso la signature scelta
+		 * all'interno di Quadrato e' public void stampa(Quadrato q) della classe
+		 * Quadrato.
+		 * 
+		 * A run-time q e' di classe Rettangolo. Per questo
+		 * partendo da Rettangolo e risalendo nella gerarchia di raffinamento cerco
+		 * un metodo che matchi la signature public void stampa(Quadrato p). In
+		 * questo caso il metodo e' presente in Rettangolo. Quindi viene
+		 * invocato il metodo public void stampa(Quadrato p) della classe Rettangolo
+		 * (Stampa Rettangolo particolare)
+		 */
+		q.stampa(q);
+
+	}
+}
+\end{lstlisting}
+
+Dove
+\begin{lstlisting}[language=Java,escapechar=|]
+public class Figura {
+	public void stampa(Figura f){
+		System.out.println("Figura");
+	}
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class Quadrato extends Figura {
+	public void stampa(Quadrato q){
+		System.out.println("Quadrato");
+	}
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class Rettangolo extends Quadrato {
+	public void stampa(Rettangolo q) {
+		System.out.println("Rettangolo");
+	}
+
+	public void stampa(Quadrato q) {
+		System.out.println("Rettangolo particolare");
+	}
+
+	public void stampa(Figura q) {
+		System.out.println("Figura particolare");
+	}
+}
+\end{lstlisting}
+
 \section{Esercizi per casa}
+
+
+
 
 \clearpage
 
