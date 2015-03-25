@@ -120,13 +120,13 @@ Il progetto consiste nello sviluppo di software del gioco da tavolo.
 
 Il progetto finale dovr\` a includere:
 \begin{itemize}
-\item diagramma UML iniziale dell'applicazione
-\item diagrammi UML che mostrino come \` e stato progettato il software;
+\item diagramma UML iniziale dell'applicazione  (al alto livello)
+\item diagrammi UML che mostrino come \`e stato progettato il software;
 \item implementazione funzionante del gioco conforme alle regole del gioco e alle specifiche presenti in questo documento
 \item codice sorgente dell'implementazione
 \item codice sorgente dei test di unit\`a
 \end{itemize}
-\textbf{La data di consegna: 19 Giugno 2015, 23:59h.}\\
+\textbf{La data di consegna: 19 Giugno 2015, 23:59h. CET}\\
 \textbf{La data di valutazione: 23 Giugno 2015.}
 \end{frame}
 
@@ -149,7 +149,7 @@ Saranno oggetto di valutazione
 \item la qualit\` a della \textbf{progettazione} con particolare riferimento a
   un uso appropriato di interfacce, ereditariet\`a, composizione tra
   classi, uso dei design pattern;
-\item la qualit\` a della progettazione di \textbf{architettura
+\item la qualit\` a della progettazione dell'\textbf{architettura
   dell'applicazione}; divisione della responsabilit\'a; progettazione
   della comunicazione;
 \item la stabilit\` a dell'implementazione e la \textbf{conformit\` a alle
@@ -160,9 +160,9 @@ Saranno oggetto di valutazione
   (preferibilmente in inglese), la mancanza di codice ripetuto e
   metodi di eccessiva lunghezza;
 \item la \textbf{qualit\` a} e la \textbf{copertura} dei casi di test: il nome e i
-  commenti ogni test dovranno chiaramente specificare le funzionalit\`
+  commenti di ogni test dovranno chiaramente specificare le funzionalit\`
   a testate e i componenti coinvolti;
- \item il corretto utilizzo di strumenti (Eclipse, Git, Maven, ...);
+ \item il corretto utilizzo degli strumenti (Eclipse, Git, Maven, ...);
 \item il livello di autonomia e impegno nello svolgimento del progetto.
 \end{itemize}
 \end{frame}
@@ -204,17 +204,17 @@ Premade scenarios
  \\
  
 22 &
-RMI +  CLC &
-Socket + CLC & 
+RMI +  CLI &
+Socket + CLI & 
 Socket + GUI \\
 
 24 & 
-Socket + CLC &
-RMI + Socket + CLC  &
+Socket + CLI &
+RMI + Socket + CLI  &
 RMI + Socket + GUI \\
 
 26 &
-RMI + Socket + CLC &
+RMI + Socket + CLI &
 RMI + Socket + GUI &
 All Tech\\
 
@@ -262,14 +262,13 @@ Le funzionalit\`a avanzate possono essere implementate dai tutti gruppi e compor
 \begin{frame}
 \frametitle{Valutazione}
 \begin{itemize}
-\item \textbf{Command Line Client (CLC)}: il client e' implementato come un interfaccia testuale e i vari giocatori che si alternano nei turni utilizzeranno la tastiera.
+\item \textbf{Command Line Interface (CLI)}: \`e implementato come un interfaccia testuale e i vari giocatori che si alternano nei turni utilizzeranno la tastiera.
 \item \textbf{GUI}: consiste in un interfaccia grafica swing
 \item \textbf{RMI:} la comunicazione avviene mediante ``Remote method invocation''
-\item \textbf{Socket}: la comunicazione avviene mediante scambiati
+\item \textbf{Socket}: la comunicazione avviene mediante messaggi scambiati
   attraverso socket. Lo studente deve autonomamente definire e
-  implementare un protocollo di comunicazione tra il client e il
-  server.
-\item \textbf{Funzionalit\`a avanzate}: sono descritte in precedenza
+  implementare un protocollo di comunicazione tra i componenti distribuiti.
+\item \textbf{Funzionalit\`a avanzate}: sono descritte in successivo.
 \end{itemize}
 \end{frame}
 
@@ -284,9 +283,9 @@ Di seguito sono proposte alcune funzionalit\`a avanzate che concorrono alla valu
   gestione degli utenti che supporti il login dei giocatori, conservi
   per ciascuno le statistiche di gioco (numero di vittorie, tempo di
   gioco, numero di sconfitte, etc...) e produca una classifica
-  ordinata prima per numero di vittorie e quindi per minimo tempo di
-  gioco cumulativo. Inoltre per ogni parita si desidera
-  memorizzare in un frame laterale la sequenza di mosse effettuate dai
+  ordinata, prima per numero di vittorie e quindi per minimo tempo di
+  gioco cumulativo. Inoltre, per ogni parita si desidera
+  memorizzare, in un frame laterale, la sequenza di mosse effettuate dai
   vari giocatori in ordine di occorrenza.
 \end{itemize}
 \end{frame}
@@ -294,14 +293,10 @@ Di seguito sono proposte alcune funzionalit\`a avanzate che concorrono alla valu
 \begin{frame}
 \frametitle{Funzionalita Avanzate}
 \begin{itemize}
-\item  \textbf{Stateful server}. Implementare la possibilit\`a di
-  salvare lo stato del server su disco e di ricaricarlo all'avvio
-  successivo. In particolare il server potr\`a inviare un comando
-  pause ai client per indicare il su spegnimento e da li in vanati non
-  accetter\`a ulteriori comandi, salver\`a lo stato su disco e
-  terminer\`a la sua esecuzione. Al riavvio dovr\`a ricaricare la
-  partita dal punto in cui si \`e interrotta.  
-\item \textbf{Stateful client}. Ai giocatori \`e permesso abbandonare
+\item  \textbf{Lato gioco stateful}. Implementare la possibilit\`a di
+  salvare lo stato del lato gioco su disco e di ricaricarlo all'avvio
+  successivo nel modo che si ritiene pi\`u idoneo. 
+\item  \textbf{Lato giocatore stateful}. Ai giocatori \`e permesso abbandonare
   temporaneamente la partita per via della perdita di connettivit\`a.
   Se il giocatore si riconnette prima della fine della partita pu\`o
   ricominciare a giocare, come se nulla fosse successo (ovviamente
@@ -314,12 +309,11 @@ Di seguito sono proposte alcune funzionalit\`a avanzate che concorrono alla valu
 \frametitle{Funzionalita Avanzate}
 \begin{itemize}
 \item \textbf{Generazione automatica delle configurazioni di
-    gioco}. Il server deve essere in grado di generare automaticamente
+    gioco}. Il lato gioco deve essere in grado di generare automaticamente
   una configurazione del gioco partendo da alcuni parametri dati. Per
-  esempio dato il numero dei terreni e numero di Escape Hatches il
-  server deve generare una mappa random, consigliare un numero di
-  giocatori adeguato. Il server deve anche consentire di progettare
-  mediante un editor opportuno delle mappe da memorizzare sul server.
+  esempio dato il numero dei terreni e il numero di Escape Hatches, il
+  lato gioco deve generare una mappa random e consigliare un numero di
+  giocatori adeguato.
 \end{itemize}
 
 \end{frame}
@@ -330,74 +324,77 @@ Di seguito sono proposte alcune funzionalit\`a avanzate che concorrono alla valu
 \frametitle{Specifiche implementative}
 In questa sezione vengono presentati i requisiti tecnici
 dell'applicazione.  Deve essere un sistema distributivo composto da
-un Game Server che pu\'o gestire molti giochi simultanei e multipli
-Game Clients che possono partecipare nel un solo giocco. Si raccomanda
+un lato gico che pu\'o gestire molti giochi simultanei e multipli
+lati giocatore che possono partecipare nel un solo giocco. Si raccomanda
 l'utilizzo del pattern \textbf{MVC} (Model-View-Controller) per
 progettare l'intero sistema.
 \end{frame}
 
-\subsection{Game Client}
+\subsection{Lato Giocatore}
 \begin{frame}
-\frametitle{Game Client}
+\frametitle{Lato Giocatore}
 \begin{itemize}
-\item I client devono essere sviluppati utilizzando JavaSE. 
+\item Il lato giocatore deve poter essere istanziato pi\`u volte. 
+\item Il lato giocatore deve essere sviluppato utilizzando JavaSE. 
 \item L'interfaccia grafica deve essere realizzata obbligatoriamente in Swing, 
-\item il client deve supportare RMI e Socket in relazione al numero di studenti del gruppo come specificato in tabella~\ref{TabellaDiValutazione}. 
-\item Nel caso in cui sia richiesta sia l'implementazione RMI che per
-  mezzo di socket, l'applicazione all'avvio deve permettere all'utente
-  di selezionare il metodo utilizzato per la comunicazione.
-\item Stesso per pi\'u interfacce richieste (CLC e GUI)
+\item Il lato giocatore deve supportare RMI e Socket, in relazione al numero di studenti del gruppo, come specificato in tabella~\ref{TabellaDiValutazione}. 
+\item Nel caso in cui sia richiesta sia l'implementazione RMI che
+  quelle per mezzo di socket, l'applicazione, all'avvio, deve permettere
+  all'utente di selezionare il metodo utilizzato per la
+  comunicazione.
 \end{itemize}
 \end{frame}
 
-\subsection{Server}
+\subsection{Lato Gioco}
 \begin{frame}
-\frametitle{Server}
-Il server deve gestire le partite. Deve permettere di 
+\frametitle{Lato Gioco}
+Questo componente deve gestire le partite e deve poter essere
+istanziato una sola volta. Deve permettere di:
 \begin{itemize}
 \item creare una nuova partita, inizializzarla, giocarla e concluderla secondo le regole del gioco.
-\item deve essere in grado di gestire pi\`u partite contemporaneamente
-\item deve essere implementato con JavaSE
-\item nel caso in cui sia l'implementazione via socket che RMI sia
-  richiesta all'avvio deve essere possibile supportare i multipli
-  client con diversa modalità di comunicazione (anche come parte di un
-  singolo giocco)
+\item Deve essere in grado di gestire pi\`u partite
+  contemporaneamente.
+\item Deve essere implementato secondo la logica JavaSE.
+\item Nel caso in cui sia l'implementazione via socket che quelle via
+  RMI sia richiesta, all'avvio al questo componente, deve essere
+  possibile adattare il metodo utilizzato rispetto alle scellte lato
+  giocatore.
 \end{itemize}
 \end{frame}
 
 \subsection{Avvio della partita}
 \begin{frame}
 \frametitle{Avvio della partita}
-L'assunzione base \`e che ogni client che voglia partecipare a una partita conosca l'indirizzo (numerico o simbolico) del server. Quando un giocatore si connette al server, 
+L'assunzione base \`e che ogni late giocatore che voglia partecipare a
+una partita conosca l'indirizzo (numerico o simbolico) del lato gioco. Quando un giocatore si connette, 
 \begin{itemize}
-\item se c\`e una partita in fase di avvio di un giocatore viene
-  automaticamente aggiunto alla partita
-\item quando la partita raggiunge il numero massimo dei giocatori
-  (dipende dalla mappa) oppure quando viene raggiunto un timeout  e ci
-  sono il numero minimo dei giocatori la partita inizia 
-\item se non ci sono partite in fase di avvio una nuova partita viene
-  creata.
+\item se c\`e una partita in fase di avvio di un giocatore viene automaticamente aggiunto alla partita
+\item quando la partita raggiunge 8 giocatori oppure quando viene raggiunto un timeout  e ci sono almeno 2 giocatori la partita inizia
+\item se non ci sono partite in fase di avvio, viene creata una nuova partita.
 \end{itemize}
 Si precisa che una nuova partita viene creata solamente quando un
-utente si connette e non ci sono partite in attesa altrimenti l'utente
-entra automaticamente a far parte della partita in fase di avvio.
+utente si connette e non ci sono partite in attesa, altrimenti
+l'utente entra automaticamente a far parte della partita in fase di
+avvio. 
 \end{frame}
 
 \subsection{Corso della partita}
 \begin{frame}
 \frametitle{Corso della partita}
-Il server consente ai vari giocatori di svolgere i propri turni
+Il lato gioco consente ai vari giocatori di svolgere i propri turni
 secondo le regole di gioco. E' necessario gestire il caso in cui i
-client si disconnettano.
+lati giocatore si disconnettano.
 \begin{itemize}
 \item ogni giocatore ha un periodo di tempo fissato a priori per  eseguire le mosse 
-\item se un giocatore va offline il server attende per questo periodo
+\item se un giocatore va offline il lato gioco attende per il periodo di
+  cui sopra,
   dopo il quale sospende il giocatore (nota il giocatore non esegue
   mosse ma viene comunque considerato nel conteggio dei punti etc.) 
-\item tutti i giocatori vengono notificati che un giocatore manca
+\item tutti i giocatori vengono notificati delle mancanze di un giocatore
 \item il gioco continua, saltando i giri del giocatore sospeso
-\item il cliente può riconnettersi e continuare il gioco se si sceglie
-  di implementare il ``stateful client'' funzionalit\`a 
+\item il lato giocatore può riconnettersi e continuare il gioco se si
+  sceglie di implementare il ``Lato giocatore stateful''
+  funzionalit\`a 
 \end{itemize}
 \end{frame}
 
