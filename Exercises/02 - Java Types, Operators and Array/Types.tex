@@ -1,0 +1,2138 @@
+% !TeX spellcheck = it_IT
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\inputencoding{utf8}
+\usepackage[T1]{fontenc}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{hyperref}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{listings}
+\usepackage{subfigure}
+\usepackage{afterpage}
+\usepackage{amsmath,amssymb}            
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{amsthm}
+\usepackage[scriptsize]{caption} 
+\hyphenation{a-gen-tiz-za-zio-ne}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1} % Line spacing
+
+\lstset{
+  numbers=left,
+  stepnumber=5,    
+  firstnumber=1,
+  numberfirstline=true
+}
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle} % Top center head
+\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+\usepackage{listings}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{mathrsfs}
+\usepackage{framed}
+\usepackage{amssymb}
+\usepackage[figuresright]{rotating}
+\usepackage{comment}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{flushend}
+\usepackage{times}
+\usepackage{url}
+\usepackage{comment}
+\usepackage{paralist}
+\usepackage[multiple]{footmisc}
+\usepackage{amsthm}
+\usepackage{multicol}
+
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true
+  tabsize=3,
+  literate={à}{{\'a}}1
+  {è}{{\'e}}1
+  {ì}{{\'u}}1
+  {ò}{{\'o}}1
+  {ù}{{\'u}}1
+}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Types of Data, mutable and not mutable classes} % Assignment title
+\newcommand{\hmwkDueDate}{Martedi,\ Marzo 17,\ 2014} % Due date
+\newcommand{\hmwkClass}{Ingegneria del Software 1} % Course/class
+\newcommand{\hmwkClassTime}{} % Class/lecture time
+\newcommand{\hmwkClassInstructor}{Claudio Menghi, Alessandro Rizzi} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{} % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \\ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{\hmwkDueDate}\\
+\vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+\vspace{3in}
+}
+
+
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+\newpage
+\tableofcontents
+\newpage
+
+\theoremstyle{definition} 
+
+\newtheorem{mydef}{Definition}
+\newtheorem{lemma}{Lemma}
+
+\newtheorem{theorem}{Theorem}[section]
+
+\section{Ripasso}
+Questa lezione copre le slides da 36 a 72 relative a Java.
+%\subsection{Java come linguaggio orientato agli oggetti}
+%Tra le caratteristiche del linguaggio Java, 
+%per gli scopi di questo corso spicca il fatto di essere \emph{orientato agli oggetti}.
+%In un linguaggio orientato agli oggetti i principali componenti
+%di un programma sono gli oggetti.
+%
+%\begin{mydef} (Oggetto) Un \texttt{oggetto} in Java è un'astrazione
+%	di un oggetto del mondo reale che modella l'oggetto reale
+%	relativamente alle caratteristiche di interesse per il programmatore.
+%\end{mydef}
+%In questo paradigma il programmatore descrive \emph{il mondo}
+%(gli oggetti del mondo) e come \emph{il mondo cambi nel tempo}.
+%Questo paradigma differisce da quello procedurale
+%in cui il mattone principale è costituito dalle procedure
+%che modificano i valori del programma.
+%Nei linguaggi procedurali lo sviluppatore specifica \emph{come risolvere} un problema, mentre nei linguaggi orientati agli oggetti
+%prima vengono definiti i relativi concetti e le loro interazioni e solo dopo viene elaborata una strategia di risoluzione attraverso
+%gli oggetti precedentemente definiti.
+%In altri termini mente in $C$ l'uso delle procedure passa in primo piano rispetto alla gestione dei dati,
+%in $Java$ e più in generale nei linguaggi orientati agli oggetti 
+%prima vengono modellate le entità relative al problema e le loro interazioni.
+%
+%Ogni oggetto ha uno stato e un comportamento ed è specificato da una classe.
+%
+%\begin{mydef} (Classe) Una \texttt{classe} è un \emph{tipo} 
+%definito dall'utente che descrive un oggetto.
+%Più precisamente specifica in che modo lo stato dell'oggetto nel sistema possa essere identificato e come lo stato cambi in risposta a operazioni eseguite sull'oggetto.
+%\end{mydef}
+%In Java una classe è una descrizione di entità reali ed è uno stampo per la creazione di oggetti che possano essere creati(istanziati) nel sistema.
+%
+%\subsection{Variabili}
+%\begin{mydef} Una variabile è uno spazio di memoria che contiene un ``valore". 
+%\end{mydef}
+%Java è fortemente tipizzato (\emph{strongly typed}), quindi \emph{ogni variabile ha un tipo}. Il compilatore durante la compilazione controlla che le variabili siano utilizzate in maniera corretta in relazione al loro tipo.\\
+%
+%In Java ci sono 2 tipi di variabili:
+%\begin{itemize}
+%\item le variabili di tipo \emph{primitivo}: contengono direttamente il valore della variabile
+%\item le variabili di tipo \emph{riferimento}: contengono riferimenti a ``valori" 
+%\end{itemize}
+%
+%I tipi \emph{primitivi} sono:
+%
+%	\begin{itemize}
+%		\item \texttt{boolean}: mantiene un valore booleano (\emph{true} o \emph{false}) all'interno di 8 bit
+%		\item \texttt{char}: intero a 16 bit usato per contenere un carattere Unicode, valori tra u0000 e uFFFF
+%		\item \texttt{byte}: intero con segno a 8 bit (da -128 a 127)
+%		\item \texttt{short}: intero con segno a 16 bit (da -32.768 a 32.767)
+%		\item \texttt{int}: intero con segno a 32 bit (da -2.147.483.648 a 2.147.483.647)
+%		\item \texttt{long}: intero con segno a 64 bit (da -9.223.372.036.854.775.808 a 9.223.372.036.854.775.807)
+%		\item \texttt{float}: numero in virgola mobile a 32 bit (da 1.4E-45 a 3.40282235E38)
+%		\item \texttt{double}: numero in virgola mobile a 64 bit (da 4.9E-324 a 1.7976931348623157E+308)
+%	\end{itemize}
+%
+%I tipi di \emph{riferimento} possono essere:
+%\begin{itemize}
+%\item definite dall'utente (o in specifiche librerie)
+%\item fornite da Java per esempio array e enumerazioni
+%\item il loro valore contiene un riferimento a un \emph{oggetto}, un indirizzo di memoria dove l'oggetto è memorizzato
+%\end{itemize}
+%
+%\subsection{Dichiarazione di una variabile}
+%Per dichiarare una variabile è sufficiente specificare il \emph{tipo} e un \emph{identificatore}, ovvero un nome simbolico utilizzato per riferirsi alla variabile\footnote{Java è case sensitive quindi caratteri in upper e lower case sono interpretati come caratteri differenti.}. \\
+%Per esempio, l'istruzione
+%\begin{lstlisting}[language=Java,escapechar=|]
+%int number;
+%\end{lstlisting}
+%dichiara una variabile di tipo primitivo ``\texttt{int}" con identificatore ``\texttt{number}", mentre l'istruzione
+%\begin{lstlisting}[language=Java,escapechar=|]
+%Car mycar;
+%\end{lstlisting}
+%dichiara una variabile di tipo riferimento ``\texttt{Car}" e con identificatore ``\texttt{mycar}".
+%La dichiarazione non alloca spazio per l'oggetto ma solo per il riferimento all'oggetto. \\
+%
+%\emph{Qual'è la differenza tra tipi riferimenti e puntatori (e.g., i puntatori di C)?}\\
+%Ci sono varie differenze e similitudini tra riferimenti e puntatori. In genere un riferimento può essere interpretato come un puntatore ``ad alto livello", mentre la differenza fondamentale è per esempio i riferimenti non consentono l'utilizzo dell'aritmetica dei puntatori. Nei riferimenti l'indirizzo di memoria non è noto e non interessa.
+%
+%\subsection{Convenzione di notazione}
+%In Java i nomi di classi, variabili e metodi fanno uso della notazione a cammello (\emph{CamelCase}).
+%La notazione a cammello è costituita dalla giustapposizione delle parole che costituiscono l'identificativo, unite con l'iniziale di ogni parola maiuscola. 
+%La prima lettera dell'identificativo è maiuscola nel caso di classi e minuscola nel caso di metodi e attributi/variabili. 
+%
+%\subsection{Inizializzazione di una variabile}
+%Una variabile non può essere usata senza essere inizializzata. Quando un attributo viene dichiarato gli viene assegnato un valore di default.
+%
+%Il riferimento e' assegnato inizialmente il valore \texttt{null}, per indicare che il riferimento non e' ancora associato a un oggetto.
+%e variabili vengono inizializzate tramite l'operatore ``$=$''. Questo operatore assegna un valore ad una variabile.
+%Il tipo della variabile deve essere compatibile col tipo del valore.\\
+%Dichiarazione e inizializzazione possono essere effettuate in una o  più istruzioni, a discrezione
+%del programmatore.
+%\begin{lstlisting}[language=Java,escapechar=|]
+%// This characters are used to start a command
+%// declares the variable
+%int number;
+%// initializes a variable
+%number=0
+%\end{lstlisting}
+%Nell'esempio precedente la dichiarazione e l'assegnamento della variabile \texttt{number} sono
+%effettuati in istruzioni differenti.
+%\begin{lstlisting}[language=Java,escapechar=|]
+%// This characters are used to start a command
+%// declares and initializes the variable
+%int number=0
+%\end{lstlisting}
+%In quest'ultimo esempio nella medesima istruzione \texttt{number} viene dichiarata e inizializzata.
+%
+%
+%\subsection{Tipi dato}
+%Vi sono due categorie principali di tipi in Java:
+%
+%
+%
+%\textbf{Dove vengono allocati gli oggetti Java?}\\
+%Gli oggetti Java risiedono in una zona detta \emph{heap}. L'heap viene creato all'avvio della JVM e può cambiare dimensione durante l'esecuzione 
+%dell'applicazione. A discrezione della JVM viene eseguita l'operazione di ``\emph{garbage collection}'', che consiste nella rimozione degli oggetti non più utilizzabili dal programma per fare posto ad altri.\\
+%Il componente che effettua tale operazione prende il nome di ``\emph{garbage collector}''.
+%
+%
+%\textbf{Quali sono le differenze tra puntatori e riferimenti?}
+%\begin{itemize}
+%\item un riferimento non può essere de-allocato dall'utente, viene rimosso dal garbage collector
+%\item un riferimento non permette l'acceso all'indirizzo di memoria relativo ad un oggetto%TODO, ma a but a value that represent it
+%\item non è possibile effettuare operazioni aritmetiche sul riferimento, come è possibile sui puntatori nel linguaggio C
+%\end{itemize}
+
+
+\subsection{Visibilità di una variabile}
+
+In Java le variabili possono essere distinte in due gruppi a seconda della loro visibilità.
+
+\begin{itemize}
+\item variabili \emph{locali}: è locale una variabile visibile soltanto all'interno del blocco dove questa è dichiarata.
+Esempi di variabili locali sono un parametro di un metodo e una variabile dichiarata in un blocco di codice.
+\item variabili \emph{globali}: tutte le altre variabili. Esempi di variabili globali sono gli attributi di una classe.
+\end{itemize}
+
+\begin{mydef} La visibilità (\emph{scope}) è la porzione di codice in cui una variabile è richiamabile
+\end{mydef}
+Dichiarare all'interno di un metodo una variabile con lo stesso nome di un attributo della classe nasconde quest'ultimo.
+Per poter accedere all'attributo è necessario usare la keyword \texttt{this}.
+\begin{lstlisting}[language=Java,escapechar=|]
+public class Car {
+
+	private double speed;
+
+	public void changeSpeed(double speed) {
+	    this.speed=speed;   
+   	}
+}
+\end{lstlisting}
+In questo esempio, nel metodo \texttt{changeSpeed} l'identificativo \texttt{speed} si riferisce al parametro passato al metodo.
+Per accedere all'attributo \texttt{speed} relativa all'istanza corrente della classe \texttt{Car} si utilizza la keyword \texttt{this}. 
+
+\subsection{Costanti}
+Una costante è un valore non modificabile.
+È possibile dichiarare una costante utilizzando la keyword
+\texttt{final}.  Una volta che una variabile \texttt{final} \`e assegnata contiene \emph{sempre} lo stesso valore.
+%A constant is a memory space where a value that cannot be changed is %stored. To declare a constant the keyword \emph{final} is used.
+
+\begin{lstlisting}[language=Java,escapechar=|]
+final int a = 82;
+a = 90; // ERRORE - non e' possibile assegnare un valore ad una costante
+\end{lstlisting}
+
+\subsection{Classi mutabili e immutabili}
+\begin{itemize}
+\item una classe è definita \emph{immutabile} se gli attributi delle sue istanze non possono essere cambiate una volta create.
+\item una classe è \emph{mutabile} altrimenti
+\end{itemize}
+
+Classi immutabili
+\begin{itemize}
+\item vantaggi:
+\begin{itemize}
+\item facili da utilizzare e testare, non essendo soggette a \emph{side-effect} indesiderati.
+\item meno soggette a errori, specialmente in caso di programmi concorrenti
+\end{itemize}
+\item svantaggi:
+\begin{itemize}
+\item possono richiedere molta memoria (viene creato un nuovo oggetto per ogni operazione effettuata)
+\item possono peggiorare le prestazioni in quanto molti oggetti vengono creati e il garbage collector viene sollecitato maggiormente
+\end{itemize}
+\end{itemize}
+
+In taluni casi, in cui devono essere eseguite una lunga sequenza di operazioni, è opportuno usare classi mutabili.
+Ad esempio, nel caso si debba concatenare diverse stringhe in un ciclo è opportuno usare la classe
+\texttt{StringBuilder} (mutabile) rispetto alla classe \texttt{String} (immutabile).
+
+
+Per creare degli oggetti immutabili \`e bene seguire le regole seguenti. Nota che queste regole non sono seguite da tutte le classi documentate come immutabili. In questi casi ci sono altre ragioni per credere  che le istanze create non cambieranno mai dopo la loro costruzione. Tuttavia, in questi casi vengono utilizzate strategie pi\`u complicate per garantire l'immutabilit\`a. Le regole basilari per garantire l'immutabilit\`a sono le seguenti:
+\begin{itemize}
+\item non fornire metodi setter (che possono modificare gli attributi o oggetti che sono referenziati gali attributi)
+\item rendere tutti gli attributi \texttt{finali} e \texttt{private}
+\item non consentire alle sottoclassi di eseguire overriding: dichiara la classe come \texttt{final} (alternarivamente puoi rendere il costruttore privato e obbligare l'esecuzione di factory methods nella creazione degli oggetti)
+\item se il vostro oggetto contiene attributi che sono references a oggetti mutabili \`e necessario non consentire di cambiare questi oggetti:
+\begin{itemize}
+\item non fornire metodi che cambiano questi oggetti
+\item non condividere i references di questi oggetti: ritornare i references mediante getters (in tal caso creare degli oggetti copia)
+\item non settare i reference degli attributi con oggetti passati come parametri (in tal caso creare degli oggetti copia)
+\end{itemize} 
+\end{itemize}  
+
+
+%\subsection{Classi e oggetti}
+%
+%Le classi rappresentano dei tipi definiti dall'utente.
+%Come tipi sono caratterizzati da:
+%\begin{itemize}
+%	\item \emph{attributi}: i dati che contengono
+%	\item \emph{metodi}: le operazioni che offrono/svolgono
+%\end{itemize}
+%
+%Un oggetto costituisce ua realizzazione concreta di una classe.
+%Possiamo pensare ad una classe come al modello di
+%un modulo e agli oggetti come fogli con stampato il modulo:
+%
+%
+%\subsection{Array}
+%
+%In Java, come in C, è presente un tipo \emph{array} che rappresenta
+%un vettore di elementi dello stesso tipo.
+%
+%Dato un tipo \texttt{T} è possibile dichiarare un array di \texttt{T}
+%anteponendo o postponendo \texttt{[]} al nome della variabile
+%dichiarata.
+%\begin{lstlisting}[language=Java,escapechar=|]
+%T[] a;
+%T b[];
+%int foo[];
+%\end{lstlisting}
+%Come in C, è possibile dichiarare array multidimensionali:
+%\begin{lstlisting}[language=Java,escapechar=|]
+%double[][] multiarray;
+%\end{lstlisting}
+%È possibile inizializzare direttamente un array fornendo
+%la lista degli elementi contenuti separati da virgola
+%all'interno di parentesi graffe.
+%\begin{lstlisting}[language=Java,escapechar=|]
+%int[] pipppo = {1,2,3,4};
+%double[][] multarray = {{1.0,2.0},{4.5,12}};
+%\end{lstlisting} 
+%Se l'inizializzazione non è presente assieme alla dichiarazione,
+%l'array non viene allocato.
+%È altrimenti possibile inizializzare dinamicamente un array tramite 
+%l'operatore \texttt{new},
+%in questo caso la dichiarazione e 'inizializzazione possono essere
+%poste in istruzioni differenti.
+%\begin{lstlisting}[language=Java,escapechar=|]
+%int[] pipppo1 = new int[42];
+%double[][] multarray1 = now double[10][10];
+%\end{lstlisting} 
+%L'array risulta a tutti gli effetti un tipo riferimento, come
+%tale può essere inizializzato a \texttt{null}.
+%Nel caso di operatore \texttt{new}, l'array viene inizializzato 
+%impostando tutti gli elementi al valore di default relativo al
+%loro tipo.
+%Quindi se gli elementi dell'array sono di tipo riferimento, 
+%questi vengono inizializzati col valore \texttt{null}.
+%In tal caso il programmatore dovrà successivamente
+%inizializzare ciascun elemento dell'array invocando 
+%il costruttore appropriato.
+
+\subsection{Enumerazioni}
+
+Da Java 5, sono disponibili i tipi enumerati, che
+ricalcano gli \texttt{enum} del C estendendoli con
+ulteriori operazioni.
+Mentre in C le enumerazioni semplicemente definiscono delle
+costanti intere, in Java sono vere è proprie classi,
+costituite da un numero prefissato di istanze associate. Le enumerazioni possono essere utilizzate per esempio per specificare le scelte di un menu, i flag command line \ldots
+\begin{lstlisting}[language=Java,escapechar=|]
+enum Colors{RED, GREEN, BLUE};
+\end{lstlisting}  
+In questo caso la classe \texttt{Color}
+ha come uniche istanze gli oggetti \texttt{RED},
+\texttt{GREEN} e \texttt{BLUE}.
+Non è quindi possibile costruirne altre mentre è possibile
+usare l'operatore ``=='' per confrontarne i valori.
+
+Essendo una vera e propria classe, è possibile aggiungere
+attributi metodi e
+costruttori personalizzati (quest'ultimi in ogni caso non utilizzabili per inizializzare ulteriori oggetti).
+
+Le enumerazioni ereditano la classe \texttt{Enum},
+la quale offre i metodi \texttt{valueOf} e \texttt{toString}
+che rispettivamente restituiscono l'oggetto desiderato
+a partire dal nome e la stringa contenente il nome dell'elemento.
+
+Inoltre tramite il metodo \texttt{values} è possibile ottenere
+l'array contenente tutti gli oggetti dell'enumerazione.
+
+\subsection{Attributi e metodi statici}
+
+Un attributo statico è condiviso tra tutti gli elementi della classe.
+Quindi mentre i normali attributi hanno un valore relativo
+alla specifica istanza, gli attributi statici hanno un unico
+valore visibile e modificabile per tutte le istanze.
+Per dichiarare un attributo statico questo deve essere seguito
+dalla keyword \texttt{static}.
+Un esempio d'uso di attributi statici
+è un contatore legato al numero di istanze della classe. 
+\begin{lstlisting}[language=Java,escapechar=|]
+class Foo{
+    static int counter = 0;
+    int number;
+
+    public Foo(){
+	    number = counter++;
+    }
+}
+\end{lstlisting} 
+In questo caso la classe \texttt{Foo} ha due attributi:
+\begin{itemize}
+	\item \texttt{counter} che tiene traccia del numero totale
+		di istanze della classe ed è quindi statico.
+	\item \texttt{number} che mi rappresenta il numero relativo 
+		alla singola istanza.
+\end{itemize}
+
+Sempre tramite la keyword \texttt{static}
+è possibile dichiarare metodi statici (o di classe).
+Tali metodi non vengono invocati su una particolare
+istanza della classe.
+Ovviamente un attributo statico non può chiamare
+attributi/metodi non statici (perchè?).
+La sintassi per accedere/invocare un attributo/metodo statico
+di una classe è
+nome classe.nome metodo/attributo
+
+\section{Esercizi}
+
+
+\subsection{Esercizio 1: LettoreMP3}
+\begin{framed}
+\textbf{Esercizio 1}: Progettare e implementare una classe che rappresenti un LettoreMP3. Ogni LettoreMP3 ha un \emph{unico} numero di serie. Un numero di serie (o numero seriale) \`e un numero identificativo assegnato in maniera univoca per distinguere un esemplare di una serie. I numeri di serie sono associati in modo incrementale. Il LettoreMP3 ha una meroria e puo' essere ascoltato.
+\end{framed}
+
+
+
+\subsubsection{Scelta delle funzionalit\`a}
+In generale nella scelta delle funzionalit\`a \`e consigliato considerare quattro tipi di operazioni:
+\begin{itemize}
+\item \emph{accessori}: forniscono informazioni sullo stato dell'oggetto
+\item \emph{modificatori}: modificano lo stato di un oggetto
+\item \emph{costruttori}:  permettono di creare un oggetto
+\item \emph{produttori}: generano un nuovo oggetto partendo dall'istanza corrente
+\end{itemize}
+
+Per il nostro caso specifico
+\begin{itemize}
+\item \emph{accessori}: 
+\begin{itemize}
+\item \texttt{int getSN()}: ritorna il numero di serie del LettoreMP3
+\item \texttt{int getMemoria()}: ritorna la memoria del LettoreMP3
+\item \texttt{void ascolta()}: ritorna il numero di serie del LettoreMP3
+\item \texttt{String toString()}:  fornirsce una comoda rappresentazione testuale dell'oggetto.
+\end{itemize}
+\item \emph{modificatori}: non esistono modificatori, il numero di serie non pu\`o essere cambiato
+\item \emph{costruttori}: il costruttore prende come parametro le dimensioni della memoria del LettoreMP3 \texttt{LettoreMP3(int memoria)}
+\item \emph{produttori}: dalla consegna non risulta sia necessario creare un oggetto partendo da una sua istanza.
+\end{itemize}
+
+
+\subsubsection{Scelta dello stato}
+\begin{itemize}
+\item Quali strutture dai consentono di memorizzare le funzionalit\`a desiderate in maniera effieciente?
+\begin{itemize}
+\item per memorizzare il numero seriale scelgo di utilizzare un intero
+\item utilizzo un altro intero per tenere conto delle istanze gi\`a create. \`E necessario che questa variabile sia \emph{condivisa} (leggibile e modificabile) da tutte le istanze della classe quindi questa variabile deve essere \texttt{static} e \emph{non} \texttt{final}
+\end{itemize}
+\end{itemize}
+
+
+
+\subsubsection{Esempio commentato}
+\begin{lstlisting}[language=Java,escapechar=|]
+package it.polimi.deib.se.ex1.counter;
+
+public class LettoreMP3 {
+	
+	//Contatore condiviso tra tutte le istanze
+	private static int counter = 0;
+	
+	// contiene il codice seriale dell LettoreMP3
+	private final int serialNumber;
+	
+	// contiene la memoria del lettore MP3
+	private final int memoria;	
+	
+	//Crea un nuovo LettoreMP3. Il costruttore potrebbe anche prendere come parametro un colore...
+	public LettoreMP3(int memoria){
+	    serialNumber=counter;
+	    counter=counter+1;
+	    this.memoria=memoria;
+	}
+	// ACCESSORI
+	// ritorna il serial number dello LettoreMP3
+	public int getSN() {
+	    return serialNumber;
+	}
+	public int getMemoria(){
+	    return this.memoria;
+	}
+	public void ascolta(){
+	    System.out.println("Track: 01");
+	}	
+	// nota il metodo toString puo' essere generato automaticamente in eclipse sfruttando source > generateToString();
+	@Override
+	public String toString(){
+	    return serialNumber + " of " + counter;
+	}
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java,escapechar=|]
+package it.polimi.deib.se.ex1.counter;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		LettoreMP3 c1 = new LettoreMP3();
+		LettoreMP3 c2 = new LettoreMP3();
+		System.out.println(c1);
+		System.out.println(c2);
+		c1.ascolta();
+	}
+}
+\end{lstlisting}
+
+
+
+\subsection{Esercizio 2: Set di interi}
+
+\begin{framed}
+\textbf{Esercizio 2}: Progettare e implementare una classe che rappresenti un \emph{insieme} di interi di dimensione massima fissata
+\end{framed}
+Un insieme \`e una collezione di oggetti:
+\begin{itemize}
+	\item \emph{non ordinata} non è definito alcun ordinamento esplicito (basato sulle proprietà degli elementi),
+	ne implicito (basato ad esempio sull'ordine di inserimento).
+	\item \emph{priva di ripetizioni} non è possibile contenere lo stesso elemento più volte
+\end{itemize}
+
+Come sempre \`e per progettare la nostra classe \`e necessario rispondere a due domande:
+\begin{itemize}
+		\item Che \textbf{funzionalità} deve offrire?
+	\item Come può essere rappresentato lo \textbf{stato} di un insieme di interi?
+\end{itemize}
+
+\subsubsection{Scelta delle Funzionalit\`a}
+
+Nel nostro caso immaginiamo di definire le seguenti funzionalit\`a:
+\begin{itemize}
+\item \emph{accessori}:
+\begin{itemize}
+\item \texttt{boolean contains(int num)}: dato in ingresso un intero \texttt{num}, ritorna \texttt{true} se l'intero è contenuto nell'insieme.
+\item \texttt{boolean isFull()}: ritorna \texttt{true} se il set \`e pieno
+\item \texttt{int size()}: ritorna la dimension effettiva del set
+\end{itemize}
+\item \emph{modificatori/modificatori}:
+\begin{itemize}
+\item  \texttt{boolean insert(int num)}: inserisce \texttt{num} nell'insieme (Cosa succede se l'elemento esiste gi\`a nell'insieme?
+Che cosa succede se l'insieme ha gi\`a raggiunto la dimension massima?)
+\item \texttt{boolean remove(int num)}: rimuove un numero presente nell'insieme (Cosa succede se l'elemento non esiste  nell'insieme?).
+\item nel nostro caso se l'elemento esiste gi\`a nell'insieme o non esiste l'operazione viene  ignorata.
+\end{itemize}
+\end{itemize}
+
+
+Le funzionalit\`a \texttt{insert(num)} e \texttt{remove(num)} possono essere implementate come:
+\begin{itemize}
+	\item produttori ritornano un nuovo Set di interi (oggetto) con l'operazione richiesta. Vengono di solito usati nelle classi immutabili.
+	\item modificatori applicano la modifica all'oggetto corrente, solitamente non ritornando alcun valore. Ovviamente rendono la classe mutabile.
+\end{itemize}
+In questo esercizio utilizzeremo una classe \emph{mutabile}.
+
+\subsubsection{Scelta dello stato}
+In generale nella scelta dello stato \`e necessario porsi le seguenti domande:
+\begin{itemize}
+\item quali \emph{strutture dati} consentono di memorizzare e/o fornire le funzionalit\`a selezionate in maniera efficiente?
+\item esistono \emph{attributi} sono costanti (\texttt{final})?
+\item \`e necessario specificare attributi di classe (\texttt{static})?
+\end{itemize}
+
+Nel nostro caso effettuiamo le seguenti scelte:
+\begin{itemize}
+\item scegliamo di memorizzare l'insieme di interi come un array con una dimensione massima fissata.
+\item scegliamo di specificare come \texttt{final} l'attributo contenente il reference corrispondente all'array di interi. La Keyword final specifica che il reference all'array di interi non puo' cambiare durante l'esecuzione: una volta inizializzato l'array non e' possibile associare il reference elements a un nuovo array 
+\item memorizziamo in un intero il numero di elementi contenuti all'interno dell'insieme
+\end{itemize}
+
+
+\subsubsection{Esempio commentato}
+\begin{lstlisting}[language=Java,escapechar=|]
+package it.polimi.deib.se.ex1.intset;
+
+public class IntSet {
+    // Rappresentazione interna: array di interi
+    // Solo i primi currentSize elementi contengono gli elementi del set
+    // La Keyword final specifica che il reference all'array di interi non puo' cambiare durante l'esecuzione: una volta inizializzato l'array non e' possibile associare il reference elements a un nuovo array
+    private final int[] elements;
+    
+    // dimensione effettiva dell'insieme
+    private int currentSize;
+    
+    // costante che rappresenta la dimensione massima del set
+    private final static int MAX_SIZE = 100;
+    
+    // costruttore di default
+    public IntSet() {
+        this.currentSize = 0;
+        this.elements = new int[MAX_SIZE];
+   }
+
+    // ACCESSORI
+    // controlla che l'elemento sia contenuto nell'insieme
+    public boolean contains(int n) {
+	    for (int i = 0; i < this.currentSize; i++) {
+		    if (elements[i]==n){
+		            return true;
+                }
+	    }
+	    /*
+	    * // alternativa NON CORRETTA
+	    *
+	    * for (int i: elements) { if (i==n){ return true; } }
+	    */
+	
+	    /* default: non trovato */
+	    return false;
+    }
+    
+    // restituisce la dimensione dell'insieme
+    public int size() {
+        return this.currentSize;
+    }
+    
+    public boolean isFull() {
+        return currentSize >= MAX_SIZE;
+    }
+    
+    // MODIFICATORI
+    // Aggiunge un intero all'insieme.
+    public void add(int n) {
+        // invoco il metodo che controlla
+        // la presenza dell'elemento nel set.
+        boolean containsElement = this.contains(n);
+        
+        // se e' gia' presente non faccio nulla
+        if (containsElement){
+		    return;
+    	}
+    	/* controllo che il set non sia pieno */
+    	if (this.currentSize < elements.length) {
+    	    // inserisco l'elemento
+    	    this.elements[currentSize] = n;
+    	    // aggiorno contatore elementi
+    	    this.currentSize++;
+    	} 
+    }
+
+     // rimuove un elemento dall'insieme.
+    public void remove(int element) {
+        // recupero l'elemento
+        int pos = find(element);
+	
+    	if (pos >= 0) {
+    	    /*
+    	    * Altra soluzione:
+    	    * for (int i = pos; i < this.currentSize - 1; i++)
+    	    *	elements[i] = elements[i + 1];
+    	    *	this.currentSize = this.currentSize - 1;
+    	    */						
+    	    this.currentSize = this.currentSize - 1;
+    	    elements[pos] = elements[currentSize];
+    	}
+    }
+    // metodo privato. restituisce la posizione
+    // di un elemento nell'array se esiste (ed e'
+    // entro this.size), -1 altrimenti
+    private int find(int n) {
+        for (int i = 0; i < this.currentSize; i++) {
+            if (elements[i]==n){
+                return i;
+            }
+        }
+        /* default */
+        return -1;
+        // Perche' non ha senso che questo metodo sia pubblico?
+    }
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("[");
+        for(int i=0; i< currentSize; i++){
+            if(i>0){
+                builder.append(", ");
+            }
+         builder.append(elements[i]);
+         }
+         builder.append("]");
+         return builder.toString();
+    }
+}
+\end{lstlisting}
+
+\subsection{Esercizio 3: Riuso dei costruttori}
+\begin{framed}
+\textbf{Esercizio 3}: Modificare l'insieme di interi per consentire la \emph{creazione} di sets di dimensioni variabili ma minore della dimensione massima fissata al momento della creazione dell'insieme
+\end{framed}
+
+
+\begin{lstlisting}[language=Java,escapechar=|]
+package it.polimi.deib.se.ex1.intset;
+
+public class IntSet {
+	
+	public IntSet() {
+		this(MAX_SIZE);
+	}
+	
+	// costruttore che prende come argomento
+	// la dimensione dell'insieme.
+	public IntSet(int size) {
+		this.currentSize = 0;
+		this.elements = new int[size];
+	}
+	
+}
+\end{lstlisting}
+
+\subsection{Esercizio 4: Classi immutabili - Complex}
+\begin{framed}
+\textbf{Esercizio 4}:  progettare e implementare una classe che rappresenti un numero complesso
+\end{framed}
+
+
+\subsubsection{Scelta delle funzionalit\`a}
+In classe vedremo solo alcune delle funzionalit\`a presenti nella classe, si consiglia di guardare l'implementazione delle altre autonomamente a casa.
+\begin{itemize}
+\item \emph{accessori:} 
+\begin{itemize}
+\item \texttt{double re()}: ritorna la parte reale del numero complesso
+\item \texttt{double im()}: ritorna la parte immaginaria del numero complesso
+\item \texttt{double abs()}: ritorna il modulo del numero complesso
+\end{itemize}
+\item \emph{modificatori:}
+\begin{itemize}
+\item una classe immutable non pu\`o contenere metodi modificatori
+\end{itemize}
+\item \emph{produttori}
+\begin{itemize}
+\item \texttt{Complex sum(Complex other)}: somma il numero complesso su cui \`e chiamato con other
+\end{itemize}
+\end{itemize}
+
+
+\subsubsection{Scelta dello stato}
+Possiamo scegliere tra due rappresentazioni:
+\begin{itemize}
+\item parte reale e parte immaginaria 
+\item modulo e fase.
+\end{itemize}
+
+In questo caso optiamo per la prima, utilizzando due variabili in virgola mobile a doppia precisione \texttt{re} e \texttt{im}.
+
+\emph{Le funzionalità della classe devono essere indipendenti dall'implementazione!}.
+
+\subsubsection{Esempio commentato}
+\begin{lstlisting}[language=Java,escapechar=|]
+package it.polimi.deib.se.ex1.complex;
+
+/*
+* Rappresenta un numero complesso.
+* Scelgo di implementare questa classe in modo che gli attributi
+* che la rappresentano non cambino mai (gli oggetti sono immutabili).
+* Nessun metodo cambia il valore degli attributi privati re, im.
+*/
+public final class Complex {
+	
+	/* parte reale */
+	private final double re;
+	/* parte immaginaria */
+	private final double im;
+	
+	// Costruttore di default, costruisce lo zero
+	public Complex() {
+		// caso particolare del costruttore
+		// con due parametri
+		this(0.0d, 0.0d);
+	}
+	
+	// Costruttore
+	public Complex(double re, double im) {
+		// ogni valore di re, im e' valido, non faccio
+		// controlli di validita' sui parametri
+		this.re = re;
+		this.im = im;
+	}
+	
+	// restituisce la parte reale del numero complesso
+	public double re() {
+		return this.re;
+	}
+	
+	// restituisce la parte immaginaria del numero complesso
+	public double im() {
+		return im;
+	}
+	
+	/*
+	* Restituisce il modulo (valore assoluto) del numero complesso.
+	*/
+	public double abs() {
+		return Math.sqrt(Math.pow(this.re, 2.0d) + Math.pow(this.im, 2.0d));
+	}
+	
+	/*
+	* Restituisce la fase (argomento) del numero complesso.
+	*/
+	public double phase() {
+		// a bit of spaghetti code...
+		if (this.re != 0) {
+			double tmp = Math.atan(this.im / this.re);
+			if (this.re < 0 && this.im >= 0)
+			tmp += Math.PI;
+			if (this.re < 0 && this.im < 0)
+			tmp += -Math.PI;
+			return tmp;
+		} else { /* this.re == 0 */
+		if (this.im < 0)
+		return -Math.PI;
+		/* if (this.im >= 0) (default) */
+		return Math.PI;
+	}
+	// TODO: Cercate nella documentazione di java.lang.Math un modo per
+	// implementare questo metodo in modo piu' conciso .
+    }
+
+    // restituisce la somma tra this e other.
+    public Complex sum(Complex other) {
+    	return new Complex(this.re + other.re(), this.im + other.im());
+    }
+
+    // restituisce il complesso coniugato di un numero.
+    public Complex conjugate() {
+	    return new Complex(this.re, -this.im);
+    }
+
+    // restituisce la differenza tra this e other
+    public Complex diff(Complex other) {
+	    return new Complex(this.re - other.re(), this.im - other.im());
+    }
+
+    // restituisce il prodotto tra this e other
+    public Complex mult(Complex other) {
+	    double productRe = this.re() * other.re() - this.im() * other.im();
+	    double productIm = this.re() * other.im() + this.im() * other.re();
+	    return new Complex(productRe, productIm);
+    }
+
+    /* Uguaglianza approssimata, a meno di precision, tra due numeri complessi Riguardo all'operazione di uguaglianza tra complessi non e' consigliabile utilizzare l'operatore ==, poiche' in tal modo basterebbe un errore di arrotondamento per far risultare due numeri diversi. Per ovviare a cio' si utilizza un parametro  che indica la tolleranza da adottare.*/
+    public boolean almostEquals(Complex other, double precision) {
+    	// controlla che la differenza in valore assoluto
+	    // tra i due numeri complessi sia minore di precision
+	    return (this.diff(other).abs() < precision);
+    }
+
+    @Override
+    public String toString() {
+	    return "Complex number: (" + re + ", " + im + ")";
+    }
+}
+\end{lstlisting}
+
+
+
+
+
+
+\subsection{Esercizio 5: Creare due costruttori con gli stessi parametri}
+\begin{framed}
+\textbf{Esercizio 5}:  Aggiungere un costruttore che permette di creare un numero complesso da module e fase
+\end{framed}
+
+Dobbiamo definire un costruttore per inizializzare l'oggetto.
+Scegliamo di passagli direttamente i valori di parte reale e immaginaria.
+Non possiamo per\`o definire un altro costruttore che prenda come ingresso
+modulo e fase, dato che andrebbe in conflitto con la segnatura di quest'ultimo.
+Per ovviare a ciò definiamo il metodo statico \texttt{fromPolarForm}.
+Ovviamente tale metodo deve essere statico in quanto non vi è
+alcuna istanza della classe prima della sua esecuzione (altrimenti
+per poter creare un complesso tramite modulo e fase dovrei creare un altro complesso
+non legato a quest'ultimo).
+\begin{lstlisting}[language=Java,escapechar=|]
+/*
+* Rappresenta un numero complesso.
+* Scelgo di implementare questa classe in modo che gli attributi
+* che la rappresentano non cambino mai (gli oggetti sono immutabili).
+* Nessun metodo cambia il valore degli attributi privati re, im.
+*/
+public class Complex {
+	
+	// Non posso avere un costruttore con la stessa signature
+	// di quello sopra.
+	// public Complex(double modulus, double phase) {
+		// re = ...;
+		// im = ...;
+		// }
+	
+	// uso un metodo di classe:
+	/*
+	* Produce un numero complesso a partire dalla sua forma polare
+	*/
+	public static Complex fromPolarForm(double abs, double phase) {
+		/* ricorda : z = modulus * (cos(phase) + i sin(phase)) */
+		double realPart = abs * Math.cos(phase);
+		double imaginaryPart = abs * Math.sin(phase);
+		return new Complex(realPart, imaginaryPart);
+	}
+\end{lstlisting}
+
+\subsection{Esercizio 6: Enum}
+\begin{lstlisting}[language=Java,escapechar=|]
+public enum Planet {
+    MERCURY (3.303e+23, 2.4397e6),
+    VENUS   (4.869e+24, 6.0518e6),
+    EARTH   (5.976e+24, 6.37814e6),
+    MARS    (6.421e+23, 3.3972e6),
+    JUPITER (1.9e+27,   7.1492e7),
+    SATURN  (5.688e+26, 6.0268e7),
+    URANUS  (8.686e+25, 2.5559e7),
+    NEPTUNE (1.024e+26, 2.4746e7);
+
+    private final double mass;   // in kilograms
+    private final double radius; // in meters
+    Planet(double mass, double radius) {
+        this.mass = mass;
+        this.radius = radius;
+    }
+    private double mass() { return mass; }
+    private double radius() { return radius; }
+
+    // universal gravitational constant  (m3 kg-1 s-2)
+    public static final double G = 6.67300E-11;
+
+    double surfaceGravity() {
+        return G * mass / (radius * radius);
+    }
+    double surfaceWeight(double otherMass) {
+        return otherMass * surfaceGravity();
+    }
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java,escapechar=|]
+public class Main {
+   public static void main(String[] args) {
+        if (args.length != 1) {
+            System.err.println("Usage: java Planet <earth_weight>");
+            System.exit(-1);
+        }
+        double earthWeight = Double.parseDouble(args[0]);
+        double mass = earthWeight/EARTH.surfaceGravity();
+        for (Planet p : Planet.values())
+           System.out.printf("Your weight on %s is %f%n",
+                             p, p.surfaceWeight(mass));
+    }
+}
+\end{lstlisting}
+
+
+\subsection{Esercizio 7: ComplexSet}
+\begin{framed}
+\textbf{Esercizio 7}:  Modificare il codice del secondo esercizio affinch\`e mantenga un insieme
+di numeri complessi. Nella costruzione di tale insieme viene definita un certo valore di precisione
+che è utilizzato per determinare l'uguaglianza tra due numeri (vedere l'esercizio 4).
+\end{framed}
+
+\begin{lstlisting}[language=Java,escapechar=|]
+package it.polimi.deib.se.ex1.complex;
+
+/* Un insieme di dimensione massima FISSA
+* di numeri complessi distinti
+* a meno di un dato errore.
+* Gli oggetti di questa classe
+* sono mutabili: lo stato dell'oggetto puo'
+* cambiare invocando i metodi add(Complex)
+* e remove(Complex).
+*/
+public class ComplexSet {
+	
+	// Rappresentazione interna: array di elementi
+	private final Complex[] elements;
+	// dimensione effettiva dell'insieme
+	private int currentSize;
+	// precisione per controllare l'uguaglianza
+	private final double precision;
+	// costante che rappresenta la dimensione massima del set
+	private final static int MAX_SIZE = 100;
+	
+	// costruttore di default, caso particolare
+	// del costruttore che ha come argomento la
+	// precisione.
+	public ComplexSet() {
+		this(2.0d * Double.MIN_VALUE);
+	}
+	
+	// costruttore che prende come argomento
+	// una precisione per il controllo dell'uguaglianza
+	public ComplexSet(double precision) {
+		this.currentSize = 0;
+		this.elements = new Complex[MAX_SIZE];
+		this.precision = precision;
+	}
+	
+	// Aggiunge un numero complesso all'insieme.
+	public void add(Complex element) {
+		// invoco il metodo che controlla
+		// la presenza dell'elemento nel set.
+		boolean containsElement = this.contains(element);
+		
+		// se e' gia' presente non faccio nulla
+		if (containsElement){
+		    return;
+		}
+		
+		/* controllo che il set non sia pieno */
+		if (this.currentSize < elements.length) {
+			this.elements[currentSize] = element;
+			this.currentSize++;
+		} 
+    }
+    
+    // controlla che l'elemento sia contenuto nell'insieme
+    public boolean contains(Complex element) {
+        for (int i = 0; i < this.currentSize; i++) {
+            if (elements[i].almostEquals(element, this.precision)){
+                return true;     
+            }
+        }
+	
+	/*
+	* // alternativa NON CORRETTA
+	*
+	* for (Complex c: elements) { if (c.approximatelyEquals(element,
+		* this.precision)) return true; }
+	*/
+	
+	/* default: non trovato */
+	    return false;
+    }
+    
+    // rimuove un elemento dall'insieme.
+    public void remove(Complex element) {
+        // recupero l'elemento
+        int pos = find(element);
+	
+	    // shift elementi: evito di lasciare un buco
+	    // nell'array
+	    if (pos >= 0) {
+	        for (int i = pos; i < this.currentSize - 1; i++){
+	            elements[i] = elements[i + 1];
+	        }
+	    }
+		this.currentSize = this.currentSize - 1;
+    }
+    
+    // metodo privato. restituisce la posizione
+    // di un elemento nell'array se esiste (ed e'
+    // entro this.size), -1 altrimenti
+    private int find(Complex element) {
+        for (int i = 0; i < this.currentSize; i++) {
+            if (elements[i].almostEquals(element, this.precision)){
+                return i;
+             }
+	    }
+    	/* default */
+	    return -1;
+	    // Perche' non ha senso che questo metodo sia pubblico?
+    }
+
+    // restituisce la dimensione dell'insieme
+    public int size() {
+	    return this.currentSize;
+    }
+
+    public boolean isFull() {
+	    return currentSize >= MAX_SIZE;
+    }
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java,escapechar=|]
+// Main di test.
+public static void main(String[] args) {
+// costruisco un complesso a partire da parte reale e immaginaria
+Complex a = new Complex(0.0, 1.0);
+// costruisco lo stesso complesso a partire dalla forma polare
+Complex b = Complex.fromPolarForm(1.0d, Math.PI / 2);
+
+// stampo i due complessi
+System.out.println(" a = " + a.re() + " + i * (" + a.im() + ")");
+System.out.println(" b = " + b.re() + " + i * (" + b.im() + ")");
+// controllo che a e b siano uguali a meno di un errore di 0.01
+System.out.print("a e b sono uguali a meno di 0.01 ? ");
+System.out.println(a.almostEquals(b, 1e-2));
+}
+
+\end{lstlisting}
+
+\subsection{Eserzizio 8: Riepilogo - Negozio}
+\subsubsection{Esercizio 8a: CD-Final-Immutabile}
+\begin{framed}
+\textbf{Esercizio 8a}: Progettare e implementare una classe che rappresenti un CD. Ogni CD ha un \emph{unico} numero di serie. Un numero di serie (o numero seriale) è un numero identificativo assegnato in maniera univoca per distinguere un esemplare di una serie. Un cd ha un titolo, un autore e un prezzo.
+\end{framed}
+
+Come sempre \`e per progettare la nostra classe \`e necessario rispondere a due domande:
+\begin{itemize}
+\item Che \emph{funzionalità} deve offrire?
+\item Come può essere rappresentato lo \emph{stato} del CD?
+\end{itemize}
+
+
+
+\textbf{Scelta delle Funzionalit\`a}
+In generale nella scelta delle funzionalit\`a \`e consigliato considerare tre tipi di operazioni:
+\begin{itemize}
+\item \emph{accessori}: forniscono informazioni sullo stato dell'oggetto
+\item \emph{modificatori}: modificano lo stato di un oggetto
+\item \emph{costruttori}: generno un nuovo oggetto
+\item \emph{produttori}: generano un nuovo oggetto partendo dall'istanza corrente
+\end{itemize}
+
+Nel nostro caso immaginiamo di definire le seguenti funzionalit\`a:
+\begin{itemize}
+\item \emph{accessori}:
+\begin{itemize}
+\item \texttt{String getTitolo()}: ritorna il titolo del CD
+\item \texttt{float getPrezzo()}: ritorna il prezzo del CD
+\item \texttt{String getAutore()}: ritorna l' autore del CD
+\item \texttt{int getSN()}: ritorna il numero seriale del CD
+\end{itemize}
+\item \emph{modificatori/modificatori}:
+\item \texttt{void setPrezzo(float prezzo)}: setta il prezzo del CD (se il prezzo e' minore di 0?)
+\item \emph{costruttori}:
+\begin{itemize}
+\item \texttt{public CD(String titolo, String autore, float prezzo)} crea un nuovo cd con uno specificato titolo, autore e prezzo
+\end{itemize}
+\end{itemize}
+
+
+\textbf{Scelta dello stato}
+In generale nella scelta dello stato \`e necessario porsi le seguenti domande:
+\begin{itemize}
+\item quali \emph{strutture dati} consentono di memorizzare e/o fornire le funzionalit\`a selezionate in maniera efficiente?
+\item esistono \emph{attributi} che non cambiano dopo essere stati inizializzati (\texttt{final})?
+\item \`e necessario specificare attributi di classe (\texttt{static})?
+\end{itemize}
+
+
+Nel nostro caso effettuiamo le seguenti scelte:
+\begin{itemize}
+\item scegliamo di memorizzare il titolo del CD come una stringa. Una volta creato un CD con un titolo specificato il titolo non pu\`o cambiare, quindi utilizziamo la keyword \texttt{final}
+\item effettuiamo una scelta analoga alla precedente sia per autore
+\item il SN pu\`o essere creato mediante l'uso di un opportuno contatore di classe, statico. 
+\end{itemize}
+
+\textbf{Esempio commentato}
+\begin{lstlisting}[language=Java,escapechar=|]
+package esercitazione2;
+
+/*
+ * contiene la descrizione di un CD
+ * 
+ *
+ */
+public class CD {
+
+	// contatore, contiene il prossimo SN da utilizzare
+	private static int snCounter=0;
+	
+	// contiene il SN del cd corrente
+	private final int sn;
+	
+	// contiene il titolo del CD
+	private final String titolo;
+	
+	// contiene l'autore di uno specifico CD
+	private final String autore;
+	
+	// contiene il prezzo del CD
+	private float prezzo;
+	
+	/*
+	 * crea un cd con uno specificato titolo, autore e prezzo.
+	 * Che cosa succede se il titolo o l'autore e' nullo? e se il prezzo e' minore di 0?
+	 */
+	public CD(String titolo, String autore, float prezzo){
+		this.sn=snCounter;
+		snCounter++;
+		this.titolo = titolo;
+		this.autore = autore;
+		this.prezzo = prezzo;
+		
+	}
+	
+	// ritorna il prezzo del CD
+	public float getPrezzo() {
+		return prezzo;
+	}
+
+	// setta il prezzo del cd
+	// che cosa succede se il prezzo e' minore di 0
+	public void setPrezzo(float prezzo) {
+	    if(prezzo>=0){
+			this.prezzo = prezzo;
+	    }
+	}
+
+	// ritorna il SN del cd
+	public int getSn() {
+		return sn;
+	}
+
+	// ritorna il titolo del CD
+	public String getTitolo() {
+		return titolo;
+	}
+
+	// ritorna l'autore del CD
+	public String getAutore() {
+		return autore;
+	}
+
+	// ritorna una Stringa che contiene la rappresentazione del CD 
+	@Override
+	public String toString() {
+		return "Cliente [name=" + name + ", codiceFiscale=" + codiceFiscale+ "]";
+	}
+}
+\end{lstlisting}
+
+
+\subsubsection{Esercizio 8b: Enum: tipo del CD}
+\begin{framed}
+\textbf{Esercizio 8b}: Un CD ha un tipo. Il tipo del cd pu\`o essere pop, country oppure dance.
+\end{framed}
+
+\begin{lstlisting}[language=Java,escapechar=|]
+package esercitazione2;
+
+// il tipo enum viene utilizzato ogni volta che si ha a che fare con un 
+// INSIEME FISSO DI COSTANTI. 
+// contiene 
+public enum CDType {
+	// siccome sono costanti i nomi dei campi di un enum sono scritti con lettere upper case
+	POP, COUNTRY, DANCE
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java,escapechar=|]
+package esercitazione2;
+
+/*
+ * contiene la descrizione di un CD
+ *
+ */
+public class CD {
+
+	// contiene il tipo del cd
+	private final CDType cdType;
+	
+	// contatore, contiene il prossimo SN da utilizzare
+	private static int snCounter=0;
+	
+	// contiene il SN del cd corrente
+	private final int sn;
+	
+	// contiene il titolo del CD
+	private final String titolo;
+	
+	// contiene l'autore di uno specifico CD
+	private final String autore;
+	
+	// contiene il prezzo del CD
+	private float prezzo;
+	
+	/*
+	 * crea un cd con uno specificato titolo, autore e prezzo.
+	 * Che cosa succede se il titolo o l'autore e' nullo? e se il prezzo e' minore di 0?
+	 */
+	public CD(String titolo, String autore, float prezzo, CDType cdType){
+		this.sn=snCounter;
+		snCounter++;
+		this.titolo = titolo;
+		this.autore = autore;
+		this.prezzo = prezzo;
+		this.cdType=cdType;
+		
+	}
+	
+	// ritorna il prezzo del CD
+	public float getPrezzo() {
+		return prezzo;
+	}
+
+	// setta il prezzo del cd
+	// che cosa succede se il prezzo e' minore di 0
+	public void setPrezzo(float prezzo) {
+		this.prezzo = prezzo;
+	}
+
+	// ritorna il SN del cd
+	public int getSn() {
+		return sn;
+	}
+
+	// ritorna il titolo del CD
+	public String getTitolo() {
+		return titolo;
+	}
+
+	// ritorna l'autore del CD
+	public String getAutore() {
+		return autore;
+	}
+
+	// ritorna una Stringa che contiene la rappresentazione del CD 
+	@Override
+	public String toString() {
+		return "Cliente [name=" + name + ", codiceFiscale=" + codiceFiscale+ "]";
+	}
+
+	public CDType getCdType() {
+		return cdType;
+	}
+	
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CD other = (CD) obj;
+		if (sn != other.sn)
+			return false;
+		return true;
+	}
+}
+
+\end{lstlisting}
+
+\textbf{Esercizio 3: Scaffale}
+\begin{framed}
+\textbf{Esercizio 3}: Progettare e implementare una classe che rappresenti un insieme di CD (uno scaffale) di dimensione massima fissata. Lo scaffale (SET/Insieme)\`e una collezione di oggetti:
+\begin{itemize}
+	\item \emph{non ordinata} non è definito alcun ordinamento esplicito (basato sulle proprietà degli elementi),
+	ne implicito (basato ad esempio sull'ordine di inserimento).
+	\item \emph{priva di ripetizioni} non è possibile contenere lo stesso elemento più volte
+\end{itemize}
+\end{framed}
+
+\textbf{Scelta delle Funzionalit\`a}
+Nel nostro caso immaginiamo di definire le seguenti funzionalit\`a:
+\begin{itemize}
+\item \emph{accessori}:
+\begin{itemize}
+\item \texttt{boolean contains(CD cd)}: dato in ingresso un CD \texttt{cd}, ritorna \texttt{true} se il CD è contenuto nello scaffale.
+\item \texttt{boolean isFull()}: ritorna \texttt{true} se lo scaffale \`e pieno
+\item \texttt{boolean size()}: restituisce il numero di libri sullo scaffale
+\end{itemize}
+\item \emph{modificatori/modificatori}:
+\begin{itemize}
+\item  \texttt{boolean insert(CD cd)}: inserisce \texttt{cd} nello scaffale (Cosa succede se l'elemento esiste gi\`a nello scaffale? Che cosa succede se l'insieme ha gi\`a raggiunto la dimension massima?)
+\item \texttt{boolean remove(CD cd)}: rimuove un cd dallo scaffale (Cosa succede se l'elemento non esiste  nell'insieme?).
+\item nel nostro caso se l'elemento non esiste nell'insieme l'operazione ritorna false
+\end{itemize}
+\end{itemize}
+
+
+\textbf{Scelta dello Stato}
+Nel nostro caso effettuiamo le seguenti scelte:
+\begin{itemize}
+\item scegliamo di memorizzare lo scaffale come un array con una dimensione massima fissata.
+\item scegliamo di specificare come \texttt{final} l'attributo contenente il reference corrispondente all'array di CD. La Keyword final specifica che il reference all'array di CD non puo' cambiare durante l'esecuzione: una volta inizializzato l'array non e' possibile associare il reference elements a un nuovo array 
+\item memorizziamo in un intero il numero di elementi contenuti all'interno dello scaffale
+\end{itemize}
+
+
+\textbf{Esempio commentato}
+
+\begin{lstlisting}[language=Java,escapechar=|]
+package esercitazione2;
+
+/*
+ * contiene un SET di CD: un insieme di dimensione massima FISSA
+ * di CD distinti. Questa classe e' mutabile: lo stato dell'oggetto puo'
+ * cambiare invocando i metodi addCD(CD cd) e remove(CD cd).
+ */
+public class Shelf {
+
+	// Rappresentazione interna: array di CD
+	private final CD[] cds;
+	
+	// dimensione effettiva dell'insieme
+	private int currentSize;
+	
+	// contiene la capienza dello scaffale: il massimo numero di CD che e' possibile contenere
+	public final static int MAX_SIZE = 100;
+
+	
+
+	// costruttore di default, crea uno scaffare con una particolare capienza
+	public Shelf() {
+		this.currentSize = 0;
+		this.cds = new CD[MAX_SIZE];
+	}
+
+	// Aggiunge un cd all'insieme. che cosa succede se il CD e' gia' contenuto nell'insieme?
+	// che cosa succede se il reference element e' nullo?
+	// che cosa succede se lo scaffale e' pieno?
+	public boolean add(CD element) {
+		
+		// invoco il metodo che controlla
+		// la presenza del CD nello scaffale
+		boolean containsElement = this.contains(element);
+
+		// se e' gia' presente non faccio nulla
+		if (containsElement){
+			return false;
+		}
+			
+		/* controllo che il set non sia pieno */
+		if (!this.isFull()) {
+			this.cds[currentSize] = element;
+			this.currentSize++;
+			return true;
+		}
+		return false;
+	}
+
+	// controlla che l'elemento sia contenuto nell'insieme
+	public boolean contains(CD element) {
+		for (int i = 0; i < this.currentSize; i++) {
+			if (cds[i].equals(element))
+				return true;
+		}
+		/* default: non trovato */
+		return false;
+	}
+
+	// rimuove un il CD dallo scaffale
+	public boolean remove(CD element) {
+		// recupero l'elemento
+		int pos = find(element);
+
+		System.out.println(pos);
+		// shift elementi: evito di lasciare un buco
+		// nell'array
+		if (pos >= 0) {
+			cds[pos]=cds[this.currentSize-1];
+			this.currentSize = this.currentSize - 1;
+			return true;
+		}
+		return false;
+	}
+
+	// metodo privato. restituisce la posizione
+	// del CD nello scaffale se esiste (ed e'
+	// entro this.size), -1 altrimenti
+	private int find(CD element) {
+		for (int i = 0; i < this.currentSize; i++) {
+			if (cds[i].equals(element))
+				return i;
+		}
+		/* default */
+		return -1;
+		// Perche' non ha senso che questo metodo sia pubblico?
+	}
+
+	// restituisce il numero di libri sullo scaffale
+	public int size() {
+		return this.currentSize;
+	}
+
+	// ritorna true se lo scaffale e' pieno
+	public boolean isFull() {
+		return currentSize >= MAX_SIZE;
+	}
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+        builder.append("Shelf [");
+        for(int i=0; i< currentSize; i++){
+            if(i>0){
+                builder.append(", ");
+            }
+         builder.append(cds[i]);
+         }
+         builder.append("]");
+         return builder.toString();
+	}
+	
+	public CD getCD(int sn){
+		for(int i=0; i<currentSize;i++){
+			if(this.cds[i].getSn()==sn){
+				return cds[i];
+			}
+		}
+		return null;
+	}
+}
+\end{lstlisting}
+
+\subsubsection{Esercizio 8c: Riuso del costruttore: scaffale di dimensione definita nel costruttore}
+\begin{framed}
+\textbf{Esercizio  8c}: Modificare la classe \texttt{Shelf} per consentire la \emph{creazione} di uno scaffale con una dimensione passata come parametro al costruttore ma minore della dimensione massima fissata
+\end{framed}
+
+
+\begin{lstlisting}[language=Java,escapechar=|]
+package it.polimi.deib.se.ex1.intset;
+
+public class IntSet {
+	
+	public IntSet() {
+		this(MAX_SIZE);
+	}
+	
+	// costruttore che prende come argomento
+	// la dimensione dell'insieme.
+	public IntSet(int size) {
+		this.currentSize = 0;
+		this.elements = new int[size];
+	}
+	
+}
+\end{lstlisting}
+
+\subsubsection{Esercizio 8d: Cliente}
+\begin{framed}
+\textbf{Esercizio 8d}: Un cliente ha un nome,  un codice fiscale, un array di CD acquistati. Un cliente pu\`o acquistare al massimo 10 CD.
+\end{framed}
+\begin{lstlisting}[language=Java,escapechar=|]
+package esercitazione2;
+
+public class Cliente {
+
+	// contiene il massimo numero di CD aquistabili da un Client
+	private final static int MAX_SIZE = 10;
+	private int cdNumberIndex;
+	
+	private final String name;
+	private final String codiceFiscale;
+	// Rappresentazione interna: array di CD
+	private final CD[] cdAquistati;
+
+	public Cliente(String name, String codiceFiscale) {
+		this.name = name;
+		this.codiceFiscale = codiceFiscale;
+		this.cdAquistati=new CD[MAX_SIZE];
+	}
+	
+	public boolean addCD(CD cd){
+		if(cdNumberIndex<MAX_SIZE){
+			cdAquistati[cdNumberIndex]=cd;
+			return true;
+		}
+		return false;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getCodiceFiscale() {
+		return codiceFiscale;
+	}
+
+	@Override
+	public String toString() {
+		return "Cliente [name=" + name + ", codiceFiscale=" + codiceFiscale+ "]";
+	}
+}
+\end{lstlisting}
+
+\subsubsection{Esercizio 8e: Negozio}
+\begin{framed}
+\textbf{Esercizio  8e}: Il negozio vuole tenere traccia dei CD venduti, per ogni CD vuole tenere traccia dell'acquirente
+\end{framed}
+\begin{lstlisting}[language=Java,escapechar=|]
+package esercitazione2;
+
+public class Negozio {
+	public static final int CLIENT_NUMBER=5;
+	private final Cliente[] clienti;
+	private final Shelf shelf;
+	
+	public Negozio(){
+		this.clienti=new Cliente[CLIENT_NUMBER];
+		this.shelf=new Shelf();
+		this.clienti[0]=new Cliente("Claudio", "ABCD");
+		this.clienti[1]=new Cliente("Luca", "DEF");
+		this.clienti[2]=new Cliente("Antonio", "sss");
+		this.clienti[3]=new Cliente("Srdan", "zzz");
+		this.clienti[4]=new Cliente("Alessandro", "ppp");
+		
+		for(int i=0; i<Shelf.MAX_SIZE; i++){
+			if(i%3==0){
+				this.shelf.add(new CD("titolo"+i, "autore"+i, i, CDType.DANCE));
+			}
+			if(i%3==1){
+				this.shelf.add(new CD("titolo"+i, "autore"+i, i, CDType.COUNTRY));
+			}
+			if(i%3==2){
+				this.shelf.add(new CD("titolo"+i, "autore"+i, i, CDType.DANCE));
+			}
+		}
+	}
+	
+	public Cliente[] getClienti() {
+		return clienti;
+	}
+
+	public Shelf getShelf() {
+		return shelf;
+	}
+	
+	public CD getCD(int sn){
+		return this.shelf.getCD(sn);
+	}
+	public void vendi(Cliente cliente, CD cd){
+		cliente.addCD(cd);
+		this.shelf.remove(cd);
+		
+	}
+	public void printBooks(){
+		System.out.println(this.shelf.toString());
+	}
+}
+
+\end{lstlisting}
+
+\subsubsection{Esercizio 8f: Implementare un client per il negozio}
+\begin{framed}
+\textbf{Esercizio 8f}: Il negozio vuole tenere traccia dei CD venduti, per ogni CD vuole tenere traccia dell'acquirente
+\end{framed}
+\begin{lstlisting}[language=Java,escapechar=|]
+package esercitazione2;
+
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+			Negozio negozio=new Negozio();
+			Cliente[] clienti=negozio.getClienti();
+			Scanner scanner=new Scanner(System.in);
+			int clienteCorrente=0;
+			while(true){
+				Cliente cliente=clienti[clienteCorrente];
+				System.out.println("Ciao "+cliente+" che CD vuoi comprare?");
+				negozio.printBooks();
+				int sn=scanner.nextInt();
+				CD cd=negozio.getCD(sn);
+				negozio.vendi(cliente, cd);
+				
+				clienteCorrente=(clienteCorrente+1)%Negozio.CLIENT_NUMBER;
+			}
+			//scanner.close();
+	}
+}
+\end{lstlisting}
+
+\subsection{Esercizio 9: Riepilogo - Morra Cinese}
+\begin{framed}
+\textbf{Esercizio 9}: Implementare il gioco della morra cinese (carta, forbice, sasso).
+L'applicazione deve chiedere la scelta al giocatore, generare una scelta e stampare a video il risultato del 
+giocatore (vittoria, pareggio, sconfitta).
+\end{framed}
+
+
+\subsubsection{Raffinamento}
+
+Suddivideremo il gioco in tre classi: 
+\begin{itemize}
+	\item \texttt{Choice}, che modella una scelta
+	\item \texttt{Outcome}, che modella un risultato rispetto il giocatore
+	\item \texttt{GameLogic}, che racchiude tutta la logica di gioco
+\end{itemize}
+
+Rispetto a \texttt{Choice} e \texttt{Outcome}, dato che modellano un numero limitato di oggetti e noto a priori,
+utilizzeremo un \texttt{enum}.
+
+\texttt{Choice} sarà caratterizzata da questi metodi:
+\begin{itemize}
+	\item \texttt{Outcome resultAgainst(Choice other)} ritornerà il risultato nei confronti del giocatore umano quando \texttt{other} è la scelta del computer.
+	\item \texttt{static Choice parseInput(String input)} ritorna la scelta identificata dalla stringa \texttt{input} o un'eccezione
+	se non ve ne è alcuna.
+	\item \texttt{static Choice getRandomChoice(Random random)} ritornerà una scelta casuale.
+\end{itemize}
+
+\texttt{Outcome}, invece, avrà questi metodi:
+
+\begin{itemize}
+	\item \texttt{static Outcome winsIfTrue(boolean condition)} ritornerà il risultato di vittoria o pareggio a seconda della condizione.
+\end{itemize}
+Inoltre \texttt{Outcome} avrà un attributo \texttt{message} che conterrà il messaggio stampato a video.
+
+La classe \texttt{GameLogic} gestirà lo svolgimento di una partita.
+Ogni partita è caratterizzata da un certo numero di round, 
+dove in ogni round verrà richiesta una scelta dall'utente, si genererà una scelta in maniera casuale
+e si stamperà a video il risultato del confronto.
+
+Il metodo \texttt{static void main(String[] args)} inizializzerà la classe \texttt{GameLogic},
+e gestirà in sequenza una serie di round, tramite il metodo \texttt{boolean round()}.
+Il risultato di tale metodo indicherà se la partita debba continuare o meno.
+
+All'interno del metodo \texttt{round} verrà gestito quindi il singolo round.
+Un paio di note:
+\begin{itemize}
+	\item La classe \texttt{java.util.Random} viene utilizzata per generare numeri pseudo-casuali.
+	\item Il metodo \texttt{next} della classe \texttt{java.util.Scanner} viene utilizzata per recuperare la stringa di testo digitata
+	dall'utente.
+	\item L'eccezione \texttt{IllegalArgumentException} viene lanciata quando la stringa inserita dell'utente non corrisponde ad alcuna
+	scelta.
+\end{itemize}
+
+\subsubsection{Esempio di implementazione}
+
+
+\begin{lstlisting}[language=Java,escapechar=|]
+package it.polimi.deib.se.ex2.morracinese;
+
+import java.util.Random;
+
+
+public enum Choice {
+    CARTA, FORBICE, SASSO;
+    public Outcome resultAgainst(Choice other){
+        if(this==other){
+            return Outcome.DRAW;
+        }
+        switch(this){
+            case CARTA:
+                return Outcome.winsIfTrue(other==Choice.SASSO);		
+            case FORBICE:
+                return Outcome.winsIfTrue(other==Choice.CARTA);		
+            case SASSO:
+                return Outcome.winsIfTrue(other==Choice.FORBICE);	
+            default:
+                return null;
+        }		
+    }
+
+    public static Choice parseInput(String input){
+        return Enum.valueOf(Choice.class, input.toUpperCase());
+    }
+    public static Choice getRandomChoice(Random random){
+        Choice[] values = Choice.values();
+        return values[random.nextInt(values.length)];
+    }
+    @Override
+    public String toString() {
+        return super.toString().toLowerCase();
+    }
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java,escapechar=|]
+package it.polimi.deib.se.ex2.morracinese;
+
+public enum Outcome {
+    WINNER("Hai vinto!"), LOSER("Hai perso!"), DRAW("Parità!");
+    private final String message;
+    
+    private Outcome(String message){
+        this.message = message;
+    }
+    
+    @Override
+    public String toString() {
+        return message;
+    }
+    public static Outcome winsIfTrue(boolean condition){
+        return (condition)?Outcome.WINNER:Outcome.LOSER;
+    }
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java,escapechar=|]
+package it.polimi.deib.se.ex2.morracinese;
+
+import java.io.InputStream;
+import java.util.Random;
+import java.util.Scanner;
+
+public class GameLogic {	
+
+    private final Scanner scanner;
+    public GameLogic(InputStream input) {
+        this.scanner = new Scanner(input);
+    }
+    private Outcome choiceSubmitted(Choice userChoice){
+        Choice computerChoice = Choice.getRandomChoice(new Random());
+        System.out.println("Ho scelto " + computerChoice + "!");
+        return userChoice.resultAgainst(computerChoice);
+    }
+    
+    public void close() {
+        scanner.close();		
+    }
+    public boolean round() {
+        System.out.println("Che scelta fai?");
+        String input = scanner.next();
+        Choice choice = Choice.parseInput(input);
+        System.out.println("Hai scelto " + choice + "!");
+        System.out.println(choiceSubmitted(choice));
+         return true; 
+     }
+     public static void main(String[] args) {
+         GameLogic gameLogic = new GameLogic(System.in);
+         boolean cont;
+         do{
+             cont = gameLogic.round();
+        }while(cont);
+        gameLogic.close();
+      }
+}
+\end{lstlisting}
+
+
+
+%\subsection{Esercizio 9: Persona e studente}
+%
+%Problema:
+%
+%Si vuole realizzare un'applicazione che rappresenti la situazione accademica di uno studente.
+%Deve essere possibile disaccoppiare la gestione dell'anagrafica dello studente (per semplificare
+%costituita da nome e data di nascita) dalla suo profilo accademico, ad es., per poter
+%riutilizzare la gestione dell'anagrafica anche per modellare i docenti.
+%Bisogna tener traccia degli esami sostenuti e del voto relativo.
+%
+%\subsubsection{Raffinamento}
+%Il primo passo da effettuare consiste nell'identificare le entità in gioco.
+%In questo caso, supponiamo vengano considerate le entità di persona, studente e voto.
+%Per ognuna di queste si dovrà implementare la relativa classe che ne modelli il comportamento.
+%Avremo quindi le classi \texttt{Person}, \texttt{Student} e \texttt{Grade}.
+%Relativamente alle operazioni richieste
+%
+%\subsubsection{Note di implementazione}
+%
+%L'implementazione non dovrebbe risultare complicata, una volta stabilite
+%le funzionalità richieste.
+%L'aspetto più interessante è costituito dalla validazione dei parametri:
+%si veda ad esempio il costruttore della classe \texttt{Person}, che si assicura
+%che gli argomenti passati non siano nulli, o al costruttore della classe \texttt{Grade},
+%che implementa controlli più approfonditi (derivanti dalla conoscenza del dominio applicativo).
+%Inoltre viene effettuata una copia difensiva della data di nascita nella classe \texttt{Person},
+%in quanto il chiamante del costruttore potrebbe modificare in seguito tale data.
+%
+%La classe \texttt{Person} deve contenere nome e data di nascita relativi a una persona e.
+%La classe \texttt{Grade} deve contenere il superamento di un esame identificato da nome, crediti e voto.
+%La classe \texttt{Student} deve estendere \texttt{Person} aggiungendo la lista di esami superati e deve
+%fornire la media pesata degli esami, i crediti totali dello studente e se questi possa laurearsi (abbia crediti sufficienti).
+%
+%\subsubsection{Esempio}
+%
+%\begin{lstlisting}[language=Java,escapechar=|]
+%package it.polimi.deib.se.ex1.student;
+%
+%import java.util.Calendar;
+%
+%public class Person {
+%private final String name;
+%private final Calendar birthday;
+%
+%public Person(String name, Calendar birthday) {
+%if (name == null || birthday == null) {
+%throw new IllegalArgumentException("Parameters must be not-null");
+%}
+%this.name = name;
+%/*
+%* Calendar e' un tipo di dato mutabile. Per evitare che dall'esterno
+%* qualcuno possa modificare il compleanno della persona dobbiamo
+%* crearne una copia.
+%*/
+%this.birthday = (Calendar) birthday.clone();
+%}
+%
+%public String getName() {
+%return name;
+%}
+%
+%public Calendar getBirthday() {
+%// Anche qui non vogliamo esporre un riferimento all'oggetto ma
+%// solamente una sua copia
+%return (Calendar) birthday.clone();
+%}
+%
+%@Override
+%public String toString() {
+%return "Hi, I'm " + name;
+%}
+%}
+%\end{lstlisting}
+%\begin{lstlisting}[language=Java,escapechar=|]
+%package it.polimi.deib.se.ex1.student;
+%
+%import java.util.ArrayList;
+%import java.util.Calendar;
+%import java.util.List;
+%
+%/*
+%* Rappresentiamo uno studente come una persona cui e' associata
+%* una lista di esami.
+%*/
+%public class Student extends Person {
+%private static final int GRADUATION_CREDITS = 180;
+%private final List<Grade> grades = new ArrayList<Grade>();
+%
+%public Student(String name, Calendar birthday) {
+%super(name, birthday);
+%}
+%
+%// Aggiunge una valutazione alla carriera dello studente.
+%public void addGrade(Grade grade) {
+%grades.add(grade);
+%}
+%
+%// Controlla se lo studente ha abbastanza crediti per potersi laureare.
+%public boolean canGraduate() {
+%return totalCredits() >= GRADUATION_CREDITS;
+%}
+%
+%// Calcola la media pesata.
+%public double getWeightedGradeAverage() {
+%double sumOfWeightedPoints = 0;
+%for (Grade grade : grades) {
+%sumOfWeightedPoints += grade.getCredits() * grade.getPoints();
+%}
+%return sumOfWeightedPoints / totalCredits();
+%}
+%
+%// Calcola il numero di crediti sostenuti dallo studente.
+%private int totalCredits() {
+%int totalCredits = 0;
+%for (Grade grade : grades) {
+%totalCredits += grade.getCredits();
+%}
+%return totalCredits;
+%}
+%
+%@Override
+%public String toString() {
+%return super.toString() + " and I am a student";
+%}
+%
+%}
+%\end{lstlisting}
+%\begin{lstlisting}[language=Java,escapechar=|]
+%package it.polimi.deib.se.ex1.student;
+%
+%public class Grade {
+%private final String subject; // La materia dell'esame
+%private final int points;	// La valutazione ricevuta
+%private final int credits;	// Il valore in crediti dell'esame
+%
+%public Grade(String subject, int points, int credits) {
+%if (subject == null || points < 18 || points > 30 || credits < 0) {
+%throw new IllegalArgumentException();
+%}
+%this.subject = subject;
+%this.points = points;
+%this.credits = credits;
+%}
+%
+%public String getSubject() {
+%return subject;
+%}
+%
+%public int getPoints() {
+%return points;
+%}
+%
+%public int getCredits() {
+%return credits;
+%}
+%
+%}
+%\end{lstlisting}
+
+
+
+\section{Curiosity}
+\begin{framed}
+Classes should be immutable unless there's a very good reason to make them mutable\ldots If a class cannot be made immutable, limit its mutability as much as possible.\\
+\emph{``Joshua Bloch – Effective Java"}
+\end{framed}
+
+\section{Esercizi per casa}
+\begin{itemize}
+\item Esercizio 1: modificare la soluzione dell'esercizio 2 come segue:
+\begin{itemize}
+	\item Quando possibile è buona prassi seguire il principio ``non ripetersi'', ovvero riutilizzare il più possibile il codice già scritto.
+	Secondo questo principio riscrivere il metodo \texttt{contains}
+	richiamando opportunamente il metodo \texttt{find}.
+	\item Aggiungere un metodo \texttt{toArray} che restituisca un array contenente gli interi presenti nell'insieme.
+	\item In questa implementazione il set fornito ha un limite
+	sul numero massimo di elementi contenuti.
+	Riscrivere l'esempio eliminando questo limite (suggerimento:
+	usare il metodo statico \texttt{Arrays.copyOf(T[] original, int newLength)} dalla classe \texttt{java.util.Arrays}).
+	\item Questa classe è mutabile, in quanto è possibile modificarne lo stato dopo la creazione. Ridefinire la classe \texttt{IntSet}
+	in modo da renderla immutabile.	
+\end{itemize}
+\item Esercizio 2: Modificare il gioco della Morra cinese come segue:
+\begin{itemize}
+	\item Attualmente il gioco continua all'infinito. Modificare l'implementazione per chiedere all'utente se desidera continuare o meno.
+	\item Estendere il gioco aggiungendo le scelte aggiuntive \textbf{LIZARD} e \textbf{SPOCK}. Le combinazioni sono:
+	\begin{itemize}
+			\item Le forbici tagliano la carta
+			\item La carta avvolge il sasso
+			\item Il sasso rompe le forbici
+			\item Le forbici decapitano Lizard
+			\item Lizard mangia la carta
+			\item La carta invalida Spock
+			\item Spock vaporizza il sasso
+			\item Il sasso schiaccia Lizard
+			\item Lizard avvelena Spock
+			\item Spock rompe le forbici
+	\end{itemize}
+\end{itemize}
+\item Esercizio 3:
+\begin{itemize}
+\item Cercare nella documentazione di java.lang.Math un modo pi\`u conciso per calcolare la fase di un numero complesso
+\url{http://docs.oracle.com/javase/7/docs/index.html}
+\end{itemize}
+\item Esercizio 4: modificare la soluzione dell'esercizio 7 come segue:
+\begin{itemize}
+	\item Aggiungere un metodo \texttt{public ComplexSet getRoots(int degree)} alla classe \texttt{Complex}
+	che restituisca le radici i-esime dell'oggetto (radici quadrate per \texttt{degree} uguale a 2, cubiche per 3, etc.).
+	Assumere che \texttt{degree} sia maggiore di 0.
+	\emph{Suggerimento:} Per l'algoritmo di radice n-esima consultare \url{http://en.wikipedia.org/wiki/Complex_number}.
+\end{itemize}
+\end{itemize}
+
+\clearpage
+
+% ---- Bibliography ----
+
+
+
+
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliographystyle{alpha}
+\bibliography{bib}
+\nocite{*}
+
+
+\end{document}
+
