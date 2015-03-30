@@ -171,23 +171,13 @@ Saranno oggetto di valutazione
 \begin{frame}
 \frametitle{Valutazione}
 
-\begin{table}
+\begin{table}[b]
   \centering
+\newcolumntype{B}{>{\raggedright\arraybackslash}m{1cm}}
 \scriptsize
-\newcolumntype{B}{>{\raggedright\arraybackslash}m{0.4cm}}
-
-\caption{Tabella di valutazione}
-\label{TabellaDiValutazione}
 \begin{tabular}{ B c c c  }
 \toprule
 \setlength{\columnsep}{0.01cm}
-
-% \begin{table}
-% \caption{Tabella Di Valutazione}
-% \label{TabellaDiValutazione}
-% \begin{tabular}{ c  c | c | c | c  |}
-% \cline{3-5} 
-
 
 Punteggio & \multicolumn{3}{c}{Numero studenti} \\
 
@@ -204,33 +194,37 @@ Premade scenarios
  \\
  
 22 &
-RMI +  CLI &
-Socket + CLI & 
-Socket + GUI \\
+CLI + GUI &
+RMI + CLI & 
+Socket + CLI \\
 
 24 & 
-Socket + CLI &
-RMI + Socket + CLI  &
-RMI + Socket + GUI \\
+RMI + CLI &
+Socket + CLI  &
+RMI + Socket + CLI \\
 
 26 &
+Socket + CLI &
+RMI + Socket + CLI &
+RMI + Socket + GUI\\
+
+28 &
 RMI + Socket + CLI &
 RMI + Socket + GUI &
 All Tech\\
 
-28 &
-RMI + Socket + GUI &
-All Tech &
-1 Funzionalit\`a Avanzata\\
-
 30L &
-All Tech &
-1 Funzionalit\`a Avanzata &   
-2 Funzionalit\`a Avanzate\\
+RMI + Socket + GUI &
+All Tech &   
+1 Funzionalit\`a Avanzata\\
 
 \bottomrule
 \end{tabular}
+\caption{Tabella di valutazione}
+\label{TabellaDiValutazione}
 \end{table}
+
+
 La tabella di valutazione presenta le funzionalit\`a da implementare
 nel caso di gruppi da 1,2 e 3 studenti.
 Gli studenti di telecomunicazioni, possono fare i gruppi insieme di un

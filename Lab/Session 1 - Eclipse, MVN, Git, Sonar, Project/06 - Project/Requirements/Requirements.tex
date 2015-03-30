@@ -154,14 +154,14 @@ caricato su BeeP. Il file definisce tre gruppi di regole (in ordine crescente di
 \textbf{regole base}, \textbf{regole avanzate} e \textbf{scenari precostituiti}.
 In oltre, vengono aggiunte le seguenti \textbf{regole addizionali}. 
 
-\subsection{Regole Addizionali}
-\label{RegoleAddizionali}
-\begin{itemize}
-\item \textbf{L'odorato  degli Alieni}: \ldots
-\item \textbf{} \ldots
-\end{itemize}
-TODO (SK): Here we add any additional rules that should make
-  the game more challenging to design, if needed...
+% \subsection{Regole Addizionali}
+% \label{RegoleAddizionali}
+% \begin{itemize}
+% \item \textbf{L'odorato  degli Alieni}: \ldots
+% \item \textbf{} \ldots
+% \end{itemize}
+% TODO (SK): Here we add any additional rules that should make
+%   the game more challenging to design, if needed...
 
 
 
@@ -190,29 +190,29 @@ Premade scenarios
  \\
  
 22 &
-RMI +  CLI &
-Socket + CLI & 
-Socket + GUI \\
+CLI + GUI &
+RMI + CLI & 
+Socket + CLI \\
 
 24 & 
-Socket + CLI &
-RMI + Socket + CLI  &
-RMI + Socket + GUI \\
+RMI + CLI &
+Socket + CLI  &
+RMI + Socket + CLI \\
 
 26 &
+Socket + CLI &
+RMI + Socket + CLI &
+RMI + Socket + GUI\\
+
+28 &
 RMI + Socket + CLI &
 RMI + Socket + GUI &
 All Tech\\
 
-28 &
-RMI + Socket + GUI &
-All Tech &
-1 Funzionalit\`a Avanzata\\
-
 30L &
-All Tech &
-1 Funzionalit\`a Avanzata &   
-2 Funzionalit\`a Avanzate\\
+RMI + Socket + GUI &
+All Tech &   
+1 Funzionalit\`a Avanzata\\
 
 \bottomrule
 \end{tabular}
@@ -221,7 +221,11 @@ All Tech &
 \end{table}
 
 
-I gruppi da 1,2,3 studenti devono implementare  le specifiche
+
+
+
+I gruppi di
+studenti devono implementare  le specifiche 
 descritte in tabella~\ref{TabellaDiValutazione} in relazione al
 punteggio desiderato. 
 Nota: in tabella sono rappresentati i
@@ -250,11 +254,13 @@ comunicazione con RMI e Socket e il Command Line Interface (CLI).
 All Tech significa che il gruppo deve implementare due modi di
 comunicazione (RMI e Socket) e due tipi di interfaccia (CLI e GUI).
 Ovviamente, il carico di lavoro è ottimizzato per il gruppo di 2
-persone.
-\textit{Gli studenti di telecomunicazioni, possono fare i gruppi di un massimo
+persone.\\
+\textbf{Gli studenti di telecomunicazioni, possono fare i gruppi di un massimo
 di 4 persone ed i requisiti applicati corrisponderanno il gruppo con
-una persona in meno, con l'eccezione di un gruppo di 1 persona.}\\
-
+una persona in meno.}\\
+\textbf{Nota: Non è possibile fare i gruppi di 1 persona, la
+  tabella~\ref{TabellaDiValutazione} contiene le informazioni solo
+  come riferimento agli studenti di telecomunicazioni.}\\
 
 Saranno oggetto di valutazione
 \begin{itemize}
