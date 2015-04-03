@@ -120,7 +120,7 @@ Il progetto consiste nello sviluppo di software del gioco da tavolo.
 
 Il progetto finale dovr\` a includere:
 \begin{itemize}
-\item diagramma UML iniziale dell'applicazione  (al alto livello)
+\item diagramma UML iniziale dell'applicazione  (ad alto livello)
 \item diagrammi UML che mostrino come \`e stato progettato il software;
 \item implementazione funzionante del gioco conforme alle regole del gioco e alle specifiche presenti in questo documento
 \item codice sorgente dell'implementazione
@@ -150,7 +150,7 @@ Saranno oggetto di valutazione
   un uso appropriato di interfacce, ereditariet\`a, composizione tra
   classi, uso dei design pattern;
 \item la qualit\` a della progettazione dell'\textbf{architettura
-  dell'applicazione}; divisione della responsabilit\'a; progettazione
+  dell'applicazione}; divisione della responsabilit\`a; progettazione
   della comunicazione;
 \item la stabilit\` a dell'implementazione e la \textbf{conformit\` a alle
   specifiche} date; 
@@ -226,9 +226,9 @@ All Tech &
 
 
 La tabella di valutazione presenta le funzionalit\`a da implementare
-nel caso di gruppi da 1,2 e 3 studenti.
+nel caso di gruppi da 1, 2 e 3 studenti.
 Gli studenti di telecomunicazioni, possono fare i gruppi insieme di un
-massimo di 4 persone ed i requisiti applicati corrisponderanno il
+massimo di 4 persone ed i requisiti applicati corrisponderanno al
 gruppo con una persona in meno, con l'eccezione di un gruppo di 1
 persona. 
 
@@ -243,10 +243,10 @@ descritte in tabella~\ref{TabellaDiValutazione} in relazione al
 punteggio desiderato. Nota: in tabella sono rappresentati i
 \textbf{massimi} punteggi ottenibili in relazione alle features
 implementate. Per esempio, per un gruppo di 2 studenti e un punteggio
-desiderato di al massimo 24 punti \`e necessario implementare
+desiderato di al massimo 24 punti \`e necessario implementare:
 comunicazione con RMI e Socket e il Command Line Client (CLC).
-All Tech significa che il gruppo deve implementare due modi di
-comunicazione (RMI e Socket) e due tipi di Client (CLC e GUI).
+All Tech significa che il gruppo deve implementare i due modi di
+comunicazione (RMI e Socket) e i due tipi di Client (CLC e GUI).
 
 Le funzionalit\`a avanzate possono essere implementate dai tutti gruppi e comportano punteggi aggiuntivi. Ovviamente per implementare queste funzionalit\`a \`e necessario che TUTTO il resto del progetto sia implementato in maniera COMPLETA e ADEGUATA (copertura con test, ben commentata etc).
 \end{frame}
@@ -256,13 +256,13 @@ Le funzionalit\`a avanzate possono essere implementate dai tutti gruppi e compor
 \begin{frame}
 \frametitle{Valutazione}
 \begin{itemize}
-\item \textbf{Command Line Interface (CLI)}: \`e implementato come un interfaccia testuale e i vari giocatori che si alternano nei turni utilizzeranno la tastiera.
+\item \textbf{Command Line Interface (CLI)}: \`e implementato come un'interfaccia testuale e i vari giocatori si alternano nei turni utilizzando la tastiera.
 \item \textbf{GUI}: consiste in un interfaccia grafica swing
 \item \textbf{RMI:} la comunicazione avviene mediante ``Remote method invocation''
 \item \textbf{Socket}: la comunicazione avviene mediante messaggi scambiati
   attraverso socket. Lo studente deve autonomamente definire e
   implementare un protocollo di comunicazione tra i componenti distribuiti.
-\item \textbf{Funzionalit\`a avanzate}: sono descritte in successivo.
+\item \textbf{Funzionalit\`a avanzate}: sono descritte successivamente.
 \end{itemize}
 \end{frame}
 
@@ -278,7 +278,7 @@ Di seguito sono proposte alcune funzionalit\`a avanzate che concorrono alla valu
   per ciascuno le statistiche di gioco (numero di vittorie, tempo di
   gioco, numero di sconfitte, etc...) e produca una classifica
   ordinata, prima per numero di vittorie e quindi per minimo tempo di
-  gioco cumulativo. Inoltre, per ogni parita si desidera
+  gioco cumulativo. Inoltre, per ogni partita si desidera
   memorizzare, in un frame laterale, la sequenza di mosse effettuate dai
   vari giocatori in ordine di occorrenza.
 \end{itemize}
@@ -318,7 +318,7 @@ Di seguito sono proposte alcune funzionalit\`a avanzate che concorrono alla valu
 \frametitle{Specifiche implementative}
 In questa sezione vengono presentati i requisiti tecnici
 dell'applicazione.  Deve essere un sistema distributivo composto da
-un lato gico che pu\'o gestire molti giochi simultanei e multipli
+un lato gioco che pu\'o gestire molti giochi simultanei e multipli
 lati giocatore che possono partecipare nel un solo giocco. Si raccomanda
 l'utilizzo del pattern \textbf{MVC} (Model-View-Controller) per
 progettare l'intero sistema.
@@ -349,9 +349,9 @@ istanziato una sola volta. Deve permettere di:
 \item Deve essere in grado di gestire pi\`u partite
   contemporaneamente.
 \item Deve essere implementato secondo la logica JavaSE.
-\item Nel caso in cui sia l'implementazione via socket che quelle via
+\item Nel caso in cui sia l'implementazione via socket che quella via
   RMI sia richiesta, all'avvio al questo componente, deve essere
-  possibile adattare il metodo utilizzato rispetto alle scellte lato
+  possibile adattare il metodo utilizzato rispetto alle scelte lato
   giocatore.
 \end{itemize}
 \end{frame}
@@ -359,11 +359,11 @@ istanziato una sola volta. Deve permettere di:
 \subsection{Avvio della partita}
 \begin{frame}
 \frametitle{Avvio della partita}
-L'assunzione base \`e che ogni late giocatore che voglia partecipare a
+L'assunzione base \`e che ogni lato giocatore che voglia partecipare a
 una partita conosca l'indirizzo (numerico o simbolico) del lato gioco. Quando un giocatore si connette, 
 \begin{itemize}
-\item se c\`e una partita in fase di avvio di un giocatore viene automaticamente aggiunto alla partita
-\item quando la partita raggiunge 8 giocatori oppure quando viene raggiunto un timeout  e ci sono almeno 2 giocatori la partita inizia
+\item se c'\`e una partita in fase di avvio di un giocatore viene automaticamente aggiunto alla partita
+\item quando la partita raggiunge 8 giocatori oppure quando viene raggiunto un timeout e ci sono almeno 2 giocatori la partita inizia
 \item se non ci sono partite in fase di avvio, viene creata una nuova partita.
 \end{itemize}
 Si precisa che una nuova partita viene creata solamente quando un
@@ -384,11 +384,11 @@ lati giocatore si disconnettano.
   cui sopra,
   dopo il quale sospende il giocatore (nota il giocatore non esegue
   mosse ma viene comunque considerato nel conteggio dei punti etc.) 
-\item tutti i giocatori vengono notificati delle mancanze di un giocatore
+\item tutti i giocatori vengono notificati delle mancanza di un giocatore
 \item il gioco continua, saltando i giri del giocatore sospeso
-\item il lato giocatore può riconnettersi e continuare il gioco se si
-  sceglie di implementare il ``Lato giocatore stateful''
-  funzionalit\`a 
+\item il lato giocatore pu\`o riconnettersi e continuare il gioco se si
+  sceglie di implementare la funzionalit\`a ``Lato giocatore stateful''
+   
 \end{itemize}
 \end{frame}
 
