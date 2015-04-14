@@ -155,17 +155,28 @@ It covers the 7 areas of code quality:
 
 \section{Install Sonar}
 
+Sonar runs 2 components that come pre-packaged for any platform. Sonar
+Analyzer analyzes your project and stores the result of the analysis
+(called the Sonar report) in a database. The default installation comes with an embedded
+database that is good enough for the purposes of the course, but in
+general you may set up any custom database. The second component is
+the Sonar Web server that runs (by default on port 9000) on the same
+machine and reads and visualizes the reports stored in the Sonar database.
+
+Here is how you install Sonar:
+
 \begin{itemize}
 \item download Sonar
   \href{http://dist.sonar.codehaus.org/sonarqube-5.0.1.zip}{\ULurl{here}}
   and unzip the downloaded file to your favorite folder
-\item Install
+\item unzip
 \item after unzipping you will see a folder for each OS
 \item depending on your OS, you need to run the appropriate executable
   (type in terminal \texttt{sonar.sh start} for Linux and Mac OS,
   execute StartSonar.bat for Windows)
-\item now you can browse your sonar installation at \url{http://localhost:9000/}
-\item modify your pom.xml (pom.xml) to have the following line under
+\item now you can browse your sonar deployment at \url{http://localhost:9000/}
+\item to analyze your project the easiest way is to embed the Sonar
+  analysis in the maven lifecycle. To do this, modify your pom.xml to have the following line under
   the properties tag:\\
 \texttt{<sonar.host.url> http://localhost:9000/ </sonar.host.url>}\\
 for example:
