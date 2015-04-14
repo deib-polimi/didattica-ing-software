@@ -138,8 +138,8 @@ There are three basic goals of a version control system (VCS):
 \begin{enumerate}
 \item We want people to be able to work simultaneously, not serially.
 \item When people are working at the same time, we want their changes
-  to not conflict with each other
-\item We want the keep the complete evolution of the code
+  to not conflict with each other.
+\item We want the keep the complete evolution of the code.
 \end{enumerate}
 
 This document is a fairly complete guide to Git on topics selected
@@ -194,7 +194,7 @@ McVoy withdrew the free version that kernel developers had
 been using and Torvalds promptly abandoned BitKeeper and moved
 to design an open-source version. This meant that several BitKeeper
 ideas became central in later VCS designs, notably the
-representation of history as a changeset-based DAG,
+representation of history as a changeset-based directed acyclic graph (DAG),
 commit-before-merge operation, and the semantics of the associated
 push and pull operations.
 Finally, two others VCS (Mercurial and git) were launched with
@@ -218,25 +218,25 @@ initialize a new empty repository. Most of the other Git commands are
 not available outside of an initialized repository, so this is usually
 the first command you'll run in a new project. 
 
+\begin{lstlisting}
+$ git init
+\end{lstlisting}
+
 Executing git init creates a .git subdirectory in the project root,
 which contains all of the necessary metadata for the repo. Aside from
 the .git directory, an existing project remains unaltered (unlike SVN,
 Git doesn't require a .git folder in every subdirectory). 
 
 \begin{lstlisting}
-$ git init
+$ git init --bare <directory>
 \end{lstlisting}
 
 Create an empty Git repository in the specified directory. Running
 this command will create a new folder called <directory> containing
 nothing but the .git subdirectory.
 
-\begin{lstlisting}
-$ git init --bare <directory>
-\end{lstlisting}
-
 Shared remote repositories should always be created with the --bare
-flag. In fact, the remote repositiory that you are going to be using in the
+flag. In fact, the remote repository that you are going to use in the
 class is already going to be initialized, however you are responsible
 for creating your local repositories.
 
@@ -272,7 +272,7 @@ repository, you push or pull commits from one repository to another.
 
 Of course, there's nothing stopping you from giving certain Git repos
 special meaning. For example, in the course one Git repo is going to be
-considered as the “central” repository, but this is just a matter of
+considered as the ``central'' repository, but this is just a matter of
 convention.
 
 \subsubsection*{git config}
@@ -305,11 +305,11 @@ particular file in the next commit.
 $ git add <file or directory> 
 \end{lstlisting}
 
+With git reset command you can revert the git add command.
+
 \begin{lstlisting}
 $ git reset <file or directory> 
 \end{lstlisting}
-
-With git reset commant you can revert the git add commant.
 
 \subsubsection*{git commit}
 
@@ -344,6 +344,10 @@ system, it's important to create atomic commits so that it's easy to
 track down bugs and revert changes with minimal impact on the rest of
 the project. 
 
+\begin{lstlisting}
+$ git commit -a -m "<message>"
+\end{lstlisting}
+
 Commit a snapshot of all changes in the working directory. This only
 includes modifications to tracked files (those that have been added
 with git add at some point in their history).
@@ -370,7 +374,7 @@ working directory untouched.
 $ git checkout <branch name>
 \end{lstlisting}
 
-This command changes the current branch in the repository and navigate
+This command changes the current branch in the repository and navigates
 the current working directory to the last (head) commit in the branch.
 
 \begin{lstlisting}
@@ -478,8 +482,8 @@ $ git log --oneline
 
 Git can keep history that is non-linear. Developers can create several
 branches in their project revision history and use them to develop
-separate features in isolated environment. 
-To perform branching in git first one needs to know how to create branches. 
+separate features in isolated environments. 
+To perform branching in git, first one needs to know how to create branches. 
 Then, as we mentioned before, we'll see how git checkout can be used to
 select a branch. Finally, we'll learn how git merge can integrate the
 history of independent branches.
@@ -491,22 +495,20 @@ A branch represents an independent line of development.
 way to request a brand new working directory, staging area, and
 project history. New commits are recorded in the history for the
 current branch, which results in a fork in the history of the
-project.
-
-The git branch command lets you create, list, rename, and delete
+project. The git branch command lets you create, list, rename, and delete
 branches.
 
 \begin{lstlisting}
 $ git branch
 \end{lstlisting}
 
-Lists all the branches in your repository.
+List all the branches in your repository.
 
 \begin{lstlisting}
 $ git branch <name>
 \end{lstlisting}
 
-Creates a new branch called <name>. This does not check out the new
+Create a new branch called <name>. This does not check out the new
 branch (i.e. it does not make it current branch).
 
 \begin{lstlisting}
@@ -519,7 +521,7 @@ Deletes the specified branch.
 $ git branch -m <name>
 \end{lstlisting}
 
-Renames the current branch to <name>.
+Rename the current branch to <name>.
 
  Branches should be a part of your everyday development
  process. When you want to add a new feature or fix a bug - no matter
@@ -563,7 +565,7 @@ start developing a feature while in a detached HEAD state, there would
 be no branch allowing you to get back to it. When you inevitably check
 out another branch (e.g., to merge your feature in), there would be no
 way to reference your feature. The point is, your development should
-always take place on a branch - never on a detached HEAD. 
+always takes place on a branch - never on a detached HEAD. 
 
 \subsubsection*{git merge}
 
@@ -743,14 +745,14 @@ branches into your local repository.
 The git remote command lets you create, view, and delete connections
 to other repositories. Remote connections are more like bookmarks
 rather than direct links into other repositories. They associate names
-to urls of the remote repositories to serve as convenient aliases
+to URLs of the remote repositories to serve as convenient aliases
 that can be used instead of using urls directly.
 
 \begin{lstlisting}
 $ git remote
 \end{lstlisting}
 
-List the remote connections you have to other repositories.
+Lists the remote connections you have to other repositories.
 When you clone a repository with git clone, it automatically creates a
 remote connection called origin pointing back to the cloned
 repository. This is useful for developers creating a local copy of a
@@ -762,7 +764,7 @@ Git-based projects call their central repository origin.
 $ git remote add <name> <url>
 \end{lstlisting}
 
-Create a new connection to a remote repository. After adding a remote,
+Creates a new connection to a remote repository. After adding a remote,
 you'll be able to use <name> as a convenient shortcut for <url> in
 other Git commands.
 
@@ -770,7 +772,7 @@ other Git commands.
 $ git remote rm <name>
 \end{lstlisting}
 
-Remove the connection to the remote repository called <name>.
+Removes the connection to the remote repository called <name>.
 
 \subsubsection*{git fetch}
 
@@ -820,7 +822,7 @@ fetch <name> followed by git merge origin/<current-branch>.
 $ git pull <name>
 \end{lstlisting}
 
-The git pull commant is an easy way to synchronize your local repository with upstream
+The git pull command is an easy way to synchronize your local repository with upstream
 changes. The following diagram explains each step of the pulling
 process in your local revision history: 
 
@@ -898,10 +900,10 @@ the commits. In this case there is only the master branch with 6 commits.
 
 EGit is an Eclipse plug-in (software component) which allows you to
 use the distributed version control system Git directly within the
-Eclipse IDE. 
+Eclipse Integrated Development Environment (IDE). 
 
 \subsection{Installation}
-Eclipse Luna, IDE that we are going to use in the class already contains
+Eclipse Luna, the IDE that we are going to use in the class already contains
 EGit 3.4.1, therefore no installation is required. If you decide to
 use some other IDE or an older version of Eclipse you need to install
 it on your own.
@@ -942,7 +944,7 @@ $\rightarrow$ Default  Repository Folder entry (for Mac).
 
 
 
-\subsection{Create new project}
+\subsection{Create a new project}
 
 The following section explains how to create a local Git repository
 for one project with Eclipse. Having a local repository allows you to keep track of your
@@ -955,7 +957,7 @@ section can be applied by one team member that can carefully set up a
 maven project and the .gitignore file and perform an initial push.
 
 \begin{enumerate}
-\item Create a new maven project and set up pom.xml file (refer to the Maven guide)
+\item Create a new maven project and set up the pom.xml file (refer to the Maven guide)
 \item Create a local repository
 
 Right click on the project, then Team $\rightarrow$ Share project
@@ -969,7 +971,7 @@ Right click on the project, then Team $\rightarrow$ Share project
 \end{center}
 
 It is recommended to separate your Git repository from any additional
-meta-data which Eclipse might create, it is recommended to place your
+meta-data which Eclipse might create, and to place your
 Git repositories outside the Eclipse workspace. Eclipse follows this
 recommendation and the EGit plug-in proposes a directory outside your
 workspace. Placing Git repositories directly in the workspace may
@@ -1044,7 +1046,7 @@ next the Java view which is currently selected).
 
 Select your newly created repository in the left.
 
-Than in the bottom tabs choose git staging.
+Then in the bottom tabs choose git staging.
 
 \begin{center}
 \includegraphics[scale=0.33]{figures/s7.png}
@@ -1060,7 +1062,7 @@ transfer them into the lower part for staging.
 \item Commit
 
 Write a commit message and press commit.
-Once you return to Java view you can the the following project
+Once you return to Java view you can see the the following project
 structure. Notice that the symbols have changed to reflect that the
 current version is saved in the repository.
 
@@ -1121,7 +1123,7 @@ using a wizard.
 \includegraphics[scale=0.35]{figures/s16.png}
 \end{center}
 
-\item After the Git repository is cloned, EGit opens an additional import dialog which allows to import the Eclipse projects from the Git repository.
+\item After the Git repository is cloned, EGit opens an additional import dialog which allows you to import the Eclipse projects from the Git repository.
 
 \begin{center}
 \includegraphics[scale=0.35]{figures/s17.png}
@@ -1149,13 +1151,13 @@ Team $\rightarrow$ Ignore, to add the file to a .gitignore file
 
 Team $\rightarrow$ Show in History, to display the selected files and folders in the History view
 
-Team $\rightarrow$ Pull to pull in changes from your remote Git repository
+Team $\rightarrow$ Pull, to pull in changes from your remote Git repository
 
-Team $\rightarrow$ Fetch to fetch the current state from the remote repository
+Team $\rightarrow$ Fetch, to fetch the current state from the remote repository
 
-Team $\rightarrow$ Switch To to switch or create new branches
+Team $\rightarrow$ Switch, to switch or create new branches
 
-Team $\rightarrow$ Push to push changes to your remote Git repository
+Team $\rightarrow$ Push, to push changes to your remote Git repository
 
 If you select a project you can use additional team operations from
 the context menu.
@@ -1190,7 +1192,7 @@ branches besides master.
 
 Developers start by cloning the central repository. In their own local
 copies of the project, they edit files and commit changes; however,
-these new commits are stored locally—they're 
+these new commits are stored locally -- they're 
 completely isolated from the central repository. This lets developers
 defer synchronizing upstream until they're at a convenient break
 point.
