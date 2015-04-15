@@ -864,9 +864,9 @@ changes by running git push origin master. Notice how git push is
 essentially the same as running git merge master from inside the
 remote repository.
 
-\textbf{Example (Synchronizing with remote repository):}
+\textbf{Synchronizing with remote repository (BitBucket)}
 
-Set up a remote repository (with bitbucket, for example).
+Set up a remote repository.
 \begin{center}
 \includegraphics[scale=0.33]{figures/s1.png}
 \end{center}
@@ -895,7 +895,41 @@ the commits. In this case there is only the master branch with 6 commits.
 \begin{center}
 \includegraphics[scale=0.33]{figures/s2.png}
 \end{center}
+\newpage 
+\textbf{Synchronizing with remote repository (GitLab)}
 
+Set up a remote repository.
+
+\begin{center}
+\includegraphics[scale=0.4]{figures/s1-b.png}
+\end{center}
+
+Perform the following set of commands
+\begin{lstlisting}
+$ git remote add origin https://gitlab.com/john/testrepo.git
+$ git remote
+origin
+$ git push origin
+$ git push -u origin --all
+Counting objects: 18, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (10/10), done.
+Writing objects: 100% (18/18), 1.55 KiB | 0 bytes/s, done.
+Total 18 (delta 1), reused 0 (delta 0)
+To https://gitlab.com/john/testrepo.git
+ * [new branch]      master -> master
+Branch master set up to track remote branch master from origin.
+$ git pull origin
+Already up-to-date.
+\end{lstlisting}
+
+You will be able to see all your branches and within each branch all
+the commits. In this case there is only the master branch with 7 commits.
+\begin{center}
+\includegraphics[scale=0.4]{figures/s2-b.png}
+\end{center}
+
+\newpage
 \section{Git with Eclipse}
 
 EGit is an Eclipse plug-in (software component) which allows you to
@@ -1129,11 +1163,16 @@ using a wizard.
 \includegraphics[scale=0.35]{figures/s17.png}
 \end{center}
 
-\item Choose your workspace directory, start a New Project wizard
-  and then follow the instructions for creating a new maven project 
+\item Choose your workspace directory and then "Import as a general project".
 
 \begin{center}
 \includegraphics[scale=0.35]{figures/s18.png}
+\end{center}
+
+\item Right click on the project in the Package Explorer view  and choose Configure $\rightarrow$ Convert to Maven project. Insert the groupId and your artifactId.
+
+\begin{center}
+\includegraphics[scale=0.35]{figures/s19.png}
 \end{center}
 
 \end{enumerate}
