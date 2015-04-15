@@ -189,6 +189,7 @@ for example:
  </properties>
 ...
 \end{lstlisting}
+\item Note that, this change is already included in the maven guide
 \item create a new run configuration: right click on the project $>$
   Run as $>$ Run configurations...
 \item choose a New maven build. Name it \texttt{maven sonar} and put
@@ -203,21 +204,51 @@ for example:
 
 
 \subsection{Enable test coverage}
-You will notice that the statistics that you option from the previous
-sonar analysis does not contain unit test coverage information. To
-enable Sonar calculating test coverage:
+If you notice that the statistics that you option from the previous
+sonar analysis does not contain unit test coverage information, you
+need to enable test coverage:
 
 \begin{itemize}
-\item open a terminal
-\item navigate to the root folder of you project
-\item run the following command 
+\item modify your pom.xml file to include the Jacoco plugin:
 \begin{lstlisting}
-mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install
--Dmaven.test.failure.ignore=true
+<plugin>
+	<groupId>org.jacoco</groupId>
+	<artifactId>jacoco-maven-plugin</artifactId>
+	<version>0.5.5.201112152213</version>
+	<configuration>
+		<destFile>target/jacoco.exec</destFile>
+		<dataFile>target/jacoco.exec</dataFile>
+	</configuration>
+	<executions>
+		<execution>
+			<id>jacoco-initialize</id>
+			<goals>
+				<goal>prepare-agent</goal>
+			</goals>
+		</execution>
+		<execution>
+			<id>jacoco-site</id>
+			<phase>package</phase>
+			<goals>
+				<goal>report</goal>
+			</goals>
+		</execution>
+	</executions>
+</plugin>
 \end{lstlisting}
-\item not re-run the \texttt{maven sonar} run configuration and go to
-  \url{http://localhost:9000/} to see the code coverage statistics.
+\item Note that, this change is already included in the maven guide
+
+% \item navigate to the root folder of you project
+% \item run the following command 
+% \begin{lstlisting}
+% mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install
+% -Dmaven.test.failure.ignore=true
+% \end{lstlisting}
+% \item re-run the \texttt{maven sonar} run configuration and go to
+%   \url{http://localhost:9000/} to see the code coverage statistics.
 \end{itemize}
+
+
 
 \subsection{Integrate Sonar with Eclipse}
 

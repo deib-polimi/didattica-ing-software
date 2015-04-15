@@ -311,6 +311,11 @@ To create a maven project:
   <artifactId>cg_*number*</artifactId> 
   <version>0.0.1-SNAPSHOT</version>
   <name>cg_*number*</name>
+  <properties>
+     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+     <sonar.language>java</sonar.language>
+     <sonar.host.url> http://localhost:9000/ </sonar.host.url>
+  </properties>
   <description>Prova Finale Ingegneria del software</description>
   <dependencies>
     <dependency>
@@ -330,6 +335,30 @@ To create a maven project:
           <source>1.7</source>
           <target>1.7</target>
         </configuration>
+      </plugin>
+      <plugin>
+	<groupId>org.jacoco</groupId>
+	<artifactId>jacoco-maven-plugin</artifactId>
+	<version>0.5.5.201112152213</version>
+	<configuration>
+	  <destFile>target/jacoco.exec</destFile>
+	  <dataFile>target/jacoco.exec</dataFile>
+	</configuration>
+	<executions>
+	  <execution>
+	    <id>jacoco-initialize</id>
+	    <goals>
+	      <goal>prepare-agent</goal>
+	    </goals>
+	  </execution>
+	  <execution>
+	    <id>jacoco-site</id>
+	    <phase>package</phase>
+	    <goals>
+	      <goal>report</goal>
+	    </goals>
+	  </execution>
+	</executions>
       </plugin>
     </plugins>
   </build>
