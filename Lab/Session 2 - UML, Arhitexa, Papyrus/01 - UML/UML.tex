@@ -163,23 +163,62 @@ Rappresenta le relazioni statiche tra le classi.
 \end{itemize}
 
 \subsubsection{Aggregazione}
-L'aggregazione \`e un particolare tipo di associazione utilizzata per descrivere una relazione di tipo "has a". In altre parole l' aggregazione \`e un tipo particolare di associazione che rappresenta la relazione tra una parte e il suo contenitore. L'aggregazione \`e utilizzata quando una classe \`e un contenitore di altre oggetti. Tuttavia contenitore e contenute non sono in una relazione ``forte" ovvero se il contenitore \`e distrutto le altri oggetti (contenuti) continuano ad esistere.
+L'aggregazione \`e un particolare tipo di associazione utilizzata per descrivere una relazione di tipo "has a". In altre parole l' aggregazione \`e un tipo particolare di associazione che rappresenta la relazione tra una parte e il suo contenitore. L'aggregazione \`e utilizzata quando una classe \`e un contenitore di altre oggetti. Tuttavia contenitore e contenute non sono in una relazione ``forte" ovvero se il contenitore \`e distrutto le altri oggetti (contenuti) continuano ad esistere. 
 
 \subsubsection{Composizione}
 \`E un particolare tipo di aggregazione che viene utilizzato quando \`e presente una ``forte" relazione tra contenitore e contenuto. Se il contenitore viene distrutto ogni istanza degli oggetti contenuti viene distrutta di conseguenza.
 
 \subsubsection{Generalizzazione}
-\`E una relazione di tipo ``\`e un". Indica che una delle due classi (la sottoclasse) \`e considerata come una specializzazione dell'altra (la super classe). Questo significa che ogni istanza della sottoclasse \`e anche un istanza della super classe e che tutti i metodi pubblici e protetti della super classe sono ereditati dalla sotto classe.
+\`E una relazione di tipo ``\`e un". Indica che una delle due classi (la sottoclasse) \`e considerata come una specializzazione dell'altra (la super classe). Questo significa che ogni istanza della sottoclasse \`e anche un istanza della super classe e che tutti i metodi pubblici e protetti della super classe sono ereditati dalla sotto classe. 
 
 \subsubsection{Realizzazione}
-\`E una relazione tra due modelli di elementi. Di solito una classe e un interfaccia, dove un elemento del modello (la classe) implementa il comportamento che altro elemento (l'interfaccia) specifica. Diverse classi possono ereditare il comportamento da una singola interfaccia. 
+\`E una relazione tra due modelli di elementi. Di solito una classe e un interfaccia, dove un elemento del modello (la classe) implementa il comportamento che altro elemento (l'interfaccia) specifica. Diverse classi possono ereditare il comportamento da una singola interfaccia.
 
 \subsubsection{Dipendenza}
-Indica che una delle classi dipende da un'altra classe perch\`e la utilizza in un certo istante di tempo. Una classe dipende da un altra se la utilizza come parametro o variabile locale in un metodo.
-
+Indica che una delle classi dipende da un'altra classe perch\`e la utilizza in un certo istante di tempo. Una classe dipende da un altra se la utilizza come parametro o variabile locale in un metodo. 
+\vspace{0.5cm}
+\begin{center}
+\includegraphics[scale=0.37]{class-not.png}\\
+\end{center}
 \subsection{Sequence diagram}
-\ldots
 
+I sequence diagram descrivono l'interazione dinamica tra oggetti in un particolare scenario. Si rappresenta lo scambio di messaggi tra oggetti in sequenza temporale, dall'alto verso il basso. Ciascun oggetto coinvolto nello scenario presenta una \textit{lifeline} o linea di vita durante la quale pu\`o scambiare o ricevere messaggi da altri oggetti. La linea di vita  \`e rappresentata da una linea verticale tratteggiata che parte dall'oggetto. Un oggetto inizia una esecuzione (\textit{execution occurence}) quando viene coinvolto nelle interazioni dello scenario, ad esempio quando invia o riceve un messaggio. L'esecuzione si rappresenta sovrapponendo alla linea di vita un rettangolo solido esteso verticalmente fino al termine dell'esecuzione.
+
+
+\begin{center}
+\includegraphics[scale=0.4]{seq-simple.png}\\
+\end{center}
+
+
+\subsubsection{Messaggi}
+
+Lo scambio di messaggi si rappresenta con una freccia orizzontale dalla lifeline dell'oggetto chiamante a quella del ricevente. Lungo le frecce dei messaggi \`e possibile descrivere con un testo il tipo di messaggio (nome del metodo, argomenti, etc.). Esistono principalmente i seguenti tipi di messaggio:
+
+\begin{itemize}
+\item  \textit{Messaggio sincrono}: un messaggio, come la classica chiamata ad un metodo, che blocca il chiamante fino alla ricezione della risposta 
+\item  \textit{Messaggio asincrono}: un messaggio non bloccante
+\item  \textit{Messaggio di ritorno}: la risposta ad un messaggio sincrono o asincrono (callback)
+\item  \textit{Messaggio di creazione}: messaggio che rappresenta la creazione di un oggetto
+\item  \textit{Messaggio di distruzione}: messaggio che rappresenta la distruzione di un oggetto 
+\end{itemize}
+
+
+\begin{center}
+\includegraphics[scale=0.5]{seq-not.png}\\
+\end{center}
+
+
+\subsubsection{Frammenti di interazione}
+
+Oltre al semplice scambio di messaggi \`e possibile rappresentare flussi di esecuzione non lineari come alternative (if-then-else), cicli o parallelismo. Questo avviene attraverso l'uso di \textit{frammenti di interazione} rappresentati da rettangoli con un \textit{operatore di interazione} posto nell'angolo in alto a sinistra. Esempi di operatori di interazione sono:  \textit{alt} (opzioni, come un costrutto if-then-else),  \textit{loop} (cicli),  \textit{opt} (if-then) e  \textit{par} (parallelismo). 
+
+Di seguito un esempio di alt e loop.
+\vspace{0.5cm}
+
+\begin{center}
+\includegraphics[scale=4.0]{seq-frag.png}\\
+\end{center}
+\newpage
 \section{Example problem}
 
 Si crei un opportuno class diagram per rappresentare una versione semplificate del gioco degli scacchi. Sapendo che:
