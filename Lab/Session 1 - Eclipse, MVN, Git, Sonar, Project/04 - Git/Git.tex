@@ -11,6 +11,8 @@
 \usepackage{courier} % Required for the courier font
 \usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
 \usepackage{hyperref}
+\usepackage[autostyle]{csquotes}
+\usepackage{verbatim}
 
 % Margins
 \topmargin=-0.45in
@@ -147,7 +149,7 @@ from several
 sources\footnote{https://www.atlassian.com/git/tutorials}\footnote{Erick
   Sink: Version Control by
   Example}\footnote{http://www.vogella.com/tutorials/EclipseGit/article.html}
-for the purposes of collaborating development during the course.
+for the purposes of collaborative development during the course.
 
 \subsection*{History}
 Broadly speaking, the history of version control tools can be divided
@@ -228,17 +230,21 @@ the .git directory, an existing project remains unaltered (unlike SVN,
 Git doesn't require a .git folder in every subdirectory). 
 
 \begin{lstlisting}
-$ git init --bare <directory>
+$ git init --bare <directory>.git
 \end{lstlisting}
 
 Create an empty Git repository in the specified directory. Running
-this command will create a new folder called <directory> containing
+this command will create a new folder called <directory>.git containing
 nothing but the .git subdirectory.
 
 Shared remote repositories should always be created with the --bare
 flag. In fact, the remote repository that you are going to use in the
 class is already going to be initialized, however you are responsible
 for creating your local repositories.
+
+\blockquote{
+``The --bare flag creates a repository that doesn't have a working directory, making it impossible to edit files and commit changes in that repository. Central repositories should always be created as bare repositories because pushing branches to a non-bare repository has the potential to overwrite changes. \textbf{Think of --bare as a way to mark a repository as a storage facility, opposed to a development environment.} This means that for virtually all Git workflows, the central repository is bare, and developers local repositories are non-bare.''
+}
 
 \begin{center}
 \includegraphics[scale=0.5]{figures/01.pdf}
@@ -565,7 +571,7 @@ start developing a feature while in a detached HEAD state, there would
 be no branch allowing you to get back to it. When you inevitably check
 out another branch (e.g., to merge your feature in), there would be no
 way to reference your feature. The point is, your development should
-always takes place on a branch - never on a detached HEAD. 
+always take place on a branch - never on a detached HEAD. 
 
 \subsubsection*{git merge}
 
@@ -1174,7 +1180,7 @@ using a wizard.
 \includegraphics[scale=0.35]{figures/s18.png}
 \end{center}
 
-\item Right click on the project in the Package Explorer view  and choose Configure $\rightarrow$ Convert to Maven project. Insert the groupId and your artifactId.
+\item Right click on the project in the Package Explorer view  and choose Configure $\rightarrow$ Convert to Maven project. If prompted insert the groupId and your artifactId.
 
 \begin{center}
 \includegraphics[scale=0.35]{figures/s19.png}
