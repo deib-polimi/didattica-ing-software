@@ -93,7 +93,7 @@
 %----------------------------------------------------------------------------------------
 
 \newcommand{\hmwkTitle}{Eclipse} % Assignment title
-\newcommand{\hmwkDueDate}{Aprile 21, 2015} % Due date
+\newcommand{\hmwkDueDate}{Marzo 15, 2016} % Due date
 \newcommand{\hmwkClass}{Ingegneria del Software 1} % Course/class
 \newcommand{\hmwkClassInstructor}{Sr\dj{}an Krsti\'c and Marco Scavuzzo} % Teacher/lecturer
 %\newcommand{\hmwkClassTime}{} % Class/lecture time
@@ -197,7 +197,7 @@
 \item copia il contenuto della cartella ``eclipse'' nella cartella ``C://Program Files'' precedentemente creata
 \end{itemize}
 
-\subsection{Linux (testato con Ubuntu 12.04)}
+\subsection{Linux (testato con Ubuntu 15.10)}
 \textbf{Installazione Java JDK SE 8u74}
 \begin{itemize}
 \item apri il terminale
@@ -212,7 +212,8 @@
 \item scegli correttamente tra x64/x86 (controlla l'architettura con:  "\texttt{file /sbin/init}")
 \item crea la cartella \texttt{sudo mkdir -p /usr/local/java}
 \item scegli la cartella dove \`e presente l'archivio, per esempio \texttt{cd /home/"your\_user\_name"/Downloads}
-\item copia l'archivio nella cartella di installazione	\texttt{sudo cp -r jdk-8u74-linux-x64.tar.gz /usr/local/java}
+\item copia l'archivio nella cartella di installazione:\\
+	\verb!sudo cp jdk-8u74-linux-x64.tar.gz /usr/local/java!
 \item scegli la cartella di installazione \texttt{cd /usr/local/java}
 %\item rendi eseguibile l'archivio \texttt{sudo chmod a+x jre-8u74-linux-x64.tar.gz}%TODO Are you sure?
 \item estraetelo \texttt{sudo tar -zxvf jdk-8u74-linux-x64.tar.gz}
@@ -220,15 +221,17 @@
   aggiungi: \\
 \texttt{JAVA\_HOME=/usr/local/java/jdk1.8.0\_74} \\
 \texttt{export JAVA\_HOME}\\
-\texttt{PATH=\$PATH:\$ JAVA\_HOME/bin}\\
+\texttt{PATH=\$PATH:\$JAVA\_HOME/bin}\\
 \texttt{export PATH}
 \item chiudi l'editor (\texttt{ctrl + o} \texttt{enter} \texttt{ctrl + x})
-\item applica i nuovi valori (\texttt{sudo bash /etc/profile})
+\item applica i nuovi valori (\texttt{source /etc/profile})
 \item informa aptitude (apt) della nuova versione di Java installata
 \begin{itemize}
-\item \texttt{sudo update-alternatives --install "/usr/bin/java" "java" "/usr/local/java/jdk1.8.0\_74/bin/java" 1}
-\item \texttt{sudo update-alternatives --install "/usr/bin/javaws" "javaws" "/usr/local/java/jdk1.8.0\_74/bin/javaws" 1}
-\item \texttt{sudo update-alternatives --set java /usr/local/java/jdk1.7.0\_75/bin/java}
+\item \verb!sudo update-alternatives --install "/usr/bin/java" "java" \! \\
+	  \verb!"/usr/local/java/jdk1.8.0\_74/bin/java" 1!
+\item \verb!sudo update-alternatives --install "/usr/bin/javaws" "javaws" \! \\  				      
+	  \verb!"/usr/local/java/jdk1.8.0\_74/bin/javaws" 1!
+\item \verb!sudo update-alternatives --set java /usr/local/java/jdk1.8.0\_74/bin/java"!
 \end{itemize} 
 \item verifica la versione \texttt{java -version}
 \item riavvia il sistema \texttt{sudo reboot}
@@ -242,7 +245,7 @@
   "\texttt{file /sbin/init}")
 \item scarica Eclipse Mars.2 (4.5.2) per Linux
 \item estrailo  \texttt{tar -zxvf eclipse-java-mars-2-linux-gtk-x86\_64.tar.gz}
-\item eseguilo \texttt{./eclipse \&}
+\item eseguilo \texttt{./eclipse/eclipse \&}
 \end{itemize}
 
 %-----------------------------------------------------------------------------------------------------------------
