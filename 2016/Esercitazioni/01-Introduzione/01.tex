@@ -101,8 +101,8 @@
 %	NAME AND CLASS SECTION
 %----------------------------------------------------------------------------------------
 
-\newcommand{\hmwkTitle}{Introduzione} % Assignment title
-\newcommand{\hmwkDueDate}{Martedi,\ Aprile 15,\ 2014} % Due date
+\newcommand{\hmwkTitle}{01 - Introduzione} % Assignment title
+\newcommand{\hmwkDueDate}{Martedi,\ Marzo 15,\ 2016} % Due date
 \newcommand{\hmwkClass}{Ingegneria del Software 1} % Course/class
 \newcommand{\hmwkClassTime}{} % Class/lecture time
 \newcommand{\hmwkClassInstructor}{Claudio Menghi} % Teacher/lecturer
@@ -114,8 +114,8 @@
 
 \title{
 \vspace{2in}
-\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
-\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+\textmd{\textbf{\hmwkClass\\ \vspace{1cm} \hmwkTitle \vspace{1cm}}}\\
+\normalsize\vspace{0.1in}\small{\hmwkDueDate}\\
 \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
 \vspace{3in}
 }
@@ -123,7 +123,7 @@
 
 \theoremstyle{definition} 
 
-\newtheorem{mydef}{Definition}
+\newtheorem{mydef}{Definizione}
 \newtheorem{lemma}{Lemma}
 
 \newtheorem{theorem}{Theorem}[section]
@@ -151,7 +151,7 @@
 
 %----------------------------------------------------------------------------------------
 \section{Introduzione}
-Questa lezione copre le  slides ``Classi come astrazioni" o in alternativa al capitolo  1- 2, 3, 4 e 5 del libro  Pellegrino Principe. “Java 8”.
+Questa lezione copre le  slides ``Classi come astrazioni" o in alternativa i capitoli  1- 2, 3, 4 e 5 del libro  Pellegrino Principe. “Java 8”.
 
 
 \subsection{Le caratteristiche di Java}
@@ -159,14 +159,17 @@ Questa esercitazione ha come scopo quella di fornire una panoramica su Java e su
 \begin{itemize}
 \item \emph{Portabile} \`e la caratteristica principale di Java. L'obiettivo di Java \`e quello di consentire allo sviluppatore di  \emph{scrivere il programma una volta sola avendo la certezza che sar\`a possibile eseguirlo ovunque indipendentemenre dall'architettura della macchina su cui viene eseguito}. La filosofia di Java \`e quindi ``Write Once, Run Anywhere".
 \item \emph{Compilato}: Java \`e un linguaggio compilato, ovvero viene ``tradotto" dal linguaggio di programmazione Java al linguaggio ``oggetto" bytecode. 
-\item \emph{Orientato agli oggetti}: in contrasto con C, COBOL or PASCAL che sono basati su un paradigma procedurale~\footnote{In un linguaggio procedurale le componenti fondamentali sono le funzioni ``procedure" che manipolano i dati del programma.} Java \`e orientato agli oggetti. In un linguaggio orientato agli oggetti lo sviluppatore ragiona in termini di oggetti ovvero astrazioni dei concetti del mondo reale che lo sviluppatore vuole modellare. In realt\`a Java \`e un linguaggio multi-paradigma dal momento che \`e anche procedurale, e se consideriamo Java 8 \`e anche funzionale.
+\item \emph{Orientato agli oggetti}: in un linguaggio orientato agli oggetti lo sviluppatore ragiona in termini di oggetti ovvero astrazioni dei concetti del mondo reale che lo sviluppatore vuole modellare\footnote{La filosofia \`e diversa da quella utilizzata per esempio quando si scrive in C dove gli ingredienti fondamentali sono le procedure. In un linguaggio procedurale le componenti fondamentali sono le funzioni ``procedure" che manipolano i dati del programma.}. In realt\`a Java \`e un linguaggio multi-paradigma dal momento che \`e anche procedurale, e se consideriamo Java 8 \`e anche funzionale (parzialmente).
 \item \emph{Staticamente tipizzato}: un linguaggio \`e staticamente tipizzato quando \`e necessario associare ad ogni variabile un tipo.
 \end{itemize}
 
 \subsubsection{Java \`e portabile e compilato}
-La caratteristica principale di Java \`e il fatto di essere portabile/platform indipendent. Se prendiamo per esempio C il compilatore genera un linguaggio ``oggetto" che \`e dipendente dalla macchina nel quale il compilatore viene eseguito. Il codice compilat pu\`o \textbf{solo} essere eseguito sulla piattaforma per il quale il codice \`e stato compilato.
+La caratteristica principale di Java \`e il fatto di essere portabile/platform indipendent. 
+Se prendiamo per esempio C il compilatore genera un linguaggio ``oggetto" che \`e dipendente dalla macchina nel quale il compilatore viene eseguito. 
+Il codice compilato pu\`o \textbf{solo} essere eseguito sulla piattaforma per il quale il codice \`e stato compilato.
 
-In Java la fase di compilazione produce un codice intermedio chiamato \emph{byte-code} che pu\`o essere eseguito su macchine differenti supporto che ci sia installato sulla macchina un \emph{interprete} (Java Virtual Machine JVM) capace di capire il byte-code. In altre parole il byte-code \`e un codice intermedio prodotto dopo la compilazione. Il Byte-code differisce dal codice eseguibile (per esempio dai file ``.exe") dal momento che deve essere interpretato da una  Java Virtual Machine per essere eseguito.
+In Java la fase di compilazione produce un codice intermedio chiamato \emph{byte-code} che pu\`o essere eseguito su macchine differenti supposto che ci sia installato sulla macchina un \emph{interprete} (Java Virtual Machine JVM) capace di capire il byte-code. 
+In altre parole il byte-code \`e un codice intermedio prodotto dopo la compilazione. Il Byte-code differisce dal codice eseguibile (per esempio dai file ``.exe") dal momento che deve essere interpretato da una  Java Virtual Machine per essere eseguito.
 
 \begin{figure}[h]
 \centering
@@ -180,11 +183,19 @@ L'architettura del linguaggio Java \`e mostrata in Figura~\ref{JavaArchitecture}
 \begin{itemize}
 \item MyProgram.java: \`e il codice sorgente nativo dell'applicazione Java (Il file che contiene il nostro codice)
 \item Compiler: (Compilatore) prende in input il nostro codice Java  (i nostri files \texttt{.java}), e produce dei file intermedi  (\texttt{.class}) ovvero i file contenenti il byte-code.
-\item Java Virtual Machine: \`e l'interprete che deve essere installato sulla nostra macchina locale al fine di eseguire il byte-code. Il byte-code viene interpretato dalla Java Virtual Machine. Per questo motivo alcuni testi considerano Java anche come un linguaggio interpretato.
+\item Java Virtual Machine: \`e l'interprete che deve essere installato sulla nostra macchina locale al fine di eseguire il byte-code. 
+Il byte-code viene interpretato dalla Java Virtual Machine. Per questo motivo alcuni testi considerano Java anche come un linguaggio interpretato.
 \end{itemize}
 
-Per eseguire il vostro programma su una macchina \`e sufficiente che l'utente abbia installato una macchina virtuale: Java Virtual Machine. In particolare, il Java Run-time Environment (JRE) contiene la macchina virtuale che consente di eseguire i programmi Java.  JREs differenti sono associati a sistemi operativi differenti. Tuttavia, una volta generati, i class files possono essere eseguiti su ogni sistema cha abbia una Macchina Virtuale installata. \\
-Per compilare i tuoi file Java \`e necessario avere un tool di sviluppo Java: un Java Development Kit (JDK). Il JDK include la JRE e contiene un set di tool di svilupo che constentono di scrivere e compilare i tuoi programmi Java.
+Per eseguire il vostro programma su una macchina \`e sufficiente che l'utente abbia installato una macchina virtuale: la Java Virtual Machine. 
+In particolare, il \textbf{Java Run-time Environment} (JRE) contiene la macchina virtuale che consente di eseguire i programmi Java.  
+JREs differenti sono associati a sistemi operativi differenti. 
+Una volta istallata la JRE \`e possibile eseguire i class files generati.
+
+Nota che, una volta generati, i class files possono essere eseguiti su ogni sistema cha abbia una Macchina Virtuale installata, indipendentemente dal sistema operativo su cui la macchina virtuale \`e eseguita.
+
+Per compilare i file Java \`e necessario avere un tool di sviluppo Java: un \textbf{Java Development Kit} (JDK). 
+Il JDK include la JRE e contiene un set di tool di svilupo che constentono di scrivere e compilare i tuoi programmi Java.
 
 
 
@@ -195,7 +206,8 @@ La programmazione orientata agli oggetti implica un approccio alla programmazion
 \begin{mydef} \textbf{Oggetto} \`e un astrazione di un oggetto del mondo reale e ne descrive le caratteristiche  che sono di interesse allo sviluppatore.
 \end{mydef}
 
-In altre parole in un paradigma orientato agli oggetti lo sviluppatore descrive il mondo e i suoi oggetti e come il mondo evolve nel corso del tempo. In un paradigma procedural lo sviluppatore specifica \textbf{come} risolvere un problema, mentre in un linguaggio orientato agli oggetti lo sviluppatore prima descrive ``il problema" e poi cerca una strategia per risolvere il probleam utilizzando il modello del mondo costruito.
+In altre parole in un paradigma orientato agli oggetti lo sviluppatore descrive il mondo e i suoi oggetti e come il mondo evolve nel corso del tempo. 
+In un paradigma procedurale lo sviluppatore specifica \textbf{come} risolvere un problema, mentre in un linguaggio orientato agli oggetti lo sviluppatore prima descrive ``il problema" e poi cerca una strategia per risolvere il probleam utilizzando il modello del mondo costruito.
 
 Gli oggetti vengono creati partendo da dei modelli pi\`u generali chiamati classi. 
 
@@ -208,7 +220,7 @@ Gli oggetti vengono creati con l'istruzione \textbf{new}. Per esempio l'istruzio
 \begin{lstlisting}
 Bike myBike=new Bike();
 \end{lstlisting}
-La descrizione del tipo bike \`e presentato nel seguito.
+La descrizione del tipo bike, ovvero la classe \texttt{Bike}, \`e presentata nel seguito.
 \begin{lstlisting}[language=Java,escapechar=|]
 public class Bike {
 
@@ -220,16 +232,17 @@ Le classi sono definiti mediante la parola chiave (keyword) \texttt{class} e des
 
 
 \subsubsection{Java \`e staticamente tipizzato}
-\begin{mydef} \textbf{Staticamente tipizzato} in linguaggio \`e staticamente tipizzato se ogni variabile \`e associato sia a un tipo che a un oggetto: non \`e possibile creare una variabile senza un tipo.
+\begin{mydef} \textbf{Staticamente tipizzato} un linguaggio \`e staticamente tipizzato se ogni variabile \`e associata a un tipo: non \`e possibile creare una variabile senza un tipo.
 \end{mydef}
 \begin{lstlisting}
 Bike bike1=new Bike();
 \end{lstlisting}
-Per esempio, l'istruzione precedente dichiara una variabile di tipo Bike con \textbf{identificatore} bike1, che \`e associata a un oggetto di classe Bike. In Java ogni variabile deve essere associata a un tipo.
+Per esempio, l'istruzione precedente dichiara una variabile di tipo Bike con \textbf{identificatore} bike1, che \`e associata a un oggetto di classe Bike. 
+In Java ogni variabile deve essere associata a un tipo.
 
 
 \subsection{Variabili e tipi di riferimento}
-Prima di discutere le variabili e i tipi di riferimento ricordiamo che la memoria in Java 
+Prima di discutere le variabili e i tipi di riferimento discutiamo per uno momento l'organizzazione della memoria in Java 
 
 \begin{itemize}
 \item \textbf{Stack} e \textbf{Heap}:  Lo stack e lo heap sono due aree di memoria che sono utilizzate per contenere le nostre variabili e i nostri oggetti.
@@ -241,9 +254,9 @@ estendibile.
 \end{itemize}
 
 
-\begin{mydef} Una variabile è uno spazio di memoria che contiene un ``valore". 
+\begin{mydef} Una variabile \`e uno spazio di memoria che contiene un ``valore". 
 \end{mydef}
-Java è fortemente tipizzato (\emph{strongly typed}), quindi \emph{ogni variabile ha un tipo}. Il compilatore durante la compilazione controlla che le variabili siano utilizzate in maniera corretta in relazione al loro tipo.\\
+Java \`e fortemente tipizzato (\emph{strongly typed}), quindi \emph{ogni variabile ha un tipo}. Il compilatore durante la compilazione controlla che le variabili siano utilizzate in maniera corretta in relazione al loro tipo.\\
 
 \item \textbf{Variabili primitive}: le variabili primitive definiscono una ``cella di memoria" che contiene direttamente il valore della variabile. Le variabili primitive di Java sono:
 \begin{itemize}
@@ -255,20 +268,26 @@ Java è fortemente tipizzato (\emph{strongly typed}), quindi \emph{ogni variabil
 
 Le \emph{variabili}:
 \begin{itemize}
-\item consentono di accedere agli oggetti
-\item sono allocate sullo stack a run-time quando si chiama il metodo su cui si sono dichiarate
-\item sono deallocate quando il sottoprogramma ritorna al chiamante
-\item gli \emph{oggetti} sono invece allocati sullo heap.
+\item sono allocate sullo \emph{stack} a run-time quando si chiama il metodo su cui si sono dichiarate
+\item si trovano nello heap quando rappresentano un attributo di un oggetto (vedremo in seguito).
+\item se non sono attributi di un oggetto sono deallocate quando il sottoprogramma ritorna al chiamante
 \end{itemize}
+Gli \emph{oggetti}:
+\begin{itemize}
+\item sono allocati sullo heap.
+\end{itemize} 
 
 
 
 \textbf{Dove vengono allocati gli oggetti Java?}\\
-Gli oggetti Java risiedono in una zona detta \emph{heap}. L'heap viene creato all'avvio della JVM e può cambiare dimensione durante l'esecuzione 
-dell'applicazione. A discrezione della JVM viene eseguita l'operazione di ``\emph{garbage collection}'', che consiste nella rimozione degli oggetti non più utilizzabili dal programma per fare posto ad altri. Il componente che effettua tale operazione prende il nome di ``\emph{garbage collector}''.
+Gli oggetti Java risiedono in una zona detta \emph{heap}. 
+L'heap viene creato all'avvio della JVM e pu\'o cambiare dimensione durante l'esecuzione 
+dell'applicazione. A discrezione della JVM viene eseguita l'operazione di ``\emph{garbage collection}'', che consiste nella rimozione degli oggetti non pi\`u utilizzabili dal programma per fare posto ad altri. 
+Il componente che effettua tale operazione prende il nome di ``\emph{garbage collector}''.
 
+\vspace{1cm}
 
-\textbf{Quali sono le differenze tra puntatori e riferimenti?}
+\textbf{Quali sono le differenze tra i puntatori di C e le veriabili di riferimento di Java?}
 \begin{itemize}
 \item un riferimento non pu\`o essere de-allocato dall'utente, viene rimosso dal garbage collector
 \item un riferimento non permette l'acceso all'indirizzo di memoria relativo ad un oggetto%TODO, ma a but a value that represent it
@@ -282,7 +301,7 @@ dell'applicazione. A discrezione della JVM viene eseguita l'operazione di ``\emp
 
 
 \subsubsection{Dichiarazione di una variabile}
-Per dichiarare una variabile \`e sufficiente specificare il \emph{tipo} e un \emph{identificatore}, ovvero un nome simbolico utilizzato per riferirsi alla variabile\footnote{Java è case sensitive quindi caratteri in upper e lower case sono interpretati come caratteri differenti.}. \\
+Per dichiarare una variabile \`e sufficiente specificare il \emph{tipo} e un \emph{identificatore}, ovvero un nome simbolico utilizzato per riferirsi alla variabile\footnote{Java \`e case sensitive quindi caratteri in upper e lower case sono interpretati come caratteri differenti.}. \\
 Per esempio, l'istruzione
 \begin{lstlisting}[language=Java,escapechar=|]
 int number;
@@ -295,7 +314,8 @@ dichiara una variabile di tipo riferimento ``\texttt{Car}" e con identificatore 
 La dichiarazione non alloca spazio per l'oggetto ma solo per il riferimento all'oggetto. \\
 
 \emph{Qual'è la differenza tra tipi riferimenti e puntatori (e.g., i puntatori di C)?}\\
-Ci sono varie differenze e similitudini tra riferimenti e puntatori. In genere un riferimento pu\`o essere interpretato come un puntatore ``ad alto livello", mentre la differenza fondamentale \`e per esempio i riferimenti non consentono l'utilizzo dell'aritmetica dei puntatori. Nei riferimenti l'indirizzo di memoria non \`e noto e non interessa.
+Ci sono varie differenze e similitudini tra riferimenti e puntatori. In genere un riferimento pu\`o essere interpretato come un puntatore ``ad alto livello", mentre la differenza fondamentale \`e per esempio i riferimenti non consentono l'utilizzo dell'aritmetica dei puntatori. 
+\emph{Nei riferimenti l'indirizzo di memoria non \`e noto e non interessa}.
 
 \subsubsection{Convenzione di notazione}
 In Java i nomi di classi, variabili e metodi fanno uso della notazione a cammello (\emph{CamelCase}).
@@ -368,8 +388,39 @@ Vari tipi di array possono essere dichiarati:
 \item Per quanto riguarda gli array multidimensionali la dichiarazione e l'inizializzazione avviene in maniera analoga \texttt{float[][] f=new float[10][10];}
 \end{itemize}
 
+\subsection{Semantic versioning}
+Solitamente, ogni applicazione \`e associata a pi\`u versioni. Il numero di versione tiene traccia di come l'applicazione evolve nel tempo.
+Per esempio Java 1.8 \`e una evoluzione di Java 1.7.
+
+Solitamente a una applicazione \`e associato un numero di versione nella forma MAJOR.MINOR.PATCH, dove i campi hanno il seguente significato:
+\begin{itemize}
+\item MAJOR ogni volta che viene rilasciata una nuova versione con un cambiamento MAJOR significa che un cambiamento nelle API che rende l'applicazione incompatibile con la versione precedente \`e stata rilasciata. 
+\item MINOR viene modificato ogni volta che vengono rilasciate nuove funzionalit\`a in una maniera backward compatibile
+\item PATCH viene eseguita un attivit\`a di bug fixing in maniera backward compatibile.
+\end{itemize}
+
+Regole per l'uso di semantic versioning:
+\begin{itemize}
+\item il software DEVE dichiarare delle API pubbliche, precise e comprensibili;
+\item MAJOR, MINOR e PATCH devono essere dei numeri NON negativi, e devono sempre incrementare. Quando la versione MAJOR (MINOR) viene incrementata il valore di MINOR e PATCH (PATCH) viene settato a zero;
+\item una volta che una verione \`e rilasciata il contenuto della versione NON pu\`o essere modificato
+\item la versione 0.y.z \`e la versione iniziale del software. Le API pubbliche devono essere considerate non stabili. Tutto pu\`o cambiare nel tempo.
+\item la versione 1.0.0 \`e la prima versione del software che definisce le API pubbliche, da questo momento l'applicazione dipende dalle API pubbliche
+\item il valore di PATCH deve essere incrementato solo se backward compatible bug fixes sono eseguiti. (Il bug fix corregge un comportamento scorretto)
+\item il valore di MINOR deve essere incrementato se sono aggiunte funzionalit\'a introdotte nelle API pubbliche o se sono rimosse funzionalit\`a deprecate. Dopo aver incrementato MINOR \`e necessario settare PATCH a zero
+\item il valore di MAJOR deve essere incrementato quando cambiamenti incompatibili sono introdotti nelle API pubbliche. PATCH e MINOR devono essere resettati a zero
+\item una pre-release viene indicata utilizando un trattino seguita da un identificatore che specifica la patch version. Per esempio, 1.0.0-alpha.1, 1.0.0-0.3.7, 1.0.0-x.7.z.92. 
+\end{itemize}
+
+La versione iniziale del software \`e in genere la 0.1.0. Da li si inizia a utilizzare le regole sopra descritte.
+\`E tempo di passare alla versione 1.0.0 quando:
+\begin{itemize}
+\item il software viene utilizzato in produzione;
+\item si hanno delle API stabili che possono essere usati da altri.
+\end{itemize}
 
 
+Il lettore interessato pu\`o trovare informazioni addizionali in \url{http://semver.org/}.
 
 \section{Esercizi}
 L'obiettivo di questi esercizi \`e di chiarire le caratteristiche di Java prima descritte.
