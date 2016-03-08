@@ -93,7 +93,7 @@
 %----------------------------------------------------------------------------------------
 
 \newcommand{\hmwkTitle}{Eclipse} % Assignment title
-\newcommand{\hmwkDueDate}{Aprile 21, 2015} % Due date
+\newcommand{\hmwkDueDate}{Marzo 15, 2016} % Due date
 \newcommand{\hmwkClass}{Ingegneria del Software 1} % Course/class
 \newcommand{\hmwkClassInstructor}{Sr\dj{}an Krsti\'c and Marco Scavuzzo} % Teacher/lecturer
 %\newcommand{\hmwkClassTime}{} % Class/lecture time
@@ -155,80 +155,83 @@
 \hrule
 \section{Installazione dei tools}
 \subsection{Mac OSx}
-\textbf{Istallazione Java JDK SE 7u75}
+\textbf{Installazione Java JDK SE 8u74}
 \begin{itemize}
 \item connettiti al sito di
-  \href{http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html}{\ULurl{Oracle}}
+  \href{http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html}{\ULurl{Oracle}}
 \item clicca su ``accept the license agreement''
-\item scarica \textit{JDK 7} (SE 7u75) per Mac OS X
+\item scarica \textit{JDK 8} (SE 8u74) per Mac OS X
 \item installa
 \end{itemize}
 
-\textbf{Istallazione di Eclipse}
+\textbf{Installazione di Eclipse}
 \begin{itemize}
 \item apri ``applications'' (applicazioni) sul tuo mac
 \item crea la cartella ``eclipse''
 \item connettiti al sito di \href{https://eclipse.org/downloads/}{\ULurl{Eclipse}}
-\item scarica Eclipse Luna SR2 (4.4.2) per Mac OS X
+\item scarica Eclipse Mars.2 (4.5.2) per Mac OS X
 \item copia il file scaricato nella cartella ``eclipse'' creata precedentemente
 \item estrai il file
 \end{itemize}
 
 
 \subsection{Windows}
-\textbf{Istallazione Java JDK SE 7u75}
+\textbf{Installazione Java JDK SE 8u74}
 \begin{itemize}
 \item connettiti al sito di
-  \href{http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html}{\ULurl{Oracle}}
+  \href{http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html}{\ULurl{Oracle}}
 \item clicca su ``accept the license agreement''
-\item scarica \textit{JDK 7} (SE 7u75) per Windows
+\item scarica \textit{JDK 8} (SE 8u74) per Windows
 \item scegli correttamente tra Windows x64/x86
 \item installa (nota che di default la jre \`e installata sotto ``Program Files/Java'')
 \end{itemize}
 
-\textbf{Istallazione di Eclipse}
+\textbf{Installazione di Eclipse}
 \begin{itemize}
 \item apri Program Files (C://Program Files)
 \item crea la cartella ``eclipse''
 \item connettiti al sito di \href{https://eclipse.org/downloads/}{\ULurl{Eclipse}}
-\item scarica Eclipse Luna SR2 (4.4.2) per Windows
+\item scarica Eclipse Mars.2 (4.5.2) per Windows
 \item clicca sulla freccia verde rivolta verso il basso
 \item clicca su ``open''
 \item copia il contenuto della cartella ``eclipse'' nella cartella ``C://Program Files'' precedentemente creata
 \end{itemize}
 
-\subsection{Linux (testato con Ubuntu 12.04)}
-\textbf{Istallazione Java JDK SE 7u75}
+\subsection{Linux (testato con Ubuntu 15.10)}
+\textbf{Installazione Java JDK SE 8u74}
 \begin{itemize}
 \item apri il terminale
 \item  verifica la versione di java con ``\texttt{java -version}''
 \begin{itemize}
-\item se la versione \`e "1.7.0\_75" hai finito.
+\item se la versione \`e "1.8.0\_74" hai finito.
 \item se no, continua la procedura
 \end{itemize}
 \item rimuovi openjdk se installato con \texttt{sudo apt-get purge openjdk-*}
 \item connettiti al sito di
-  \href{http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html}{\ULurl{Oracle}}
+  \href{http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html}{\ULurl{Oracle}}
 \item scegli correttamente tra x64/x86 (controlla l'architettura con:  "\texttt{file /sbin/init}")
 \item crea la cartella \texttt{sudo mkdir -p /usr/local/java}
 \item scegli la cartella dove \`e presente l'archivio, per esempio \texttt{cd /home/"your\_user\_name"/Downloads}
-\item copia l'archivio nella cartella di installazione	\texttt{sudo cp -r jdk-7u75-linux-x64.tar.gz /usr/local/java}
+\item copia l'archivio nella cartella di installazione:\\
+	\verb!sudo cp jdk-8u74-linux-x64.tar.gz /usr/local/java!
 \item scegli la cartella di installazione \texttt{cd /usr/local/java}
-\item rendi eseguibile l'archivio \texttt{sudo chmod a+x jre-7u75-linux-x64.tar.gz}%TODO Are you sure?
-\item estraetelo \texttt{sudo tar -zxvf jdk-7u75-linux-x64.tar.gz}
+%\item rendi eseguibile l'archivio \texttt{sudo chmod a+x jre-8u74-linux-x64.tar.gz}%TODO Are you sure?
+\item estraetelo \texttt{sudo tar -zxvf jdk-8u74-linux-x64.tar.gz}
 \item Modifica le variabili con \texttt{sudo nano /etc/profile}  e
   aggiungi: \\
-\texttt{JAVA\_HOME=/usr/local/java/jdk1.7.0\_75} \\
+\texttt{JAVA\_HOME=/usr/local/java/jdk1.8.0\_74} \\
 \texttt{export JAVA\_HOME}\\
-\texttt{PATH=\$PATH:\$ JAVA\_HOME/bin}\\
+\texttt{PATH=\$PATH:\$JAVA\_HOME/bin}\\
 \texttt{export PATH}
 \item chiudi l'editor (\texttt{ctrl + o} \texttt{enter} \texttt{ctrl + x})
-\item applica i nuovi valori (\texttt{sudo bash /etc/profile})
+\item applica i nuovi valori (\texttt{source /etc/profile})
 \item informa aptitude (apt) della nuova versione di Java installata
 \begin{itemize}
-\item \texttt{sudo update-alternatives --install "/usr/bin/java" "java" "/usr/local/java/jdk1.7.0\_75/bin/java" 1}
-\item \texttt{sudo update-alternatives --install "/usr/bin/javaws" "javaws" "/usr/local/java/jdk1.7.0\_75/bin/javaws" 1}
-\item \texttt{sudo update-alternatives --set java /usr/local/java/jdk1.7.0\_75/bin/java}
+\item \verb!sudo update-alternatives --install "/usr/bin/java" "java" \! \\
+	  \verb!"/usr/local/java/jdk1.8.0\_74/bin/java" 1!
+\item \verb!sudo update-alternatives --install "/usr/bin/javaws" "javaws" \! \\  				      
+	  \verb!"/usr/local/java/jdk1.8.0\_74/bin/javaws" 1!
+\item \verb!sudo update-alternatives --set java /usr/local/java/jdk1.8.0\_74/bin/java"!
 \end{itemize} 
 \item verifica la versione \texttt{java -version}
 \item riavvia il sistema \texttt{sudo reboot}
@@ -240,9 +243,9 @@
 \item connettiti al sito di \href{https://eclipse.org/downloads/}{\ULurl{Eclipse}}
 \item scegli correttamente tra x64/x86 (controlla l'architettura con:
   "\texttt{file /sbin/init}")
-\item scarica Eclipse Luna SR2 (4.4.2) per Linux
-\item estrailo  \texttt{tar -zxvf eclipse-java-luna-SR2-linux-gtk-x86\_64.tar.gz}
-\item eseguilo \texttt{./eclipse \&}
+\item scarica Eclipse Mars.2 (4.5.2) per Linux
+\item estrailo  \texttt{tar -zxvf eclipse-java-mars-2-linux-gtk-x86\_64.tar.gz}
+\item eseguilo \texttt{./eclipse/eclipse \&}
 \end{itemize}
 
 %-----------------------------------------------------------------------------------------------------------------
