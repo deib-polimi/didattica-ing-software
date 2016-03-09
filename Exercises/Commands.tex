@@ -1,0 +1,17 @@
+\newcounter{EsercizioCounter}
+ \setcounter{EsercizioCounter}{1}
+
+
+\newcommand{\Esercizio}[1]{
+%\setlength{\fboxsep}{2pt}
+\fbox{
+   
+  \parbox[t][4em]{\textwidth}{
+   \vspace{2ex}
+   \textbf{Esercizio \arabic{EsercizioCounter}}: #1
+    \vspace{2ex}
+    \refstepcounter{EsercizioCounter}
+  }
+}
+}
+
