@@ -441,17 +441,11 @@ Questi esercizi hanno come fine quello di mostrare il fatto che Java \`e un ling
 \item Scrivere il codice  Java seguente
 \end{itemize}
 \end{itemize}
-\begin{lstlisting}
-public class Welcome {	
-    public static void main(String[] args){	
-	 	System.out.println("Benvenuto al corso di Ingegneria del Software");
-    }
-}
-\end{lstlisting}
+\lstinputlisting{Source/Esercizio1.java}
 \begin{itemize}
 \item \textbf{Descrizione del file creato}
 \begin{itemize}
-\item il codice definisce una classe (\texttt{class}) chiamata  Welcome con un singolo metodo  \texttt{method} chiamato main
+\item il codice definisce una classe (\texttt{class}) chiamata  \texttt{Esercizio1} con un singolo metodo  chiamato \texttt{main}
 \item \texttt{public} \`e utilizzato per specificare che la classe \`e pubblica: \`e possibile accedervi dall'esterno, per esempio da altre classi.
 \item la classe ha solo un metodo statico main
 \item \texttt{void} specifica che il metodo non ritorna alcun valore
@@ -463,7 +457,7 @@ public class Welcome {
 \end{itemize}
 \end{itemize}
 \begin{itemize}
-\item \textbf{Salvare il file} con nome \texttt{Welcome.java} (attenzione: non scegliere un nome differente e controllare che l'estensione del file sia .java).
+\item \textbf{Salvare il file} con nome \texttt{Esercizio1.java} (attenzione: non scegliere un nome differente e controllare che l'estensione del file sia .java).
 \end{itemize}
 
 \begin{itemize}
@@ -474,8 +468,8 @@ public class Welcome {
 \begin{itemize}
 \item per aprire una sottocartella e tornare alla cartella padre \`e possibile utilizzare i  comandi \emph{cd}, e \emph{cd ..}, rispettivamente. Per mostrare il contenuto della cartella utilizzare  il comando \emph{ls} (\texttt{dir} per gli utenti Windows).
 \end{itemize}
-\item Digitare \texttt{javac Welcome.java}
-\item il comando \texttt{javac}  \textbf{compila} il file \texttt{Welcome.java} file e genera un file .class (o un jar) che contiene il bytecode file che \`e possibile eseguire su qualunque piattaforma\footnote{Ricordiamo che il bytecode \`e una rappresentazione intermedia che pu\`o essere interpretata da una macchina virtuale Virtual Machine.}. Questo processo supporta la  \textbf{portabilit\`a}. 
+\item Digitare \texttt{javac Esercizio1.java}
+\item il comando \texttt{javac}  \textbf{compila} il file \texttt{Esercizio1.java} file e genera un file .class (o un jar) che contiene il bytecode file che \`e possibile eseguire su qualunque piattaforma\footnote{Ricordiamo che il bytecode \`e una rappresentazione intermedia che pu\`o essere interpretata da una macchina virtuale Virtual Machine.}. Questo processo supporta la  \textbf{portabilit\`a}. 
 \item \emph{Per eseguire con successo il comando \emph{javac} \`e necessario avere una JDK (Java Development Kit) istallata sul proprio pc\footnote{Nota che la JDK include anche il Java Run-Time Environment}.} La JDK permette quindi di  \emph{compilare} e \emph{eseguire} il programma creato.
 \end{itemize}
 \end{itemize}
@@ -484,8 +478,8 @@ public class Welcome {
 \item \textbf{Eseguire il file Java}
 \begin{itemize}
 \item il java bytecode (.class) pu\`o essere eseguito in qualsiasi architettura dove \`e installata una Virtual Machine (la quale fornisce un  \textbf{interprete} per il $Java$ bytecode) . In particolare la Java JRE fornisce questa Virtual Machine.
-\item per eseguire il file bytecodefile eseguire il comando \texttt{java Welcome}
-\item questo comando esegue il   \texttt{Main} method della classe Welcome
+\item per eseguire il file bytecodefile eseguire il comando \texttt{java Esercizio1}
+\item questo comando esegue il   \texttt{main} method della classe \texttt{Esercizio1}
 \end{itemize}
 \end{itemize}
 
