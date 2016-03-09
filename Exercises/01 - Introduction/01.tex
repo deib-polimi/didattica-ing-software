@@ -428,7 +428,7 @@ L'obiettivo di questi esercizi \`e di chiarire le caratteristiche di Java prima 
 \subsection{Java \`e compilato ed \`e portabile}
 Questi esercizi hanno come fine quello di mostrare il fatto che Java \`e un linguaggio compilato ed \`e portabile. 
 
-\subsubsection{Esercizio 1}
+\subsubsection{Esercizio}
 \Esercizio{Scrivere un programma Java che stampa a video: ``Benvenuto al corso di Ingegneria del Software"}
 
 \begin{itemize}
@@ -484,7 +484,7 @@ Questi esercizi hanno come fine quello di mostrare il fatto che Java \`e un ling
 
 
 
-\subsubsection{Esercizio 2}
+\subsubsection{Esercizio}
 \Esercizio{Richiedere all'utente di inserire il proprio nome (per esempio Carlo) e stampare ``Ciao Carlo, Benvenuto al corso di Ingegneria del Software"}
 
 \begin{itemize}
@@ -515,13 +515,11 @@ Questi esercizi hanno come fine quello di mostrare il fatto che Java \`e un ling
 \end{itemize}
 
 \subsection{Java \`e orientato agli oggetti e staticamente tipizzato}
-Una variabile \`e una posizione di memoria che contiene un valore e pu\`o essere modificato. 
+Questa sezione presenta un insieme di esercizi che mostrano che Java \`e orientato agli oggetti e staticamente tipizzato.
 
 
-\subsubsection{Esercizio 1}
-\begin{framed}
-\textbf{Esercizio 2}: Modellizzare in Java una bicicletta, una bicicletta (in un particolare istante temporale) ha una determinata velocit\`a, che dipende dalla marcia inserita e dal ritmo di pedalata
-\end{framed}
+\subsubsection{Esercizio}
+\Esercizio{Modellizzare in Java una bicicletta, una bicicletta (in un particolare istante temporale) ha una determinata velocit\`a, che dipende dalla marcia inserita e dal ritmo di pedalata}
 
 Per progettare le vostre classi in Java \`e necessario rispondere a due quesiti:
 \begin{itemize}
@@ -529,46 +527,17 @@ Per progettare le vostre classi in Java \`e necessario rispondere a due quesiti:
 \item Quali sono le \emph{funzionalit\`a} che gli oggetti di una determinata classe devono fornire?
 \end{itemize}
 
-
-\begin{lstlisting}[language=Java,escapechar=|]
-// defines a public class called Bike 
-// the name of the class usually starts with an upper case letter
-public class Bike {
-	
-	// The attributes of the class are used to describe the state of the class and are usually private or protected 
-	// The attributes of the class usually start with lower case letters
-	private int gear=1; //default 1
-	private int cadence; //default 0
-	private int speed; //default 0
-	
-	// is the constructor of the class which allows to create a new Bike
-	// the constructor has the same name of the class and does not have a return type
-	public Bike(){
-	}
-}
-\end{lstlisting}
+\lstinputlisting{Source/Bike.java}
 
 
-\subsubsection{Esercizio 2}
-\begin{framed}
-\textbf{Esercizio 2}: Implementare un client per la classe bicicletta
-\end{framed}
+
+\subsubsection{Esercizio}
+\Esercizio{Implementare un client per la classe bicicletta}
+
 Un Java si utilizza l'espressione client per indicare una generica classe, che utilizza la classe da noi progettata (nel nostro caso la classe Bicicletta). 
 
+\lstinputlisting{Source/Client.java}
 
-\begin{lstlisting}[language=Java,escapechar=|]
-public class Client {
-	
-	public static void main(String[] args)
-    {
-        Bike bike1; // defines a new reference (pointer) of class Bike with a predefined value null
-        bike1 = new Bike(); // instantiate  the object
-        // the instruction new Bike() creates a new object of type Bike and returns the reference to this object which is assigned to the reference bike1
-        // when the method new is invoked, the VM allocates dynamically the quantity of memory which is sufficient to contain the Bike object
-        Bike bike2 = new Bike(); // defines and instantiate a new object of class Bike
-     }
-}
-\end{lstlisting}
 \begin{itemize}
 \item compilare ed eseguire il programma
 \end{itemize}
@@ -577,121 +546,53 @@ public class Client {
 \item 
 \textbf{Quesiti:}\\
 \begin{itemize}
-\item Qual'\`e lo stat dell'oggetto dopo l'istruzione \emph{Bike bike1;}?\emph{l'oggetto non ha uno stato, visto che non esiste esiste solamente il suo reference.}
-\item Qual'\`e lo stato dell'oggetto  \texttt{bike1} dopo l'istruzione  \texttt{bike1 = new Bike()}? \texttt{gear=1}, \texttt{cadence=0}, \texttt{speed=0}
-\item Qual'\`e lo stato dell'oggetto  \texttt{bike1} dopo l'istruzione \texttt{bike2 = new Bike()}? \texttt{gear=1}, \texttt{cadence=0}, \texttt{speed=0}
-\item Qual'\`e lo stato dell'oggetto  \texttt{bike1} dopo l'istruzione \texttt{bike2 = new Bike()}? \texttt{gear=1}, \texttt{cadence=0}, \texttt{speed=0}
+\item Qual'\`e lo stato dell'oggetto dopo l'istruzione \texttt{Bike bike1;}?\\
+\emph{l'oggetto non ha uno stato, visto che non esiste esiste solamente il suo reference.}
+\item Qual'\`e lo stato dell'oggetto  \texttt{bike1} dopo l'istruzione  \texttt{bike1 = new Bike()}?\\
+ \texttt{gear=1}, \texttt{cadence=0}, \texttt{speed=0}
+\item Qual'\`e lo stato dell'oggetto  \texttt{bike1} dopo l'istruzione \texttt{bike2 = new Bike()}?\\
+ \texttt{gear=1}, \texttt{cadence=0}, \texttt{speed=0}
+\item Qual'\`e lo stato dell'oggetto  \texttt{bike1} dopo l'istruzione \texttt{bike2 = new Bike()}?\\
+ \texttt{gear=1}, \texttt{cadence=0}, \texttt{speed=0}
 \end{itemize}
 \end{itemize}
 
 
 
-\subsubsection{Esercizio 3}
-\begin{lstlisting}[language=Java,escapechar=|]
-public class Client {
-	
-	public static void main(String[] args)
-    {
-        Bike bike1; 
-        bike1 = new Bike();
-        Bike bike2 = new Bike(); 
-        
-        // == compare the reference of the Bike1 with the reference of the Bike2
-        System.out.println(bike1==bike2);
-     }
-}
-\end{lstlisting}
+\subsubsection{Esercizio}
+\Esercizio{Dire che cosa viene stampato quando viene eseguita la seguente classe}
+
+\lstinputlisting{Source/Client2.java}
+
 
 \begin{itemize}
-\item Che cosa stampa l'istruzione  \texttt{bike1==bike2}? \emph{false, visto che i references ai due oggetti  \texttt{bike1} e \texttt{bike2} si riferiscono al medesimo oggetto}
+\item Che cosa stampa l'istruzione  \texttt{bike1==bike2}?\\
+ \emph{false, visto che i references ai due oggetti  \texttt{bike1} e \texttt{bike2} si riferiscono a due oggetti diversi}
 \end{itemize}
 
 
-\subsubsection{Esercizio 4}
-\begin{framed}
-\textbf{Esercizio 4}: Aggiungere alla bicicletta una funzionalit\`a che permette all'oggetto di stampare il suo stato
-\end{framed}
+\subsubsection{Esercizio}
+\Esercizio{Aggiungere alla bicicletta una funzionalit\`a che permette all'oggetto di stampare il suo stato}
 
-\begin{lstlisting}[language=Java,escapechar=|]
-// defines a public class called Bike 
-// the name of the class usually starts with an upper case letter
-public class Bike {
-	
-	// The attributes of the class are used to describe the state of the class and are usually private or protected 
-	// The attributes of the class usually start with lower case letters
-	private int gear=1; //default 1
-	private int cadence; //default 0
-	private int speed; //default 0
-	
-	// is the constructor of the class which allows to create a new Bike
-	// the constructor has the same name of the class and does not have a return type
-	public Bike(){
-	}
-	
-	public void printState(){
-	    // + is the String concatenation operator
-	    // the int gear, speed and cadence are automatically converted into String
-		System.out.println("gear: "+ gear + ", speed: "+speed+ ", cadence: "+cadence);
-	}
-}
-\end{lstlisting}
+\lstinputlisting{Source/Bike2.java}
 
-\subsubsection{Esercizio 5}
-\begin{framed}
-\textbf{Esercizio 5}: Cambiare il package delle classi e compilare
-\end{framed}
-\begin{lstlisting}[language=Java,escapechar=|]
-package transport;
+\subsubsection{Esercizio}
+\Esercizio{Mettere la classe Bike nel package transport}
 
-// defines a public class called Bike 
-// the name of the class usually starts with an upper case letter
-public class Bike {
-	
-	// The attributes of the class are used to describe the state of the class and are usually private or protected 
-	// The attributes of the class usually start with lower case letters
-	private int gear=1; //default 1
-	private int cadence; //default 0
-	private int speed; //default 0
-	
-	// is the constructor of the class which allows to create a new Bike
-	// the constructor has the same name of the class and does not have a return type
-	public Bike(){
-	}
-	
-	public void printState(){
-	    // + is the String concatenation operator
-	    // the int gear, speed and cadence are automatically converted into String
-		System.out.println("gear: "+ gear + ", speed: "+speed+ ", cadence: "+cadence);
-	}
-}
-\end{lstlisting}
+\begin{itemize}
+\item creare la cartella transport \texttt{mkdir transport}
+\end{itemize}
+\lstinputlisting{Source/transport/Bike2.java}
 
-\begin{lstlisting}[language=Java,escapechar=|]
-// imports the class Bike inside the package transport
-import transport.Bike;
+\subsection{Esercizio}
+\Esercizio{Modificare il client affinche' chiami il metodo \texttt{printState()}}
 
-public class Client {
-	
-	public static void main(String[] args)
-    {
-        Bike bike1; 
-        bike1 = new Bike();
-        Bike bike2 = new Bike(); 
-        
-        // == compare the reference of the Bike1 with the reference of the Bike2
-        System.out.println(bike1==bike2);
-        // invokes the method print state of the object bike1       
-          bike1.printState();
-          // invokes the method print state of the object bike2
-            bike2.printState();
+\lstinputlisting{Source/Client3.java}
 
-     }
-}
-\end{lstlisting}
 
 If we change folder of the bike class we have to change the package
 
-\subsection{Eclipse Integrated Development Environment  (20 min)}
+\subsection{Eclipse Integrated Development Environment}
 La gestione di un progetto man mano che la complessit\`a aumenta diventa sempre pi\`u difficile. Per questo, nello sviluppo softeware  Integrated Development Environment ($IDE$) sono comunemente utilizzati. Gli $IDE$s rimuovono alcune delle difficolt\`a solitamente incontrate nel processo di sviluppo e forniscono funzionalit\`a aggiuntive come il completamento automatico del codice. In questo corso e in paricolare nel laboratorio useremo $Eclipse IDE$ come ambiente di sviluppo\footnote{$Netbeans$ one of the most used competitor of $Eclipse$}.  
 
 \subsubsection{Esercizio 6}
