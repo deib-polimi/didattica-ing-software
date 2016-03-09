@@ -439,11 +439,11 @@ Questi esercizi hanno come fine quello di mostrare il fatto che Java \`e un ling
 \item Scrivere il codice  Java seguente
 \end{itemize}
 \end{itemize}
-\lstinputlisting{Source/Esercizio1.java}
+\lstinputlisting{Source/Esercizio1/Welcome.java}
 \begin{itemize}
 \item \textbf{Descrizione del file creato}
 \begin{itemize}
-\item il codice definisce una classe (\texttt{class}) chiamata  \texttt{Esercizio1} con un singolo metodo  chiamato \texttt{main}
+\item il codice definisce una classe (\texttt{class}) chiamata  \texttt{Welcome} con un singolo metodo  chiamato \texttt{main}
 \item \texttt{public} \`e utilizzato per specificare che la classe \`e pubblica: \`e possibile accedervi dall'esterno, per esempio da altre classi.
 \item la classe ha solo un metodo statico main
 \item \texttt{void} specifica che il metodo non ritorna alcun valore
@@ -490,12 +490,12 @@ Questi esercizi hanno come fine quello di mostrare il fatto che Java \`e un ling
 \begin{itemize}
 \item \textbf{Creare un file Java}
 \begin{itemize}
-\item crea un file Java con nome \texttt{Esercizio2}
+\item crea un file Java con nome \texttt{Welcome}
 \item scrivere il seguente codice Java
 \end{itemize}
 \end{itemize}
 
-\lstinputlisting{Source/Esercizio2.java}
+\lstinputlisting{Source/Esercizio1/Welcome.java}
 \begin{itemize}
 \item \textbf{Descrizione del file creato}
 \begin{itemize}
@@ -527,7 +527,7 @@ Per progettare le vostre classi in Java \`e necessario rispondere a due quesiti:
 \item Quali sono le \emph{funzionalit\`a} che gli oggetti di una determinata classe devono fornire?
 \end{itemize}
 
-\lstinputlisting{Source/Bike.java}
+\lstinputlisting{Source/Esercizio3/Bike.java}
 
 
 
@@ -536,7 +536,7 @@ Per progettare le vostre classi in Java \`e necessario rispondere a due quesiti:
 
 Un Java si utilizza l'espressione client per indicare una generica classe, che utilizza la classe da noi progettata (nel nostro caso la classe Bicicletta). 
 
-\lstinputlisting{Source/Client.java}
+\lstinputlisting{Source/Esercizio3/Client.java}
 
 \begin{itemize}
 \item compilare ed eseguire il programma
@@ -562,7 +562,7 @@ Un Java si utilizza l'espressione client per indicare una generica classe, che u
 \subsubsection{Esercizio}
 \Esercizio{Dire che cosa viene stampato quando viene eseguita la seguente classe}
 
-\lstinputlisting{Source/Client2.java}
+\lstinputlisting{Source/Esercizio4/Client.java}
 
 
 \begin{itemize}
@@ -574,7 +574,7 @@ Un Java si utilizza l'espressione client per indicare una generica classe, che u
 \subsubsection{Esercizio}
 \Esercizio{Aggiungere alla bicicletta una funzionalit\`a che permette all'oggetto di stampare il suo stato}
 
-\lstinputlisting{Source/Bike2.java}
+\lstinputlisting{Source/Esercizio5/Bike.java}
 
 \subsubsection{Esercizio}
 \Esercizio{Mettere la classe Bike nel package transport}
@@ -582,39 +582,37 @@ Un Java si utilizza l'espressione client per indicare una generica classe, che u
 \begin{itemize}
 \item creare la cartella transport \texttt{mkdir transport}
 \end{itemize}
-\lstinputlisting{Source/transport/Bike2.java}
+\lstinputlisting{Source/Esercizio6/transport/Bike.java}
 
 \subsection{Esercizio}
 \Esercizio{Modificare il client affinche' chiami il metodo \texttt{printState()}}
 
-\lstinputlisting{Source/Client3.java}
+\lstinputlisting{Source/Esercizio6/Client.java}
 
 
 If we change folder of the bike class we have to change the package
 
 \subsection{Eclipse Integrated Development Environment}
-La gestione di un progetto man mano che la complessit\`a aumenta diventa sempre pi\`u difficile. Per questo, nello sviluppo softeware  Integrated Development Environment ($IDE$) sono comunemente utilizzati. Gli $IDE$s rimuovono alcune delle difficolt\`a solitamente incontrate nel processo di sviluppo e forniscono funzionalit\`a aggiuntive come il completamento automatico del codice. In questo corso e in paricolare nel laboratorio useremo $Eclipse IDE$ come ambiente di sviluppo\footnote{$Netbeans$ one of the most used competitor of $Eclipse$}.  
+La gestione di un progetto man mano che la complessit\`a aumenta diventa sempre pi\`u difficile. Per questo, nello sviluppo softeware  Integrated Development Environment ($IDE$) sono comunemente utilizzati. Gli $IDE$s rimuovono alcune delle difficolt\`a solitamente incontrate nel processo di sviluppo e forniscono funzionalit\`a aggiuntive come il completamento automatico del codice. In questo corso e in paricolare nel laboratorio useremo $Eclipse$ $IDE$ come ambiente di sviluppo\footnote{$Netbeans$ \`e uno dei maggiori competitor di $Eclipse$}.  
 
-\subsubsection{Esercizio 6}
-\begin{framed}
-\textbf{Esercizio 6}: Crea il tuo primo progetto in Eclipse
-\end{framed}
+\subsubsection{Esercizio}
+\Esercizio{Crea il tuo primo progetto in Eclipse}
 
 \begin{itemize}
 \item \textbf{Creare un progetto in eclipse}
 \begin{itemize}
 \item apri $Eclipse$
-\item non appena $Eclipse$ si avvia richiede all'utente di selezionare il $Workspace$. Il $Workspace$ \`e l'are di lavoro dell'utente, contiene i file creati etc. L'utente pu\`o definire varit $Workspace$s ognuno dei quali pu\`o contenere pi\`u progetti.
+\item non appena $Eclipse$ si avvia richiede all'utente di selezionare il $Workspace$. Il $Workspace$ \`e l'area di lavoro dell'utente, contiene i file creati etc. L'utente pu\`o definire vari $Workspace$s ognuno dei quali pu\`o contenere pi\`u progetti.
 \item clicca su $Workbench$ 
 \item \texttt{File} $>$ \texttt{New} $>$ \texttt{Project} $>$ \texttt{Maven Project}
 \item seleziona \texttt{Create a simple project}
 \item digita \texttt{IngegneriaDelSoftware1} as Group Id and \texttt{Esercitazione1} as Artifact Id
 \item scegli \texttt{finish}
-\item Quando create il vostro nuovo progetto Maven (Maven\footnote{Maven sar\`a spiegato nel corso del laboratorio.}) in Eclipse, eclise crea automaticamente la struttura del vostro progetto. In particolare, 
+\item Quando create il vostro nuovo progetto Maven (Maven\footnote{Maven sar\`a spiegato nel corso del laboratorio.}) in Eclipse, Eclipse crea automaticamente la struttura del vostro progetto. In particolare, 
 \begin{itemize}
 \item $src/main/java$ contiene il codice sorgente Java dell'applicazione in via di sviluppo.
-\item $src/main/resources$ contiene le ``risorse" utilizzate dalla vostra applicazione, file di configurazione etc
-\item $src/test/java$ contiene le cassi usate per testare la vostra applicazione
+\item $src/main/resources$ contiene le ``risorse" utilizzate dalla vostra applicazione, file di configurazione etc..
+\item $src/test/java$ contiene le classi usate per testare la vostra applicazione
 \item $src/test/resources$ contiene le risorse necessarie a testare la vostra applicazione
 \end{itemize}
 \end{itemize}
@@ -640,7 +638,7 @@ La gestione di un progetto man mano che la complessit\`a aumenta diventa sempre 
 \item premere finish
 \end{itemize}
 \end{itemize}
-Come noti  Eclipse automaticamente aggiunge il package, gli identificatori etc
+Come noti  Eclipse automaticamente aggiunge il package, gli identificatori etc...
 
 \begin{itemize}
 \item \textbf{Running a project in Eclipse}

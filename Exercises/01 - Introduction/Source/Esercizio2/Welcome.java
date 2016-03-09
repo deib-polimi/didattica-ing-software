@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Esercizio2{
+public class Welcome{
 	public static void main(String[] args){
 		Scanner scanner=new Scanner(System.in);
 		System.out.println("Inserisci il tuo nome");
