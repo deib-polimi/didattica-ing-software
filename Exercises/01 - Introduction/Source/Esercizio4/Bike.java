@@ -4,9 +4,9 @@ public class Bike{
 	
 	// gli attributi della classe sono utilizzati per descrivere lo stato dell'oggetto che verra' istanziato partendo dalla classe corrente e sono solitamente dichiarati privati o protetti.
 	// il nome degli attributi inizia con una lettera minuscola
-	private int marcia=1; // default 1;
-	private int ritmoPedalata; // default 0;
-	private int velocita; // default 0;
+	private int gear=1; // default 1;
+	private int cadence; // default 0;
+	private int speed; // default 0;
 
 	// il costruttore della classe permette di creare una nuova bicicletta
 	// il costruttore della classe e' un metodo con lo stesso nome della classe che non ha un valore di ritorno
