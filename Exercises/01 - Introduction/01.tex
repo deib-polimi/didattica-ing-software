@@ -242,7 +242,7 @@ In Java ogni variabile deve essere associata a un tipo.
 
 
 \subsection{Variabili e tipi di riferimento}
-Prima di discutere le variabili e i tipi di riferimento discutiamo per uno momento l'organizzazione della memoria in Java 
+Prima di discutere le variabili e i tipi di riferimento discutiamo per l'organizzazione della memoria in Java 
 
 \begin{itemize}
 \item \textbf{Stack} e \textbf{Heap}:  Lo stack e lo heap sono due aree di memoria che sono utilizzate per contenere le nostre variabili e i nostri oggetti.
@@ -326,7 +326,7 @@ La prima lettera dell'identificativo è maiuscola nel caso di classi e minuscola
 Una variabile non pu\`o essere usata senza essere inizializzata. Quando un attributo viene dichiarato gli viene assegnato un valore di default.
 
 Il riferimento \`e assegnato inizialmente il valore \texttt{null}, per indicare che il riferimento non \`e ancora associato a un oggetto.
-e variabili vengono inizializzate tramite l'operatore ``$=$''. Questo operatore assegna un valore ad una variabile.
+Le variabili vengono inizializzate tramite l'operatore ``$=$''. Questo operatore assegna un valore ad una variabile.
 Il tipo della variabile deve essere compatibile col tipo del valore.\\
 Dichiarazione e inizializzazione possono essere effettuate in una o  pi\`u istruzioni, a discrezione
 del programmatore.
@@ -402,11 +402,11 @@ Solitamente a una applicazione \`e associato un numero di versione nella forma M
 Regole per l'uso di semantic versioning:
 \begin{itemize}
 \item il software DEVE dichiarare delle API pubbliche, precise e comprensibili;
-\item MAJOR, MINOR e PATCH devono essere dei numeri NON negativi, e devono sempre incrementare. Quando la versione MAJOR (MINOR) viene incrementata il valore di MINOR e PATCH (PATCH) viene settato a zero;
+\item MAJOR, MINOR e PATCH devono essere dei numeri NON negativi, e devono sempre incrementare, con la seguente eccezione: quando la versione MAJOR (MINOR) viene incrementata il valore di MINOR e PATCH (PATCH) viene settato a zero;
 \item una volta che una verione \`e rilasciata il contenuto della versione NON pu\`o essere modificato
 \item la versione 0.y.z \`e la versione iniziale del software. Le API pubbliche devono essere considerate non stabili. Tutto pu\`o cambiare nel tempo.
 \item la versione 1.0.0 \`e la prima versione del software che definisce le API pubbliche, da questo momento l'applicazione dipende dalle API pubbliche
-\item il valore di PATCH deve essere incrementato solo se backward compatible bug fixes sono eseguiti. (Il bug fix corregge un comportamento scorretto)
+\item il valore di PATCH deve essere incrementato solo se backward compatible e bug fixes sono eseguiti. (Il bug fix corregge un comportamento scorretto)
 \item il valore di MINOR deve essere incrementato se sono aggiunte funzionalit\'a introdotte nelle API pubbliche o se sono rimosse funzionalit\`a deprecate. Dopo aver incrementato MINOR \`e necessario settare PATCH a zero
 \item il valore di MAJOR deve essere incrementato quando cambiamenti incompatibili sono introdotti nelle API pubbliche. PATCH e MINOR devono essere resettati a zero
 \item una pre-release viene indicata utilizando un trattino seguita da un identificatore che specifica la patch version. Per esempio, 1.0.0-alpha.1, 1.0.0-0.3.7, 1.0.0-x.7.z.92. 
@@ -421,6 +421,26 @@ La versione iniziale del software \`e in genere la 0.1.0. Da li si inizia a util
 
 
 Il lettore interessato pu\`o trovare informazioni addizionali in \url{http://semver.org/}.
+
+\subsection{Java versions history}
+\begin{table}[h]
+\center
+\begin{tabular}{ | p{1cm} | p{12cm} |}
+\hline
+JDK & improvements \\
+\hline
+JDK1.1 & RMI, inner classes \\
+JDK1.2 & Swing, Collections \\
+JDK1.3 & CORBA, JNDI \\
+JDK1.4 & Regular expressions, logging, assert  \\
+JDK1.5 & Generics, Autoboxing, Unboxing, Enumerations, cuncurrency utilities  \\
+JDK1.6 & JDBC, GUI, compiler optimization IO \\
+JDK1.7 & String switch, type inference improvements, new IO libraries, new network protocols, and cryptography algorithms  \\
+JDK1.8 & lambda expressions,  map-reduce, annotations, HNI\\
+\hline
+\end{tabular}
+
+\end{table}
 
 \section{Esercizi}
 L'obiettivo di questi esercizi \`e di chiarire le caratteristiche di Java prima descritte.
@@ -624,7 +644,7 @@ La gestione di un progetto man mano che la complessit\`a aumenta diventa sempre 
 \item \textbf{Creare un package}
 \begin{itemize}
 \item tasto destro su \texttt{src/main/java} $>$ New $>$ package 
-\item scegliere il nome del package ($esercitatione1$)
+\item scegliere il nome del package ($exercizio10$)
 \item press finish
 \end{itemize}
 \end{itemize}
@@ -665,47 +685,8 @@ Come noti  Eclipse automaticamente aggiunge il package, gli identificatori etc..
 \Esercizio{Deve essere possibile monitorare la velocit\`a la marcia inserita e il ritmo di pedalata di una bicicletta}
 
 
-\begin{lstlisting}[language=Java,escapechar=|]
-package esercitatione1;
+\lstinputlisting{Source/eclipse/Esercitazione1/src/main/java/esercizio10/Bike.java}
 
-
-//defines a public class called Bike 
-//the name of the class usually starts with an upper case letter
-public class Bike {
-	
-	// The attributes of the class are used to describe the state of the class and are usually private or protected 
-	// The attributes of the class usually start with lower case letters
-	private int gear=1; //default 1
-	private int cadence; //default 0
-	private int speed; //default 0
-	
-	// is the constructor of the class which allows to create a new Bike
-	// the constructor has the same name of the class and does not have a return type
-	public Bike(){
-	}
-	
-	public void printState(){
-	    // + is the String concatenation operator
-	    // the int gear, speed and cadence are automatically converted into String
-		System.out.println("gear: "+ gear + ", speed: "+speed+ ", cadence: "+cadence);
-	}
-	
-	// returns the gear of the bike
-	public int getGear(){
-		return this.gear;
-	}
-
-	// returns the cadence of the bike
-	public int getCadence(){
-		return this.cadence;
-	}
-	
-	// returns the speed ok the bike
-	public int getSpeed(){
-		return this.speed;
-	}
-}
-\end{lstlisting}
 
 Il ``Monitoring" di un oggetto \`e eseguito mediante i metodi getters.\\
 Command tricks:
@@ -714,133 +695,17 @@ Command tricks:
 \end{itemize}
 
 
-\begin{lstlisting}[language=Java,escapechar=|]
-package esercitatione1;
+\lstinputlisting{Source/eclipse/Esercitazione1/src/main/java/esercizio10/Client.java}
 
-public class Client {
-
-	public static void main(String[] args) {
-
-		Bike bike1;
-		bike1 = new Bike();
-		Bike bike2 = new Bike();
-
-		// == compare the reference of the Bike1 with the reference of the Bike2
-		System.out.println(bike1 == bike2);
-		// invokes the method print state of the object bike1
-		bike1.printState();
-		// invokes the method print state of the object bike2
-		bike2.printState();
-
-		System.out.println(bike1.getCadence());
-	}
-
-}
-
-\end{lstlisting}
 
 
 \subsubsection{Esercizio}
 \Esercizio{Deve essere possibile incrementare la marcia inserita e il ritmo di pedalata, in tal caso la velocit\`a deve aumentare di conseguenza}
 
-\begin{lstlisting}[language=Java,escapechar=|]
-package esercitatione1;
+\lstinputlisting{Source/eclipse/Esercitazione1/src/main/java/esercizio11/Bike.java}
 
-//defines a public class called Bike 
-//the name of the class usually starts with an upper case letter
-public class Bike {
+\lstinputlisting{Source/eclipse/Esercitazione1/src/main/java/esercizio11/Client.java}
 
-	// The attributes of the class are used to describe the state of the class
-	// and are usually private or protected
-	// The attributes of the class usually start with lower case letters
-	private int gear=1; // default 1
-	private int cadence; // default 0
-	private int speed; // default 0
-
-	// is the constructor of the class which allows to create a new Bike
-	// the constructor has the same name of the class and does not have a return
-	// type
-	public Bike() {
-	}
-
-	public void printState() {
-		// + is the String concatenation operator
-		// the int gear, speed and cadence are automatically converted into
-		// String
-		System.out.println("gear: " + gear + ", speed: " + speed
-				+ ", cadence: " + cadence);
-	}
-    
-    // changes the cadence of the bike
-	public void changeCadence(int cadence) {
-		this.cadence = cadence;
-		updateSpeed();
-	}
-
-	// increment the gear
-	public void incrementGear() {
-		this.gear++;
-		this.updateSpeed();
-	}
-
-	// decrement the gear
-	public void decrementGear() {
-		this.gear--;
-		this.updateSpeed();
-	}
-
-	// every time the cadence or the gear changes the speed is updated
-	// the method is private and cannot be invoked from other external classes
-	private void updateSpeed(){
-		this.speed = this.gear * this.cadence; 
-	}
-	
-	// returns the gear of the bike
-	public int getGear() {
-		return this.gear;
-	}
-
-	// returns the cadence of the bike
-	public int getCadence() {
-		return this.cadence;
-	}
-
-	// returns the speed ok the bike
-	public int getSpeed() {
-		return this.speed;
-	}
-}
-\end{lstlisting}
-
-
-\begin{lstlisting}[language=Java,escapechar=|]
-package esercitatione1;
-
-public class Client {
-
-	public static void main(String[] args) {
-
-		Bike bike1;
-		bike1 = new Bike();
-		Bike bike2 = new Bike();
-
-		// == compare the reference of the Bike1 with the reference of the Bike2
-		System.out.println(bike1 == bike2);
-		// invokes the method print state of the object bike1
-		bike1.printState();
-		// invokes the method print state of the object bike2
-		bike2.printState();
-
-		bike1.printState();
-		bike1.incrementGear();
-		bike1.printState();
-		
-		bike1.changeCadence(10);
-		bike1.printState();
-		
-	}
-}
-\end{lstlisting}
 
 \begin{itemize}
 \item \textbf{Quesiti}
@@ -854,84 +719,8 @@ public class Client {
 
 \subsubsection{Esercizio}
 \Esercizio{La classe di biciclette considerate ha $6$ marce}
-\begin{lstlisting}[language=Java,escapechar=|]
-package esercitatione1;
 
-//defines a public class called Bike 
-//the name of the class usually starts with an upper case letter
-public class Bike {
-
-	// static specifies that this variable is shared from all the objects
-	// The final modifier indicates that the value of this field cannot change.
- 	// The static modifier, in combination with the final modifier, is also used to define constants. 
-	private static final int MAX_GEAR = 6;
-	private static final int MIN_GEAR = 1;
-
-	// The attributes of the class are used to describe the state of the class
-	// and are usually private or protected
-	// The attributes of the class usually start with lower case letters
-	private int gear = 1; // default 1
-	private int cadence; // default 0
-	private int speed; // default 0
-
-	// is the constructor of the class which allows to create a new Bike
-	// the constructor has the same name of the class and does not have a return
-	// type
-	public Bike() {
-	}
-
-	public void printState() {
-		// + is the String concatenation operator
-		// the int gear, speed and cadence are automatically converted into
-		// String
-		System.out.println("gear: " + gear + ", speed: " + speed
-				+ ", cadence: " + cadence);
-	}
-
-	// changes the cadence of the bike
-	public void changeCadence(int cadence) {
-		this.cadence = cadence;
-		updateSpeed();
-	}
-
-	// increment the gear
-	public void incrementGear() {
-		if (gear < MAX_GEAR) {
-			gear++;
-			updateSpeed();
-		}
-	}
-
-	// decrement the gear
-	public void decrementGear() {
-		if (gear > MIN_GEAR) {
-			gear--;
-			updateSpeed();
-		}
-	}
-
-	// every time the cadence or the gear changes the speed is updated
-	// the method is private and cannot be invoked from other external classes
-	private void updateSpeed() {
-		this.speed = this.gear * this.cadence;
-	}
-
-	// returns the gear of the bike
-	public int getGear() {
-		return this.gear;
-	}
-
-	// returns the cadence of the bike
-	public int getCadence() {
-		return this.cadence;
-	}
-
-	// returns the speed ok the bike
-	public int getSpeed() {
-		return this.speed;
-	}
-}
-\end{lstlisting}
+\lstinputlisting{Source/eclipse/Esercitazione1/src/main/java/esercizio12/Bike.java}
 
 
 
@@ -940,33 +729,9 @@ public class Bike {
 
 \subsubsection{Esercizio}
 \Esercizio{Analizzare che cosa succede eseguendo il seguente codice}
-\begin{lstlisting}[language=Java,escapechar=|]
-package esercitatione1;
 
-public class Client {
+\lstinputlisting{Source/eclipse/Esercitazione1/src/main/java/esercizio13/Client.java}
 
-	public static void main(String[] args) {
-
-        // dichiaro una variabile di tipo reference con identificativo bike1
-        Bike bike1;
-        // creo un nuovo oggetto di tipo Bike e assegno il reference ritornato alla variabile bike1
-        bike1 = new Bike();
-        // creo un nuovo oggetto di tipo Bike e assegno il reference ritornato alla variabile bike2
-        Bike bike2 = new Bike();
-        
-        // vengono stampati due reference diversi relativi alle variabili bike1 e bike2
-    	System.out.println(bike1);
-    	System.out.println(bike2);
-    	
-    	// copia il reference contenuto nella variabile bike2 nella variabile bike1
-    	bike1 = bike2;
-    
-       // vengono stampati i due reference
-       System.out.println(bike1);
-       System.out.println(bike2);	
-       }
-}
-\end{lstlisting}
 Per avere una visualizzazione migliore di quanto accade utilizzeremo il debugger di eclipse. Il debugger vi consente di eseguire passo passo il vostro codice e vi assiste nell'individuazione e nella correzioni di errore in un programma.
 
 \begin{itemize}
@@ -980,168 +745,17 @@ Nella View variables \`e possibile vedere passo passo le variabili sullo stack. 
 
 \`E possibile proseguire nell'esecuzione del codice (un passo alla volta) premendo sul pulsante step over (la freccia gialla posta al centro delle le tre in alto a sinistra)\footnote{Un utilizzo pi\`u dettagliato del debugger verr\`a descritto nel corso del laboratorio}.
 
-\subsubsection{Esercizio}
-\Esercizio{Analizzare che cosa succede eseguendo il seguente codice}
-
-\begin{lstlisting}[language=Java,escapechar=|]
-package esercitatione1;
-
-public class Client {
-
-	public static void creatingANewBike() {
-		// dichiaro una variabile di tipo reference con identificativo bike1
-		Bike bike1;
-		// creo un nuovo oggetto di tipo Bike e assegno il reference ritornato
-		// alla variabile bike1
-		bike1 = new Bike(4, 5);
-	}
-
-	public static void main(String[] args) {
-
-		// dichiaro una variabile di tipo reference con identificativo bike1
-		Bike bike1;
-		// creo un nuovo oggetto di tipo Bike e assegno il reference ritornato
-		// alla variabile bike1
-		bike1 = new Bike(4, 5);
-		// creo un nuovo oggetto di tipo Bike e assegno il reference ritornato
-		// alla variabile bike2
-		Bike bike2 = new Bike(2, 3);
-
-		// vengono stampati due reference diversi relativi alle variabili bike1
-		// e bike2
-		System.out.println(bike1);
-		System.out.println(bike2);
-
-		// copia il reference contenuto nella variabile bike2 nella variabile
-		// bike1
-
-		bike1 = bike2;
-
-		// vengono stampati i due reference
-		System.out.println(bike1);
-		System.out.println(bike2);
-		
-		creatingANewBike();
-    }
-}
-\end{lstlisting}
 
 
 \subsection{Costruttori}
 \subsubsection{Esercizio}
 \Esercizio{Modificare la classe bicibletta affinch\`e sia possibile creare una bicicletta con un numero di marce  un dato ritmo di pedalata}
 
-\begin{lstlisting}[language=Java,escapechar=|]
-package esercitatione1;
+\lstinputlisting{Source/eclipse/Esercitazione1/src/main/java/esercizio14/Bike.java}
 
-//defines a public class called Bike 
-//the name of the class usually starts with an upper case letter
-public class Bike {
+\lstinputlisting{Source/eclipse/Esercitazione1/src/main/java/esercizio14/Client.java}
 
-	// static specifies that this variable is shared from all the objects
-	// The final modifier indicates that the value of this field cannot change.
- 	// The static modifier, in combination with the final modifier, is also used to define constants. 
-	private static final int MAX_GEAR = 6;
-	private static final int MIN_GEAR = 1;
 
-	// The attributes of the class are used to describe the state of the class
-	// and are usually private or protected
-	// The attributes of the class usually start with lower case letters
-	private int gear = 1; // default 1
-	private int cadence; // default 0
-	private int speed; // default 0
-
-	// is the constructor of the class which allows to create a new Bike
-	// the constructor has the same name of the class and does not have a return
-	// type
-	// gear and cadence are the intial values of the gear and the cadence
-	public Bike(int gear, int cadence) {
-		
-		// this allows to refer to the variable gear of THIS class, otherwise gear refers to the variable passed as parameter
-		this.gear=gear;
-		this.cadence=cadence;
-		this.updateSpeed();
-	}
-
-	public void printState() {
-		// + is the String concatenation operator
-		// the int gear, speed and cadence are automatically converted into
-		// String
-		System.out.println("gear: " + gear + ", speed: " + speed
-				+ ", cadence: " + cadence);
-	}
-
-	// changes the cadence of the bike
-	public void changeCadence(int cadence) {
-		this.cadence = cadence;
-		updateSpeed();
-	}
-
-	// increment the gear
-	public void incrementGear() {
-		if (gear < MAX_GEAR) {
-			gear++;
-			updateSpeed();
-		}
-	}
-
-	// decrement the gear
-	public void decrementGear() {
-		if (gear > MIN_GEAR) {
-			gear--;
-			updateSpeed();
-		}
-	}
-
-	// every time the cadence or the gear changes the speed is updated
-	// the method is private and cannot be invoked from other external classes
-	private void updateSpeed() {
-		this.speed = this.gear * this.cadence;
-	}
-
-	// returns the gear of the bike
-	public int getGear() {
-		return this.gear;
-	}
-
-	// returns the cadence of the bike
-	public int getCadence() {
-		return this.cadence;
-	}
-
-	// returns the speed ok the bike
-	public int getSpeed() {
-		return this.speed;
-	}
-}
-\end{lstlisting}
-
-\begin{lstlisting}[language=Java,escapechar=|]
-package esercitatione1;
-
-public class Client {
-
-	public static void main(String[] args) {
-
-		Bike bike1;
-		bike1 = new Bike(3, 2);
-		Bike bike2 = new Bike(1, 2);
-
-		// == compare the reference of the Bike1 with the reference of the Bike2
-		System.out.println(bike1 == bike2);
-		// invokes the method print state of the object bike1
-		bike1.printState();
-		// invokes the method print state of the object bike2
-		bike2.printState();
-
-		bike1.printState();
-		bike1.incrementGear();
-		bike1.printState();
-		bike1.changeCadence(10);
-		bike1.printState();
-	    }
-}
-\end{lstlisting}
 \textbf{Quesiti:}\\
 \begin{itemize}
 \item Qual'\`e lo stato dell'oggetto \texttt{bike1} dopo che l'istruzione   \texttt{bike1=new Bike(3, 2);} \`e eseguita? 
@@ -1155,138 +769,24 @@ public class Client {
 \end{itemize}
 
 \subsubsection{Esercizio}
+\Esercizio{Analizzare che cosa succede eseguendo il seguente codice}
+
+\lstinputlisting{Source/eclipse/Esercitazione1/src/main/java/esercizio15/Client.java}
+
+
+\subsubsection{Esercizio}
 \Esercizio{Modificare la classe bicibletta affinch\`e sia possibile creare una bicicletta con un dato numero di marce}
 
-\begin{lstlisting}[language=Java,escapechar=|]
-package esercitatione1;
+\lstinputlisting{Source/eclipse/Esercitazione1/src/main/java/esercizio16/Bike.java}
 
-//defines a public class called Bike 
-//the name of the class usually starts with an upper case letter
-public class Bike {
-
-	// static specifies that this variable is shared from all the objects
-	// The final modifier indicates that the value of this field cannot change.
- 	// The static modifier, in combination with the final modifier, is also used to define constants. 
-	private static final int MAX_GEAR = 6;
-	private static final int MIN_GEAR = 1;
-
-	// The attributes of the class are used to describe the state of the class
-	// and are usually private or protected
-	// The attributes of the class usually start with lower case letters
-	private int gear = 1; // default 1
-	private int cadence; // default 0
-	private int speed; // default 0
-
-	// is the constructor of the class which allows to create a new Bike
-	// the constructor has the same name of the class and does not have a return
-	// type
-	// gear and cadence are the intial values of the gear and the cadence
-	public Bike(int gear, int cadence) {
-		
-		// this allows to refer to the variable gear of THIS class, otherwise gear refers to the variable passed as parameter
-		this.gear=gear;
-		this.cadence=cadence;
-		this.updateSpeed();
-	}
-	
-	public Bike(int gear) {
-		
-		// this allows to refer to the variable gear of THIS class, otherwise gear refers to the variable passed as parameter
-		this.gear=gear;
-		this.cadence=0;
-		this.speed=0;
-	}
-
-	public void printState() {
-		// + is the String concatenation operator
-		// the int gear, speed and cadence are automatically converted into
-		// String
-		System.out.println("gear: " + gear + ", speed: " + speed
-				+ ", cadence: " + cadence);
-	}
-
-	// changes the cadence of the bike
-	public void changeCadence(int cadence) {
-		this.cadence = cadence;
-		updateSpeed();
-	}
-
-	// increment the gear
-	public void incrementGear() {
-		if (gear < MAX_GEAR) {
-			gear++;
-			updateSpeed();
-		}
-	}
-
-	// decrement the gear
-	public void decrementGear() {
-		if (gear > MIN_GEAR) {
-			gear--;
-			updateSpeed();
-		}
-	}
-
-	// every time the cadence or the gear changes the speed is updated
-	// the method is private and cannot be invoked from other external classes
-	private void updateSpeed() {
-		this.speed = this.gear * this.cadence;
-	}
-
-	// returns the gear of the bike
-	public int getGear() {
-		return this.gear;
-	}
-
-	// returns the cadence of the bike
-	public int getCadence() {
-		return this.cadence;
-	}
-
-	// returns the speed ok the bike
-	public int getSpeed() {
-		return this.speed;
-	}
-}
-\end{lstlisting}
 
 
 \subsection{Array}
 \subsubsection{Esercizio}
 \Esercizio{Creare un array di bike, riempirlo e stampare la pi\`u veloce}
 
-\begin{lstlisting}[language=Java,escapechar=|]
-public class ArrayOfBikes {
-	private static void printFastBikes(Bike [] bikes){
-		for (Bike bike: bikes){
-			if (bike != null && bike.getSpeed() > 10)
-				bike.printState();
-		}
-	}
-	public static void main(String [] args){
-		// definiamo una dimensione fissa 
-		// tutti gli elementi degli array hanno valore null
-		Bike [] arr1 = new Bike[10]; 
-		Bike [] arr2 = new Bike[10];
-		
-		arr1[0] = new Bike(3, 20);
-		arr1[1] = new Bike(3, 10);
-		arr1[2] = new Bike(1, 1);
-		System.out.println("Print fast bikes in arr1");
-		printFastBikes(arr1);
-		int k = 0;
-		for (Bike b: arr1){
-			if (b!= null){
-				Bike b2 = new Bike(b.getGear(),b.getSpeed());
-				b2.changeCadence(b2.getCadence() + 5);
-				arr2[k++] = b2;
-			}				
-		}
-		System.out.println("Print fast bikes in arr2");
-		printFastBikes(arr2);
-	}
-}
-\end{lstlisting}
+\lstinputlisting{Source/eclipse/Esercitazione1/src/main/java/esercizio17/ArrayOfBikes.java}
+
 \section{Curiosity}
 \begin{framed}
 Il nome  Java riflette la passione del teams di sviluppatori per il caff\`e. Java \`e un particolare tipo di chicco di caff\`e prodotto nell'isola  Indonesiana  di Java.
