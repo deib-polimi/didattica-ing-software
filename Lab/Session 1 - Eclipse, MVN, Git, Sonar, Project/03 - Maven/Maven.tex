@@ -85,7 +85,7 @@
 %----------------------------------------------------------------------------------------
 
 \newcommand{\hmwkTitle}{Maven} % Assignment title
-\newcommand{\hmwkDueDate}{Aprile 21, 2015} % Due date
+\newcommand{\hmwkDueDate}{Aprile 19, 2016} % Due date
 \newcommand{\hmwkClass}{Ingegneria del Software 1} % Course/class
 \newcommand{\hmwkClassTime}{} % Class/lecture time
 \newcommand{\hmwkClassInstructor}{Sr\dj{}an Krsti\'c and Marco Scavuzzo} % Teacher/lecturer
@@ -125,8 +125,8 @@
 
 
 %----------------------------------------------------------------------------------------
-\section{Preliminaries}
-\subsection{Apache Maven}
+\section{Apache Maven}
+\subsection{Introduction}
 Apache Maven is a project management and comprehension tool and as such
 provides a way to help with managing: 
 
@@ -139,31 +139,275 @@ provides a way to help with managing:
 \item Distribution
 \end{compactitem}
 
-Maven describes how software is built and what are the necessary
-dependencies to perform the build correctly. These descriptions are
+Maven employs a software engineering paradigm called \emph{convention
+  over configuration}.
+Convention over configuration is a simple concept: Systems, libraries,
+and frameworks should assume reasonable defaults. Without requiring
+unnecessary configuration, systems should ``just work''. Using that line
+of thought to make a maven project work, the minimal configuration
+you need to provide is the name of the project (artifactID) and name of
+the organization (groupID). The rest of the configuration is
+assumed to be default. Maven's core plugins apply a common
+set of conventions for compiling source code, packaging distributions,
+generating web sites, and many other processes.
+If you follow the conventions, Maven will require almost
+zero effort - just put your source in the correct directory, and Maven
+will take care of the rest. However, you will need to learn the
+conventions first.
+
+\subsection{Installing Maven}
+
+The latest version of Maven currently requires the usage of Java 7 or
+higher. Install the most recent stable Java Development Kit (JDK)
+available for your operating system.
+
+\begin{description}
+\item Installing on Mac OS (assuming that brew is installed):
+\begin{lstlisting}
+$ brew update
+$ brew install maven
+\end{lstlisting}
+
+\item Installing on Linux (assuming aptitude package manager):
+\begin{lstlisting}
+$ sudo apt-get update
+$ sudo apt-get install maven
+\end{lstlisting}
+
+\item Installing on Windows:
+
+You can download Apache Maven installation from the project website at
+\url{http://maven.apache.org/download.html}
+
+Extract the binary archive in some folder, for example \url{C:\\Program Files\\apache-maven}.
+
+Now you need to set the environment variable:
+
+\begin{compactitem}
+
+\item Go into the Control Panel
+\item Select System
+\item Go in Advanced tab and click on Environment Variables.
+\item Click on the Path variable in the lower System variables section and click the Edit button.
+\item Add the string "\url{C:\\Program Files\\apache-maven\\bin;}" in the Variable value field to the front of the existing value and click on the OK button in this and the following dialogs.
+
+\end{compactitem}
+
+\end{description}
+
+Once Maven is installed, you can check the version by running mvn -v
+from the command line. If Maven has been installed, you should see
+something resembling the following output.
+\begin{lstlisting}
+$ mvn -v
+Apache Maven 3.2.3 (33f8c3e1027c3ddde99d3cdebad2656a31e8fdf4; 2014-08-11T22:58:10+02:00)
+Maven home: /usr/local/Cellar/maven/3.2.3/libexec
+Java version: 1.8.0_60, vendor: Oracle Corporation
+Java home: /Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home/jre
+Default locale: en_US, platform encoding: UTF-8
+OS name: "mac os x", version: "10.10.5", arch: "x86_64", family: "mac"
+\end{lstlisting}
+
+
+
+
+
+
+\subsection{Project organization}
+
+In order for maven to manage your project you will need to provide the project
+description in an expected format. This description is
 stored in a \texttt{pom.xml} file. Every project has its own
 \texttt{pom.xml} file which is in the home (root) folder of the
 project.
-A typical structure of a Maven project is show in the following picture:
+
+% structure 
+Here is a structure of a Maven project according to its convention:
 \begin{center}
 \includegraphics[scale=0.3]{figures/1}
 \end{center}
 \begin{compactitem}
 \item project home	- Contains the pom.xml and all subdirectories.
-\item src/main/java - Contains the deliverable Java sourcecode for the project.
+\item src/main/java - Contains the Java source code for the project.
 \item src/main/resources - Contains the deliverable resources for the project, such as property files.
-\item src/test/java - Contains the testing sourcecode (JUnit test cases, for example) for the project.
+\item src/test/java - Contains the testing source code (JUnit test cases, for example) for the project.
 \item src/test/resources - Contains resources necessary for testing.
 \end{compactitem}
 
-A Project Object Model (POM) contains all the configuration for a
-single project. General configuration covers the project's name, its
-owner and its dependencies on other projects. 
+%pom
+A Project Object Model (POM) file contains at least the project's name
+and its owner/organization name. For example here is an example of a
+minimalistic POM file:
+
+
+\begin{lstlisting}
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.mycompany.app</groupId>
+  <artifactId>my-app</artifactId>
+  <version>1.0-SNAPSHOT</version>
+</project>
+\end{lstlisting}
+
+As you can see  the POM file has XML structure and needs to have al
+least the following elements:
+
+\begin{compactitem}
+
+\item project -  This is the top-level element in all Maven pom.xml files.
+
+\item modelVersion -  This element indicates what version of the object
+  model this POM is using. The version of the model itself changes
+  very infrequently but it is mandatory in order to ensure stability
+  of use if and when the Maven developers deem it necessary to change
+  the model. It's default value is 4.0.0. 
+
+\item groupId - This element indicates the unique identifier of the
+  organization or group that created the project. The groupId is one
+  of the key identifiers of a project and is typically based on the
+  fully qualified domain name of your organization.
+  This element must be specified and does not have a default value.
+
+\item artifactId -  This element indicates the unique name of the
+  primary artifact being generated by this project. The primary
+  artifact for a project is typically a JAR file. A typical artifact
+  produced by Maven would have the form artifactId-version.extension
+  (for example, myapp-1.0.jar).
+  This element must be specified and does not have a default value.
+
+\item version - This element indicates the version of the artifact
+  generated by the project. Maven goes a long way to help you with
+  version management and the default version is 1.0-SNAPSHOT.
+
+\end{compactitem}
+
+Now let's really create a very simple maven project by invoking the
+following command:
+
+\begin{lstlisting}
+$ mvn -B archetype:generate   -DarchetypeGroupId=org.apache.maven.archetypes   -DgroupId=com.mycompany.app   -DartifactId=my-app
+\end{lstlisting}
+
+The  important parameters of the command are groupID "com.mycompany.app" and
+artifactID "my-app", archetypes are going to be discussed later. After
+choosing an appropriate folder and running the above command in the
+terminal maven will create the following folder structure and files: 
+
+\begin{lstlisting}
+$ tree
+-- my-app
+    |-- pom.xml
+    |-- src
+        |-- main
+        |   -- java
+        |       -- com
+        |           -- mycompany
+        |               -- app
+        |                   -- App.java
+        |-- test
+            -- java
+                -- com
+                    -- mycompany
+                        -- app
+                            -- AppTest.java
+\end{lstlisting}
+
+As you can see, the project created has a POM file, a
+folders for your application's sources and folders for your
+test sources. This is the standard layout for Maven projects (the
+application sources reside in src/main/java and test
+sources reside in src/test/java.
+In addition maven created a folder structure in both folders
+reflecting the groupID you specified. It also included an App class
+with an empty main method in application sources and an AppTest class
+hosting trivial JUnit tests for the App class. Now let's inspect the
+POM file:
+
+\begin{lstlisting}
+$ cd my-app
+$ cat pom.xml
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.mycompany.app</groupId>
+  <artifactId>my-app</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>my-app</name>
+  <url>http://maven.apache.org</url>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>
+\end{lstlisting}
+
+This is a slightly more verbose POM file than the previous one and it
+displays some addition POM elements, so let's walk through each of them:
+
+\begin{compactitem}
+\item packaging - This element indicates the package type to be
+  created when building the project. Note that, this specifies both
+  the artifact type produced (JAR, WAR, EAR, etc.) and a
+  specific default lifecycle to use as part of the build process.
+  The default value for the packaging element is JAR.
+
+\item name - This element indicates the display name used for the
+  project. This is often used in Maven's generated documentation. 
+
+\item url - This element indicates where the project's site can be
+  found. This is often used in Maven's generated documentation.
+
+\item dependencies - This element describes all the external libraries
+  used by the project. We will explain the dependency management later
+  in more details.
+\end{compactitem}
+
+Usually a POM file is considerably more complex: defining multiple
+dependencies and customizing plugin behavior. The first few
+elements—groupId, artifactId, packaging, version—are what is known as
+the Maven coordinates which uniquely identify a project. name and url
+are descriptive elements of the POM providing a human readable name
+and associating the project with a web site.
+
+Maven always executes against an effective POM, a combination of
+settings from this project’s pom.xml, all parent POMs, a super-POM
+defined within Maven, user-defined settings, and active profiles. All
+projects ultimately extend the super-POM, which defines a set of
+sensible default configuration settings. While your project might have
+a relatively minimal pom.xml, the contents of your project’s POM are
+interpolated with the contents of all parent POMs, user settings, and
+any active profiles. To see this complete and "effective" POM, run the
+following command in the simple project’s base directory.
+\begin{lstlisting}
+mvn help:effective-pom
+\end{lstlisting}
+
+% archetype
+Lastly, while creating the example project above we omitted some
+details. We have used a particular plugin called Maven Archetype
+plugin.
+An archetype is a template for a Maven project which is used by the
+Maven Archetype plugin to create new projects. Archetypes are useful
+present end-users with a set of baseline projects that can be
+used as a foundation for new applications. Archetypes can also be
+useful within an organization that wants to encourage standards across
+a series of similar and related projects. Anyone can create and publish
+his/her own archetype that can be used by all other maven users.
+Particularly, in the previous example we have used archetype called
+maven-archetype-simple and for the lab project we suggest you to use
+maven-archetype-quickstart archetype.
+
+\subsection{Project lifecycle}
 
 To obtain an executable version of the application, the project must be
 compiled, built and exported (as a .jar file, usually) with a
 correctly configured classpath to all the classes of the
-external libraries used in the project (i.e., dependencies) )as well 
+external libraries used in the project (i.e., dependencies) as well 
 as the entry point class (i.e., the Main class). It is a
 good practice to also test the application before using it.
 
@@ -201,6 +445,8 @@ implemented using plugins specified in the pom.xml file. For example,
 one can configure the compiler-plugin to use Java version 1.7 for
 compilation.
 
+\subsection{Dependency Management}
+
 A central feature in Maven is dependency management. If you are
 developing a project that uses external libraries you do not need to
 provide them together with your project. It is enough to specify the
@@ -235,7 +481,7 @@ Maven Integration for Eclipse, named `m2e', provides the following features:
 \item Quick fixes in the Java editor for looking up required dependencies/jars by the class or package name
 \end{compactitem}
 
-\subsection{Install Maven}
+\subsection{Install Maven for Eclipse}
 Eclipse 4.4.2 comes with installation of m2e, so the installation is
 not needed. If you are using an older version of Eclipse (not
 recommended) you can install last m2e release by using the following
@@ -262,9 +508,9 @@ The archetype generation need:
 \begin{compactitem}
 \item \textbf{Archetype}: kind of project we want to create
 \item \textbf{Group ID}: Explanationar Id when my project includes multiple artifacts
-\item \textbf{Artifact ID}: output of project web application (WAR) Enterprise application (EAR) Simple Java application (Jar)
+\item \textbf{Artifact ID}: Identifier of the project
 \item \textbf{Version}: 1.0 we are developing at the end we can release
-\item \textbf{Package}: where we want to put the source code
+\item \textbf{Package}: output of project web application (WAR) Enterprise application (EAR) Simple Java application (Jar)
 \end{compactitem}
 
 Archetype defines:
