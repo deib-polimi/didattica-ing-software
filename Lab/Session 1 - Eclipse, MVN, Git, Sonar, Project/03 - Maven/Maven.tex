@@ -208,11 +208,6 @@ Default locale: en_US, platform encoding: UTF-8
 OS name: "mac os x", version: "10.10.5", arch: "x86_64", family: "mac"
 \end{lstlisting}
 
-
-
-
-
-
 \subsection{Project organization}
 
 In order for maven to manage your project you will need to provide the project
@@ -319,9 +314,9 @@ application sources reside in src/main/java and test
 sources reside in src/test/java.
 In addition maven created a folder structure in both folders
 reflecting the groupID you specified. It also included an App class
-with an empty main method in application sources and an AppTest class
-hosting trivial JUnit tests for the App class. Now let's inspect the
-POM file:
+with a main method that prints "Hello world" in application sources
+and an AppTest class hosting trivial JUnit tests for the App
+class. Now let's inspect the POM file:
 
 \begin{lstlisting}
 $ cd my-app
@@ -384,7 +379,7 @@ interpolated with the contents of all parent POMs, user settings, and
 any active profiles. To see this complete and "effective" POM, run the
 following command in the simple project’s base directory.
 \begin{lstlisting}
-mvn help:effective-pom
+$ mvn help:effective-pom
 \end{lstlisting}
 
 % archetype
@@ -401,6 +396,17 @@ his/her own archetype that can be used by all other maven users.
 Particularly, in the previous example we have used archetype called
 maven-archetype-simple and for the lab project we suggest you to use
 maven-archetype-quickstart archetype.
+To create a project with a particular archetype you have to specify
+the archetype's groupID and artifactID, for instance:
+
+\begin{lstlisting}
+$ mvn archetype:generate \
+-DgroupId=com.mycompany.app \
+-DartifactId=my-app \
+-DarchetypeGroupId=org.apache.maven.archetypes \
+-DarchetypeArtifactId=maven-archetype-quickstart \
+-DinteractiveMode=false
+\end{lstlisting}
 
 \subsection{Project lifecycle}
 
@@ -414,43 +420,185 @@ good practice to also test the application before using it.
 Doing this manually every time would be cumbersome, thus in this
 lab we will use Maven to automatize the build process.
 Maven follows a build lifecycle when building the project. Build
-lifecycle is a list of phases that must be executed sequentially to
-build the project.
+lifecycle is a list of phases (also called maven goals) that must be
+executed sequentially to build the project.
 
 \begin{compactitem}
-\item validate
-\item generate-sources
-\item process-sources
-\item generate-resources
-\item process-resources
-\item compile
-\item process-test-sources
-\item process-test-resources
-\item test-compile
-\item test
-\item package
-\item install
-\item deploy
+\item validate - validate if the POM file and project are correct and
+  all necessary information is available
+
+\item compile - compile the source code of the project
+
+\item test - test the compiled source code using a suitable unit
+  testing framework. These tests should not require the code be
+  packaged or deployed
+
+\item package - take the compiled code and package it in its
+  distributable format
+
+\item integration-test - process and deploy the package if necessary
+  into an environment where integration tests can be run
+
+\item verify - run any checks to verify the package is valid and meets
+  quality criteria
+ 
+\item install - install the package into the local repository, for use
+  as a dependency in other projects locally 
+
+\item deploy - done in an integration or release environment, copies
+  the final package to the remote repository for sharing with other
+  developers and projects
+
 \end{compactitem}
 
 When invoking a maven build you may specify any of the phases as a
 goal of the build. Maven would then execute sequentially all phases
 before the goal and the goal phase itself. For example, if you specify
-\texttt{compile} as a goal, phases \texttt{validate},
-\texttt{generate-sources}, \texttt{process-sources},
-\texttt{generate-resources}, \texttt{process-resources},
-\texttt{compile} are going to be executed.
+\texttt{package} as a goal, phases \texttt{validate},
+\texttt{compile}, \texttt{test} and \texttt{package} are going to be
+executed.
+
+Let's test this by packaging the application:
+
+\begin{lstlisting}
+$ mvn package
+\end{lstlisting}
+
+You’ve just created, compiled, tested and packaged the
+simplest possible Maven project. To prove to yourself that this
+program works, run it from the command line.
+
+\begin{lstlisting}
+$ java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App
+Hello World!
+\end{lstlisting}
+
+An alternative (and easier) way to run a java project is using the
+exec plugin of maven:
+
+\begin{lstlisting}
+$ mvn exec:java -Dexec.mainClass="com.mycompany.app.App"
+\end{lstlisting}
+
+The main difference between the two commands is that the exec plugin
+would correctly specify the classpath of any runtime dependency, while
+in the other case you would need to do this manually.
+
+As you can see maven has created a jar of your application and placed
+it in the target/ folder. In fact here is how the folder structure
+looks like now:
+
+\begin{lstlisting}
+$ tree -L 2 .
+|-- pom.xml
+|-- src
+|   |-- main
+|   |-- test
+|-- target
+    |-- classes
+    |-- maven-archiver
+    |-- maven-status
+    |-- my-app-1.0-SNAPSHOT.jar
+    |-- surefire-reports
+    |-- test-classes
+\end{lstlisting}
+
+If you perform the clean process, maven would delete all automatically
+generated files:
+
+\begin{lstlisting}
+$ mvn clean
+\end{lstlisting}
+
 You can also customize individual phases of the build process. This is
-implemented using plugins specified in the pom.xml file. For example,
-one can configure the compiler-plugin to use Java version 1.7 for
-compilation.
+implemented using plugins specified in the pom.xml file. Plugins are
+other maven artifacts (i.e., they have their own groupID and
+artifactID) that provide goals to Maven. Furthermore, a plugin may
+have one or more goals wherein each goal represents a capability of
+that plugin. For example, the Compiler plugin has two goals: compile
+and testCompile. The former compiles the source code of your main
+code, while the latter compiles the source code of your test code. 
+Here is how you can modify the lifecycle of your project by
+customizing the compile phase to use Java version 1.8:
+
+\begin{lstlisting}
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.mycompany.app</groupId>
+  <artifactId>my-app</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>my-app</name>
+  <url>http://maven.apache.org</url>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.5.1</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+\end{lstlisting}
+
+
+
+\subsection{Maven plugins}
+
+We have just seen how using a particular maven plugin we can modify
+the lifecycle of our project. However, plugins in maven have a much
+more general use. 
+The core functionality of Maven is very simple, it doesn’t know how to
+do much beyond parsing a few XML documents and keeping track of a
+lifecycle and a few plugins. In fact, Maven has been designed to
+delegate most responsibility to a set of Maven Plugins which can
+affect the Maven Lifecycle and offer access to goals. Most of the
+action in Maven happens in plugin goals which take care of things like
+compiling source, packaging bytecode, publishing sites, and any other
+task which need to happen in a build. The Maven you download from
+Apache doesn’t know much about packaging a WAR file or running JUnit
+tests; most of the intelligence of Maven is implemented in the plugins
+and the plugins are retrieved from the Maven Repository when they are
+needed.
+
+To execute a single Maven plugin goal, we used the syntax for instance
+\begin{lstlisting}
+ mvn archetype:generate
+\end{lstlisting}
+where archetype is the identifier of a plugin and
+generate is the identifier of a goal.
+
+\begin{center}
+\includegraphics[scale=0.7]{figures/5}
+\end{center}
+
+A Maven Plugin is a collection of one or more goals. Examples of Maven
+plugins can be simple core plugins like the Jar plugin, which contains
+goals for creating JAR files, Compiler plugin, which contains goals
+for compiling source code and unit tests, or the Surefire plugin,
+which contains goals for executing unit tests and generating
+reports.
 
 \subsection{Dependency Management}
 
-A central feature in Maven is dependency management. If you are
-developing a project that uses external libraries you do not need to
+One of the central features of Maven is dependency management. If you
+are developing a project that uses external libraries you do not need to
 provide them together with your project. It is enough to specify the
-dependency in the pom.xml file and  during the build Maven will
+dependency in the pom.xml file and during the build Maven will
 automatically download the dependency and in turn, all the
 dependencies that the dependency itself needs (called transitive
 dependencies).
@@ -459,16 +607,43 @@ There are two types of repositories where maven searches for
 dependencies: local and remote. Maven automatically creates a local
 repository on your machine (usually on the .m2 folder) that contains
 the cache of your downloaded dependencies, as well as the
-temporary builds of projects that you manage with maven.
+builds of projects that you manage with maven. You can ``publish''
+your project's artifact (a jar file, for instance) in you local maven
+repository by invoking the install goal:
 
-Maven provides a remote ``Central Repository''  that is used by default to search
-for dependencies, but other repositories can be specified and used.
+\begin{lstlisting}
+$ mvn install
+\end{lstlisting}
 
-Maven's is able to find dependencies based on the coordinates (Group
-ID and Artifact ID) that identify individual software libraries or
-modules.
+Now, for our example project with a groupId "com.mycompany.app", an
+artifactId  "my-app", and a version "1.0-SNAPSHOT", the
+install:install goal is going to copy the JAR file from
+target folder to 
+.m2/repository/com/mycompany/app/my-app/1.0-SNAPSHOT folder.
+GroupID, artifactID and version are the so called maven project
+coordinates. They are assumed to uniquely identify a project managed
+with maven and can be used to look up any artifact published using
+maven. You can now see from the example above maven coordinates can be
+utilized to fetch the artifacts.
 
-\subsection{Maven Plugin for Eclipse (m2e)}
+Maven also provides a remote ``Central Repository''  that is used by
+default to search for dependencies, but other repositories can be
+specified and used. You can browse available libraries at
+\url{http://repo1.maven.org/maven2/}.
+
+Again, you will see that the standard for a Maven repository is to store
+an artifact in the following directory relative to the root of the
+repository: 
+\begin{lstlisting}
+/<groupId>/<artifactId>/<version>/<artifactId>-<version>.<packaging>
+\end{lstlisting}
+
+Often you will be writing a project which depends on libraries that
+are neither free nor publicly distributed. In this case you will need
+to either setup a custom repository inside your organization's network
+or download and install the dependencies manually.
+
+\section{Maven Plugin for Eclipse (m2e)}
 
 Maven Integration for Eclipse, named `m2e', provides the following features:
 \begin{compactitem}
@@ -481,10 +656,16 @@ Maven Integration for Eclipse, named `m2e', provides the following features:
 \item Quick fixes in the Java editor for looking up required dependencies/jars by the class or package name
 \end{compactitem}
 
+What you need to understand is that the m2e plugin is only a
+front-end graphical interface for maven. You can still use all the
+maven features via command line, even if they are not supported by the
+plugin. However, the typical use of maven for this course would not go
+beyond the capabilities of the m2e plugin. 
+
 \subsection{Install Maven for Eclipse}
-Eclipse 4.4.2 comes with installation of m2e, so the installation is
-not needed. If you are using an older version of Eclipse (not
-recommended) you can install last m2e release by using the following
+Eclipse 4.5.2 comes with installation of m2e, so the installation is
+not needed. If you are using an older version of Eclipse (which is not
+recommended) you can install latest m2e release by using the following
 update site from within Eclipse: 
 
 \url{http://download.eclipse.org/technology/m2e/releases/}
@@ -499,10 +680,18 @@ Perform following steps:
 \item Click Next, Next, Accept, Finish
 \end{compactitem}
 
-\section{Create a Maven project}
-Maven provides project templates called archetypes. The archetype
-specify the type of project we want to create. Each archetype
-corresponds to a particular type of application we want to develop.
+An important caveat you need to be aware is that m2e plugin comes with
+its own maven installation. Therefore, it is likely that building your
+project via command line and via Eclipse might use different versions
+of maven.
+
+\subsection{Create a Maven project in Eclipse}
+
+This process is equivalent to the command line version of running:
+\begin{lstlisting}
+$ mvn archetype:generate 
+\end{lstlisting}
+
 
 The archetype generation need:
 \begin{compactitem}
@@ -546,7 +735,7 @@ To create a maven project:
   *number* with your appropriate number.
 \end{compactitem}
 
-
+\subsection{Create a Maven project in Eclipse}
 
 \section{Pom.xml file for the lab}
 
@@ -576,10 +765,10 @@ To create a maven project:
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.2</version>
+        <version>3.5.1</version>
         <configuration>
-          <source>1.7</source>
-          <target>1.7</target>
+          <source>1.8</source>
+          <target>1.8</target>
         </configuration>
       </plugin>
       <plugin>
@@ -610,7 +799,6 @@ To create a maven project:
   </build>
 </project>
 \end{lstlisting}
-
 
 \end{document}
 
