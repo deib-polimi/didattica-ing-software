@@ -155,6 +155,28 @@
 \hrule
 \section{Installazione dei tools}
 \subsection{Mac OSx}
+
+\textbf{Rimozione della OpenJDK}\\
+Per evitare problemi nel corso del progetto si consiglia di rimuovere la OpenJDK se istallata.
+\begin{itemize}
+\item verifica se e' istallata una JDK: 
+\begin{itemize}
+\item aprire il terminale
+\item digitare \texttt{javac}
+\item se ottenete il messaggio command not found andate alla prossima sezione (Installazione Java JDK SE 8u74)
+\end{itemize}
+\item verifica se una di queste \`e la OpenJDK
+\begin{itemize}
+\item digitate \texttt{which java javac}
+\item se NESSUNO dei path mostrati contengono la sottostringa ``openjdk" andate alla prossima sezione (Installazione Java JDK SE 8u74)
+\end{itemize}
+\item rimuovi la OpenJDK
+\begin{itemize}
+\item digita \texttt{sudo rm -rf} percorso della OpenJDK, per esempio\\
+ \texttt{sudo rm -rf /Library/Java/JavaVirtualMachines/openjdkx.y.z.jdk}
+\end{itemize}
+\end{itemize}
+
 \textbf{Installazione Java JDK SE 8u74}
 \begin{itemize}
 \item connettiti al sito di
@@ -169,7 +191,7 @@
 \item apri ``applications'' (applicazioni) sul tuo mac
 \item crea la cartella ``eclipse''
 \item connettiti al sito di \href{https://eclipse.org/downloads/}{\ULurl{Eclipse}}
-\item scarica Eclipse Mars.2 (4.5.2) per Mac OS X
+\item scarica Eclipse Mars.2 (4.5.2) per Mac OS X in particolare Eclipse IDE for Java Developers
 \item copia il file scaricato nella cartella ``eclipse'' creata precedentemente
 \item estrai il file
 \end{itemize}
@@ -181,7 +203,7 @@
 \item connettiti al sito di
   \href{http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html}{\ULurl{Oracle}}
 \item clicca su ``accept the license agreement''
-\item scarica \textit{JDK 8} (SE 8u74) per Windows
+\item scarica \textit{JDK 8} (SE 8u74) per Windows 
 \item scegli correttamente tra Windows x64/x86
 \item installa (nota che di default la jre \`e installata sotto ``Program Files/Java'')
 \end{itemize}
@@ -191,13 +213,35 @@
 \item apri Program Files (C://Program Files)
 \item crea la cartella ``eclipse''
 \item connettiti al sito di \href{https://eclipse.org/downloads/}{\ULurl{Eclipse}}
-\item scarica Eclipse Mars.2 (4.5.2) per Windows
+\item scarica Eclipse Mars.2 (4.5.2) per Windows in particolare Eclipse IDE for Java Developers
 \item clicca sulla freccia verde rivolta verso il basso
 \item clicca su ``open''
 \item copia il contenuto della cartella ``eclipse'' nella cartella ``C://Program Files'' precedentemente creata
 \end{itemize}
 
 \subsection{Linux (testato con Ubuntu 15.10)}
+\textbf{Rimozione della OpenJDK}\\
+Per evitare problemi nel corso del progetto si consiglia di rimuovere la OpenJDK se istallata.
+\begin{itemize}
+\item verifica se e' istallata una JDK: 
+\begin{itemize}
+\item aprire il terminale
+\item digitare \texttt{javac}
+\item se ottenete il messaggio command not found andate alla prossima sezione (Installazione Java JDK SE 8u74)
+\end{itemize}
+\item verifica se una di queste \`e la OpenJDK
+\begin{itemize}
+\item digitate \texttt{which java javac}
+\item se NESSUNO dei path mostrati contengono la sottostringa ``openjdk" andate alla prossima sezione (Installazione Java JDK SE 8u74)
+\end{itemize}
+\item rimuovi la OpenJDK
+\begin{itemize}
+\item digita \texttt{sudo rm -rf} percorso della OpenJDK, per esempio\\
+ \texttt{sudo rm -rf /Library/Java/JavaVirtualMachines/openjdkx.y.z.jdk}
+\end{itemize}
+\end{itemize}
+
+
 \textbf{Installazione Java JDK SE 8u74}
 \begin{itemize}
 \item apri il terminale
@@ -243,7 +287,7 @@
 \item connettiti al sito di \href{https://eclipse.org/downloads/}{\ULurl{Eclipse}}
 \item scegli correttamente tra x64/x86 (controlla l'architettura con:
   "\texttt{file /sbin/init}")
-\item scarica Eclipse Mars.2 (4.5.2) per Linux
+\item scarica Eclipse Mars.2 (4.5.2) per Linux in particolare Eclipse IDE for Java Developers
 \item estrailo  \texttt{tar -zxvf eclipse-java-mars-2-linux-gtk-x86\_64.tar.gz}
 \item eseguilo \texttt{./eclipse/eclipse \&}
 \end{itemize}
