@@ -150,6 +150,7 @@
 \author{\textbf{\hmwkAuthorName}}
 \date{} % Insert date here if you want it to appear below your name
 
+\input{../Commands.tex}
 %----------------------------------------------------------------------------------------
 
 \begin{document}
@@ -173,7 +174,7 @@
 
 \newtheorem{theorem}{Theorem}[section]
 
-\section{Ripasso}
+\section{Introduzione}
 Questa lezione copre le slides da 36 a 72 relative a Java.
 %\subsection{Java come linguaggio orientato agli oggetti}
 %Tra le caratteristiche del linguaggio Java, 
@@ -315,16 +316,9 @@ Esempi di variabili locali sono un parametro di un metodo e una variabile dichia
 \end{mydef}
 Dichiarare all'interno di un metodo una variabile con lo stesso nome di un attributo della classe nasconde quest'ultimo.
 Per poter accedere all'attributo è necessario usare la keyword \texttt{this}.
-\begin{lstlisting}[language=Java,escapechar=|]
-public class Car {
 
-	private double speed;
+\lstinputlisting{Source/esercitazione2/src/main/java/esercitazione2/Car.java}
 
-	public void changeSpeed(double speed) {
-	    this.speed=speed;   
-   	}
-}
-\end{lstlisting}
 In questo esempio, nel metodo \texttt{changeSpeed} l'identificativo \texttt{speed} si riferisce al parametro passato al metodo.
 Per accedere all'attributo \texttt{speed} relativa all'istanza corrente della classe \texttt{Car} si utilizza la keyword \texttt{this}. 
 
@@ -367,7 +361,7 @@ Ad esempio, nel caso si debba concatenare diverse stringhe in un ciclo è opport
 Per creare degli oggetti immutabili \`e bene seguire le regole seguenti. Nota che queste regole non sono seguite da tutte le classi documentate come immutabili. In questi casi ci sono altre ragioni per credere  che le istanze create non cambieranno mai dopo la loro costruzione. Tuttavia, in questi casi vengono utilizzate strategie pi\`u complicate per garantire l'immutabilit\`a. Le regole basilari per garantire l'immutabilit\`a sono le seguenti:
 \begin{itemize}
 \item non fornire metodi setter (che possono modificare gli attributi o oggetti che sono referenziati gali attributi)
-\item rendere tutti gli attributi \texttt{finali} e \texttt{private}
+\item rendere tutti gli attributi \texttt{final} e \texttt{private}
 \item non consentire alle sottoclassi di eseguire overriding: dichiara la classe come \texttt{final} (alternarivamente puoi rendere il costruttore privato e obbligare l'esecuzione di factory methods nella creazione degli oggetti)
 \item se il vostro oggetto contiene attributi che sono references a oggetti mutabili \`e necessario non consentire di cambiare questi oggetti:
 \begin{itemize}
@@ -443,7 +437,7 @@ Da Java 5, sono disponibili i tipi enumerati, che
 ricalcano gli \texttt{enum} del C estendendoli con
 ulteriori operazioni.
 Mentre in C le enumerazioni semplicemente definiscono delle
-costanti intere, in Java sono vere è proprie classi,
+costanti intere, in Java sono vere e proprie classi,
 costituite da un numero prefissato di istanze associate. Le enumerazioni possono essere utilizzate per esempio per specificare le scelte di un menu, i flag command line \ldots
 \begin{lstlisting}[language=Java,escapechar=|]
 enum Colors{RED, GREEN, BLUE};
@@ -458,7 +452,7 @@ Essendo una vera e propria classe, è possibile aggiungere
 attributi metodi e
 costruttori personalizzati (quest'ultimi in ogni caso non utilizzabili per inizializzare ulteriori oggetti).
 
-Le enumerazioni ereditano la classe \texttt{Enum},
+Le enumerazioni ereditano dalla classe \texttt{Enum},
 la quale offre i metodi \texttt{valueOf} e \texttt{toString}
 che rispettivamente restituiscono l'oggetto desiderato
 a partire dal nome e la stringa contenente il nome dell'elemento.
@@ -507,10 +501,8 @@ nome classe.nome metodo/attributo
 \section{Esercizi}
 
 
-\subsection{Esercizio 1: LettoreMP3}
-\begin{framed}
-\textbf{Esercizio 1}: Progettare e implementare una classe che rappresenti un LettoreMP3. Ogni LettoreMP3 ha un \emph{unico} numero di serie. Un numero di serie (o numero seriale) \`e un numero identificativo assegnato in maniera univoca per distinguere un esemplare di una serie. I numeri di serie sono associati in modo incrementale. Il LettoreMP3 ha una meroria e puo' essere ascoltato.
-\end{framed}
+\subsection{Esercizio: LettoreMP3}
+\Esercizio{Progettare e implementare una classe che rappresenti un LettoreMP3. Ogni LettoreMP3 ha un \emph{unico} numero di serie. Un numero di serie (o numero seriale) \`e un numero identificativo assegnato in maniera univoca per distinguere un esemplare di una serie. I numeri di serie sono associati in modo incrementale. Il LettoreMP3 ha una meroria e puo' essere ascoltato.}
 
 
 
@@ -606,11 +598,8 @@ public class Main {
 
 
 
-\subsection{Esercizio 2: Set di interi}
-
-\begin{framed}
-\textbf{Esercizio 2}: Progettare e implementare una classe che rappresenti un \emph{insieme} di interi di dimensione massima fissata
-\end{framed}
+\subsection{Esercizio: Set di interi}
+\Esercizio{Progettare e implementare una classe che rappresenti un \emph{insieme} di interi di dimensione massima fissata}
 Un insieme \`e una collezione di oggetti:
 \begin{itemize}
 	\item \emph{non ordinata} non è definito alcun ordinamento esplicito (basato sulle proprietà degli elementi),
@@ -780,10 +769,8 @@ public class IntSet {
 }
 \end{lstlisting}
 
-\subsection{Esercizio 3: Riuso dei costruttori}
-\begin{framed}
-\textbf{Esercizio 3}: Modificare l'insieme di interi per consentire la \emph{creazione} di sets di dimensioni variabili ma minore della dimensione massima fissata al momento della creazione dell'insieme
-\end{framed}
+\subsection{Esercizio: Riuso dei costruttori}
+\Esercizio{Modificare l'insieme di interi per consentire la \emph{creazione} di sets di dimensioni variabili ma minore della dimensione massima fissata al momento della creazione dell'insieme}
 
 
 \begin{lstlisting}[language=Java,escapechar=|]
@@ -805,10 +792,8 @@ public class IntSet {
 }
 \end{lstlisting}
 
-\subsection{Esercizio 4: Classi immutabili - Complex}
-\begin{framed}
-\textbf{Esercizio 4}:  progettare e implementare una classe che rappresenti un numero complesso
-\end{framed}
+\subsection{Esercizio: Classi immutabili - Complex}
+\Esercizio{Progettare e implementare una classe che rappresenti un numero complesso}
 
 
 \subsubsection{Scelta delle funzionalit\`a}
@@ -954,10 +939,8 @@ public final class Complex {
 
 
 
-\subsection{Esercizio 5: Creare due costruttori con gli stessi parametri}
-\begin{framed}
-\textbf{Esercizio 5}:  Aggiungere un costruttore che permette di creare un numero complesso da module e fase
-\end{framed}
+\subsection{Esercizio: Creare due costruttori con gli stessi parametri}
+\Esercizio{Aggiungere un costruttore che permette di creare un numero complesso da module e fase}
 
 Dobbiamo definire un costruttore per inizializzare l'oggetto.
 Scegliamo di passagli direttamente i valori di parte reale e immaginaria.
@@ -996,7 +979,9 @@ public class Complex {
 	}
 \end{lstlisting}
 
-\subsection{Esercizio 6: Enum}
+\subsection{Esercizio: Enum}
+\Esercizio{Scrivere una classe Enum per modellizzare i pianeti del sistema solare}
+
 \begin{lstlisting}[language=Java,escapechar=|]
 public enum Planet {
     MERCURY (3.303e+23, 2.4397e6),
@@ -1046,12 +1031,10 @@ public class Main {
 \end{lstlisting}
 
 
-\subsection{Esercizio 7: ComplexSet}
-\begin{framed}
-\textbf{Esercizio 7}:  Modificare il codice del secondo esercizio affinch\`e mantenga un insieme
+\subsection{Esercizio: ComplexSet}
+\Esercizio{Modificare il codice del secondo esercizio affinch\`e mantenga un insieme
 di numeri complessi. Nella costruzione di tale insieme viene definita un certo valore di precisione
-che è utilizzato per determinare l'uguaglianza tra due numeri (vedere l'esercizio 4).
-\end{framed}
+che è utilizzato per determinare l'uguaglianza tra due numeri}
 
 \begin{lstlisting}[language=Java,escapechar=|]
 package it.polimi.deib.se.ex1.complex;
@@ -1185,11 +1168,9 @@ System.out.println(a.almostEquals(b, 1e-2));
 
 \end{lstlisting}
 
-\subsection{Eserzizio 8: Riepilogo - Negozio}
-\subsubsection{Esercizio 8a: CD-Final-Immutabile}
-\begin{framed}
-\textbf{Esercizio 8a}: Progettare e implementare una classe che rappresenti un CD. Ogni CD ha un \emph{unico} numero di serie. Un numero di serie (o numero seriale) è un numero identificativo assegnato in maniera univoca per distinguere un esemplare di una serie. Un cd ha un titolo, un autore e un prezzo.
-\end{framed}
+\subsection{Eserzizio: Riepilogo - Negozio}
+\subsubsection{Esercizio a: CD-Final-Immutabile}
+\Esercizio{Progettare e implementare una classe che rappresenti un CD. Ogni CD ha un \emph{unico} numero di serie. Un numero di serie (o numero seriale) è un numero identificativo assegnato in maniera univoca per distinguere un esemplare di una serie. Un cd ha un titolo, un autore e un prezzo.}
 
 Come sempre \`e per progettare la nostra classe \`e necessario rispondere a due domande:
 \begin{itemize}
@@ -1318,10 +1299,8 @@ public class CD {
 \end{lstlisting}
 
 
-\subsubsection{Esercizio 8b: Enum: tipo del CD}
-\begin{framed}
-\textbf{Esercizio 8b}: Un CD ha un tipo. Il tipo del cd pu\`o essere pop, country oppure dance.
-\end{framed}
+\subsubsection{Esercizio b: Enum: tipo del CD}
+\Esercizio{Un CD ha un tipo. Il tipo del cd pu\`o essere pop, country oppure dance.}
 
 \begin{lstlisting}[language=Java,escapechar=|]
 package esercitazione2;
@@ -1590,10 +1569,8 @@ public class Shelf {
 }
 \end{lstlisting}
 
-\subsubsection{Esercizio 8c: Riuso del costruttore: scaffale di dimensione definita nel costruttore}
-\begin{framed}
-\textbf{Esercizio  8c}: Modificare la classe \texttt{Shelf} per consentire la \emph{creazione} di uno scaffale con una dimensione passata come parametro al costruttore ma minore della dimensione massima fissata
-\end{framed}
+\subsubsection{Esercizio c: Riuso del costruttore: scaffale di dimensione definita nel costruttore}
+\Esercizio{Modificare la classe \texttt{Shelf} per consentire la \emph{creazione} di uno scaffale con una dimensione passata come parametro al costruttore ma minore della dimensione massima fissata}
 
 
 \begin{lstlisting}[language=Java,escapechar=|]
@@ -1615,10 +1592,8 @@ public class IntSet {
 }
 \end{lstlisting}
 
-\subsubsection{Esercizio 8d: Cliente}
-\begin{framed}
-\textbf{Esercizio 8d}: Un cliente ha un nome,  un codice fiscale, un array di CD acquistati. Un cliente pu\`o acquistare al massimo 10 CD.
-\end{framed}
+\subsubsection{Esercizio d: Cliente}
+\Esercizio{Un cliente ha un nome,  un codice fiscale, un array di CD acquistati. Un cliente pu\`o acquistare al massimo 10 CD.}
 \begin{lstlisting}[language=Java,escapechar=|]
 package esercitazione2;
 
@@ -1662,10 +1637,8 @@ public class Cliente {
 }
 \end{lstlisting}
 
-\subsubsection{Esercizio 8e: Negozio}
-\begin{framed}
-\textbf{Esercizio  8e}: Il negozio vuole tenere traccia dei CD venduti, per ogni CD vuole tenere traccia dell'acquirente
-\end{framed}
+\subsubsection{Esercizio e: Negozio}
+\Esercizio{Il negozio vuole tenere traccia dei CD venduti, per ogni CD vuole tenere traccia dell'acquirente}
 \begin{lstlisting}[language=Java,escapechar=|]
 package esercitazione2;
 
@@ -1719,10 +1692,9 @@ public class Negozio {
 
 \end{lstlisting}
 
-\subsubsection{Esercizio 8f: Implementare un client per il negozio}
-\begin{framed}
-\textbf{Esercizio 8f}: Il negozio vuole tenere traccia dei CD venduti, per ogni CD vuole tenere traccia dell'acquirente
-\end{framed}
+\subsubsection{Esercizio f: Implementare un client per il negozio}
+\Esercizio{Il negozio vuole tenere traccia dei CD venduti, per ogni CD vuole tenere traccia dell'acquirente}
+
 \begin{lstlisting}[language=Java,escapechar=|]
 package esercitazione2;
 
@@ -1751,12 +1723,10 @@ public class Main {
 }
 \end{lstlisting}
 
-\subsection{Esercizio 9: Riepilogo - Morra Cinese}
-\begin{framed}
-\textbf{Esercizio 9}: Implementare il gioco della morra cinese (carta, forbice, sasso).
+\subsection{Esercizio: Riepilogo - Morra Cinese}
+\Esercizio{Implementare il gioco della morra cinese (carta, forbice, sasso).
 L'applicazione deve chiedere la scelta al giocatore, generare una scelta e stampare a video il risultato del 
-giocatore (vittoria, pareggio, sconfitta).
-\end{framed}
+giocatore (vittoria, pareggio, sconfitta).}
 
 
 \subsubsection{Raffinamento}
