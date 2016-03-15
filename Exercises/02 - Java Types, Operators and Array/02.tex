@@ -366,8 +366,8 @@ Per creare degli oggetti immutabili \`e bene seguire le regole seguenti. Nota ch
 \item se il vostro oggetto contiene attributi che sono references a oggetti mutabili \`e necessario non consentire di cambiare questi oggetti:
 \begin{itemize}
 \item non fornire metodi che cambiano questi oggetti
-\item non condividere i references di questi oggetti: ritornare i references mediante getters (in tal caso creare degli oggetti copia)
-\item non settare i reference degli attributi con oggetti passati come parametri (in tal caso creare degli oggetti copia)
+\item non condividere i references di questi oggetti: se \`e necessario ritornare i references mediante getters creare degli oggetti copia
+\item non settare i reference degli attributi con oggetti passati come parametri visto che \`e possibile modificare tali oggetti dall'esterno, ma assegnare agli attributi delle copie degli oggetti ricevuti come parametro
 \end{itemize} 
 \end{itemize}  
 
@@ -542,59 +542,10 @@ Per il nostro caso specifico
 
 
 \subsubsection{Esempio commentato}
-\begin{lstlisting}[language=Java,escapechar=|]
-package it.polimi.deib.se.ex1.counter;
+\lstinputlisting{Source/esercitazione2/src/main/java/esercitazione2/LettoreMP3.java}
 
-public class LettoreMP3 {
-	
-	//Contatore condiviso tra tutte le istanze
-	private static int counter = 0;
-	
-	// contiene il codice seriale dell LettoreMP3
-	private final int serialNumber;
-	
-	// contiene la memoria del lettore MP3
-	private final int memoria;	
-	
-	//Crea un nuovo LettoreMP3. Il costruttore potrebbe anche prendere come parametro un colore...
-	public LettoreMP3(int memoria){
-	    serialNumber=counter;
-	    counter=counter+1;
-	    this.memoria=memoria;
-	}
-	// ACCESSORI
-	// ritorna il serial number dello LettoreMP3
-	public int getSN() {
-	    return serialNumber;
-	}
-	public int getMemoria(){
-	    return this.memoria;
-	}
-	public void ascolta(){
-	    System.out.println("Track: 01");
-	}	
-	// nota il metodo toString puo' essere generato automaticamente in eclipse sfruttando source > generateToString();
-	@Override
-	public String toString(){
-	    return serialNumber + " of " + counter;
-	}
-}
-\end{lstlisting}
+\lstinputlisting{Source/esercitazione2/src/main/java/esercitazione2/LettoreMP3Main.java}
 
-\begin{lstlisting}[language=Java,escapechar=|]
-package it.polimi.deib.se.ex1.counter;
-
-public class Main {
-	
-	public static void main(String[] args) {
-		LettoreMP3 c1 = new LettoreMP3();
-		LettoreMP3 c2 = new LettoreMP3();
-		System.out.println(c1);
-		System.out.println(c2);
-		c1.ascolta();
-	}
-}
-\end{lstlisting}
 
 
 
@@ -657,117 +608,7 @@ Nel nostro caso effettuiamo le seguenti scelte:
 
 
 \subsubsection{Esempio commentato}
-\begin{lstlisting}[language=Java,escapechar=|]
-package it.polimi.deib.se.ex1.intset;
-
-public class IntSet {
-    // Rappresentazione interna: array di interi
-    // Solo i primi currentSize elementi contengono gli elementi del set
-    // La Keyword final specifica che il reference all'array di interi non puo' cambiare durante l'esecuzione: una volta inizializzato l'array non e' possibile associare il reference elements a un nuovo array
-    private final int[] elements;
-    
-    // dimensione effettiva dell'insieme
-    private int currentSize;
-    
-    // costante che rappresenta la dimensione massima del set
-    private final static int MAX_SIZE = 100;
-    
-    // costruttore di default
-    public IntSet() {
-        this.currentSize = 0;
-        this.elements = new int[MAX_SIZE];
-   }
-
-    // ACCESSORI
-    // controlla che l'elemento sia contenuto nell'insieme
-    public boolean contains(int n) {
-	    for (int i = 0; i < this.currentSize; i++) {
-		    if (elements[i]==n){
-		            return true;
-                }
-	    }
-	    /*
-	    * // alternativa NON CORRETTA
-	    *
-	    * for (int i: elements) { if (i==n){ return true; } }
-	    */
-	
-	    /* default: non trovato */
-	    return false;
-    }
-    
-    // restituisce la dimensione dell'insieme
-    public int size() {
-        return this.currentSize;
-    }
-    
-    public boolean isFull() {
-        return currentSize >= MAX_SIZE;
-    }
-    
-    // MODIFICATORI
-    // Aggiunge un intero all'insieme.
-    public void add(int n) {
-        // invoco il metodo che controlla
-        // la presenza dell'elemento nel set.
-        boolean containsElement = this.contains(n);
-        
-        // se e' gia' presente non faccio nulla
-        if (containsElement){
-		    return;
-    	}
-    	/* controllo che il set non sia pieno */
-    	if (this.currentSize < elements.length) {
-    	    // inserisco l'elemento
-    	    this.elements[currentSize] = n;
-    	    // aggiorno contatore elementi
-    	    this.currentSize++;
-    	} 
-    }
-
-     // rimuove un elemento dall'insieme.
-    public void remove(int element) {
-        // recupero l'elemento
-        int pos = find(element);
-	
-    	if (pos >= 0) {
-    	    /*
-    	    * Altra soluzione:
-    	    * for (int i = pos; i < this.currentSize - 1; i++)
-    	    *	elements[i] = elements[i + 1];
-    	    *	this.currentSize = this.currentSize - 1;
-    	    */						
-    	    this.currentSize = this.currentSize - 1;
-    	    elements[pos] = elements[currentSize];
-    	}
-    }
-    // metodo privato. restituisce la posizione
-    // di un elemento nell'array se esiste (ed e'
-    // entro this.size), -1 altrimenti
-    private int find(int n) {
-        for (int i = 0; i < this.currentSize; i++) {
-            if (elements[i]==n){
-                return i;
-            }
-        }
-        /* default */
-        return -1;
-        // Perche' non ha senso che questo metodo sia pubblico?
-    }
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("[");
-        for(int i=0; i< currentSize; i++){
-            if(i>0){
-                builder.append(", ");
-            }
-         builder.append(elements[i]);
-         }
-         builder.append("]");
-         return builder.toString();
-    }
-}
-\end{lstlisting}
+\lstinputlisting{Source/esercitazione2/src/main/java/esercitazione2/IntSet.java}
 
 \subsection{Esercizio: Riuso dei costruttori}
 \Esercizio{Modificare l'insieme di interi per consentire la \emph{creazione} di sets di dimensioni variabili ma minore della dimensione massima fissata al momento della creazione dell'insieme}
