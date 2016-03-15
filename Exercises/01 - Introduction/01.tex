@@ -104,7 +104,7 @@
 \newcommand{\hmwkDueDate}{Martedi,\ Marzo 15,\ 2016} % Due date
 \newcommand{\hmwkClass}{Ingegneria del Software 1} % Course/class
 \newcommand{\hmwkClassTime}{} % Class/lecture time
-\newcommand{\hmwkClassInstructor}{Claudio Menghi} % Teacher/lecturer
+\newcommand{\hmwkClassInstructor}{Claudio Menghi, Francesco Marconi, Alessandro Rizzi} % Teacher/lecturer
 \newcommand{\hmwkAuthorName}{} % Your name
 
 %----------------------------------------------------------------------------------------
@@ -151,20 +151,20 @@
 
 %----------------------------------------------------------------------------------------
 \section{Introduzione}
-Questa lezione copre le  slides ``Classi come astrazioni" o in alternativa i capitoli  1- 2, 3, 4 e 5 del libro  Pellegrino Principe. “Java 8”.
+Questa lezione copre le  slides ``Classi come astrazioni" o in alternativa i capitoli  1, 2, 3, 4 e 5 del libro  Pellegrino Principe -- “Java 8”.
 
 
 \subsection{Le caratteristiche di Java}
 Questa esercitazione ha come scopo quella di fornire una panoramica su Java e sulle sue caratteristiche fondamentali. In particolare Java \`e:
 \begin{itemize}
-\item \emph{Portabile} \`e la caratteristica principale di Java. L'obiettivo di Java \`e quello di consentire allo sviluppatore di  \emph{scrivere il programma una volta sola avendo la certezza che sar\`a possibile eseguirlo ovunque indipendentemenre dall'architettura della macchina su cui viene eseguito}. La filosofia di Java \`e quindi ``Write Once, Run Anywhere".
+\item \emph{Portabile}: \`e la caratteristica principale di Java. L'obiettivo di Java \`e quello di consentire allo sviluppatore di  \emph{scrivere il programma una volta sola avendo la certezza che sar\`a possibile eseguirlo ovunque indipendentemenre dall'architettura della macchina su cui viene eseguito}. La filosofia di Java \`e quindi ``Write Once, Run Anywhere".
 \item \emph{Compilato}: Java \`e un linguaggio compilato, ovvero viene ``tradotto" dal linguaggio di programmazione Java al linguaggio ``oggetto" bytecode. 
 \item \emph{Orientato agli oggetti}: in un linguaggio orientato agli oggetti lo sviluppatore ragiona in termini di oggetti ovvero astrazioni dei concetti del mondo reale che lo sviluppatore vuole modellare\footnote{La filosofia \`e diversa da quella utilizzata, per esempio, quando si scrive in C, dove gli ingredienti fondamentali sono le procedure. Infatti in un linguaggio procedurale le componenti fondamentali sono le funzioni (``procedure") che manipolano i dati del programma.}. In realt\`a Java \`e un linguaggio multi-paradigma dal momento che \`e anche procedurale, e se consideriamo Java 8 \`e anche funzionale (parzialmente).
 \item \emph{Staticamente tipizzato}: un linguaggio \`e staticamente tipizzato quando \`e necessario associare ad ogni variabile un tipo.
 \end{itemize}
 
 \subsubsection{Java \`e portabile e compilato}
-La caratteristica principale di Java \`e il fatto di essere portabile/platform indipendent. 
+La caratteristica principale di Java \`e il fatto di essere portabile/platform independent. 
 Se prendiamo per esempio C il compilatore genera un linguaggio ``oggetto" che \`e dipendente dalla macchina nel quale il compilatore viene eseguito. 
 Il codice compilato pu\`o \textbf{solo} essere eseguito sulla piattaforma per il quale il codice \`e stato compilato.
 
@@ -178,7 +178,7 @@ In altre parole il byte-code \`e un codice intermedio prodotto dopo la compilazi
     \label{JavaArchitecture}
 \end{figure}
 
-L'architettura del linguaggio Java \`e mostrata in Figura~\ref{JavaArchitecture}. Pi\`u precisamente,
+L'architettura del linguaggio Java \`e mostrata in Figura~\ref{JavaArchitecture}. Pi\`u precisamente:
 
 \begin{itemize}
 \item MyProgram.java: \`e il codice sorgente nativo dell'applicazione Java (Il file che contiene il nostro codice)
@@ -210,16 +210,16 @@ La programmazione orientata agli oggetti implica un approccio alla programmazion
 \end{mydef}
 
 In altre parole in un paradigma orientato agli oggetti lo sviluppatore descrive il mondo e i suoi oggetti e come il mondo evolve nel corso del tempo. 
-In un paradigma procedurale lo sviluppatore specifica \textbf{come} risolvere un problema, mentre in un linguaggio orientato agli oggetti lo sviluppatore prima descrive ``il problema" e poi cerca una strategia per risolvere il probleam utilizzando il modello del mondo costruito.
+In un paradigma procedurale lo sviluppatore specifica \textbf{come} risolvere un problema, mentre in un linguaggio orientato agli oggetti lo sviluppatore prima descrive ``il problema" e poi cerca una strategia per risolvere il problema utilizzando il modello del mondo costruito.
 
-Gli oggetti vengono creati partendo da dei modelli pi\`u generali chiamati classi. 
+Gli oggetti vengono creati partendo da modelli pi\`u generali chiamati classi. 
 
 \begin{mydef} \textbf{Classi} sono dei \emph{tipi} definiti dall'utente che descrivono degli oggetti. In particolare descrivono l'oggetto, il suo \emph{stato} e come lo \emph{stato dell'oggetto} cambia in risposta a delle operazioni eseguite sull'oggetto.
 \end{mydef}
 
 Utilizzando un esempio automobilistico possiamo pensare alle classi come ai documenti di progetto di un autovettura, e agli oggetti come alle macchine realizzate partendo dai quei documenti. In altre parole le classi sono la teoria, gli oggetti sono particolari \textbf{istanze} di una specifica classe. 
 
-Gli oggetti vengono creati con l'istruzione \textbf{new}. Per esempio l'istruzione seguente crea un nuovo oggetto di tipo Bike. 
+Gli oggetti vengono creati col costrutto \textbf{new}. Per esempio l'istruzione seguente crea un nuovo oggetto di tipo \texttt{Bike}. 
 \begin{lstlisting}
 Bike myBike=new Bike();
 \end{lstlisting}
@@ -240,7 +240,7 @@ Le classi sono definiti mediante la parola chiave (keyword) \texttt{class} e des
 \begin{lstlisting}
 Bike bike1=new Bike();
 \end{lstlisting}
-Per esempio, l'istruzione precedente dichiara una variabile di tipo Bike con \textbf{identificatore} bike1, che \`e associata a un oggetto di classe Bike. 
+Per esempio, l'istruzione precedente dichiara una variabile di tipo \texttt{Bike} con \textbf{identificatore} \texttt{bike1}, che \`e associata a un oggetto di classe \texttt{Bike}. 
 In Java ogni variabile deve essere associata a un tipo.
 
 
@@ -250,8 +250,8 @@ Prima di discutere le variabili e i tipi di riferimento discutiamo per l'organiz
 \begin{itemize}
 \item \textbf{Stack} e \textbf{Heap}:  Lo stack e lo heap sono due aree di memoria che sono utilizzate per contenere le nostre variabili e i nostri oggetti.
 \begin{itemize}
-\item \textbf{Stack} \`e un area di memoria dove \`e possibile memorizzare informazioni. E' molto rapido e basato su un LIFO pattern.
-\item \textbf{Heap} \`e uno spazio di memoria assegnabile al progetto e facilmente 
+\item Lo \textbf{stack} \`e un area di memoria dove \`e possibile memorizzare informazioni. E' molto rapido e basato su un LIFO pattern.
+\item Lo \textbf{heap} \`e uno spazio di memoria assegnabile al progetto e facilmente 
 estendibile. 
 \item Lo stack ha una dimensione fissa assegnata prima di eseguire il programma ``durante la fase di startup". Lo heap non viene utilizzato seguendo uno specifico pattern, e ci\`o lo rende molto flessibile (\`e estendibile) ma anche pi\`u lento. 
 \end{itemize}
@@ -305,7 +305,7 @@ Il componente che effettua tale operazione prende il nome di ``\emph{garbage col
 
 \subsubsection{Dichiarazione di una variabile}
 Per dichiarare una variabile \`e sufficiente specificare il \emph{tipo} e un \emph{identificatore}, ovvero un nome simbolico utilizzato per riferirsi alla variabile\footnote{Java \`e case sensitive quindi caratteri in upper e lower case sono interpretati come caratteri differenti.}. \\
-Per esempio, l'istruzione
+Per esempio, l'istruzione:
 \begin{lstlisting}[language=Java,escapechar=|]
 int number;
 \end{lstlisting}
@@ -361,16 +361,16 @@ Effettuando new Car() viene creato un nuovo oggetto di tipo auto e viene ritorna
 \end{mydef}
 
 \begin{itemize}
-\item se in una classe non viene definito un costruttore ne viene automaticamente generato ed utilizzato uno di default senza argomenti che, all'atto della creazione doll'oggetto, richiama il costruttore di default senza argomenti della super classe.
+\item se in una classe non viene definito un costruttore ne viene automaticamente generato ed utilizzato uno di default senza argomenti che, all'atto della creazione dell'oggetto, richiama il costruttore di default senza argomenti della super classe.
 \item se per\`o vengono creati dei costruttori il costruttore di default non risulta pi\`u disponibile a meno che definito dall'utente. 
 \item l'uso di costruttori diversi permette di creare un tipo di oggetto passando argomenti diversi 
 \end{itemize}
 
-Un costruttore alloca + inizializza
+Un costruttore alloca e inizializza
 \begin{itemize}
 \item alloca lo spazio per gli attributi di tipo \emph{primitivo}
 \item alloca lo spazio per i \emph{riferimenti} agli attributi definiti dall'utente
-\item inizializza i riferimenti e gli attibuti. Se un riferimento non \`e inizializzato gli viene associato il valore null. Se una variabile numerica non \`e inizializzata gli viene associato il valore zero. Ai boolean viene assegnato il valore false
+\item inizializza i riferimenti e gli attibuti. Se un riferimento non \`e inizializzato gli viene associato il valore null. Se una variabile numerica non \`e inizializzata gli viene associato il valore zero. Ai \texttt{boolean} viene assegnato il valore false
 \end{itemize}
 
 
@@ -384,7 +384,7 @@ Vari tipi di array possono essere dichiarati:
 \begin{itemize}
 \item array monodimensionali (anche noti come vettori)
 \begin{itemize}
-\item possono essere dichiarati come \texttt{type nomeVariabile[]} o come \texttt{type[] nomeVariabile} dove type indica il tipo di dato contenuti negli elementi dell'array mentre le parentesi poste dopo l'identificatore o dopo il tipo indicano che la variabile \`e di tipo array.
+\item possono essere dichiarati come \texttt{type nomeVariabile[]} o come \texttt{type[] nomeVariabile} dove \texttt{type} indica il tipo di dato contenuti negli elementi dell'array mentre le parentesi poste dopo l'identificatore o dopo il tipo indicano che la variabile \`e di tipo array.
 \item ovviamente in mancanza di \emph{inizializzazione} la dichiarazione di un array non alloca spazio per gli elementi dell'array
 \item l'allocazione si realizza come \texttt{int[] i=new int[10];} dove 10 \'e il numero di elementi dell'array
 \end{itemize}
@@ -439,7 +439,7 @@ JDK1.4 & Regular expressions, logging, assert  \\
 JDK1.5 & Generics, Autoboxing, Unboxing, Enumerations, cuncurrency utilities  \\
 JDK1.6 & JDBC, GUI, compiler optimization IO \\
 JDK1.7 & String switch, type inference improvements, new IO libraries, new network protocols, and cryptography algorithms  \\
-JDK1.8 & lambda expressions,  map-reduce, annotations, HNI\\
+JDK1.8 & lambda expressions,  map-reduce, annotations, static library linking with JNI\\
 \hline
 \end{tabular}
 
@@ -474,7 +474,7 @@ Questi esercizi hanno come fine quello di mostrare il fatto che Java \`e un ling
 \item \texttt{main} \`e il ``metodo di partenza" che deve essere presente in almeno una classe affinch\`e l'applicazione sia eseguibile. 
 \item \texttt{args} contiene il parametro (anche chiamato argomento) del metodo main. Il parametro \texttt{args} contiene i valori dei parametri passati al metodo main quando il programma \`e eseguito da command line.
 \item \texttt{String[]} (array of String) \`e il tipo della variabile args 
-\item \texttt{System.out.println} scrive il testo speciticato sullo schermo.
+\item \texttt{System.out.println} scrive il testo specificato sullo schermo.
 \end{itemize}
 \end{itemize}
 \begin{itemize}
@@ -612,8 +612,7 @@ Un Java si utilizza l'espressione client per indicare una generica classe, che u
 
 \lstinputlisting{Source/Esercizio6/Client.java}
 
-
-If we change folder of the bike class we have to change the package
+Se cambiamo la cartella della classe \texttt{bike} dobbiamo cambiarne anche il package.
 
 \subsection{Eclipse Integrated Development Environment}
 La gestione di un progetto man mano che la complessit\`a aumenta diventa sempre pi\`u difficile. Per questo, nello sviluppo softeware  Integrated Development Environment ($IDE$) sono comunemente utilizzati. Gli $IDE$s rimuovono alcune delle difficolt\`a solitamente incontrate nel processo di sviluppo e forniscono funzionalit\`a aggiuntive come il completamento automatico del codice. In questo corso e in paricolare nel laboratorio useremo $Eclipse$ $IDE$ come ambiente di sviluppo\footnote{$Netbeans$ \`e uno dei maggiori competitor di $Eclipse$}.  
@@ -634,7 +633,7 @@ La gestione di un progetto man mano che la complessit\`a aumenta diventa sempre 
 \item Quando create il vostro nuovo progetto Maven\footnote{Maven sar\`a spiegato nel corso del laboratorio.} in Eclipse, Eclipse crea automaticamente la struttura del vostro progetto. In particolare, 
 \begin{itemize}
 \item $src/main/java$ contiene il codice sorgente Java dell'applicazione in via di sviluppo.
-\item $src/main/resources$ contiene le ``risorse" utilizzate dalla vostra applicazione, file di configurazione etc..
+\item $src/main/resources$ contiene le ``risorse" utilizzate dalla vostra applicazione, file di configurazione, etc\ldots
 \item $src/test/java$ contiene le classi usate per testare la vostra applicazione
 \item $src/test/resources$ contiene le risorse necessarie a testare la vostra applicazione
 \end{itemize}
@@ -648,7 +647,7 @@ La gestione di un progetto man mano che la complessit\`a aumenta diventa sempre 
 \begin{itemize}
 \item tasto destro su \texttt{src/main/java} $>$ New $>$ package 
 \item scegliere il nome del package ($exercizio10$)
-\item press finish
+\item premere finish
 \end{itemize}
 \end{itemize}
 
