@@ -104,7 +104,7 @@
 \newcommand{\hmwkDueDate}{Martedi,\ Marzo 15,\ 2016} % Due date
 \newcommand{\hmwkClass}{Ingegneria del Software 1} % Course/class
 \newcommand{\hmwkClassTime}{} % Class/lecture time
-\newcommand{\hmwkClassInstructor}{Claudio Menghi} % Teacher/lecturer
+\newcommand{\hmwkClassInstructor}{Claudio Menghi, Francesco Marconi, Alessandro Rizzi} % Teacher/lecturer
 \newcommand{\hmwkAuthorName}{} % Your name
 
 %----------------------------------------------------------------------------------------
@@ -151,20 +151,20 @@
 
 %----------------------------------------------------------------------------------------
 \section{Introduzione}
-Questa lezione copre le  slides ``Classi come astrazioni" o in alternativa i capitoli  1- 2, 3, 4 e 5 del libro  Pellegrino Principe. “Java 8”.
+Questa lezione copre le  slides ``Classi come astrazioni" o in alternativa i capitoli  1, 2, 3, 4 e 5 del libro  Pellegrino Principe -- “Java 8”.
 
 
 \subsection{Le caratteristiche di Java}
 Questa esercitazione ha come scopo quella di fornire una panoramica su Java e sulle sue caratteristiche fondamentali. In particolare Java \`e:
 \begin{itemize}
-\item \emph{Portabile} \`e la caratteristica principale di Java. L'obiettivo di Java \`e quello di consentire allo sviluppatore di  \emph{scrivere il programma una volta sola avendo la certezza che sar\`a possibile eseguirlo ovunque indipendentemenre dall'architettura della macchina su cui viene eseguito}. La filosofia di Java \`e quindi ``Write Once, Run Anywhere".
+\item \emph{Portabile}: \`e la caratteristica principale di Java. L'obiettivo di Java \`e quello di consentire allo sviluppatore di  \emph{scrivere il programma una volta sola avendo la certezza che sar\`a possibile eseguirlo ovunque indipendentemenre dall'architettura della macchina su cui viene eseguito}. La filosofia di Java \`e quindi ``Write Once, Run Anywhere".
 \item \emph{Compilato}: Java \`e un linguaggio compilato, ovvero viene ``tradotto" dal linguaggio di programmazione Java al linguaggio ``oggetto" bytecode. 
-\item \emph{Orientato agli oggetti}: in un linguaggio orientato agli oggetti lo sviluppatore ragiona in termini di oggetti ovvero astrazioni dei concetti del mondo reale che lo sviluppatore vuole modellare\footnote{La filosofia \`e diversa da quella utilizzata per esempio quando si scrive in C dove gli ingredienti fondamentali sono le procedure. In un linguaggio procedurale le componenti fondamentali sono le funzioni ``procedure" che manipolano i dati del programma.}. In realt\`a Java \`e un linguaggio multi-paradigma dal momento che \`e anche procedurale, e se consideriamo Java 8 \`e anche funzionale (parzialmente).
+\item \emph{Orientato agli oggetti}: in un linguaggio orientato agli oggetti lo sviluppatore ragiona in termini di oggetti ovvero astrazioni dei concetti del mondo reale che lo sviluppatore vuole modellare\footnote{La filosofia \`e diversa da quella utilizzata, per esempio, quando si scrive in C, dove gli ingredienti fondamentali sono le procedure. Infatti in un linguaggio procedurale le componenti fondamentali sono le funzioni (``procedure") che manipolano i dati del programma.}. In realt\`a Java \`e un linguaggio multi-paradigma dal momento che \`e anche procedurale, e se consideriamo Java 8 \`e anche funzionale (parzialmente).
 \item \emph{Staticamente tipizzato}: un linguaggio \`e staticamente tipizzato quando \`e necessario associare ad ogni variabile un tipo.
 \end{itemize}
 
 \subsubsection{Java \`e portabile e compilato}
-La caratteristica principale di Java \`e il fatto di essere portabile/platform indipendent. 
+La caratteristica principale di Java \`e il fatto di essere portabile/platform independent. 
 Se prendiamo per esempio C il compilatore genera un linguaggio ``oggetto" che \`e dipendente dalla macchina nel quale il compilatore viene eseguito. 
 Il codice compilato pu\`o \textbf{solo} essere eseguito sulla piattaforma per il quale il codice \`e stato compilato.
 
@@ -178,45 +178,48 @@ In altre parole il byte-code \`e un codice intermedio prodotto dopo la compilazi
     \label{JavaArchitecture}
 \end{figure}
 
-L'architettura del linguaggio Java \`e mostrata in Figura~\ref{JavaArchitecture}. Pi\`u precisamente,
+L'architettura del linguaggio Java \`e mostrata in Figura~\ref{JavaArchitecture}. Pi\`u precisamente:
 
 \begin{itemize}
 \item MyProgram.java: \`e il codice sorgente nativo dell'applicazione Java (Il file che contiene il nostro codice)
 \item Compiler: (Compilatore) prende in input il nostro codice Java  (i nostri files \texttt{.java}), e produce dei file intermedi  (\texttt{.class}) ovvero i file contenenti il byte-code.
-\item Java Virtual Machine: \`e l'interprete che deve essere installato sulla nostra macchina locale al fine di eseguire il byte-code. 
+\item Java Virtual Machine (JVM): \`e l'interprete che deve essere installato sulla nostra macchina locale al fine di eseguire il byte-code. 
 Il byte-code viene interpretato dalla Java Virtual Machine. Per questo motivo alcuni testi considerano Java anche come un linguaggio interpretato.
 \end{itemize}
 
-Per eseguire il vostro programma su una macchina \`e sufficiente che l'utente abbia installato una macchina virtuale: la Java Virtual Machine. 
+Per eseguire il vostro programma su una macchina \`e sufficiente che l'utente abbia installato 
+%una macchina virtuale: 
+la Java Virtual Machine. 
 In particolare, il \textbf{Java Run-time Environment} (JRE) contiene la macchina virtuale che consente di eseguire i programmi Java.  
 JREs differenti sono associati a sistemi operativi differenti. 
-Una volta istallata la JRE \`e possibile eseguire i class files generati.
+Una volta istallata la JRE \`e possibile eseguire i file \texttt{.class} generati.
 
-Nota che, una volta generati, i class files possono essere eseguiti su ogni sistema cha abbia una Macchina Virtuale installata, indipendentemente dal sistema operativo su cui la macchina virtuale \`e eseguita.
+Nota che, una volta generati, i file \texttt{.class} possono essere eseguiti su ogni sistema cha abbia una Macchina Virtuale Java installata, indipendentemente dal sistema operativo su cui la macchina virtuale \`e eseguita.
 
-Per compilare i file Java \`e necessario avere un tool di sviluppo Java: un \textbf{Java Development Kit} (JDK). 
+Per compilare i file \texttt{.java} \`e necessario avere un tool di sviluppo Java: un \textbf{Java Development Kit} (JDK). 
 Il JDK include la JRE e contiene un set di tool di svilupo che constentono di scrivere e compilare i tuoi programmi Java.
 
 
 
 
 \subsubsection{Java \`e orientato agli oggetti}
-La programmazione orientata agli oggetti implica un approccio alla programmazione completamente diverso rispetto ai normali lingguaggi procedurali. Gli oggetti sono entit\`a che hanno una ``vita propria" ed esistono indipendentemente dal come vengono utilizzate all'interno della nostra applicazione. In altre parole un 
+La programmazione orientata agli oggetti implica un approccio alla programmazione completamente diverso rispetto ai normali linguaggi procedurali. Gli oggetti sono entit\`a che hanno una ``vita propria" ed esistono indipendentemente dal come vengono utilizzate all'interno della nostra applicazione. 
+%In altre parole un 
 
 \begin{mydef} \textbf{Oggetto} \`e un astrazione di un oggetto del mondo reale e ne descrive le caratteristiche  che sono di interesse allo sviluppatore.
 \end{mydef}
 
 In altre parole in un paradigma orientato agli oggetti lo sviluppatore descrive il mondo e i suoi oggetti e come il mondo evolve nel corso del tempo. 
-In un paradigma procedurale lo sviluppatore specifica \textbf{come} risolvere un problema, mentre in un linguaggio orientato agli oggetti lo sviluppatore prima descrive ``il problema" e poi cerca una strategia per risolvere il probleam utilizzando il modello del mondo costruito.
+In un paradigma procedurale lo sviluppatore specifica \textbf{come} risolvere un problema, mentre in un linguaggio orientato agli oggetti lo sviluppatore prima descrive ``il problema" e poi cerca una strategia per risolvere il problema utilizzando il modello del mondo costruito.
 
-Gli oggetti vengono creati partendo da dei modelli pi\`u generali chiamati classi. 
+Gli oggetti vengono creati partendo da modelli pi\`u generali chiamati classi. 
 
 \begin{mydef} \textbf{Classi} sono dei \emph{tipi} definiti dall'utente che descrivono degli oggetti. In particolare descrivono l'oggetto, il suo \emph{stato} e come lo \emph{stato dell'oggetto} cambia in risposta a delle operazioni eseguite sull'oggetto.
 \end{mydef}
 
 Utilizzando un esempio automobilistico possiamo pensare alle classi come ai documenti di progetto di un autovettura, e agli oggetti come alle macchine realizzate partendo dai quei documenti. In altre parole le classi sono la teoria, gli oggetti sono particolari \textbf{istanze} di una specifica classe. 
 
-Gli oggetti vengono creati con l'istruzione \textbf{new}. Per esempio l'istruzione seguente crea un nuovo oggetto di tipo Bike. 
+Gli oggetti vengono creati col costrutto \textbf{new}. Per esempio l'istruzione seguente crea un nuovo oggetto di tipo \texttt{Bike}. 
 \begin{lstlisting}
 Bike myBike=new Bike();
 \end{lstlisting}
@@ -237,7 +240,7 @@ Le classi sono definiti mediante la parola chiave (keyword) \texttt{class} e des
 \begin{lstlisting}
 Bike bike1=new Bike();
 \end{lstlisting}
-Per esempio, l'istruzione precedente dichiara una variabile di tipo Bike con \textbf{identificatore} bike1, che \`e associata a un oggetto di classe Bike. 
+Per esempio, l'istruzione precedente dichiara una variabile di tipo \texttt{Bike} con \textbf{identificatore} \texttt{bike1}, che \`e associata a un oggetto di classe \texttt{Bike}. 
 In Java ogni variabile deve essere associata a un tipo.
 
 
@@ -247,10 +250,10 @@ Prima di discutere le variabili e i tipi di riferimento discutiamo per l'organiz
 \begin{itemize}
 \item \textbf{Stack} e \textbf{Heap}:  Lo stack e lo heap sono due aree di memoria che sono utilizzate per contenere le nostre variabili e i nostri oggetti.
 \begin{itemize}
-\item \textbf{Stack} \`e un area di memoria dove \`e possibile memorizzare informazioni. E' molto rapido e basato su un LIFO pattern.
-\item \textbf{Heap} \`e uno spazio di memoria assegnabile al progetto e facilmente 
+\item Lo \textbf{stack} \`e un area di memoria dove \`e possibile memorizzare informazioni. E' molto rapido e basato su un LIFO pattern.
+\item Lo \textbf{heap} \`e uno spazio di memoria assegnabile al progetto e facilmente 
 estendibile. 
-\item Lo stack ha una dimensione fissa assegnata prima di eseguire il programma ``durante la fase di startup". Lo heap non ha uno specifico pattern, lo rende molto flessibile (\`e estendibile) ma \`e pi\`u lento. 
+\item Lo stack ha una dimensione fissa assegnata prima di eseguire il programma ``durante la fase di startup". Lo heap non viene utilizzato seguendo uno specifico pattern, e ci\`o lo rende molto flessibile (\`e estendibile) ma anche pi\`u lento. 
 \end{itemize}
 
 
@@ -302,7 +305,7 @@ Il componente che effettua tale operazione prende il nome di ``\emph{garbage col
 
 \subsubsection{Dichiarazione di una variabile}
 Per dichiarare una variabile \`e sufficiente specificare il \emph{tipo} e un \emph{identificatore}, ovvero un nome simbolico utilizzato per riferirsi alla variabile\footnote{Java \`e case sensitive quindi caratteri in upper e lower case sono interpretati come caratteri differenti.}. \\
-Per esempio, l'istruzione
+Per esempio, l'istruzione:
 \begin{lstlisting}[language=Java,escapechar=|]
 int number;
 \end{lstlisting}
@@ -313,9 +316,9 @@ Car mycar;
 dichiara una variabile di tipo riferimento ``\texttt{Car}" e con identificatore ``\texttt{mycar}".
 La dichiarazione non alloca spazio per l'oggetto ma solo per il riferimento all'oggetto. \\
 
-\emph{Qual'è la differenza tra tipi riferimenti e puntatori (e.g., i puntatori di C)?}\\
-Ci sono varie differenze e similitudini tra riferimenti e puntatori. In genere un riferimento pu\`o essere interpretato come un puntatore ``ad alto livello", mentre la differenza fondamentale \`e per esempio i riferimenti non consentono l'utilizzo dell'aritmetica dei puntatori. 
-\emph{Nei riferimenti l'indirizzo di memoria non \`e noto e non interessa}.
+\emph{Qual \`e la differenza tra tipi riferimenti e puntatori (e.g., i puntatori di C)?}\\
+Ci sono varie differenze e similitudini tra riferimenti e puntatori. In genere un riferimento pu\`o essere interpretato come un puntatore ``ad alto livello", mentre la differenza fondamentale \`e  il fatto che \emph{nei riferimenti l'indirizzo di memoria non \`e noto e non interessa}. Per questo motivo, ad esempio, i riferimenti non consentono l'utilizzo dell'aritmetica dei puntatori. 
+
 
 \subsubsection{Convenzione di notazione}
 In Java i nomi di classi, variabili e metodi fanno uso della notazione a cammello (\emph{CamelCase}).
@@ -358,30 +361,30 @@ Effettuando new Car() viene creato un nuovo oggetto di tipo auto e viene ritorna
 \end{mydef}
 
 \begin{itemize}
-\item se una classe non ha un costruttore ne viene automaticamente uno di default senza argomenti che all'atto della creazione doll'oggetto richiama il costruttore di default senza argomenti della super classe.
+\item se in una classe non viene definito un costruttore ne viene automaticamente generato ed utilizzato uno di default senza argomenti che, all'atto della creazione dell'oggetto, richiama il costruttore di default senza argomenti della super classe.
 \item se per\`o vengono creati dei costruttori il costruttore di default non risulta pi\`u disponibile a meno che definito dall'utente. 
 \item l'uso di costruttori diversi permette di creare un tipo di oggetto passando argomenti diversi 
 \end{itemize}
 
-Un costruttore alloca + inizializza
+Un costruttore alloca e inizializza
 \begin{itemize}
 \item alloca lo spazio per gli attributi di tipo \emph{primitivo}
 \item alloca lo spazio per i \emph{riferimenti} agli attributi definiti dall'utente
-\item inizializza i riferimenti e gli attibuti. Se un riferimento non \`e inizializzato gli viene associato il valore null. Se una variabile numerica non \`e inizializzata gli viene associato il valore zero. Ai boolean viene assegnato il valore false
+\item inizializza i riferimenti e gli attibuti. Se un riferimento non \`e inizializzato gli viene associato il valore null. Se una variabile numerica non \`e inizializzata gli viene associato il valore zero. Ai \texttt{boolean} viene assegnato il valore false
 \end{itemize}
 
 
 \subsection{Array}
 \begin{itemize}
 \item Un array \`e una variabile di tipo reference: contiene un reference a un area di memoria dove ci sono un insime di variabili dello stesso tipo.
-\item un array ha una natura \emph{statica} mantiene la propria dimensione ovvero il numero di elementi che contiene.
+\item un array ha una natura \emph{statica}: esso mantiene la propria dimensione, ovvero il numero di elementi che contiene.
 \end{itemize}
 
 Vari tipi di array possono essere dichiarati:
 \begin{itemize}
 \item array monodimensionali (anche noti come vettori)
 \begin{itemize}
-\item possono essere dichiarati come \texttt{type nomeVariabile[]} o come \texttt{type[] nomeVariabile} dove type indica il tipo di dato contenuti negli elementi dell'array mentre le parentesi poste dopo l'identificatore o dopo il tipo indicano che la variabile \`e di tipo array.
+\item possono essere dichiarati come \texttt{type nomeVariabile[]} o come \texttt{type[] nomeVariabile} dove \texttt{type} indica il tipo di dato contenuti negli elementi dell'array mentre le parentesi poste dopo l'identificatore o dopo il tipo indicano che la variabile \`e di tipo array.
 \item ovviamente in mancanza di \emph{inizializzazione} la dichiarazione di un array non alloca spazio per gli elementi dell'array
 \item l'allocazione si realizza come \texttt{int[] i=new int[10];} dove 10 \'e il numero di elementi dell'array
 \end{itemize}
@@ -404,7 +407,7 @@ Regole per l'uso di semantic versioning:
 \item il software DEVE dichiarare delle API pubbliche, precise e comprensibili;
 \item MAJOR, MINOR e PATCH devono essere dei numeri NON negativi, e devono sempre incrementare, con la seguente eccezione: quando la versione MAJOR (MINOR) viene incrementata il valore di MINOR e PATCH (PATCH) viene settato a zero;
 \item una volta che una verione \`e rilasciata il contenuto della versione NON pu\`o essere modificato
-\item la versione 0.y.z \`e la versione iniziale del software. Le API pubbliche devono essere considerate non stabili. Tutto pu\`o cambiare nel tempo.
+\item la versione 0.y.z \`e la versione iniziale del software. In questa versione le API pubbliche devono essere considerate non stabili. Tutto pu\`o cambiare nel tempo.
 \item la versione 1.0.0 \`e la prima versione del software che definisce le API pubbliche, da questo momento l'applicazione dipende dalle API pubbliche
 \item il valore di PATCH deve essere incrementato solo se backward compatible e bug fixes sono eseguiti. (Il bug fix corregge un comportamento scorretto)
 \item il valore di MINOR deve essere incrementato se sono aggiunte funzionalit\'a introdotte nelle API pubbliche o se sono rimosse funzionalit\`a deprecate. Dopo aver incrementato MINOR \`e necessario settare PATCH a zero
@@ -436,7 +439,7 @@ JDK1.4 & Regular expressions, logging, assert  \\
 JDK1.5 & Generics, Autoboxing, Unboxing, Enumerations, cuncurrency utilities  \\
 JDK1.6 & JDBC, GUI, compiler optimization IO \\
 JDK1.7 & String switch, type inference improvements, new IO libraries, new network protocols, and cryptography algorithms  \\
-JDK1.8 & lambda expressions,  map-reduce, annotations, HNI\\
+JDK1.8 & lambda expressions,  map-reduce, annotations, static library linking with JNI\\
 \hline
 \end{tabular}
 
@@ -471,11 +474,11 @@ Questi esercizi hanno come fine quello di mostrare il fatto che Java \`e un ling
 \item \texttt{main} \`e il ``metodo di partenza" che deve essere presente in almeno una classe affinch\`e l'applicazione sia eseguibile. 
 \item \texttt{args} contiene il parametro (anche chiamato argomento) del metodo main. Il parametro \texttt{args} contiene i valori dei parametri passati al metodo main quando il programma \`e eseguito da command line.
 \item \texttt{String[]} (array of String) \`e il tipo della variabile args 
-\item \texttt{System.out.println} scrive il testo speciticato sullo schermo.
+\item \texttt{System.out.println} scrive il testo specificato sullo schermo.
 \end{itemize}
 \end{itemize}
 \begin{itemize}
-\item \textbf{Salvare il file} con nome \texttt{Esercizio1.java} (attenzione: non scegliere un nome differente e controllare che l'estensione del file sia .java).
+\item \textbf{Salvare il file} con nome \texttt{Welcome.java} (attenzione: non scegliere un nome differente e controllare che l'estensione del file sia .java).
 \end{itemize}
 
 \begin{itemize}
@@ -486,8 +489,8 @@ Questi esercizi hanno come fine quello di mostrare il fatto che Java \`e un ling
 \begin{itemize}
 \item per aprire una sottocartella e tornare alla cartella padre \`e possibile utilizzare i  comandi \emph{cd}, e \emph{cd ..}, rispettivamente. Per mostrare il contenuto della cartella utilizzare  il comando \emph{ls} (\texttt{dir} per gli utenti Windows).
 \end{itemize}
-\item Digitare \texttt{javac Esercizio1.java}
-\item il comando \texttt{javac}  \textbf{compila} il file \texttt{Esercizio1.java} file e genera un file .class (o un jar) che contiene il bytecode file che \`e possibile eseguire su qualunque piattaforma\footnote{Ricordiamo che il bytecode \`e una rappresentazione intermedia che pu\`o essere interpretata da una macchina virtuale Virtual Machine.}. Questo processo supporta la  \textbf{portabilit\`a}. 
+\item Digitare \texttt{javac Welcome.java}
+\item il comando \texttt{javac}  \textbf{compila} il file \texttt{Welcome.java} file e genera un file .class (o un jar) che contiene il bytecode file che \`e possibile eseguire su qualunque piattaforma\footnote{Ricordiamo che il bytecode \`e una rappresentazione intermedia che pu\`o essere interpretata da una macchina virtuale Virtual Machine.}. Questo processo supporta la  \textbf{portabilit\`a}. 
 \item \emph{Per eseguire con successo il comando \emph{javac} \`e necessario avere una JDK (Java Development Kit) istallata sul proprio pc\footnote{Nota che la JDK include anche il Java Run-Time Environment}.} La JDK permette quindi di  \emph{compilare} e \emph{eseguire} il programma creato.
 \end{itemize}
 \end{itemize}
@@ -496,8 +499,8 @@ Questi esercizi hanno come fine quello di mostrare il fatto che Java \`e un ling
 \item \textbf{Eseguire il file Java}
 \begin{itemize}
 \item il java bytecode (.class) pu\`o essere eseguito in qualsiasi architettura dove \`e installata una Virtual Machine (la quale fornisce un  \textbf{interprete} per il $Java$ bytecode) . In particolare la Java JRE fornisce questa Virtual Machine.
-\item per eseguire il file bytecodefile eseguire il comando \texttt{java Esercizio1}
-\item questo comando esegue il   \texttt{main} method della classe \texttt{Esercizio1}
+\item per eseguire il file bytecodefile eseguire il comando \texttt{java Welcome}
+\item questo comando esegue il   \texttt{main} method della classe \texttt{Welcome}
 \end{itemize}
 \end{itemize}
 
@@ -515,7 +518,7 @@ Questi esercizi hanno come fine quello di mostrare il fatto che Java \`e un ling
 \end{itemize}
 \end{itemize}
 
-\lstinputlisting{Source/Esercizio1/Welcome.java}
+\lstinputlisting{Source/Esercizio2/Welcome.java}
 \begin{itemize}
 \item \textbf{Descrizione del file creato}
 \begin{itemize}
@@ -529,8 +532,8 @@ Questi esercizi hanno come fine quello di mostrare il fatto che Java \`e un ling
 \begin{itemize}
 \item  \textbf{Compilare ed eseguire il file creato}
 \begin{itemize}
-\item \texttt{javac Esercizio2.java}
-\item \texttt{java Esercizio2}
+\item \texttt{javac Welcome.java}
+\item \texttt{java Welcome}
 \end{itemize}
 \end{itemize}
 
@@ -566,13 +569,13 @@ Un Java si utilizza l'espressione client per indicare una generica classe, che u
 \item 
 \textbf{Quesiti:}\\
 \begin{itemize}
-\item Qual'\`e lo stato dell'oggetto dopo l'istruzione \texttt{Bike bike1;}?\\
+\item Qual \`e lo stato dell'oggetto dopo l'istruzione \texttt{Bike bike1;}?\\
 \emph{l'oggetto non ha uno stato, visto che non esiste esiste solamente il suo reference.}
-\item Qual'\`e lo stato dell'oggetto  \texttt{bike1} dopo l'istruzione  \texttt{bike1 = new Bike()}?\\
+\item Qual \`e lo stato dell'oggetto  \texttt{bike1} dopo l'istruzione  \texttt{bike1 = new Bike()}?\\
  \texttt{gear=1}, \texttt{cadence=0}, \texttt{speed=0}
-\item Qual'\`e lo stato dell'oggetto  \texttt{bike1} dopo l'istruzione \texttt{bike2 = new Bike()}?\\
+\item Qual \`e lo stato dell'oggetto  \texttt{bike1} dopo l'istruzione \texttt{bike2 = new Bike()}?\\
  \texttt{gear=1}, \texttt{cadence=0}, \texttt{speed=0}
-\item Qual'\`e lo stato dell'oggetto  \texttt{bike1} dopo l'istruzione \texttt{bike2 = new Bike()}?\\
+\item Qual \`e lo stato dell'oggetto  \texttt{bike1} dopo l'istruzione \texttt{bike2 = new Bike()}?\\
  \texttt{gear=1}, \texttt{cadence=0}, \texttt{speed=0}
 \end{itemize}
 \end{itemize}
@@ -609,8 +612,7 @@ Un Java si utilizza l'espressione client per indicare una generica classe, che u
 
 \lstinputlisting{Source/Esercizio6/Client.java}
 
-
-If we change folder of the bike class we have to change the package
+Se cambiamo la cartella della classe \texttt{bike} dobbiamo cambiarne anche il package.
 
 \subsection{Eclipse Integrated Development Environment}
 La gestione di un progetto man mano che la complessit\`a aumenta diventa sempre pi\`u difficile. Per questo, nello sviluppo softeware  Integrated Development Environment ($IDE$) sono comunemente utilizzati. Gli $IDE$s rimuovono alcune delle difficolt\`a solitamente incontrate nel processo di sviluppo e forniscono funzionalit\`a aggiuntive come il completamento automatico del codice. In questo corso e in paricolare nel laboratorio useremo $Eclipse$ $IDE$ come ambiente di sviluppo\footnote{$Netbeans$ \`e uno dei maggiori competitor di $Eclipse$}.  
@@ -626,12 +628,12 @@ La gestione di un progetto man mano che la complessit\`a aumenta diventa sempre 
 \item clicca su $Workbench$ 
 \item \texttt{File} $>$ \texttt{New} $>$ \texttt{Project} $>$ \texttt{Maven Project}
 \item seleziona \texttt{Create a simple project}
-\item digita \texttt{IngegneriaDelSoftware1} as Group Id and \texttt{Esercitazione1} as Artifact Id
+\item digita \texttt{IngegneriaDelSoftware1} come Group Id e \texttt{Esercitazione1} come Artifact Id
 \item scegli \texttt{finish}
-\item Quando create il vostro nuovo progetto Maven (Maven\footnote{Maven sar\`a spiegato nel corso del laboratorio.}) in Eclipse, Eclipse crea automaticamente la struttura del vostro progetto. In particolare, 
+\item Quando create il vostro nuovo progetto Maven\footnote{Maven sar\`a spiegato nel corso del laboratorio.} in Eclipse, Eclipse crea automaticamente la struttura del vostro progetto. In particolare, 
 \begin{itemize}
 \item $src/main/java$ contiene il codice sorgente Java dell'applicazione in via di sviluppo.
-\item $src/main/resources$ contiene le ``risorse" utilizzate dalla vostra applicazione, file di configurazione etc..
+\item $src/main/resources$ contiene le ``risorse" utilizzate dalla vostra applicazione, file di configurazione, etc\ldots
 \item $src/test/java$ contiene le classi usate per testare la vostra applicazione
 \item $src/test/resources$ contiene le risorse necessarie a testare la vostra applicazione
 \end{itemize}
@@ -645,7 +647,7 @@ La gestione di un progetto man mano che la complessit\`a aumenta diventa sempre 
 \begin{itemize}
 \item tasto destro su \texttt{src/main/java} $>$ New $>$ package 
 \item scegliere il nome del package ($exercizio10$)
-\item press finish
+\item premere finish
 \end{itemize}
 \end{itemize}
 
@@ -674,7 +676,7 @@ Come noti  Eclipse automaticamente aggiunge il package, gli identificatori etc..
 \item se apriamo il workspace notiamo che il nostro progetto contiene varie cartelle: 
 \begin{itemize}
 \item src: contiene i file sorgenti delle nostre applicazioni (\texttt{.java} files)
-\item target: contains i file che contengono il bytecode (\texttt{.class} files) che sono generati dopo aver eseguito la procedura appena descritta. La compilazione ed esecuzione \`e resa trasparente all'utente
+\item target: contiene i file che contengono il bytecode (\texttt{.class} files) che sono generati dopo aver eseguito la procedura appena descritta. La compilazione ed esecuzione \`e resa trasparente all'utente
 \end{itemize}
 \end{itemize}
 \end{itemize}
@@ -710,9 +712,9 @@ Command tricks:
 \begin{itemize}
 \item \textbf{Quesiti}
 \begin{itemize}
-\item Qual'\`e lo stato dell'oggetto \texttt{bike1} dopo che l'istruzione \texttt{bike1.incrementGear();} \`e eseguita? 
+\item Qual \`e lo stato dell'oggetto \texttt{bike1} dopo che l'istruzione \texttt{bike1.incrementGear();} \`e eseguita? 
 \texttt{gear=2}, \texttt{cadence=0}, \texttt{speed=0}.
-\item Qual'\`e lo stato dell'oggetto  \texttt{bike1} dopo che l'istruzione \texttt{bike1.changeCadence(10);} \`e eseguita? 
+\item Qual \`e lo stato dell'oggetto  \texttt{bike1} dopo che l'istruzione \texttt{bike1.changeCadence(10);} \`e eseguita? 
 \texttt{gear=2}, \texttt{cadence=10}, \texttt{speed=0}.
 \end{itemize}
 \end{itemize}
@@ -736,10 +738,10 @@ Per avere una visualizzazione migliore di quanto accade utilizzeremo il debugger
 
 \begin{itemize}
 \item cliccare con il tasto destro del mouse sulla barra vertical a fianco a \texttt{public static void main}
-\item cliccare su \texttt{toggle breakpoing}
+\item cliccare su \texttt{toggle breakpoint}
 \item cliccare con il tasto destro sulla nostra classe (Client.java)
 \item cliccare su debug as Java Application
-\item se viene chiesto se aprire il perspective di debug rispondere Yes
+\item se viene chiesto se aprire la perspective di debug rispondere Yes
 \end{itemize}
 Nella View variables \`e possibile vedere passo passo le variabili sullo stack. Se una variabile \`e di tipo reference \`e possibile esplorare il corrispondente oggetto (e di conseguenza lo heap)
 
@@ -749,7 +751,7 @@ Nella View variables \`e possibile vedere passo passo le variabili sullo stack. 
 
 \subsection{Costruttori}
 \subsubsection{Esercizio}
-\Esercizio{Modificare la classe bicibletta affinch\`e sia possibile creare una bicicletta con un numero di marce  un dato ritmo di pedalata}
+\Esercizio{Modificare la classe bicicletta affinch\`e sia possibile creare una bicicletta con un numero di marce  un dato ritmo di pedalata}
 
 \lstinputlisting{Source/eclipse/Esercitazione1/src/main/java/esercizio14/Bike.java}
 
@@ -758,13 +760,13 @@ Nella View variables \`e possibile vedere passo passo le variabili sullo stack. 
 
 \textbf{Quesiti:}\\
 \begin{itemize}
-\item Qual'\`e lo stato dell'oggetto \texttt{bike1} dopo che l'istruzione   \texttt{bike1=new Bike(3, 2);} \`e eseguita? 
+\item Qual \`e lo stato dell'oggetto \texttt{bike1} dopo che l'istruzione   \texttt{bike1=new Bike(3, 2);} \`e eseguita? 
 \texttt{gear=3}, \texttt{cadence=2}, \texttt{speed=0}.
-\item Qual'\`e lo stato dell'oggetto  \texttt{bike2} dopo che l'istruzione  \texttt{Bike bike2=new Bike(1, 2);} \`e eseguita? 
+\item Qual \`e lo stato dell'oggetto  \texttt{bike2} dopo che l'istruzione  \texttt{Bike bike2=new Bike(1, 2);} \`e eseguita? 
 \texttt{gear=1}, \texttt{cadence=2}, \texttt{speed=0}.
-\item Qual\`e lo stato dell'oggetto \texttt{bike1} dopo che l'istruzione \texttt{bike1.incrementGear();} \`e eseguita? 
+\item Qual \`e lo stato dell'oggetto \texttt{bike1} dopo che l'istruzione \texttt{bike1.incrementGear();} \`e eseguita? 
 \texttt{gear=3}, \texttt{cadence=2}, \texttt{speed=0}.
-\item Qual\`e lo stato dell'oggetto \texttt{bike1} dopo che l'istruzione   \texttt{bike1.changeCadence(10);} \`e eseguita? 
+\item Qual \`e lo stato dell'oggetto \texttt{bike1} dopo che l'istruzione   \texttt{bike1.changeCadence(10);} \`e eseguita? 
 \texttt{gear=3}, \texttt{cadence=10}, \texttt{speed=0}.
 \end{itemize}
 
@@ -775,7 +777,7 @@ Nella View variables \`e possibile vedere passo passo le variabili sullo stack. 
 
 
 \subsubsection{Esercizio}
-\Esercizio{Modificare la classe bicibletta affinch\`e sia possibile creare una bicicletta con un dato numero di marce}
+\Esercizio{Modificare la classe bicicletta affinch\`e sia possibile creare una bicicletta con un dato numero di marce}
 
 \lstinputlisting{Source/eclipse/Esercitazione1/src/main/java/esercizio16/Bike.java}
 
