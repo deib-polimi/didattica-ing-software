@@ -128,27 +128,25 @@
 %----------------------------------------------------------------------------------------
 
 \newcommand{\hmwkTitle}{Ereditariet\`a e Interfacce} % Assignment title
-\newcommand{\hmwkDueDate}{Martedi,\ Marzo 24,\ 2015} % Due date
+\newcommand{\hmwkDueDate}{Venerdi,\ Marzo 18,\ 2016} % Due date
 \newcommand{\hmwkClass}{Ingegneria del Software 1} % Course/class
 \newcommand{\hmwkClassTime}{} % Class/lecture time
 \newcommand{\hmwkClassInstructor}{Claudio Menghi, Alessandro Rizzi} % Teacher/lecturer
 \newcommand{\hmwkAuthorName}{} % Your name
 
+
+
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
 
-\title{
-\vspace{2in}
-\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
-\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
-\vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
-\vspace{3in}
-}
+
+
 
 \author{\textbf{\hmwkAuthorName}}
 \date{} % Insert date here if you want it to appear below your name
 
+\input{../Commands.tex}
 %----------------------------------------------------------------------------------------
 
 \begin{document}
@@ -184,7 +182,7 @@ La classe figlio ha accesso a tutti gli attributi e i metodi della classe padre 
 
 Con l'eccezione di  \texttt{Object}, che non ha sopra classi, ogni classe ha una unica super-classe (ereditariet\'a singola). Se una classe non specifica una sopraclasse estende implicitamente la classe \texttt{Object}.
 
-L'idea dell'ereditariet\`a \`e molto semplice: quando vuoi creare una nuova classe $A$ ed esiste gi\`a una classe $B$ che contiene del codice che desideri puoi derivare $A$ da $B$. In questo caso puoi riusare i campi e i metodi della classe esistente senza doverli riscrivere (e debuggarli).
+L'idea dell'ereditariet\`a \`e molto semplice: quando vuoi creare una nuova classe $A$ ed esiste gi\`a una classe $B$ che contiene del codice che desideri puoi derivare $A$ da $B$. In questo caso puoi riusare i campi e i metodi della classe esistente senza doverli riscrivere.
 
 Che cosa \`e possibile fare con l'ereditariet\`a
 \begin{itemize}
@@ -207,6 +205,14 @@ Nella ridefinizione è possibile cambiare la visibilità dei metodi e il tipo di
 La nuova visibilità deve essere maggiore (secondo la scala \texttt{private} < \texttt{default} < \texttt{protected} < \texttt{public}), mentre il tipo di ritorno deve essere un sottotipo del metodo
 originale ovvero \emph{covariante}\footnote{Vedremo la definizione di covarianza pi\`u avanti nel corso}.
 
+\subsection{Overloading dei metodi}
+L'overloading consente a una classe di avere due o pi\`u metodi con lo stesso nome. 
+Affinch\`e due o pi\`u metodi con lo stesso nome possano essere nella stessa classe \`e necessario che differiscano almento in almeno uno tra:
+\begin{itemize}
+\item numero di parametri
+\item tipo dei parametri
+\item sequenza del tipo dei parametri
+\end{itemize}
 
 \subsection{Polimorfismo}
 
@@ -215,9 +221,9 @@ Si definisce \emph{polimorfismo} il fatto che un oggetto pu\`o assumere diverse 
 
 Per questo motivo in Java si distingue tra tipo statico e tipo dinamico.
 \begin{itemize}
-	\item \textbf{tipizzazione statica} Equivale al tipo presente nella dichiarazione della variabile.
+	\item \textbf{tipo statico} Equivale al tipo presente nella dichiarazione della variabile.
 	È unico per tutta la vita della variabile e disponibile a compile-time (basta guardarne la dichiarazione)
-	\item \textbf{tipizzazione dinamica}: Equivale al tipo dell'istanza effettiva associata alla variabile (o coincide col tipo statico o è un sottotipo di quest'ultimo).
+	\item \textbf{tipo dinamico}: Equivale al tipo dell'istanza effettiva associata alla variabile (o coincide col tipo statico o è un sottotipo di quest'ultimo).
 	Può cambiare durante l'esecuzione del programma.
 \end{itemize}
 
@@ -274,9 +280,8 @@ Nei metodi ridefiniti la visibilità e il tipo di ritorno possono essere cambiat
 
 \section{Esercizi}
 
-\subsection{Esercizio 1: Scacchiera}
-\begin{framed}
-\textbf{Esercizio 1}: Si implmenti il gioco degli scacchi
+\subsection{Scacchiera}
+\Esercizio{Si implmenti il gioco degli scacchi
 \begin{itemize}
 \item Si ha una griglia 8x8 denominata Scacchiera
 \item Ogni elemento della griglia si chiama Casella
@@ -286,16 +291,14 @@ Nei metodi ridefiniti la visibilità e il tipo di ritorno possono essere cambiat
 \item  Una casella pu\`o essere vuota o avere un pezzo al suo interno.
 \item Un pezzo pu\`o appartenere al giocatore Bianco o al giocatore Nero e pu\`o spostarsi da una casella ad unaltra secondo determinate regole dipendenti dal pezzo.
 \item Un pezzo pu\`o muoversi solo verso una casella vuota od una casella occupata da un pezzo avversario. In questo secondo caso il pezzo avversario viene rimosso. I movimenti consentono di spostarsi di al pi\`u una casella in orizzontale, verticale o obliquo.
-\end{itemize}
-\end{framed}
+\end{itemize}}
 
-Il primo passo da eseguire \`e analizzare il problema ed identificare le entit\`a (ovvero delle classi candidate). In questo caso, abbiamo \texttt{Scacchiera}, \texttt{Casella}, \texttt{Pezzo},  \texttt{Color} \ldots
+Il primo passo da eseguire \`e analizzare il problema ed identificare le entit\`a (ovvero delle classi candidate). In questo caso, abbiamo \texttt{Scacchiera}, \texttt{Casella}, \texttt{Pezzo}, \ldots
 
-\subsection{Esercizio 1.1 Colori}
+\textbf{Colori}
 Iniziamo ad analizzare un sottoproblema: modelliamo il colore delle pedine
-\begin{framed}
-\textbf{Esercizio 1.1} Le pedine possono avere $2$ colori: \emph{nero} e \emph{bianco}
-\end{framed}
+\Esercizio{Le pedine possono avere $2$ colori: \emph{nero} e \emph{bianco}}
+
 \begin{itemize}
 \item come modelliamo i colori?
 \begin{itemize}
@@ -303,26 +306,18 @@ Iniziamo ad analizzare un sottoproblema: modelliamo il colore delle pedine
 \end{itemize}
 \end{itemize}
 
-\begin{lstlisting}[language=Java,escapechar=|]
-package scacchiera;
 
-// Le pedine possono essere di colore bianco o nero: un set definito a priori E NON modificabile di valori
-public enum Color {
-	WHITE, BLACK
-}
-\end{lstlisting}
+\lstinputlisting{Source/Scacchi/src/scacchi/scacchiera/Color.java}
 
-\subsection{Esercizio 1.2 Casella}
+\subsubsection{Casella}
 Un nuovo sottoproblema: modelliamo la casella
-\begin{framed}
-\textbf{Esercizio 1.2} Analizziamo le caratteristiche di una casella:
+\Esercizio{Analizziamo le caratteristiche di una casella:
 \begin{itemize}
 \item ogni casella ha una coordinata
 \item ogni casella pu\`o avere un pezzo al suo interno
 \item deve essere possibile aggiungere un pezzo all'interno della casella
 \item deve essere possibile controllare se all'interno della casella \`e presente un pezzo
-\end{itemize}
-\end{framed}
+\end{itemize}}
 
 Leggendo la specifica identifichiamo un nuovo elemento: \texttt{Coordinata}: 
 
@@ -346,31 +341,10 @@ Leggendo la specifica identifichiamo un nuovo elemento: \texttt{Coordinata}:
 \end{itemize}
 \end{itemize}
 
-\begin{lstlisting}[language=Java,escapechar=|]
-package scacchi.scacchiera;
+\lstinputlisting{Source/Scacchi/src/scacchi/scacchiera/Coordinata.java}
 
-public class Coordinata {
 
-	private final int x;
-	private final int y;
-	
-	public Coordinata(int x, int y){
-		this.x=x;
-		this.y=y;
-	}
-
-	public int getX() {
-		return x;
-	}
-
-	public int getY() {
-		return y;
-	}
-}
-
-\end{lstlisting}
-
-Analizziamo ora una \texttt{Casella}. La classe casella fornisce le stesse funzionalit\`a di una coordinata \texttt{getX} e \texttt{getY}: estende coordinata. 
+Analizziamo ora una \texttt{Casella}.
 
 \begin{itemize}
 \item \`e una classe mutabile?
@@ -394,59 +368,11 @@ Analizziamo ora una \texttt{Casella}. La classe casella fornisce le stesse funzi
 \end{itemize}
 \end{itemize}
 
-\begin{lstlisting}[language=Java,escapechar=|]
-package scacchi.scacchiera;
+\lstinputlisting{Source/Scacchi/src/scacchi/scacchiera/Casella.java}
 
-// casella estende coordinata
-public class Casella extends Coordinata {
+\subsubsection{Pezzi}
+\Esercizio{I pezzi possono essere: Torre, Cavallo, Alfiere, Regina, Re, ognuno con differenti capacit\`a di movimento (si assuma che il Pedone possa effettuare solo movimenti di una casella).}
 
-	private Pezzo pezzo;
-	
-	public Casella(int x, int y) {
-		// chiama il costruttore di coordinata
-		super(x, y);
-		setPezzo(null);
-		
-	}
-
-	public Pezzo getPezzo() {
-		return pezzo;
-	}
-
-	public void setPezzo(Pezzo pezzo) {
-		this.pezzo = pezzo;
-	}
-	
-	public boolean isEmpty(){
-		if(this.pezzo==null){
-			return true;
-		}
-		return false;
-	}
-	
-	public Pezzo unsetPezzo() {
-		Pezzo pieceToBeReturned=this.pezzo;
-		this.pezzo = null;
-		return pieceToBeReturned;
-	}
-	@Override
-	public String toString(){
-		if(this.getPezzo()!=null){
-			return this.getPezzo().toString();
-		}
-		else{
-			return "         ";
-		}
-		
-	}
-}
-\end{lstlisting}
-
-\subsection{Esercizio 1.3 Pezzi}
-Iniziamo ad analizzare un sottoproblema: modelliamo i pezzi
-\begin{framed}
-\textbf{Esercizio 1.3} I pezzi possono essere: Torre, Cavallo, Alfiere, Regina, Re, ognuno con differenti capacit\`a di movimento (si assuma che il Pedone possa effettuare solo movimenti di una casella).
-\end{framed}
 \begin{itemize}
 \item Quale relazione esiste fra gli elementi da modellare?\\
 \textit{Nel nostro caso specifico un Torre \textbf{\`e un} pezzo, un Cavallo \textbf{\`e un} pezzo,  una Re  \textbf{\`e un} pezzo\ldots. La relazione \textbf{\`e un} \`e esattamente il tipo di relazione che \`e possibile modellare con la gerarchia.}
@@ -478,596 +404,64 @@ che cosa succede se la casella non
 \end{itemize}
 \end{itemize}
 
-\begin{lstlisting}[language=Java,escapechar=|]
-package scacchiera;
+\lstinputlisting{Source/Scacchi/src/scacchi/scacchiera/pezzi/Pezzo.java}
 
-public abstract class Pezzo {
-	
-	private final Color color;
-	private Casella casella;
-	
-	public Pezzo(Casella casella, Color color){
-		this.setCasella(casella);
-		this.color=color;
-	}
-	
-	public Color getColor() {
-		return color;
-	}
-
-	public Casella getCasella() {
-		return casella;
-	}
-
-	public void setCasella(Casella casella) {
-		this.casella = casella;
-	}
-	public abstract boolean mossaValida(Scacchiera scacchiera, Casella destinazione);
-}
-
-\end{lstlisting}
-\subsubsection{Re}
+\textbf{Re}
 La classe \texttt{Re} estende la classe Pezzo implementando la logica di movimento della Pedina \texttt{Re}. In particolare, saranno valide per il \texttt{Re} alcune mosse non valide per il cavallo etc.
-\begin{lstlisting}[language=Java,escapechar=|]
-package scacchi.scacchiera.pezzi;
 
-import scacchi.scacchiera.Casella;
-import scacchi.scacchiera.Color;
-import scacchi.scacchiera.Pezzo;
-import scacchi.scacchiera.Scacchiera;
+\lstinputlisting{Source/Scacchi/src/scacchi/scacchiera/pezzi/Re.java}
 
-public class Re extends Pezzo {
 
-	public Re(Casella casella, Color color) {
-		super(casella, color);
-	}
+\textbf{Alfiere}
+\lstinputlisting{Source/Scacchi/src/scacchi/scacchiera/pezzi/Alfiere.java}
 
-	@Override
-	public boolean mossaValida(Scacchiera scacchiera, Casella casellaFinale) {
-		// se la casella finale non \`e nulla
-		if (casellaFinale != null) {
-			// se la casella non \`e vuota e \`e presente un Pezzo dello stesso
-			// colore
-			if (!casellaFinale.isEmpty()
-					&& casellaFinale.getPezzo().getColor() == this.getColor()) {
-				return false;
-			}
-			// ritorna true se la distanza tra la cella final e iniziale \`e di
-			// una cella in orizzontale e in verticale
-			return Math.abs(this.getCasella().getX() - casellaFinale.getX()) <= 1
-					&& Math.abs(this.getCasella().getY() - casellaFinale.getY()) <= 1;
 
-		}
-		return false;
-	}
 
-	@Override
-	public String toString() {
-		return "R ["+this.getColor()+"]";
-	}
-}
-\end{lstlisting}
+\textbf{Torre}
+\lstinputlisting{Source/Scacchi/src/scacchi/scacchiera/pezzi/Torre.java}
 
-\subsubsection{Alfiere}
 
-\begin{lstlisting}[language=Java,escapechar=|]
-package scacchi.scacchiera.pezzi;
 
-import scacchi.scacchiera.Casella;
-import scacchi.scacchiera.Color;
-import scacchi.scacchiera.Coordinata;
-import scacchi.scacchiera.Pezzo;
-import scacchi.scacchiera.Scacchiera;
+\textbf{Cavallo}
+\lstinputlisting{Source/Scacchi/src/scacchi/scacchiera/pezzi/Cavallo.java}
 
-public class Alfiere extends Pezzo {
 
-	public Alfiere(Casella casella, Color color) {
-		super(casella, color);
-	}
+\textbf{Donna}
+\lstinputlisting{Source/Scacchi/src/scacchi/scacchiera/pezzi/Donna.java}
 
-	@Override
-	public boolean mossaValida(Scacchiera scacchiera, Casella destinazione) {
-		if (destinazione != null) {
-			// se la casella destinazione non \`e vuota e \`e presente un Pezzo dello stesso
-			// colore ritorna falso
-			if (!destinazione.isEmpty()
-					&& destinazione.getPezzo().getColor() == this.getColor()) {
-				return false;
-			}
-			// calcola la distanza della cella rispetto all'asse delle x e delle y
-			int deltaX=destinazione.getX()-this.getCasella().getX();
-			int deltaY=destinazione.getY()-this.getCasella().getY();
-			// se il valore assoluto delle distanze \`e diverso ritorna false
-			if(Math.abs(deltaX)!=Math.abs(deltaY)){
-				return false;
-			}
-			// controlla tutte le caselle sulla diagonale, se in una di queste c'e' un pezzo ritorna false
-			for(int i=1;i<Math.abs(deltaX);i++){
-				if(!scacchiera.getCasella(new Coordinata(this.getCasella().getX()+Integer.signum(deltaX)*i, this.getCasella().getY()+Integer.signum(deltaY)*i)).isEmpty()){
-					return false;
-				}
-			}
-			// ritorna true
-			return true;
-		}
-		return false;
-	}
 
-	@Override
-	public String toString() {
-		return "A ["+this.getColor()+"]";
-	}
-}
-\end{lstlisting}
+\textbf{Pedone}
+\lstinputlisting{Source/Scacchi/src/scacchi/scacchiera/pezzi/Pedone.java}
 
-\subsubsection{Torre}
 
-\begin{lstlisting}[language=Java,escapechar=|]
-package scacchi.scacchiera.pezzi;
+\subsubsection{Scacchiera}
+\Esercizio{Una scacchiera contiene dei pezzi, quando viene creata i pezzi sono posti sulla scacchiera in maniera corretta.}
+\lstinputlisting{Source/Scacchi/src/scacchi/scacchiera/Scacchiera.java}
 
-import scacchi.scacchiera.Casella;
-import scacchi.scacchiera.Color;
-import scacchi.scacchiera.Coordinata;
-import scacchi.scacchiera.Pezzo;
-import scacchi.scacchiera.Scacchiera;
 
-public class Torre extends Pezzo {
+\subsubsection{Player}
+\Esercizio{Nel gioco degli scacchi ci sono due giocatori a ciascuno dei quali \`e associato un colore}
 
-	public Torre(Casella casella, Color color) {
-		super(casella, color);
-	}
-
-	@Override
-	public boolean mossaValida(Scacchiera scacchiera, Casella destinazione) {
-		if (destinazione != null) {
-			// se la casella destinazione non \`e vuota e \`e presente un Pezzo dello stesso
-			// colore ritorna falso
-			if (!destinazione.isEmpty()
-					&& destinazione.getPezzo().getColor() == this.getColor()) {
-				return false;
-			}
-			// se la riga o la colonna non e' costante ritorno false
-			int deltaX=destinazione.getX()-this.getCasella().getX();
-			int deltaY=destinazione.getY()-this.getCasella().getY();
-			if(!((deltaX==0)||(deltaY==0))){
-				return false;
-			}
-			if(deltaY==0){
-				// controlla tutte le caselle sulla diagonale, se in una di queste c'e' un pezzo ritorna false
-				for(int i=1;i<Math.abs(deltaX);i++){
-					if(!scacchiera.getCasella(new Coordinata(this.getCasella().getX() +i, this.getCasella().getY())).isEmpty()){
-						return false;
-					}
-				}
-			}
-			if(deltaX==0){
-				for(int i=1;i<Math.abs(deltaX);i++){
-					if(!scacchiera.getCasella(new Coordinata(this.getCasella().getX(), this.getCasella().getY()+i)).isEmpty()){
-						return false;
-					}
-				}
-			}
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public String toString() {
-		return "T ["+this.getColor()+"]";
-	}
-}
-\end{lstlisting}
-\subsubsection{Cavallo}
-\begin{lstlisting}[language=Java,escapechar=|]
-package scacchi.scacchiera.pezzi;
-
-import scacchi.scacchiera.Casella;
-import scacchi.scacchiera.Color;
-import scacchi.scacchiera.Pezzo;
-import scacchi.scacchiera.Scacchiera;
-
-public class Cavallo extends Pezzo {
-
-	public Cavallo(Casella casella, Color color) {
-		super(casella, color);
-	}
-
-	@Override
-	public boolean mossaValida(Scacchiera scacchiera, Casella destinazione) {
-		if (destinazione != null) {
-			// se la casella destinazione non \`e vuota e \`e presente un Pezzo
-			// dello stesso
-			// colore ritorna falso
-			if (!destinazione.isEmpty()
-					&& destinazione.getPezzo().getColor() == this.getColor()) {
-				return false;
-			}
-			// calcola la distanza della cella rispetto all'asse delle x e delle
-			// y
-			int deltaX = destinazione.getX() - this.getCasella().getX();
-			int deltaY = destinazione.getY() - this.getCasella().getY();
-			if((Math.abs(deltaX)==2&&Math.abs(deltaY)==1)||(Math.abs(deltaY)==2&&Math.abs(deltaX)==1)){
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public String toString() {
-		return "C ["+this.getColor()+"]";
-	}
-}
-\end{lstlisting}
-
-\subsubsection{Donna}
-\begin{lstlisting}[language=Java,escapechar=|]
-package scacchi.scacchiera.pezzi;
-
-import scacchi.scacchiera.Casella;
-import scacchi.scacchiera.Color;
-import scacchi.scacchiera.Coordinata;
-import scacchi.scacchiera.Pezzo;
-import scacchi.scacchiera.Scacchiera;
-
-public class Donna extends Pezzo {
-
-	public Donna(Casella casella, Color color) {
-		super(casella, color);
-	}
-
-	@Override
-	public boolean mossaValida(Scacchiera scacchiera, Casella destinazione) {
-		if (destinazione != null) {
-			// se la casella destinazione non \`e vuota e \`e presente un Pezzo
-			// dello stesso
-			// colore ritorna falso
-			if (!destinazione.isEmpty()
-					&& destinazione.getPezzo().getColor() == this.getColor()) {
-				return false;
-			}
-			// calcola la distanza della cella rispetto all'asse delle x e delle
-			// y
-			int deltaX = destinazione.getX() - this.getCasella().getX();
-			int deltaY = destinazione.getY() - this.getCasella().getY();
-			// se il valore assoluto delle distanze \`e diverso ritorna false
-			if (Math.abs(deltaX) == Math.abs(deltaY)) {
-				// controlla tutte le caselle sulla diagonale, se in una di
-				// queste c'e' un pezzo ritorna false
-				for (int i = 1; i < Math.abs(deltaX); i++) {
-					if (!scacchiera.getCasella(
-							new Coordinata(this.getCasella().getX()
-									+ Integer.signum(deltaX) * i, this
-									.getCasella().getY()
-									+ Integer.signum(deltaY) * i)).isEmpty()) {
-						return false;
-					}
-				}
-				return true;
-			}
-			if ((deltaX == 0) || (deltaY == 0)) {
-
-				if (deltaY == 0) {
-					// controlla tutte le caselle sulla diagonale, se in una di
-					// queste c'e' un pezzo ritorna false
-					for (int i = 1; i < Math.abs(deltaX); i++) {
-						if (!scacchiera.getCasella(
-								new Coordinata(this.getCasella().getX() + i,
-										this.getCasella().getY())).isEmpty()) {
-							return false;
-						}
-					}
-				}
-				if (deltaX == 0) {
-					for (int i = 1; i < Math.abs(deltaX); i++) {
-						if (!scacchiera.getCasella(
-								new Coordinata(this.getCasella().getX(), this
-										.getCasella().getY() + i)).isEmpty()) {
-							return false;
-						}
-					}
-				}
-				return true;
-			}
-
-			// ritorna true
-			return false;
-		}
-		return false;
-	}
-
-	@Override
-	public String toString() {
-		return "D ["+this.getColor()+"]";
-	}
-}
-\end{lstlisting}
-
-\subsubsection{Pedone}
-\begin{lstlisting}[language=Java,escapechar=|]
-package scacchi.scacchiera.pezzi;
-
-import scacchi.scacchiera.Casella;
-import scacchi.scacchiera.Color;
-import scacchi.scacchiera.Coordinata;
-import scacchi.scacchiera.Pezzo;
-import scacchi.scacchiera.Scacchiera;
-
-public class Pedone extends Pezzo {
-
-	public Pedone(Casella casella, Color color) {
-		super(casella, color);
-	}
-
-	@Override
-	public boolean mossaValida(Scacchiera scacchiera, Casella destinazione) {
-		if (destinazione != null) {
-			// se la casella destinazione non \`e vuota e \`e presente un Pezzo
-			// dello stesso
-			// colore ritorna falso
-			if (!destinazione.isEmpty()
-					&& destinazione.getPezzo().getColor() == this.getColor()) {
-				return false;
-			}
-			// calcola la distanza della cella rispetto all'asse delle x e delle
-			// y
-			int deltaX = destinazione.getX() - this.getCasella().getX();
-			int deltaY = destinazione.getY() - this.getCasella().getY();
-			if(this.getColor().equals(Color.BLACK)&&deltaY>0){
-				return false;
-			}
-			if(this.getColor().equals(Color.WHITE)&&deltaY<0){
-				return false;
-			}
-			if(Math.abs(deltaY)>1||Math.abs(deltaX)>1){
-				return false;
-			}
-			if(Math.abs(deltaY)==1&&Math.abs(deltaX)==1&&scacchiera.getCasella(new Coordinata(this.getCasella().getX()+deltaX, this.getCasella().getY()+deltaY)).isEmpty()){
-				return false;
-			}
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public String toString() {
-		return "P ["+this.getColor()+"]";
-	}
-}
-\end{lstlisting}
-\subsection{Esercizio 1.4 Scacchiera}
-\begin{framed}
-\textbf{Esercizio 1.4} Una scacchiera contiene dei pezzi, quando viene creata i pezzi sono posti sulla scacchiera in maniera corretta.
-\end{framed}
-\begin{lstlisting}[language=Java,escapechar=|]
-package scacchi.scacchiera;
-
-import scacchi.scacchiera.pezzi.Alfiere;
-import scacchi.scacchiera.pezzi.Cavallo;
-import scacchi.scacchiera.pezzi.Donna;
-import scacchi.scacchiera.pezzi.Pedone;
-import scacchi.scacchiera.pezzi.Re;
-import scacchi.scacchiera.pezzi.Torre;
-
-public class Scacchiera {
-
-	/**
-	 * 8x8 Matrix of caselle
-	 */
-	private final Casella[][] caselle;
-	private static final int SIZE = 8;
-
-	/**
-	 * Constructor for Scacchiera, initializes all the fields.
-	 */
-	public Scacchiera() {
-		// initialize fields
-
-		caselle = new Casella[SIZE][SIZE];
-		for (int i = 0; i < SIZE; i++) {
-			for (int j = 0; j < SIZE; j++) {
-				caselle[i][j] = new Casella(i, j);
-			}
-		}
-
-		this.intializeReRow(0, Color.WHITE);
-		this.intializePedoniRow(1, Color.WHITE);
-		this.intializePedoniRow(6, Color.BLACK);
-		this.intializeReRow(7, Color.BLACK);
-
-	}
-
-	private void intializePedoniRow(int row, Color color) {
-		for (int i = 0; i < SIZE; i++) {
-			Pezzo pedone = new Pedone(caselle[row][i], color);
-			caselle[row][i].setPezzo(pedone);
-		}
-	}
-
-	private void intializeReRow(int row, Color color) {
-		Pezzo torreBianca1 = new Torre(caselle[row][0], color);
-		caselle[row][0].setPezzo(torreBianca1);
-		Pezzo cavalloBianca1 = new Cavallo(caselle[row][1], color);
-		caselle[row][1].setPezzo(cavalloBianca1);
-		Pezzo alfiereBianca1 = new Alfiere(caselle[row][2], color);
-		caselle[row][2].setPezzo(alfiereBianca1);
-		Pezzo reBianco = new Re(caselle[row][3], color);
-		caselle[row][3].setPezzo(reBianco);
-		Pezzo reginaBianco = new Donna(caselle[row][4], color);
-		caselle[row][4].setPezzo(reginaBianco);
-		Pezzo alfiereBianca2 = new Alfiere(caselle[row][5], color);
-		caselle[row][5].setPezzo(alfiereBianca2);
-		Pezzo cavalloBianco2 = new Cavallo(caselle[row][6], color);
-		caselle[row][6].setPezzo(cavalloBianco2);
-		Pezzo torreBianca2 = new Torre(caselle[row][7], color);
-		caselle[row][7].setPezzo(torreBianca2);
-	}
-
-	public Casella getCasella(Coordinata coordinata) {
-		return this.caselle[coordinata.getX()][coordinata.getY()];
-	}
-
-	/**
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		String ret = "";
-		ret += "---------------------------------------------------------------------------------------------------\n";
-		for (int i = 0; i < SIZE; i++) {
-			ret += "| ";
-			for (int j = 0; j < SIZE; j++) {
-				ret += caselle[i][j].toString();
-				ret += " | ";
-			}
-			ret += "\n";
-			ret += "---------------------------------------------------------------------------------------------------\n";
-		}
-		ret += "\n ";
-		return ret;
-	}
-}
-\end{lstlisting}
-
-\subsection{Esercizio 1.5 Player}
-\begin{framed}
-\textbf{Esercizio 1.5} Nel gioco degli scacchi ci sono due giocatori a ciascuno dei quali \`e associato un colore
-\end{framed}
-\begin{lstlisting}[language=Java,escapechar=|]
-package scacchi;
-
-import scacchi.scacchiera.Color;
-
-public class Player {
-
-	private final Color color;
-	
-	public Player(Color color){
-		this.color=color;
-	}
-
-	@Override
-	public String toString() {
-		return "Player [color=" + color + "]";
-	}
-
-	public Color getColor() {
-		return color;
-	}
-}
-\end{lstlisting}
-
-\subsection{Esercizio 1.6 Gioco}
+\lstinputlisting{Source/Scacchi/src/scacchi/Player.java}
+\subsubsection{Gioco}
 \begin{framed}
 \textbf{Esercizio 1.6} Il gioco consiste in una serie di mosse iterativamente effettuate dai due giocatori
 \end{framed}
-\begin{lstlisting}[language=Java,escapechar=|]
-package scacchi;
+\lstinputlisting{Source/Scacchi/src/scacchi/Gioco.java}
 
-import java.io.IOException;
-import java.util.Scanner;
 
-import scacchi.scacchiera.Casella;
-import scacchi.scacchiera.Color;
-import scacchi.scacchiera.Coordinata;
-import scacchi.scacchiera.Pezzo;
-import scacchi.scacchiera.Scacchiera;
+\subsubsection{Main}
+\lstinputlisting{Source/Scacchi/src/scacchi/Main.java}
 
-public class Gioco {
-
-	private static final int N_PLAYERS = 2;
-	private final Player[] players;
-	private final Scacchiera scacchiera;
-
-	public Gioco() {
-		players = new Player[N_PLAYERS];
-		players[0] = new Player(Color.WHITE);
-		players[1] = new Player(Color.BLACK);
-		scacchiera = new Scacchiera();
-	}
-
-	public void gioca() throws IOException {
-		int i = 0;
-		while (true) {
-			System.out.println("Tocca a " + players[i % 2]);
-			Player currPlayer = players[i % 2];
-			boolean valid = false;
-			Scanner in = new Scanner(System.in);
-			do {
-				System.out.println(this.scacchiera);
-				System.out
-						.println("Specifica la riga dove si trova la pedina che vuoi muovere");
-				int riga = in.nextInt();
-				System.out
-						.println("Specifica la colonna dove si trova la pedina che vuoi muovere");
-				int colonna = in.nextInt();
-
-				Casella casellaSelezionata = scacchiera
-						.getCasella(new Coordinata(riga, colonna));
-				if (casellaSelezionata.getPezzo() != null
-						&& casellaSelezionata.getPezzo().getColor()
-								.equals(currPlayer.getColor())) {
-					Pezzo pezzo = casellaSelezionata.getPezzo();
-
-					System.out
-							.println("Specifica la riga dove vuoi muovere il pezzo");
-					int rigaDestinazione = in.nextInt();
-					System.out
-							.println("Specifica la colonna dove vuoi muovere il pezzo");
-					int colonnaDestinazione = in.nextInt();
-					Casella casellaDestinazione=this.scacchiera.getCasella(new Coordinata(rigaDestinazione, colonnaDestinazione));
-					if(pezzo.mossaValida(this.scacchiera, casellaDestinazione)){
-						casellaSelezionata.unsetPezzo();
-						casellaDestinazione.setPezzo(pezzo);
-						pezzo.setCasella(casellaDestinazione);
-						valid=true;
-						
-					}
-					else{
-						System.out
-						.println("Non e' possibile muovere la pedina nella colonna specificata");
-				
-					}
-
-				} else {
-					System.out.println("Nella casella [" + riga + "]["
-							+ colonna
-							+ "] non e' contenuta una pedina del tuo colore");
-				}
-
-			}while(!valid);
-        	i++;
-		}
-	}
-}
-\end{lstlisting}
-\subsection{Esercizio 1.7: Main}
-\begin{lstlisting}[language=Java,escapechar=|]
-package scacchi;
-
-import java.io.IOException;
-
-public class Main {
-
-	public static void main(String[] args) throws IOException {
-		Gioco gioco=new Gioco();
-		gioco.gioca();
-	}
-}
-
-\end{lstlisting}
-\subsection{Esercizio 2: Persone e Studenti}
-\begin{framed}
-\textbf{Esercizio 2}: Implementare le classi per rappresentare delle persone e degli studenti.
+\subsection{Persone e Studenti}
+\Esercizio{Implementare le classi per rappresentare delle persone e degli studenti.
 \begin{itemize}
 \item  Vogliamo tenere traccia del nome e della data di nascita di una persona.
 \item Gli studenti sono delle persone cui \`e associata una lista di esami sostenuti.
 \item Vogliamo controllare se lo studente ha abbastanza crediti per laurearsi.
 \item Vogliamo fornire uno strumento per il calcolo della media pesata
 \end{itemize}
-\end{framed}
+}
 
 \subsubsection{Raffinamento}
 Il primo passo da effettuare consiste nell'identificare le entità in gioco.
@@ -1265,15 +659,14 @@ public class Esempio {
 \item  Cosa succederebbe se scrivessi l’istruzione pippo.canGraduate() \textit{Errore di compilazione, il tipo statico di Pippo \`e persona, quindi il compilatore cerca nel tipo \texttt{Person} la signature del metodo \texttt{canGraduate} che non \`e presente.}
 \end{itemize}
 
-\subsection{Esercizio 3: Forme Geometriche}
-\begin{framed}
-\textbf{Esercizio 3}: Implementare una gerarchia di classe che rappresenti delle forme geometriche, permettendo di calcolare
+\subsection{Forme Geometriche}
+\Esercizio{Implementare una gerarchia di classe che rappresenti delle forme geometriche, permettendo di calcolare
 \begin{itemize}
 \item  La loro area
 \item Perimetro
 \item E di rappresentarle sullo schermo.
 \end{itemize}
-\end{framed}
+}
 
 \subsubsection{TwoDimensionalCanvas}
 Perch\`e usiamo un interfaccia per modellare TwoDimensionalCanvas?
@@ -1492,13 +885,10 @@ public class ShapeClient {
 
 
 
-\subsection{Esercizio 4: Animali (Interfacce)}
 
 
-\subsection{Esercizio 5: Forme Geometriche (Resizable, Rotatable)}
-\begin{framed}
-\textbf{Esercizio 5}: Deve essere possibile ruotare e ridimensionare gli oggetti shape. A seconda della loro natura (e.g., un cerchio non pu\`o essere ruotato ma pu\`o essere ridimensionato)
-\end{framed}
+\subsection{Forme Geometriche (Resizable, Rotatable)}
+\Esercizio{Deve essere possibile ruotare e ridimensionare gli oggetti shape. A seconda della loro natura (e.g., un cerchio non pu\`o essere ruotato ma pu\`o essere ridimensionato)}
 
 \subsubsection{Rotatable}
 \begin{lstlisting}[language=Java,escapechar=|]
@@ -1544,399 +934,36 @@ public class Circle extends Shape implements Resizable {
 }
 \end{lstlisting}
 
-\subsection{Esercizio 6: Tipo statico e tipo dinamico}
-Dire cosa stampa il seguente programma 
-\begin{lstlisting}[language=Java,escapechar=|]
-public static void main(String[] args) {
-		ClassA a1, a2;
-		ClassB b1;
-		ClassC c1;
-
-		a1 = new ClassB();
-		b1 = new ClassB();
-		c1 = new ClassC();
-		a2 = new ClassC();
-
-		/*
-		 * b1 e' di classe ClassB, viene chiesto di invocare il metodo stampa su
-		 * un parametro b1 di tipo statico ClassB. A compile scelgo la signature
-		 * "compatibile" e piu' "vicina", considerando i tipi statici delle
-		 * variabili. In particolare in questo caso la signature scelta e'
-		 * public void stampa(ClassB p).
-		 * 
-		 * A run time b1 e' di classe classB e e il parametro p, che equivale a
-		 * B1 e' anch'esso di classe ClassB per cui viene chiamato il metodo
-		 * public void stampa(ClassB p) di class B (stampa BBB)
-		 */
-		b1.stampa(b1);
-		/*
-		 * a1 e' di classe ClassA, viene chiesto di invocare il metodo stampa su
-		 * un parametro b1 di tipo statico ClassB. A compile scelgo la signature
-		 * "compatibile" e piu' "vicina", considerando i tipi statici delle
-		 * variabili. In particolare in questo caso la signature scelta e'
-		 * public void stampa(ClassA p) della classe ClassA.
-		 * 
-		 * A run-time a1 e' di classe ClassB. Per questo partendo da classB e
-		 * risalendo nella gerarchia di raffinamento cerco un metodo che matchi
-		 * la signature public void stampa(ClassA p). In questo caso il metodo
-		 * e' gia' presente in ClassB. Quindi viene invocato il metodo public
-		 * void stampa(ClassA p) della classe ClassB (Stampa AAA/BBB)
-		 */
-		a1.stampa(b1);
-
-		/*
-		 * b1 e' di classe ClassB, viene chiesto di invocare il metodo stampa su
-		 * un parametro c1 di tipo statico ClassC. A compile scelgo la signature
-		 * "compatibile" e piu' "vicina", considerando i tipi statici delle
-		 * variabili (ClassB). In particolare in questo caso la signature scelta
-		 * all'interno di ClassB e' public void stampa(ClassA p) della classe
-		 * ClassB.
-		 * 
-		 * A run-time b1 e' di classe ClassB, c1 e' di classe ClassC. Per questo
-		 * partendo da classB e risalendo nella gerarchia di raffinamento cerco
-		 * un metodo che matchi la signature public void stampa(ClassA p). In
-		 * questo caso il metodo e' gia' presente in ClassB. Quindi viene
-		 * invocato il metodo public void stampa(ClassA p) della classe ClassB
-		 * (Stampa AAA/BBB)
-		 */
-		b1.stampa(c1);
-
-		/*
-		 * c1 e' di classe statica ClassC, viene chiesto di invocare il metodo stampa su
-		 * un parametro c1 di tipo statico ClassC. A compile scelgo la signature
-		 * "compatibile" e piu' "vicina", considerando i tipi statici delle
-		 * variabili (ClassC). In particolare in questo caso la signature scelta
-		 * all'interno di ClassC e' public void stampa(ClassC p) della classe
-		 * ClassC.
-		 * 
-		 * A run-time c1 e' di classe ClassC, c1 e' di classe ClassC. Per questo
-		 * partendo da ClassC e risalendo nella gerarchia di raffinamento cerco
-		 * un metodo che matchi la signature public void stampa(ClassC p). In
-		 * questo caso il metodo e' gia' presente in ClassC. Quindi viene
-		 * invocato il metodo public void stampa(ClassC p) della classe ClassC
-		 * (Stampa CCC)
-		 */
-		c1.stampa(c1);
-		
-		/*
-		 * c1 e' di classe statica ClassC, viene chiesto di invocare il metodo stampa su
-		 * un parametro a1 di tipo statico ClassA. A compile scelgo la signature
-		 * "compatibile" e piu' "vicina", considerando i tipi statici delle
-		 * variabili. In particolare in questo caso la signature scelta
-		 * all'interno di ClassC e' public void stampa(ClassA p) della classe
-		 * ClassC.
-		 * 
-		 * A run-time c1 e' di classe ClassC, a1 e' di classe ClassB. Per questo
-		 * partendo da ClassC e risalendo nella gerarchia di raffinamento cerco
-		 * un metodo che matchi la signature public void stampa(ClassA p). In
-		 * questo caso il metodo e' gia' presente in ClassC. Quindi viene
-		 * invocato il metodo public void stampa(ClassA p) della classe ClassC
-		 * (Stampa AAA/CCC)
-		 */
-		c1.stampa(a1);
-
-		/*
-		 * a2 e' di classe statica ClassA, viene chiesto di invocare il metodo stampa su
-		 * un parametro c1 di tipo statico ClassC. A compile scelgo la signature
-		 * "compatibile" e piu' "vicina", considerando i tipi statici delle
-		 * variabili. In particolare in questo caso la signature scelta
-		 * all'interno di ClassA e' public void stampa(ClassA p) della classe
-		 * ClassA.
-		 * 
-		 * A run-time a2 e' di classe ClassC, c1 e' di classe ClassC. Per questo
-		 * partendo da ClassC e risalendo nella gerarchia di raffinamento cerco
-		 * un metodo che matchi la signature public void stampa(ClassA p). In
-		 * questo caso il metodo e' gia' presente in ClassC. Quindi viene
-		 * invocato il metodo public void stampa(ClassA p) della classe ClassC
-		 * (Stampa AAA/CCC)
-		 */
-		a2.stampa(c1);
-	}
-\end{lstlisting}
-dove 
-\begin{lstlisting}[language=Java,escapechar=|]
-public class ClassA {
-
-	public void stampa(ClassA p){
-		System.out.println("AAA");
-	}
-}
-\end{lstlisting}
-
-\begin{lstlisting}[language=Java,escapechar=|]
-public class ClassB extends ClassA {
-	public void stampa(ClassB p){
-		System.out.println("BBB");
-	}
-	public void stampa(ClassA p){
-		System.out.println("AAA/BBB");
-	}
-}
-\end{lstlisting}
-
-\begin{lstlisting}[language=Java,escapechar=|]
-public class ClassC extends ClassA {
-	public void stampa(ClassC p){
-		System.out.println("CCC");
-	}
-	public void stampa(ClassA p){
-		System.out.println("AAA/CCC");
-	}
-}
-\end{lstlisting}
-
-\subsubsection{Esercizio 6a}
+\section{Curiosit\`a}
 \begin{framed}
-\textbf{Esercizio 6a}: Cosa succede se \texttt{ClassC} eredita da \texttt{ClassB} e non da \texttt{ClassA}
+In un paper intitolato ``Java: an Overview", James Gosling nel 1995 discute le ragioni per cui l'ereditariet\`a multipla non \`e supporta in Java.
+\emph{JAVA omits many rarely used, poorly understood, confusing features of C++ that in our experience bring more grief than benefit. This primarily consists of operator overloading (although it does have method overloading), multiple inheritance, and extensive automatic coercions.}
 \end{framed}
-\begin{lstlisting}[language=Java,escapechar=|]
-package tipostaticoedinamico;
-
-public class Main {
-
-	public static void main(String[] args) {
-		ClassA a1, a2;
-		ClassB b1;
-		ClassC c1;
-
-		a1 = new ClassB();
-		b1 = new ClassB();
-		c1 = new ClassC();
-		a2 = new ClassC();
-
-		/*
-		 * b1 e' di classe ClassB, viene chiesto di invocare il metodo stampa su
-		 * un parametro b1 di tipo statico ClassB. A compile scelgo la signature
-		 * "compatibile" e piu' "vicina", considerando i tipi statici delle
-		 * variabili. In particolare in questo caso la signature scelta e'
-		 * public void stampa(ClassB p).
-		 * 
-		 * A run time b1 e' di classe classB e e il parametro p, che equivale a
-		 * B1 e' anch'esso di classe ClassB per cui viene chiamato il metodo
-		 * public void stampa(ClassB p) di class B (stampa BBB)
-		 */
-		b1.stampa(b1);
-		/*
-		 * a1 e' di classe ClassA, viene chiesto di invocare il metodo stampa su
-		 * un parametro b1 di tipo statico ClassB. A compile scelgo la signature
-		 * "compatibile" e piu' "vicina", considerando i tipi statici delle
-		 * variabili. In particolare in questo caso la signature scelta e'
-		 * public void stampa(ClassA p) della classe ClassA.
-		 * 
-		 * A run-time a1 e' di classe ClassB. Per questo partendo da classB e
-		 * risalendo nella gerarchia di raffinamento cerco un metodo che matchi
-		 * la signature public void stampa(ClassA p). In questo caso il metodo
-		 * e' gia' presente in ClassB. Quindi viene invocato il metodo public
-		 * void stampa(ClassA p) della classe ClassB (Stampa AAA/BBB)
-		 */
-		a1.stampa(b1);
-
-		/*
-		 * b1 e' di classe ClassB, viene chiesto di invocare il metodo stampa su
-		 * un parametro c1 di tipo statico ClassC. A compile scelgo la signature
-		 * "compatibile" e piu' "vicina", considerando i tipi statici delle
-		 * variabili (ClassB). In particolare in questo caso la signature scelta
-		 * all'interno di ClassB e' public void stampa(ClassB p) della classe
-		 * ClassB.
-		 * 
-		 * A run-time b1 e' di classe ClassB, c1 e' di classe ClassC. Per questo
-		 * partendo da classB e risalendo nella gerarchia di raffinamento cerco
-		 * un metodo che matchi la signature public void stampa(ClassB p). In
-		 * questo caso il metodo e' gia' presente in ClassB. Quindi viene
-		 * invocato il metodo public void stampa(ClassB p) della classe ClassB
-		 * (Stampa BBB)
-		 */
-		b1.stampa(c1);
-
-		/*
-		 * c1 e' di classe statica ClassC, viene chiesto di invocare il metodo stampa su
-		 * un parametro c1 di tipo statico ClassC. A compile scelgo la signature
-		 * "compatibile" e piu' "vicina", considerando i tipi statici delle
-		 * variabili (ClassC). In particolare in questo caso la signature scelta
-		 * all'interno di ClassC e' public void stampa(ClassC p) della classe
-		 * ClassC.
-		 * 
-		 * A run-time c1 e' di classe ClassC, c1 e' di classe ClassC. Per questo
-		 * partendo da ClassC e risalendo nella gerarchia di raffinamento cerco
-		 * un metodo che matchi la signature public void stampa(ClassC p). In
-		 * questo caso il metodo e' gia' presente in ClassC. Quindi viene
-		 * invocato il metodo public void stampa(ClassC p) della classe ClassC
-		 * (Stampa CCC)
-		 */
-		c1.stampa(c1);
-		
-		/*
-		 * c1 e' di classe statica ClassC, viene chiesto di invocare il metodo stampa su
-		 * un parametro a1 di tipo statico ClassA. A compile scelgo la signature
-		 * "compatibile" e piu' "vicina", considerando i tipi statici delle
-		 * variabili. In particolare in questo caso la signature scelta
-		 * all'interno di ClassC e' public void stampa(ClassA p) della classe
-		 * ClassC.
-		 * 
-		 * A run-time c1 e' di classe ClassC, a1 e' di classe ClassB. Per questo
-		 * partendo da ClassC e risalendo nella gerarchia di raffinamento cerco
-		 * un metodo che matchi la signature public void stampa(ClassA p). In
-		 * questo caso il metodo e' gia' presente in ClassC. Quindi viene
-		 * invocato il metodo public void stampa(ClassA p) della classe ClassC
-		 * (Stampa AAA/CCC)
-		 */
-		c1.stampa(a1);
-
-		/*
-		 * a2 e' di classe statica ClassA, viene chiesto di invocare il metodo stampa su
-		 * un parametro c1 di tipo statico ClassC. A compile scelgo la signature
-		 * "compatibile" e piu' "vicina", considerando i tipi statici delle
-		 * variabili. In particolare in questo caso la signature scelta
-		 * all'interno di ClassA e' public void stampa(ClassA p) della classe
-		 * ClassA.
-		 * 
-		 * A run-time a2 e' di classe ClassC, c1 e' di classe ClassC. Per questo
-		 * partendo da ClassC e risalendo nella gerarchia di raffinamento cerco
-		 * un metodo che matchi la signature public void stampa(ClassA p). In
-		 * questo caso il metodo e' gia' presente in ClassC. Quindi viene
-		 * invocato il metodo public void stampa(ClassA p) della classe ClassC
-		 * (Stampa AAA/CCC)
-		 */
-		a2.stampa(c1);
-	}
-}
-\end{lstlisting}
-
-\subsection{Esercizio 7: Tipo statico e tipo dinamico}
-Dire cosa stampa il seguente programma 
-\begin{lstlisting}[language=Java,escapechar=|]
-public class Main {
-
-	public static void main(String[] args) {
-		Figura f1, f2;
-		Quadrato q=new Rettangolo();
-		Rettangolo r=new Rettangolo();
-		f1=new Quadrato();
-		f2=new Rettangolo();
-		
-		/*
-		 * f1 e' di classe statica Figura, viene chiesto di invocare il metodo stampa su
-		 * un parametro f2 di tipo statico Figura. A compile scelgo la signature
-		 * "compatibile" e piu' "vicina", considerando i tipi statici delle
-		 * variabili. In particolare in questo caso la signature scelta
-		 * all'interno di Figura e' public void stampa(Figura p) della classe
-		 * Figura.
-		 * 
-		 * A run-time f1 e' di classe Quadrato, f2 e' di classe Rettangolo. Per questo
-		 * partendo da Quadrato e risalendo nella gerarchia di raffinamento cerco
-		 * un metodo che matchi la signature public void stampa(Figura p). In
-		 * questo caso il metodo e' presente solo in Figura. Quindi viene
-		 * invocato il metodo public void stampa(Figura p) della classe Figura
-		 * (Stampa Figura)
-		 */
-		f1.stampa(f2);
-		
-		/*
-		 * q e' di classe statica Quadrato, viene chiesto di invocare il metodo stampa su
-		 * un parametro r di tipo statico Rettangolo. A compile scelgo la signature
-		 * "compatibile" e piu' "vicina", considerando i tipi statici delle
-		 * variabili. In particolare in questo caso la signature scelta
-		 * all'interno di Quadrato e' public void stampa(Rettangolo p) della classe
-		 * Quadrato.
-		 * 
-		 * A run-time q e' di classe Rettangolo, r e' di classe Rettangolo. Per questo
-		 * partendo da Rettangolo e risalendo nella gerarchia di raffinamento cerco
-		 * un metodo che matchi la signature public void stampa(Rettangolo p). In
-		 * questo caso il metodo e' presente in Rettangolo. Quindi viene
-		 * invocato il metodo public void stampa(Rettangolo p) della classe Rettangolo
-		 * (Stampa Rettangolo Particolare)
-		 */
-		q.stampa(r);
-		
-		/*
-		 * f1 e' di classe statica Figura, viene chiesto di invocare il metodo stampa su
-		 * un parametro q di tipo statico Quadrato. A compile scelgo la signature
-		 * "compatibile" e piu' "vicina", considerando i tipi statici delle
-		 * variabili. In particolare in questo caso la signature scelta
-		 * all'interno di Figura e' public void stampa(Figura p) della classe
-		 * Figura.
-		 * 
-		 * A run-time f1 e' di classe Quadrato, q e' di classe Rettangolo. Per questo
-		 * partendo da Quadrato e risalendo nella gerarchia di raffinamento cerco
-		 * un metodo che matchi la signature public void stampa(Figura p). In
-		 * questo caso il metodo e' presente in Figura. Quindi viene
-		 * invocato il metodo public void stampa(Figura p) della classe Figura
-		 * (Stampa Figura)
-		 */
-		f1.stampa(q);
-		
-		/*
-		 * q e' di classe statica Quadrato, viene chiesto di invocare il metodo stampa su
-		 * un parametro f1 di tipo statico Figura. A compile scelgo la signature
-		 * "compatibile" e piu' "vicina", considerando i tipi statici delle
-		 * variabili. In particolare in questo caso la signature scelta
-		 * all'interno di Quadrato e' public void stampa(Figura q) della classe
-		 * Figura.
-		 * 
-		 * A run-time q e' di classe Rettangolo, f1 e' di classe Quadrato. Per questo
-		 * partendo da Rettangolo e risalendo nella gerarchia di raffinamento cerco
-		 * un metodo che matchi la signature public void stampa(Figura p). In
-		 * questo caso il metodo e' presente in Rettangolo. Quindi viene
-		 * invocato il metodo public void stampa(Figura p) della classe Rettangolo
-		 * (Stampa Figura particolare)
-		 */
-		q.stampa(f1);
-		
-		/*
-		 * q e' di classe statica Quadrato, viene chiesto di invocare il metodo stampa su
-		 * un parametro q di tipo statico Quadrato. A compile scelgo la signature
-		 * "compatibile" e piu' "vicina", considerando i tipi statici delle
-		 * variabili. In particolare in questo caso la signature scelta
-		 * all'interno di Quadrato e' public void stampa(Quadrato q) della classe
-		 * Quadrato.
-		 * 
-		 * A run-time q e' di classe Rettangolo. Per questo
-		 * partendo da Rettangolo e risalendo nella gerarchia di raffinamento cerco
-		 * un metodo che matchi la signature public void stampa(Quadrato p). In
-		 * questo caso il metodo e' presente in Rettangolo. Quindi viene
-		 * invocato il metodo public void stampa(Quadrato p) della classe Rettangolo
-		 * (Stampa Rettangolo particolare)
-		 */
-		q.stampa(q);
-
-	}
-}
-\end{lstlisting}
-
-Dove
-\begin{lstlisting}[language=Java,escapechar=|]
-public class Figura {
-	public void stampa(Figura f){
-		System.out.println("Figura");
-	}
-}
-\end{lstlisting}
-\begin{lstlisting}[language=Java,escapechar=|]
-public class Quadrato extends Figura {
-	public void stampa(Quadrato q){
-		System.out.println("Quadrato");
-	}
-}
-\end{lstlisting}
-\begin{lstlisting}[language=Java,escapechar=|]
-public class Rettangolo extends Quadrato {
-	public void stampa(Rettangolo q) {
-		System.out.println("Rettangolo");
-	}
-
-	public void stampa(Quadrato q) {
-		System.out.println("Rettangolo particolare");
-	}
-
-	public void stampa(Figura q) {
-		System.out.println("Figura particolare");
-	}
-}
-\end{lstlisting}
 
 \section{Esercizi per casa}
 
 
+\begin{itemize}
+\item Esercizio 1:
+\begin{itemize}
+\item Modificare la soluzione dell'esercizio relativo agli scacchi al fine di:
+\begin{itemize}
+\item \emph{rimuovere le duplicazioni di codice}. In generale \`e sempre bene ridurre al minimo le parti di codice duplicato. All'interno del metodo \texttt{mossavalida(..)} i vari pezzi controllano che la casella destinazione non \`e uguale a \texttt{null}, che non \`e presente un pezzo dello stesso colore etc.. Implementare una variante nel quale le replicazioni di codice sono ridotte..
+\item \emph{nell'implementazione corrente non gestisce correttamente la mossa iniziale del pedone, ovvero il fatto che il pedone inizialmente pu\`o muoversi di due caselle. Rimuovere questa limitazione}
+\item \emph{implementare la mossa dell'arrocco}
+\item \emph{implementare la mossa speciale dell'en passant}
+\end{itemize}
+\end{itemize}
+\item Esercizio 2:
+\begin{itemize}
+\item Modificare la soluzione dell'esercizio dell'esercizio persone e studenti al fine di
+\begin{itemize}
+\item \emph{aggiungere la possibilit\`a di cambiare il voto agli esami}
+\item \emph{aggiungere un'entit\`a che rappresenta un docente. A ogni grade \`e associato uno e un solo docente e a ogni docente \`e associata la lista di grade assegnati}
+\item \emph{\`E sempre consigliabile non usare tipi e metodi deprecati. Reimplementare l'esercizio persone e studenti utilizzando la classe \texttt{GregorianCalendar} invece della classe \texttt{Date}.}
+\end{itemize}
+\end{itemize}
+\end{itemize}
 
 
 \clearpage

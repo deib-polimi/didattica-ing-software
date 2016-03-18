@@ -1,0 +1,237 @@
+\documentclass[9pt]{beamer}
+
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\usepackage{algorithm}
+\usepackage[citestyle=authortitle-ibid,backend=bibtex]{biblatex} 
+\setbeamerfont{footnote}{size=\tiny}
+%\usepackage{algorithm2e}
+\usepackage{algpseudocode}
+\graphicspath{{figures/}}
+
+
+\usepackage[absolute,overlay]{textpos}
+
+\usepackage{tikz}
+\usetikzlibrary{automata,positioning}
+
+%\usepackage{longtable}
+%\usepackage{fancyhdr}
+%\usepackage{color}
+%\usepackage{array}
+%\usepackage{mdwmath}
+%\usepackage{mdwtab}
+%\usepackage{amsmath,amssymb}
+%\usepackage{cite}
+%\usepackage{graphicx}
+%\usepackage{listings}
+\usepackage{subfig}
+%\usepackage{booktabs}
+%\usepackage{latexsym}
+%\usepackage{color}
+%\usepackage{rotating}
+%\usepackage{multirow}
+%\usepackage{paralist}
+%\usepackage{bibentry}
+%%\usepackage[algochapter]{algorithm2e}
+%\PassOptionsToPackage{hyphens}{url}\usepackage[bookmarks=true,bookmarksopen=true]{hyperref}
+%\usepackage{url}
+%\usepackage{lscape}
+%%\usepackage{algorithmic}
+%\usepackage{algorithm}
+%\usepackage{longtable}
+%\usepackage[T1]{fontenc} 
+%\usepackage[latin1]{inputenc}
+
+
+%\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{mathrsfs}
+\usepackage{framed}
+\usepackage{amssymb}
+\usepackage[figuresright]{rotating}
+\usepackage{comment}
+\usepackage{subfig}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{algpseudocode}
+
+%\usepackage{flushend}
+\usepackage{times}
+\usepackage{url}
+\usepackage{comment}
+\usepackage{paralist}
+\usepackage[multiple]{footmisc}
+\usepackage{multicol}
+%\usepackage{pbox}
+\usepackage{textcomp}
+\usepackage{stfloats}
+\usepackage{multirow}
+\usepackage{hhline}
+
+\usepackage{longtable}
+
+\usepackage{amsthm,thmtools}
+
+
+\makeatletter
+\def\th@scalabilityEvaluationStyle{%
+    \normalfont % body font
+    \setbeamertemplate{blocks}[rounded][shadow=false]
+    \setbeamercolor{block title example}{bg=POLIMIEvaluationGreen,fg=white}
+    \setbeamercolor{block body example}{bg=POLIMILightgray,fg=black}
+    \def\inserttheoremblockenv{exampleblock}
+  }
+\theoremstyle{scalabilityEvaluationStyle}
+\newtheorem*{scalabilityEvaluation}{}
+\makeatother
+
+\makeatletter
+\def\th@complexityEvaluationStyle{%
+    \normalfont % body font
+    \setbeamertemplate{blocks}[rounded][shadow=false]
+    \setbeamercolor{block title example}{bg=POLIMIComplexity,fg=black}
+    \setbeamercolor{block body example}{bg=POLIMILightgray,fg=black}
+    \def\inserttheoremblockenv{exampleblock}
+  }
+\theoremstyle{complexityEvaluationStyle}
+\newtheorem*{complexityEvaluation}{}
+\makeatother
+
+
+\setbeamertemplate{blocks}[rounded][shadow=true]
+\setbeamertemplate{theorems}[numbered]
+ 
+ 
+ \newcommand{\backupbegin}{
+   \newcounter{framenumberappendix}
+   \setcounter{framenumberappendix}{\value{framenumber}}
+}
+\newcommand{\backupend}{
+   \addtocounter{framenumberappendix}{-\value{framenumber}}
+   \addtocounter{framenumber}{\value{framenumberappendix}} 
+}
+% usage: \tikzpic{<x percent>}{<y percent>}{<image size>}{<image name>}
+\newcommand*{\tikzpic}[4]{%
+\begin{tikzpicture}[remember picture,overlay]
+\node at (current page.south west) [xshift=#1\paperwidth,yshift=#2\paperheight] {\includegraphics[width=#3\linewidth]{#4}};
+\end{tikzpicture}%
+}
+
+\title[]%
+{Esercitazione 2}
+\author[C. Menghi]{\underline{Claudio Menghi,}\\
+{\small \href{mailto:claudio.menghi@polimi.it}{\nolinkurl{claudio.menghi@polimi.it}}\\
+}}
+%\institute[POLIMI,Kennesaw State University]{Politecnico di Milano, Italy, Kennesaw State University, USA}
+
+\usetheme{POLIMI}
+
+\AtBeginSubsection[]{\frame[plain,noframenumbering]{\frametitle{Outline}%
+                  \usebeamerfont{myTOC}\tableofcontents[currentsection,currentsubsection]}}
+
+\student{Claudio Menghi}
+
+\ExecuteBibliographyOptions{firstinits=true, isbn=false, url=false, doi=false, uniquename=init}
+
+\AtEveryCitekey{%
+\ifentrytype{article}{
+    \clearfield{pages}%
+    \clearfield{volume}%
+}{}
+}
+\bibliography{bibliography}
+
+\input{Sections/ExperimentValues.tex}
+
+\input{../../Commands.tex}
+\begin{document}
+%\color[RGB]{0,51,102}
+
+\frame
+{
+\frametitle{Esercizi}
+
+\Esercizio{Progettare e implementare una classe che rappresenti un LettoreMP3. Ogni LettoreMP3 ha un \emph{unico} numero di serie. Un numero di serie (o numero seriale) \`e un numero identificativo assegnato in maniera univoca per distinguere un esemplare di una serie. I numeri di serie sono associati in modo incrementale. Il LettoreMP3 ha una meroria e puo' essere ascoltato.}
+}
+
+\frame
+{
+\frametitle{Esercizi}
+
+\Esercizio{Progettare e implementare una classe che rappresenti un \emph{insieme} di interi di dimensione massima fissata}
+}
+
+\frame
+{
+\frametitle{Esercizi}
+
+\Esercizio{Modificare l'insieme di interi per consentire la \emph{creazione} di sets di dimensioni variabili ma minore della dimensione massima fissata al momento della creazione dell'insieme}
+}
+
+\frame
+{
+\frametitle{Esercizi}
+
+\Esercizio{Progettare e implementare una classe che rappresenti un numero complesso}
+}
+
+\frame
+{
+\frametitle{Esercizi}
+
+\Esercizio{Aggiungere un costruttore che permette di creare un numero complesso da module e fase}
+}
+
+\frame
+{
+\frametitle{Esercizi}
+
+\Esercizio{Scrivere una classe Enum per modellizzare i pianeti del sistema solare}
+}
+
+\frame
+{
+\frametitle{Esercizi}
+
+\Esercizio{Modificare il codice del secondo esercizio affinch\`e mantenga un insieme
+di numeri complessi. Nella costruzione di tale insieme viene definita un certo valore di precisione
+che è utilizzato per determinare l'uguaglianza tra due numeri}
+}
+
+
+\frame
+{
+\frametitle{Esercizi}
+
+\Esercizio{Progettare e implementare una classe che rappresenti un CD. Ogni CD ha un \emph{unico} numero di serie. Un numero di serie (o numero seriale) è un numero identificativo assegnato in maniera univoca per distinguere un esemplare di una serie. Un cd ha un titolo, un autore e un prezzo.}
+}
+
+\frame
+{
+\frametitle{Esercizi}
+
+\Esercizio{Implementare il gioco della morra cinese (carta, forbice, sasso).
+L'applicazione deve chiedere la scelta al giocatore, generare una scelta e stampare a video il risultato del 
+giocatore (vittoria, pareggio, sconfitta).}
+}
+
+%\section*{Bibliography}
+%\begin{frame}[allowframebreaks]{Bibliography}
+%\footnotesize{
+%\bibliographystyle{abbrv}
+%\bibliography{bibliography} }
+%\end{frame}
+
+\backupbegin
+
+%\section{Tool demo}
+\backupend
+
+
+
+
+\end{document}
