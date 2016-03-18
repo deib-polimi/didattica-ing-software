@@ -1,0 +1,230 @@
+% Copyright 2012 by Antonio Cervone
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/licenses/LICENSE for more details.
+
+\newif\ifbeamer@POLIMIname
+\beamer@POLIMInamefalse
+
+\DeclareOptionBeamer{nameInFootline}{\csname beamer@POLIMInametrue\endcsname}
+
+
+\ProcessOptionsBeamer
+
+\mode<presentation>
+
+\RequirePackage{tikz}
+\RequirePackage{graphicx}
+\RequirePackage{etoolbox}
+\RequirePackage{calc}
+%\RequirePackage{adjustbox}
+
+\definecolor{POLIMIgray}{RGB}{192,192,192}
+\definecolor{POLIMILightgray}{RGB}{255,255,255} % 003366
+\definecolor{POLIMIgreen}{RGB}{0,153,76} % 003366
+\definecolor{POLIMILightblue2}{RGB}{165,170,204}
+\definecolor{POLIMILightblue}{RGB}{165,187,204}
+\definecolor{POLIMIblue}{RGB}{0,51,102} % 003366
+\definecolor{POLIMIorange}{RGB}{255,153,0} % ff9900
+\definecolor{POLIMIEvaluationGreen}{RGB}{124,172,174} % ff9900
+\definecolor{POLIMIComplexity}{RGB}{255,253,161}
+\definecolor{POLIMIRed}{RGB}{255,153,153}
+
+
+
+\setbeamercolor{structure}{fg=POLIMIblue}
+\setbeamercolor{empty}{fg=white,bg=white}
+%\setbeamercolor{POLIMIbox}{fg=POLIMIblue,bg=white}
+%\setbeamercolor{POLIMIboxInverted}{bg=POLIMIblue,fg=white}
+
+\setbeamercolor{block title}{fg=white,bg=POLIMIblue}
+%\setbeamercolor{block body}{fg=POLIMIblue,bg=POLIMIblue!10}
+
+\defbeamertemplate*{block begin}{POLIMI}
+{
+  \par\vskip\medskipamount%
+  \begin{beamercolorbox}[colsep*=.75ex]{block title}
+    \usebeamerfont*{block title}%
+    \includegraphics[width=2ex]{freccia_trasparente.png}\hspace{.5ex}%
+    \insertblocktitle%
+  \end{beamercolorbox}%
+  {\parskip0pt\par}%
+  \ifbeamercolorempty[bg]{block title}
+  {}
+  {\ifbeamercolorempty[bg]{block body}{}{\nointerlineskip\vskip-0.5pt}}%
+  \usebeamerfont{block body}%
+  \begin{beamercolorbox}[colsep*=.75ex,vmode]{block body}%
+    \ifbeamercolorempty[bg]{block body}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+}
+\defbeamertemplate*{block end}{POLIMI}
+{\end{beamercolorbox}\vskip\smallskipamount}
+
+
+\defbeamertemplate*{title page}{POLIMI}
+{
+  \begin{tikzpicture}[overlay, remember picture]
+    \node at (current page.north)
+      [inner sep=0pt, outer sep=0pt,anchor=north]
+      {\includegraphics[width=\paperwidth]{banner}};
+    \node at (current page.center)
+      [anchor=north,  align=center,  xshift=.1\paperwidth]
+      (title)
+      {\parbox[b]{.62\paperwidth}{\usebeamercolor{title}%
+       \usebeamerfont{title}\textcolor{fg}{\inserttitle}}};
+    \node at (current page.west)
+      [anchor=west, xshift=.1\paperwidth, yshift=-.20\paperheight,
+       fill=author.bg, align=left]
+      (student)
+      {\parbox[t]{.65\paperwidth}{\usebeamercolor{author}%
+       \usebeamerfont{author}\textcolor{fg}{\@student}}};
+       
+      \node at (student.south)
+      [anchor=center,  yshift=-.02\paperheight,
+       fill=author.bg, align=left]
+      (supervisor)
+      {\parbox[t]{.65\paperwidth}{\usebeamercolor{author}%
+       \usebeamerfont{author}\textcolor{fg}{\@supervisor}}};
+   
+      \node at (supervisor.south)
+      [anchor=center, yshift=-.02\paperheight,
+       fill=author.bg, align=left]
+      (cosupervisor)
+      {\parbox[t]{.65\paperwidth}{\usebeamercolor{author}%
+       \usebeamerfont{author}\textcolor{fg}{\@cosupervisor}}};
+            
+%    \node at (author.north)
+%      [anchor=north, fill=institute.bg, align=left]
+%      (institute)
+%      {\parbox[t]{.65\paperwidth}{\usebeamercolor{institute}%
+%       \usebeamerfont{institute}\textcolor{fg}{\insertinstitute}}};
+    \node at (cosupervisor.south)
+      [anchor=north, fill=date.bg, align=center, xshift=.32\paperheight, yshift=-.07\paperheight]
+      (date)
+      {\parbox[t]{.65\paperwidth}{\usebeamercolor{date}%
+       \usebeamerfont{date}\textcolor{fg}{\insertdate}}};
+    \end{tikzpicture}
+}
+
+\defbeamertemplate*{plain title page}{POLIMI}
+{
+  \vbox{}
+  \vfill
+  \begin{centering}
+    \begin{beamercolorbox}[wd=.9\paperwidth,sep=8pt,center]{title}
+      \usebeamerfont{title}\inserttitle
+    \end{beamercolorbox}%
+    \vskip0.5em\par
+    \begin{beamercolorbox}[sep=8pt,center]{author}
+      \usebeamerfont{author}\insertauthor
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=8pt,center]{institute}
+      \usebeamerfont{institute}\insertinstitute
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=8pt,center]{date}
+      \usebeamerfont{date}\insertdate
+    \end{beamercolorbox}\vskip0.5em
+    {\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
+  \end{centering}
+  \vfill
+}
+
+\defbeamertemplate*{frametitle}{POLIMI}[1][left]
+{
+  \nointerlineskip%
+%   \ifbeamercolorempty[bg]{frametitle}{}{\nointerlineskip}%
+%   \@tempdima=\textwidth%
+%   \advance\@tempdima by\beamer@leftmargin%
+%   \advance\@tempdima by\beamer@rightmargin%
+  \begin{beamercolorbox}[sep=0.3cm,#1,wd=\paperwidth]{frametitle}
+    \usebeamerfont{frametitle}%
+    \vbox{}\vskip-1ex%
+    \if@tempswa\else\csname beamer@fte#1\endcsname\fi%
+    \strut\includegraphics[height=.05\paperheight]{freccia_trasparente}%
+    \hspace{.5ex}\smash{\rule[-1ex]{.1ex}{5ex}}\hspace{1ex}%
+    \insertframetitle\strut%
+    \par%
+    {%
+      \ifx\insertframesubtitle\@empty%
+      \else%
+      {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\strut\par}%
+      \fi
+    }%
+    \vskip-1ex%
+    \if@tempswa\else\vskip-.3cm\fi% set inside beamercolorbox... evil here...
+    \hbox{\raisebox{-2ex}{\includegraphics[width=\paperwidth]{barra_alta}}}
+  \end{beamercolorbox}%
+%   \begin{tikzpicture}[remember picture,overlay]
+%   \node at (current page.north east) [anchor=north east] {\rule{1cm}{1cm}};
+%   \end{tikzpicture}
+}
+
+\def\POLIMIbar{\includegraphics[width=.5\paperwidth]{barra_down}}
+
+\newlength\POLIMIbarh
+\setlength\POLIMIbarh{\heightof{\POLIMIbar}}
+
+\defbeamertemplate*{footline}{POLIMI}
+{
+  \hbox{\usebeamercolor[fg]{structure}\rule{\paperwidth}{.2ex}}\nointerlineskip%
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.4\paperwidth,ht=.75\POLIMIbarh,dp=.25\POLIMIbarh,center]{POLIMIbox}%
+    \usebeamerfont{author in head/foot}\tiny\insertshortauthor
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.1\paperwidth,ht=.75\POLIMIbarh,dp=.25\POLIMIbarh,center]{POLIMIbox}%
+    \usebeamerfont{title in head/foot}\tiny\insertshorttitle
+  \end{beamercolorbox}%
+   \begin{beamercolorbox}[wd=.1\paperwidth,ht=.75\POLIMIbarh,dp=.25\POLIMIbarh,center]{POLIMIbox}%
+     \insertframenumber{} / \inserttotalframenumber
+   \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.2\paperwidth,ht=.75\POLIMIbarh,dp=.25\POLIMIbarh,left]{empty}%
+      \raisebox{-.25\POLIMIbarh}{\POLIMIbar}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.3\paperwidth,ht=.75\POLIMIbarh,dp=.25\POLIMIbarh,center]{POLIMIboxInverted}%
+    \ifbeamer@POLIMIname
+      \adjustbox{width=.25\paperwidth,height=.5\POLIMIbarh}{\bfseries POLITECNICO DI MILANO}
+    \fi
+  \end{beamercolorbox}%
+  }%
+  \vskip0pt%
+}
+
+\setbeamertemplate{section in toc}{
+  \tikz \node {\includegraphics[width=2ex]{freccia_trasparente}\hspace{1ex}\inserttocsection};
+}
+
+\setbeamertemplate{section in toc shaded}{
+  \tikz \node [opacity=0.15] {\includegraphics[width=2ex]{freccia_trasparente}\hspace{1ex}\inserttocsection};
+}
+
+%\setbeamertemplate{block}[POLIMI]
+\setbeamertemplate{title page}[POLIMI]
+\setbeamertemplate{frametitle}[POLIMI]
+\setbeamertemplate{footline}[POLIMI]
+
+\setbeamertemplate{itemize item}[circle]
+\setbeamercolor{itemize item}{fg=POLIMIorange}
+
+\setbeamercolor{enumerate item}{fg=POLIMIorange}
+\setbeamerfont{enumerate item}{series=\bfseries}
+
+\newcommand*{\POLIMItitle}[1]{%
+  \includegraphics[width=2ex]{freccia_trasparente.png}\hspace{.5ex}%
+  \usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}#1}
+
+\newcommand{\@supervisor}{}
+\newcommand{\supervisor}[1]{\renewcommand{\@supervisor}{Supervisor: Prof. #1}}
+
+\newcommand{\@cosupervisor}{}
+\newcommand{\cosupervisor}[1]{\renewcommand{\@cosupervisor}{Co-supervisor: Prof. #1}}
+
+
+\newcommand{\@student}{}
+\newcommand{\student}[1]{\renewcommand{\@student}{Student: #1}}
+
+\mode
+<all>
