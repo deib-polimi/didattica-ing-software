@@ -839,14 +839,13 @@ Nella prima versione della soluzione utilizziamo il for generalizzato
 \begin{framed}
 \begin{lstlisting}
 public class FindDups {
-	public static void findDups(Collection<String> words){
-		Set<String> set = new HashSet<String>();
-		for (String s: words){
-			set.add(s);
-		}
-		System.out.println("Unique values, dim : " + 
+    public static void findDups(Collection<String> words){
+	    Set<String> set = new HashSet<String>();
+	    for (String s: words){
+	        set.add(s);
+	    }
+	    System.out.println("Unique values, dim : " + 
 		set.size() + " Elements:" + set);
-			
 	}
 }
 \end{lstlisting}
