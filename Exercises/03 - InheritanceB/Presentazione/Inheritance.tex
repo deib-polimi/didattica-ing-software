@@ -197,6 +197,22 @@ Animale a=new Cane();
 \begin{frame}[fragile]
 \frametitle{Overriding}
 \begin{framed}
+Overriding:
+\begin{itemize}
+\item La lista degli argomenti deve essere esattamente la stessa di quella del metodo overridato
+\item il tipo di ritorno deve essere lo stesso o un sottotipo di quello del metodo overridato
+\item il modificatore di accesso non pu\`o essere pi\`u restrittivo
+\item un metodo dichiarato final non pu\`o essere overridato
+\item un metodo statico non pu\`o essere overridato ma pu\`o essere ridichiarato
+\item constructors cannot be overridden.
+\end{itemize}
+\end{framed}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Overriding}
+\begin{framed}
 Che cosa stampa?
 \begin{lstlisting}
 public class Animale {
@@ -1135,6 +1151,19 @@ n.nuota(); //NO
 \end{lstlisting}
 \end{frame}
 
+
+\begin{frame}[fragile]
+\frametitle{Interfacce}
+\textbf{Semantica}\\
+Extends $\rightarrow$ \`e un...\\
+Implements $\rightarrow$ ha un comportamento\\
+Attributo $\rightarrow$ ha un oggetto (e.g., coordinate, esami) \\
+\vspace{1cm}
+\textbf{Sintassi}\\
+Extends $\rightarrow$ tra classe e classe o tra interfaccia e interfaccia\\
+Implements $\rightarrow$ tra classe e interfaccia\\
+\end{frame}
+
 \section{Casting di Tipo}
 \begin{frame}[fragile]
 \frametitle{Conversione tra tipi (Casting)}
@@ -1153,6 +1182,27 @@ Gatto b=(Gatto) a;
 \begin{itemize}
  \item l'assegnamento di un riferimento di una classe base a una classe derivata si pu\`o effettuare solo previo esplicito cast, passando come operando la classe derivata che si vuole assegnare
 \end{itemize}
+\end{frame}
+
+\section{Classi anonime}
+
+\begin{frame}[fragile]
+\frametitle{Classi anonime }
+
+\begin{lstlisting}[language=Java,escapechar=|]
+ interface HelloWorld {
+        public void greet();
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java,escapechar=|]
+ HelloWorld frenchGreeting=new HelloWorld() {
+            String name = "tout le monde";
+            public void greet() {
+                greetSomeone("tout le monde");
+            }
+        };
+\end{lstlisting}
 \end{frame}
 
 \end{document} 
