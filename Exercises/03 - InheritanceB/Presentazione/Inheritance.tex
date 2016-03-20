@@ -355,29 +355,10 @@ Cane: uccidi
 \end{framed}
 \end{frame}
 
-\begin{frame}[fragile]
-Dire cosa stampa il seguente programma 
-\begin{lstlisting}[language=Java,escapechar=|]
-public static void main(String[] args) {
-    ClassA a1, a2;
-    ClassB b1;
-    ClassC c1;
-    a1 = new ClassB();
-    b1 = new ClassB();
-    c1 = new ClassC();
-    a2 = new ClassC();
-    b1.stampa(b1); 
-    a1.stampa(b1); 
-    b1.stampa(c1); 
-    c1.stampa(c1);
-    c1.stampa(a1); 
-    a2.stampa(c1); 
-}
-\end{lstlisting}
-\end{frame}
 
 \begin{frame}[fragile]
-dove 
+\begin{columns}
+\begin{column}{0.6\textwidth}
 \begin{lstlisting}[language=Java,escapechar=|]
 public class ClassA {
     public void stampa(ClassA p){
@@ -391,8 +372,8 @@ public class ClassB extends ClassA {
         System.out.println("BBB");
     }
     public void stampa(ClassA p){
-	    System.out.println("AAA/BBB");
-	}
+        System.out.println("AAA/BBB");
+    }
 }
 \end{lstlisting}
 \begin{lstlisting}[language=Java,escapechar=|]
@@ -405,13 +386,11 @@ public class ClassC extends ClassA {
    }
 }
 \end{lstlisting}
-\end{frame}
-
-
-\begin{frame}[fragile]
-Dire cosa stampa il seguente programma 
+\end{column}
+\begin{column}{0.4\textwidth}
 \begin{lstlisting}[language=Java,escapechar=|]
-public static void main(String[] args) {
+public static void main(
+    String[] args) {
     ClassA a1, a2;
     ClassB b1;
     ClassC c1;
@@ -419,15 +398,624 @@ public static void main(String[] args) {
     b1 = new ClassB();
     c1 = new ClassC();
     a2 = new ClassC();
-    b1.stampa(b1); // (Stampa BBB)
-    a1.stampa(b1); // (Stampa AAA/BBB)
-    b1.stampa(c1); // (Stampa AAA/BBB)
-    c1.stampa(c1); // (Stampa CCC)
-    c1.stampa(a1); // (Stampa AAA/CCC)
-    a2.stampa(c1); // (Stampa AAA/CCC)
+    b1.stampa(b1); 
+   
 }
 \end{lstlisting}
+\end{column}
+\end{columns}
 \end{frame}
+
+\begin{frame}[fragile]
+\begin{columns}
+\begin{column}{0.6\textwidth}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassA {
+    public void stampa(ClassA p){
+        System.out.println("AAA");
+    }
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassB extends ClassA {
+    public void stampa(ClassB p){
+        System.out.println("BBB");
+    }
+    public void stampa(ClassA p){
+        System.out.println("AAA/BBB");
+    }
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassC extends ClassA {
+    public void stampa(ClassC p){
+        System.out.println("CCC");
+    }
+    public void stampa(ClassA p){
+        System.out.println("AAA/CCC");
+   }
+}
+\end{lstlisting}
+\end{column}
+\begin{column}{0.4\textwidth}
+\begin{lstlisting}[language=Java,escapechar=|]
+public static void main(
+    String[] args) {
+    ClassA a1, a2;
+    ClassB b1;
+    ClassC c1;
+    a1 = new ClassB();
+    b1 = new ClassB();
+    c1 = new ClassC();
+    a2 = new ClassC();
+    b1.stampa(b1); 
+    // BBB
+}
+\end{lstlisting}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\begin{columns}
+\begin{column}{0.6\textwidth}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassA {
+    public void stampa(ClassA p){
+        System.out.println("AAA");
+    }
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassB extends ClassA {
+    public void stampa(ClassB p){
+        System.out.println("BBB");
+    }
+    public void stampa(ClassA p){
+        System.out.println("AAA/BBB");
+    }
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassC extends ClassA {
+    public void stampa(ClassC p){
+        System.out.println("CCC");
+    }
+    public void stampa(ClassA p){
+        System.out.println("AAA/CCC");
+   }
+}
+\end{lstlisting}
+\end{column}
+\begin{column}{0.4\textwidth}
+\begin{lstlisting}[language=Java,escapechar=|]
+public static void main(
+    String[] args) {
+    ClassA a1, a2;
+    ClassB b1;
+    ClassC c1;
+    a1 = new ClassB();
+    b1 = new ClassB();
+    c1 = new ClassC();
+    a2 = new ClassC();
+    b1.stampa(b1); 
+    // BBB
+    a1.stampa(b1); 
+}
+\end{lstlisting}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\begin{columns}
+\begin{column}{0.6\textwidth}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassA {
+    public void stampa(ClassA p){
+        System.out.println("AAA");
+    }
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassB extends ClassA {
+    public void stampa(ClassB p){
+        System.out.println("BBB");
+    }
+    public void stampa(ClassA p){
+        System.out.println("AAA/BBB");
+    }
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassC extends ClassA {
+    public void stampa(ClassC p){
+        System.out.println("CCC");
+    }
+    public void stampa(ClassA p){
+        System.out.println("AAA/CCC");
+   }
+}
+\end{lstlisting}
+\end{column}
+\begin{column}{0.4\textwidth}
+\begin{lstlisting}[language=Java,escapechar=|]
+public static void main(
+    String[] args) {
+    ClassA a1, a2;
+    ClassB b1;
+    ClassC c1;
+    a1 = new ClassB();
+    b1 = new ClassB();
+    c1 = new ClassC();
+    a2 = new ClassC();
+    b1.stampa(b1); 
+    //BBB
+    a1.stampa(b1);  
+    //AAA/BBB
+}
+\end{lstlisting}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{columns}
+\begin{column}{0.6\textwidth}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassA {
+    public void stampa(ClassA p){
+        System.out.println("AAA");
+    }
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassB extends ClassA {
+    public void stampa(ClassB p){
+        System.out.println("BBB");
+    }
+    public void stampa(ClassA p){
+        System.out.println("AAA/BBB");
+    }
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassC extends ClassA {
+    public void stampa(ClassC p){
+        System.out.println("CCC");
+    }
+    public void stampa(ClassA p){
+        System.out.println("AAA/CCC");
+   }
+}
+\end{lstlisting}
+\end{column}
+\begin{column}{0.4\textwidth}
+\begin{lstlisting}[language=Java,escapechar=|]
+public static void main(
+    String[] args) {
+    ClassA a1, a2;
+    ClassB b1;
+    ClassC c1;
+    a1 = new ClassB();
+    b1 = new ClassB();
+    c1 = new ClassC();
+    a2 = new ClassC();
+    b1.stampa(b1); 
+    //BBB
+    a1.stampa(b1);  
+    //AAA/BBB
+    b1.stampa(c1);
+}
+\end{lstlisting}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{columns}
+\begin{column}{0.6\textwidth}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassA {
+    public void stampa(ClassA p){
+        System.out.println("AAA");
+    }
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassB extends ClassA {
+    public void stampa(ClassB p){
+        System.out.println("BBB");
+    }
+    public void stampa(ClassA p){
+        System.out.println("AAA/BBB");
+    }
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassC extends ClassA {
+    public void stampa(ClassC p){
+        System.out.println("CCC");
+    }
+    public void stampa(ClassA p){
+        System.out.println("AAA/CCC");
+   }
+}
+\end{lstlisting}
+\end{column}
+\begin{column}{0.4\textwidth}
+\begin{lstlisting}[language=Java,escapechar=|]
+public static void main(
+    String[] args) {
+    ClassA a1, a2;
+    ClassB b1;
+    ClassC c1;
+    a1 = new ClassB();
+    b1 = new ClassB();
+    c1 = new ClassC();
+    a2 = new ClassC();
+    b1.stampa(b1); 
+    //BBB
+    a1.stampa(b1);  
+    //AAA/BBB
+    b1.stampa(c1); 
+    // AAA/BBB
+}
+\end{lstlisting}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{columns}
+\begin{column}{0.6\textwidth}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassA {
+    public void stampa(ClassA p){
+        System.out.println("AAA");
+    }
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassB extends ClassA {
+    public void stampa(ClassB p){
+        System.out.println("BBB");
+    }
+    public void stampa(ClassA p){
+        System.out.println("AAA/BBB");
+    }
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassC extends ClassA {
+    public void stampa(ClassC p){
+        System.out.println("CCC");
+    }
+    public void stampa(ClassA p){
+        System.out.println("AAA/CCC");
+   }
+}
+\end{lstlisting}
+\end{column}
+\begin{column}{0.4\textwidth}
+\begin{lstlisting}[language=Java,escapechar=|]
+public static void main(
+    String[] args) {
+    ClassA a1, a2;
+    ClassB b1;
+    ClassC c1;
+    a1 = new ClassB();
+    b1 = new ClassB();
+    c1 = new ClassC();
+    a2 = new ClassC();
+    b1.stampa(b1); 
+    //BBB
+    a1.stampa(b1);  
+    //AAA/BBB
+    b1.stampa(c1); 
+    // AAA/BBB
+    c1.stampa(c1); 
+}
+\end{lstlisting}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{columns}
+\begin{column}{0.6\textwidth}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassA {
+    public void stampa(ClassA p){
+        System.out.println("AAA");
+    }
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassB extends ClassA {
+    public void stampa(ClassB p){
+        System.out.println("BBB");
+    }
+    public void stampa(ClassA p){
+        System.out.println("AAA/BBB");
+    }
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassC extends ClassA {
+    public void stampa(ClassC p){
+        System.out.println("CCC");
+    }
+    public void stampa(ClassA p){
+        System.out.println("AAA/CCC");
+   }
+}
+\end{lstlisting}
+\end{column}
+\begin{column}{0.4\textwidth}
+\begin{lstlisting}[language=Java,escapechar=|]
+public static void main(
+    String[] args) {
+    ClassA a1, a2;
+    ClassB b1;
+    ClassC c1;
+    a1 = new ClassB();
+    b1 = new ClassB();
+    c1 = new ClassC();
+    a2 = new ClassC();
+    b1.stampa(b1); 
+    //BBB
+    a1.stampa(b1);  
+    //AAA/BBB
+    b1.stampa(c1); 
+    // AAA/BBB
+    c1.stampa(c1); 
+    // CCC
+}
+\end{lstlisting}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{columns}
+\begin{column}{0.6\textwidth}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassA {
+    public void stampa(ClassA p){
+        System.out.println("AAA");
+    }
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassB extends ClassA {
+    public void stampa(ClassB p){
+        System.out.println("BBB");
+    }
+    public void stampa(ClassA p){
+        System.out.println("AAA/BBB");
+    }
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassC extends ClassA {
+    public void stampa(ClassC p){
+        System.out.println("CCC");
+    }
+    public void stampa(ClassA p){
+        System.out.println("AAA/CCC");
+   }
+}
+\end{lstlisting}
+\end{column}
+\begin{column}{0.4\textwidth}
+\begin{lstlisting}[language=Java,escapechar=|]
+public static void main(
+    String[] args) {
+    ClassA a1, a2;
+    ClassB b1;
+    ClassC c1;
+    a1 = new ClassB();
+    b1 = new ClassB();
+    c1 = new ClassC();
+    a2 = new ClassC();
+    b1.stampa(b1); 
+    //BBB
+    a1.stampa(b1);  
+    //AAA/BBB
+    b1.stampa(c1); 
+    // AAA/BBB
+    c1.stampa(c1); 
+    // CCC
+    c1.stampa(a1); 
+}
+\end{lstlisting}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{columns}
+\begin{column}{0.6\textwidth}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassA {
+    public void stampa(ClassA p){
+        System.out.println("AAA");
+    }
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassB extends ClassA {
+    public void stampa(ClassB p){
+        System.out.println("BBB");
+    }
+    public void stampa(ClassA p){
+        System.out.println("AAA/BBB");
+    }
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassC extends ClassA {
+    public void stampa(ClassC p){
+        System.out.println("CCC");
+    }
+    public void stampa(ClassA p){
+        System.out.println("AAA/CCC");
+   }
+}
+\end{lstlisting}
+\end{column}
+\begin{column}{0.4\textwidth}
+\begin{lstlisting}[language=Java,escapechar=|]
+public static void main(
+    String[] args) {
+    ClassA a1, a2;
+    ClassB b1;
+    ClassC c1;
+    a1 = new ClassB();
+    b1 = new ClassB();
+    c1 = new ClassC();
+    a2 = new ClassC();
+    b1.stampa(b1); 
+    //BBB
+    a1.stampa(b1);  
+    //AAA/BBB
+    b1.stampa(c1); 
+    // AAA/BBB
+    c1.stampa(c1); 
+    // CCC
+    c1.stampa(a1); 
+    // AAA/CCC
+}
+\end{lstlisting}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\begin{columns}
+\begin{column}{0.6\textwidth}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassA {
+    public void stampa(ClassA p){
+        System.out.println("AAA");
+    }
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassB extends ClassA {
+    public void stampa(ClassB p){
+        System.out.println("BBB");
+    }
+    public void stampa(ClassA p){
+        System.out.println("AAA/BBB");
+    }
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassC extends ClassA {
+    public void stampa(ClassC p){
+        System.out.println("CCC");
+    }
+    public void stampa(ClassA p){
+        System.out.println("AAA/CCC");
+   }
+}
+\end{lstlisting}
+\end{column}
+\begin{column}{0.4\textwidth}
+\begin{lstlisting}[language=Java,escapechar=|]
+public static void main(
+    String[] args) {
+    ClassA a1, a2;
+    ClassB b1;
+    ClassC c1;
+    a1 = new ClassB();
+    b1 = new ClassB();
+    c1 = new ClassC();
+    a2 = new ClassC();
+    b1.stampa(b1); 
+    //BBB
+    a1.stampa(b1);  
+    //AAA/BBB
+    b1.stampa(c1); 
+    // AAA/BBB
+    c1.stampa(c1); 
+    // CCC
+    c1.stampa(a1); 
+    // AAA/CCC
+     a2.stampa(c1)
+}
+\end{lstlisting}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\begin{columns}
+\begin{column}{0.6\textwidth}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassA {
+    public void stampa(ClassA p){
+        System.out.println("AAA");
+    }
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassB extends ClassA {
+    public void stampa(ClassB p){
+        System.out.println("BBB");
+    }
+    public void stampa(ClassA p){
+        System.out.println("AAA/BBB");
+    }
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java,escapechar=|]
+public class ClassC extends ClassA {
+    public void stampa(ClassC p){
+        System.out.println("CCC");
+    }
+    public void stampa(ClassA p){
+        System.out.println("AAA/CCC");
+   }
+}
+\end{lstlisting}
+\end{column}
+\begin{column}{0.4\textwidth}
+\begin{lstlisting}[language=Java,escapechar=|]
+public static void main(
+    String[] args) {
+    ClassA a1, a2;
+    ClassB b1;
+    ClassC c1;
+    a1 = new ClassB();
+    b1 = new ClassB();
+    c1 = new ClassC();
+    a2 = new ClassC();
+    b1.stampa(b1); 
+    //BBB
+    a1.stampa(b1);  
+    //AAA/BBB
+    b1.stampa(c1); 
+    // AAA/BBB
+    c1.stampa(c1); 
+    // CCC
+    c1.stampa(a1); 
+    // AAA/CCC
+     a2.stampa(c1) 
+     // AAA/CCC
+}
+\end{lstlisting}
+\end{column}
+\end{columns}
+\end{frame}
+
+
 
 
 
