@@ -1,19 +1,10 @@
+\frametitle{Bounded Wildcard}
 \begin{framed}
 \begin{lstlisting}
-public static void count(String text){
-    StringTokenizer tokenizer =
-        new StringTokenizer(text);
-    Map<String,Integer> frequencyCounterMap =
-        new HashMap<String,Integer>();
-    while (tokenizer.hasMoreTokens()){
-        String word = tokenizer.nextToken();
-        Integer freq = frequencyCounterMap.get(word);
-        frequencyCounterMap.put(word,
-            (freq == null) ? 1 : freq + 1);
+void drawAll(List<? extends Shape> shapes) {
+    for (Shape s : shapes) {
+        s.draw(this);
     }
-    System.out.println(frequencyCounterMap.size() +
-         " parole distinte");
-    System.out.println(frequencyCounterMap);
 }
 \end{lstlisting}
 \end{framed}

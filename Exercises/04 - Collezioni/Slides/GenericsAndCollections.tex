@@ -941,6 +941,80 @@ public static void count(String text){
 \end{framed}
 \end{frame}
 
+
+\subsection{Esercizio 5: Scrivere un metodo che stampa gli elementi di una collection di qualsiasi tipo.}
+\begin{frame}[fragile]
+\frametitle{WildCard}
+\begin{framed}
+Esercizio 5: Scrivere un metodo che stampa gli elementi di una collection di qualsiasi tipo.
+\end{framed}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{WildCard}
+La prima soluzione che potrebbe venirci in mente \`e la seguente: dichiarare un metodo che prende come parametro una collezione di elementi il cui tipo \`e \texttt{Object}.
+\begin{framed}
+\begin{lstlisting}[language=Java]
+void printCollection(Collection<Object> c){
+    for(Object e: c){
+        System.out.println(e);    
+    }
+}
+\end{lstlisting}
+\end{framed}
+ Tuttavia questa soluzione non ci pemette di stampare una collezione di \texttt{String}. Infatti, bench\`e \texttt{String} estende \texttt{Object} non \`e vero che \texttt{Collection<Object>} estende \texttt{Collection<String>}. Quindi non \`e possibile chiamare il metodo \texttt{printCollection} passando come parametro una \texttt{Collection<String>}.
+\end{frame}
+%
+\begin{frame}[fragile]
+\frametitle{WildCard}
+\begin{framed}
+\begin{lstlisting}[language=Java]
+void printCollection(Collection<?> c){
+    for(Object e: c){
+        System.out.println(e);    
+    }
+}
+\end{lstlisting}
+\end{framed}
+\end{frame}
+
+\subsection{Esercizio 6: Bounded Wildcard}
+\begin{frame}[fragile]
+\frametitle{Bounded Wildcard}
+\begin{framed}
+Esercizio 6: Aggiungere un metodo \texttt{drawAll} in ShapeClient per disegnare tutte le figure di una lista di figure
+\end{framed}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Bounded Wildcard}
+	La prima soluzione a cui possiamo pensare \`e la seguente:
+	\begin{framed}
+	\begin{lstlisting}
+	void drawAll(List<Shape> shapes) { 
+	    for (Shape s : shapes) {
+	        s.draw(this); 
+	    }
+	}
+	\end{lstlisting}
+\end{framed}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Bounded Wildcard}
+\begin{framed}
+\begin{lstlisting}
+void drawAll(List<? extends Shape> shapes) { 
+    for (Shape s : shapes) {
+        s.draw(this); 
+    }
+}
+\end{lstlisting}
+\end{framed}
+\end{frame}
+
 %-------------
 
 %------------------------------------------------
