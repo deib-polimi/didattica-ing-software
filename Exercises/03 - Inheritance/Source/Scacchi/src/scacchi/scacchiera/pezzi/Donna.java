@@ -40,15 +40,17 @@ public class Donna extends Pezzo {
 				}
 				return true;
 			}
+			int x = this.getCasella().getCoordinata().getX();
+			int y = this.getCasella().getCoordinata().getY();
 			if ((deltaX == 0) || (deltaY == 0)) {
 
 				if (deltaY == 0) {
 					// controlla tutte le caselle sulla diagonale, se in una di
 					// queste c'e' un pezzo ritorna false
 					for (int i = 1; i < Math.abs(deltaX); i++) {
+						
 						if (!scacchiera.getCasella(
-								new Coordinata(this.getCasella().getCoordinata().getX() + i,
-										this.getCasella().getCoordinata().getY())).isEmpty()) {
+								new Coordinata(x + i, y)).isEmpty()) {
 							return false;
 						}
 					}
@@ -56,8 +58,7 @@ public class Donna extends Pezzo {
 				if (deltaX == 0) {
 					for (int i = 1; i < Math.abs(deltaX); i++) {
 						if (!scacchiera.getCasella(
-								new Coordinata(this.getCasella().getCoordinata().getX(), this
-										.getCasella().getCoordinata().getY() + i)).isEmpty()) {
+								new Coordinata(x, y + i)).isEmpty()) {
 							return false;
 						}
 					}

@@ -24,7 +24,7 @@ public class Cavallo extends Pezzo {
 			// y
 			int deltaX = destinazione.getCoordinata().getX() - this.getCasella().getCoordinata().getX();
 			int deltaY = destinazione.getCoordinata().getY() - this.getCasella().getCoordinata().getY();
-			if((Math.abs(deltaX)==2&&Math.abs(deltaY)==1)||(Math.abs(deltaY)==2&&Math.abs(deltaX)==1)){
+			if((Math.abs(deltaX)==2 && Math.abs(deltaY)==1) || (Math.abs(deltaY)==2 && Math.abs(deltaX)==1)){
 				return true;
 			}
 		}
