@@ -21,15 +21,18 @@ public class Alfiere extends Pezzo {
 				return false;
 			}
 			// calcola la distanza della cella rispetto all'asse delle x e delle y
-			int deltaX=destinazione.getCoordinata().getX()-this.getCasella().getCoordinata().getX();
-			int deltaY=destinazione.getCoordinata().getY()-this.getCasella().getCoordinata().getY();
+			int deltaX = destinazione.getCoordinata().getX() - this.getCasella().getCoordinata().getX();
+			int deltaY = destinazione.getCoordinata().getY() - this.getCasella().getCoordinata().getY();
 			// se il valore assoluto delle distanze \`e diverso ritorna false
 			if(Math.abs(deltaX)!=Math.abs(deltaY)){
 				return false;
 			}
+			int x = this.getCasella().getCoordinata().getX();
+			int y = this.getCasella().getCoordinata().getY();
 			// controlla tutte le caselle sulla diagonale, se in una di queste c'e' un pezzo ritorna false
 			for(int i=1;i<Math.abs(deltaX);i++){
-				if(!scacchiera.getCasella(new Coordinata(this.getCasella().getCoordinata().getX()+Integer.signum(deltaX)*i, this.getCasella().getCoordinata().getY()+Integer.signum(deltaY)*i)).isEmpty()){
+				if(!scacchiera.getCasella(
+					new Coordinata(x+Integer.signum(deltaX)*i, y+Integer.signum(deltaY)*i)).isEmpty()){
 					return false;
 				}
 			}
