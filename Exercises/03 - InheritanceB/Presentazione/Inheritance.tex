@@ -1191,15 +1191,15 @@ Gatto b=(Gatto) a;
 
 \begin{lstlisting}[language=Java,escapechar=|]
  interface HelloWorld {
-        public void greet();
+        public String greet();
 }
 \end{lstlisting}
 
 \begin{lstlisting}[language=Java,escapechar=|]
  HelloWorld frenchGreeting=new HelloWorld() {
             String name = "tout le monde";
-            public void greet() {
-                greetSomeone("tout le monde");
+            public String greet() {
+               return name;
             }
         };
 \end{lstlisting}
