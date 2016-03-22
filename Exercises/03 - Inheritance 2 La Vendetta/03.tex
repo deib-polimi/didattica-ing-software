@@ -122,8 +122,8 @@
 
 
 
-\newcommand{\hmwkTitle}{04 - Ereditariet\`a e Conversioni} % Assignment title
-\newcommand{\hmwkDueDate}{Martedì,\ Marzo 21,\ 2016} % Due date
+\newcommand{\hmwkTitle}{03 - Ereditariet\`a e Conversioni} % Assignment title
+\newcommand{\hmwkDueDate}{Martedì,\ Marzo 22,\ 2016} % Due date
 \newcommand{\hmwkClass}{Ingegneria del Software 1} % Course/class
 \newcommand{\hmwkClassTime}{} % Class/lecture time
 \newcommand{\hmwkClassInstructor}{Claudio Menghi, Alessandro Rizzi} % Teacher/lecturer
@@ -332,7 +332,7 @@ Figura~\ref{Fig:gerarchy4} presenta una gerarchia che risolve il problema preced
       \label{Fig:gerarchy4}
 \end{figure}
 
-Una bozza di implementazione \`e resentata in seguito.
+Una bozza di implementazione \`e presentata in seguito.
 \begin{lstlisting}[language=Java,escapechar=|]
 public class Anatra extends Animale implements Volatile, Acquatico { 
     // Ha tutto ciò che aveva la classe Animale
@@ -383,7 +383,7 @@ for (int i = 1; i < 50; i += 2)
 \`E possibile aggiungere a una lista di tipo \texttt{Integer} \texttt{li} un elemento \texttt{i} di tipo \texttt{int}, sebbene \texttt{i} sia di un tipo primitivo mentre gli elementi in \texttt{li} siano di tipo reference. Questo perch\`e il compilatore crea degli oggetti di tipo \texttt{Integer} partendo dalla variabile \texttt{i}.
 
 \subsection{Casting}
-Abbiamo visto che il tipo dinamico di un oggetto dipende dal tipo della classe utilizzata per istanziarlo. Per esempio, se scriviamo
+Abbiamo visto che il tipo dinamico di un oggetto dipende dal tipo della classe utilizzata per istanziarlo. Per esempio, se scriviamo:
 \begin{lstlisting}[language=Java,escapechar=|]
 MountainBike myBike = new MountainBike();
 \end{lstlisting}
@@ -396,7 +396,7 @@ Object obj = new MountainBike();
 \end{lstlisting}
 l'oggetto \texttt{obj} \`e sia un oggetto che una \texttt{MountainBike} (se non riassegnato). Questo viene chiamato \emph{casting implicito}.
 
-A questo punto, se scriviamo 
+A questo punto, se scriviamo: 
 \begin{lstlisting}[language=Java,escapechar=|]
 MountainBike myBike = obj;
 \end{lstlisting}
@@ -520,7 +520,7 @@ public static void main(String[] args) {
 		a2.stampa(c1);
 	}
 \end{lstlisting}
-dove 
+dove: 
 \begin{lstlisting}[language=Java,escapechar=|]
 public class ClassA {
 
@@ -770,7 +770,7 @@ public class Main {
 }
 \end{lstlisting}
 
-Dove
+Dove:
 \begin{lstlisting}[language=Java,escapechar=|]
 public class Figura {
 	public void stampa(Figura f){
