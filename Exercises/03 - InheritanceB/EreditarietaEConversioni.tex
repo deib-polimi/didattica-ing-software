@@ -1,5 +1,8 @@
+% !TeX spellcheck = it_IT
 \documentclass{article}
-
+\usepackage[utf8]{inputenc}
+\inputencoding{utf8}
+\usepackage[T1]{fontenc}
 \usepackage{fancyhdr} % Required for custom headers
 \usepackage{lastpage} % Required to determine the last page for the footer
 \usepackage{extramarks} % Required for headers and footers
@@ -11,13 +14,11 @@
 \usepackage{hyperref}
 \usepackage{multirow}
 \usepackage{tabularx}
-\usepackage{framed}
 \usepackage{longtable}
 \usepackage{listings}
 \usepackage{subfigure}
 \usepackage{afterpage}
 \usepackage{amsmath,amssymb}            
-\usepackage{rotating}  
 \usepackage{fancyhdr}
 \usepackage{graphicx}
 \usepackage{amsthm}
@@ -34,10 +35,10 @@
 \linespread{1.1} % Line spacing
 
 \lstset{
-  numbers=left,
-  stepnumber=5,    
-  firstnumber=1,
-  numberfirstline=true
+	numbers=left,
+	stepnumber=5,    
+	firstnumber=1,
+	numberfirstline=true
 }
 
 % Set up the header and footer
@@ -55,28 +56,52 @@
 
 \usepackage{listings}
 \usepackage{color}
+\usepackage{graphicx}
+\usepackage{mathrsfs}
+\usepackage{framed}
+\usepackage{amssymb}
+\usepackage[figuresright]{rotating}
+\usepackage{comment}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{flushend}
+\usepackage{times}
+\usepackage{url}
+\usepackage{comment}
+\usepackage{paralist}
+\usepackage[multiple]{footmisc}
+\usepackage{amsthm}
+\usepackage{multicol}
+
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
 
 \lstset{frame=tb,
-  language=Java,
-  aboveskip=3mm,
-  belowskip=3mm,
-  showstringspaces=false,
-  columns=flexible,
-  basicstyle={\small\ttfamily},
-  numbers=none,
-  numberstyle=\tiny\color{gray},
-  keywordstyle=\color{blue},
-  commentstyle=\color{dkgreen},
-  stringstyle=\color{mauve},
-  breaklines=true,
-  breakatwhitespace=true
-  tabsize=3
+	language=Java,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=none,
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve},
+	breaklines=true,
+	breakatwhitespace=true
+	tabsize=3,
+	literate={à}{{\'a}}1
+	{è}{{\'e}}1
+	{ì}{{\'u}}1
+	{ò}{{\'o}}1
+	{ù}{{\'u}}1
 }
-
 %----------------------------------------------------------------------------------------
 %	DOCUMENT STRUCTURE COMMANDS
 %	Skip this unless you know what you're doing
@@ -97,8 +122,8 @@
 
 
 
-\newcommand{\hmwkTitle}{Ereditariet\`a e Conversioni} % Assignment title
-\newcommand{\hmwkDueDate}{Lunedi,\ Marzo 20,\ 2016} % Due date
+\newcommand{\hmwkTitle}{04 - Ereditariet\`a e Conversioni} % Assignment title
+\newcommand{\hmwkDueDate}{Martedì,\ Marzo 21,\ 2016} % Due date
 \newcommand{\hmwkClass}{Ingegneria del Software 1} % Course/class
 \newcommand{\hmwkClassTime}{} % Class/lecture time
 \newcommand{\hmwkClassInstructor}{Claudio Menghi, Alessandro Rizzi} % Teacher/lecturer
