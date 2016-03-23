@@ -1,5 +1,8 @@
+% !TeX spellcheck = it_IT
 \documentclass{article}
-
+\usepackage[utf8]{inputenc}
+\inputencoding{utf8}
+\usepackage[T1]{fontenc}
 \usepackage{fancyhdr} % Required for custom headers
 \usepackage{lastpage} % Required to determine the last page for the footer
 \usepackage{extramarks} % Required for headers and footers
@@ -11,13 +14,11 @@
 \usepackage{hyperref}
 \usepackage{multirow}
 \usepackage{tabularx}
-\usepackage{framed}
 \usepackage{longtable}
 \usepackage{listings}
 \usepackage{subfigure}
 \usepackage{afterpage}
 \usepackage{amsmath,amssymb}            
-\usepackage{rotating}  
 \usepackage{fancyhdr}
 \usepackage{graphicx}
 \usepackage{amsthm}
@@ -34,10 +35,10 @@
 \linespread{1.1} % Line spacing
 
 \lstset{
-  numbers=left,
-  stepnumber=5,    
-  firstnumber=1,
-  numberfirstline=true
+	numbers=left,
+	stepnumber=5,    
+	firstnumber=1,
+	numberfirstline=true
 }
 
 % Set up the header and footer
@@ -55,28 +56,52 @@
 
 \usepackage{listings}
 \usepackage{color}
+\usepackage{graphicx}
+\usepackage{mathrsfs}
+\usepackage{framed}
+\usepackage{amssymb}
+\usepackage[figuresright]{rotating}
+\usepackage{comment}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{flushend}
+\usepackage{times}
+\usepackage{url}
+\usepackage{comment}
+\usepackage{paralist}
+\usepackage[multiple]{footmisc}
+\usepackage{amsthm}
+\usepackage{multicol}
+
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
 
 \lstset{frame=tb,
-  language=Java,
-  aboveskip=3mm,
-  belowskip=3mm,
-  showstringspaces=false,
-  columns=flexible,
-  basicstyle={\small\ttfamily},
-  numbers=none,
-  numberstyle=\tiny\color{gray},
-  keywordstyle=\color{blue},
-  commentstyle=\color{dkgreen},
-  stringstyle=\color{mauve},
-  breaklines=true,
-  breakatwhitespace=true
-  tabsize=3
+	language=Java,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=none,
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve},
+	breaklines=true,
+	breakatwhitespace=true
+	tabsize=3,
+	literate={à}{{\'a}}1
+	{è}{{\'e}}1
+	{ì}{{\'u}}1
+	{ò}{{\'o}}1
+	{ù}{{\'u}}1
 }
-
 %----------------------------------------------------------------------------------------
 %	DOCUMENT STRUCTURE COMMANDS
 %	Skip this unless you know what you're doing
@@ -97,8 +122,8 @@
 
 
 
-\newcommand{\hmwkTitle}{Generici e Collezioni} % Assignment title
-\newcommand{\hmwkDueDate}{Lunedi,\ Marzo 21,\ 2016} % Due date
+\newcommand{\hmwkTitle}{04 - Generici e Collezioni} % Assignment title
+\newcommand{\hmwkDueDate}{Mercoledì,\ Marzo 23,\ 2016} % Due date
 \newcommand{\hmwkClass}{Ingegneria del Software 1} % Course/class
 \newcommand{\hmwkClassTime}{} % Class/lecture time
 \newcommand{\hmwkClassInstructor}{Claudio Menghi, Alessandro Rizzi} % Teacher/lecturer
@@ -177,12 +202,12 @@ class PrintArrayGeneric
 
 Per convenzione i tipi dei parametri generici sono indicati con una singola lettera maiuscola, seguendo la seguente convenzione
 \begin{itemize}
-\item \texttt{E}: Element
+\item \texttt{E} - Element
 \item \texttt{K} - Key
 \item \texttt{N} - Number
 \item \texttt{T} - Type
 \item \texttt{V} - Value
-\item \texttt{S},\texttt{U},\texttt{V}\texttt etc. - 2nd, 3rd, 4th types
+\item \texttt{S},\texttt{U},\texttt{V}, etc. - secondo, terzo, quarto,\dots tipo
 \end{itemize}
 
 
@@ -219,7 +244,7 @@ Il wildcard non deve essere utilizzato come:
 
 
 \subsubsection{Bounded Wildcard}
-Come per i tipi generici \`e possibile utilizzare il Wildcard in una versione \texttt{Bounded}. In particolare, \`e possibile specificare che \texttt{?} deve estendere una particolare classe, mediante la parola chiave \texttt{extends} ma anche che \texttt{?} deve essere un sopra-tipo di una particolare classe, mediante la parola chiave \texttt{super}.
+Come per i tipi generici \`e possibile utilizzare il wildcard in una versione \texttt{Bounded}. In particolare, \`e possibile specificare che \texttt{?} deve estendere una particolare classe, mediante la parola chiave \texttt{extends} ma anche che \texttt{?} deve essere un sopra-tipo di una particolare classe, mediante la parola chiave \texttt{super}.
 
 \subsection{Collezioni}
 Una collezione \`e un ``oggetto" che raggruppa degli elementi. Le collezioni sono utilizzate per memorizzare, manipolare, recuperare dati. Tipicamente raggruppano elementi in modo da formare dei gruppi, per esempio una collezione (insieme) di carte, una sequenza di lettere, un insieme di numeri. 
@@ -241,7 +266,7 @@ L'insieme di \textbf{interfacce} fornite dal Java collection framework \`e rappr
     \label{Fig:collections}
 \end{figure}
 
-Ogni interfaccia \`e generica. Quando dichiari una collezione devi specificare il tipo degli oggetti contenuti nella collezione. Questo permette al compilatore di verificare \textbf{a compile time} che il tipo dell'oggetto inserito all'interno di una collezione \`e corretto. Per esempio l'interfaccia \texttt{Collection} \`e specificata come segue, dove \texttt{E} \`e il tipo di elementi contenuti nella collezione.
+Ogni interfaccia \`e generica. Quando dichiari una collezione devi specificare il tipo degli oggetti contenuti nella collezione. Questo permette al compilatore di verificare a \textbf{compile time} che il tipo dell'oggetto inserito all'interno di una collezione \`e corretto. Per esempio l'interfaccia \texttt{Collection} \`e specificata come segue, dove \texttt{E} \`e il tipo di elementi contenuti nella collezione.
 \begin{lstlisting}
 public interface Collection<E>...
 \end{lstlisting}
@@ -511,9 +536,9 @@ public class Main {
 \end{lstlisting}
 
 \subsubsection{Generic Bounded types}
-\Esercizio{Pregettare la classe \texttt{Box}. La classe \texttt{Box} contiene un oggetto di tipo \textbf{animale} o suoi sottotipi. La classe fornisce il metodo \texttt{set}, che modifica l'oggetto contenuto nel box, e  \texttt{get}, che ottiene l'oggetto contenuto nel \texttt{Box}.}
+\Esercizio{Progettare la classe \texttt{Box}. La classe \texttt{Box} contiene un oggetto di tipo \textbf{animale} o suoi sottotipi. La classe fornisce il metodo \texttt{set}, che modifica l'oggetto contenuto nel box, e  \texttt{get}, che ottiene l'oggetto contenuto nel \texttt{Box}.}
 
-E\` possibile specificare che il tipo generico sostituito a \texttt{T} debba estendere una classe o implementare un interfaccia. Nel caso in questione forziamo \texttt{T} a estendere la classe \texttt{Animale}.
+\`E possibile specificare che il tipo generico sostituito a \texttt{T} debba estendere una classe o implementare un interfaccia. Nel caso in questione forziamo \texttt{T} a estendere la classe \texttt{Animale}.
 
 \begin{lstlisting}[language=Java]
 /*
@@ -601,13 +626,12 @@ List<String> ls=new ArrayList<String>();
 List<Object> lo=ls;
 \end{lstlisting}
 
-La prima istruzione \`e certamente corretta. La classe \texttt{ArrayList} implementa l'interfaccia \texttt{List}, e il tipo specificato per il parametro generico \`e il medesimo. La seconda istruzione non \`e corretta: bench\`e \texttt{String} estende \texttt{Object}, una lista di \texttt{String} non estende una lista di \texttt{Object}. Il compilatore genera un errore.l
-
+La prima istruzione \`e certamente corretta. La classe \texttt{ArrayList} implementa l'interfaccia \texttt{List}, e il tipo specificato per il parametro generico \`e il medesimo. La seconda istruzione non \`e corretta: bench\`e \texttt{String} estende \texttt{Object}, una lista di \texttt{String} non estende una lista di \texttt{Object}. Il compilatore genera un errore.
 
 \subsubsection{Rimozione di duplicati}
 \Esercizio{Scrivere un metodo statico che data una collezione di \texttt{String} rimuove i duplicati e stampa il numero di elementi non duplicati e i corrispettivi elementi}
 
-Nella prima versione della soluzione utilizziamo il for generalizzato
+Nella prima versione della soluzione utilizziamo il \emph{for generalizzato}
 \begin{lstlisting}
 package es1;
 
@@ -902,30 +926,16 @@ public static void count(String text){
 
 \section{Esercizi per casa}
 \begin{itemize}
-\item Generici
+\item \textbf{Generici}
 \begin{itemize}
 \item implementare la classe coppia, che rappresenta una coppia di elementi. I due elementi hanno dei tipi generici \texttt{K}, \texttt{V}.
 \item progettare un metodo statico che date due coppie i cui elementi sono dello stesso tipo ritorna true se le coppie rappresentano il medesimo oggetto
 \end{itemize} 
-\item Collezioni
+\item \textbf{Collezioni}
 \begin{itemize}
 \item modificare il gioco degli scacchi utilizzando le collezioni in modo opportuno al fine di memorizzare le mosse eseguite dai due giocatori al fine di mostrare al termine della partita  il log delle mosse (la ``storia della partita").
 \end{itemize}
 \end{itemize}
-
-
-\clearpage
-
-% ---- Bibliography ----
-
-
-
-
-\addcontentsline{toc}{chapter}{Bibliography}
-\bibliographystyle{alpha}
-\bibliography{bib}
-\nocite{*}
-
 
 \end{document}
 

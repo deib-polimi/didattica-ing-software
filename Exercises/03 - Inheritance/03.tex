@@ -173,18 +173,18 @@
 \section{Ripasso degli elementi del linguaggio Java}
 \subsection{Ereditarietà}
 
-Nella programmazione ad oggetti l'\emph{ereditarietà} è un meccanismo tramite il quale,
+Nella programmazione ad oggetti l'\emph{ereditarietà} è un meccanismo tramite il quale
 è possibile definire una classe a partire da un'altra e riutilizzare gli attributi e i metodi
 già definiti. I costruttori \emph{non} sono ereditati, anche se \`e possibile chiamare i costruttori del padre nel figlio.
 
 È detta classe figlio la classe che eredita, classe padre la classe ereditata.
 La classe figlio ha accesso a tutti gli attributi e i metodi della classe padre a seconda della loro visibilit\`a. Tutti gli attributi e i metodi \texttt{public} e \texttt{protected} sono visibili quelli di \texttt{default} solo se padre e figlio risiedono nello stesso package.
 
-Con l'eccezione di  \texttt{Object}, che non ha sopra classi, ogni classe ha una unica super-classe (ereditariet\'a singola). Se una classe non specifica una sopraclasse estende implicitamente la classe \texttt{Object}.
+Con l'eccezione di  \texttt{Object}, che non ha eredita alcuna classe, ogni classe ha una unica classe padre (ereditariet\'a singola). Se una classe non specifica alcuna classe padre, questa estende implicitamente la classe \texttt{Object}.
 
 L'idea dell'ereditariet\`a \`e molto semplice: quando vuoi creare una nuova classe $A$ ed esiste gi\`a una classe $B$ che contiene del codice che desideri puoi derivare $A$ da $B$. In questo caso puoi riusare i campi e i metodi della classe esistente senza doverli riscrivere.
 
-Che cosa \`e possibile fare con l'ereditariet\`a
+Che cosa \`e possibile fare con l'ereditariet\`a:
 \begin{itemize}
 \item i campi ereditati possono essere usati direttamente, esattamente come ogni altro campo;
 \item \`e possibile dichiarare attributi nella sottoclasse che non sono presenti nella classe padre;
@@ -270,7 +270,8 @@ o.foo(...);
 	sottotipo, altrimenti quella di \texttt{O} (\textbf{binding dinamico}).
 \end{enumerate}
 
-Nei metodi ridefiniti la visibilità e il tipo di ritorno possono essere cambiati
+Nei metodi ridefiniti la visibilità e il tipo di ritorno possono essere cambiati: la visibilità
+può solo essere aumentata ed è il tipo di ritorno può solo essere cambiato in un suo sottotipo.
 
 
 
@@ -382,7 +383,7 @@ Analizziamo ora una \texttt{Casella}.
 \item Quale relazione esiste fra gli elementi da modellare?\\
 \textit{Nel nostro caso specifico un Torre \textbf{\`e un} pezzo, un Cavallo \textbf{\`e un} pezzo,  una Re  \textbf{\`e un} pezzo\ldots. La relazione \textbf{\`e un} \`e esattamente il tipo di relazione che \`e possibile modellare con la gerarchia.}
 \item Qual'\`e la super-classe e qual\`e la sottoclasse?\\
-\textit{La super-classe \`e l'oggetto che contiene gli attributi che sono in comune. Nel nostro caso Pezzo \`e la super classe, Torre, Cavallo, Alfiere\ldots sono sotto-classi}
+\textit{La super-classe \`e l'oggetto che contiene gli attributi che sono in comune. Nel nostro caso Pezzo \`e la super classe; Torre, Cavallo, Alfiere\ldots sono sotto-classi.}
 \item Come traduciamo questa relazione in Java? Usiamo una classe, una classe astratta o un interfaccia?
 \textit{Se deve essere possibile istanziare un elemento con tipo uguale alla super-classe utilizziamo una classe ``normale". In caso constrario, un interfaccia fornisce uno scheletro dell'oggetto ma nessuna implementazione. Una classe astratta al contrario pu\`o contenere delle parti implementate}
 \textit{Nel caso specifico non deve essere possibile istanziare un oggetto di tipo pezzo ma solo di uno dei suoi sottotipi. Quindi optiamo o per una classe astratta o per un interfaccia. Nel caso specifico utilizzeremo una classe astratta e ne vedremo dopo le motivazioni}
