@@ -91,7 +91,7 @@
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
 
-\title[Eccezioni]{Eccezioni e Iteratori} % The short title appears at the bottom of every slide, the full title is only on the title page
+\title[Eccezioni]{Eccezioni} % The short title appears at the bottom of every slide, the full title is only on the title page
 
 \author{Claudio Menghi} % Your name
 \institute[Polimi] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
@@ -184,6 +184,27 @@ public boolean mossaValida(Scacchiera scacchiera,
 \end{frame}
 
 
+\begin{frame}[fragile]
+\frametitle{Eccezione unchecked}
+Considerato che le eccezioni \textbf{unchecked} in genere causano il crash dell'applicazione come posso evitarle?
+\begin{itemize}
+\item Ask for forgiveness
+\begin{lstlisting}[language=Java]
+try{
+    set.add(new Complex(1.0,1.0));
+}catch(FullStackException e){
+    System.err.println("The stack is full");
+}
+\end{lstlisting}
+\item Ask for permission
+\begin{lstlisting}[language=Java]
+if(!set.isFull()){
+    set.add(new Complex(1.0, 1.0));
+}
+\end{lstlisting}
+\item In java si utilizza la seconda convenzione
+\end{itemize}
+\end{frame}
 
 
 \subsection{Eccezioni checked}
@@ -199,11 +220,11 @@ public boolean mossaValida(Scacchiera scacchiera,
         Casella casellaFinale) {
     if(!casellaFinale.isEmpty()){
         throw new MossaNonValidaException(
-            "Non e' possibile muovere una pedina in una casella gia' occupata");
+            "Non e' possibile muovere una pedina in 
+              una casella gia' occupata");
     }
 }
 \end{lstlisting}
-L'actual type parameter di \texttt{b1} \`e \texttt{String}.
 \end{framed}
 \end{frame}
 
@@ -261,27 +282,7 @@ public class MossaNonValida extends Exception {
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]
-\frametitle{Eccezione unchecked}
-Considerato che le eccezioni \textbf{unchecked} in genere causano il crash dell'applicazione come posso evitarle?
-\begin{itemize}
-\item Ask for forgiveness
-\begin{lstlisting}[language=Java]
-try{
-    set.add(new Complex(1.0,1.0));
-}catch(FullStackException e){
-    System.err.println("The stack is full");
-}
-\end{lstlisting}
-\item Ask for permission
-\begin{lstlisting}[language=Java]
-if(!set.isFull()){
-    set.add(new Complex(1.0, 1.0));
-}
-\end{lstlisting}
-\item In java si utilizza la seconda convenzione
-\end{itemize}
-\end{frame}
+
 
 \begin{frame}[fragile]
 \frametitle{Creare un eccezione unchecked}
@@ -443,8 +444,8 @@ Generated in g()
 
 
 \begin{frame}[fragile]
-\frametitle{Esercizio 3}
-Specificare la causa di un eccezione
+\frametitle{Esercizio 3: Specificare la causa di un eccezione}
+
 \begin{lstlisting}[language=Java]
 public static void f() throws Exception{
     System.out.println("Throw new Exception f()");
@@ -470,8 +471,8 @@ public static void main(String[] args) {
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Esercizio 4}
-Ordine dei catch
+\frametitle{Esercizio 4: Ordine dei catch}
+
 \begin{lstlisting}[language=Java]
 public class MyException extends Exception {
     private static final long serialVersionUID =
@@ -483,10 +484,31 @@ public class MyException extends Exception {
 \end{lstlisting}
 \end{frame}
 
+\begin{frame}[fragile]
+\frametitle{Esercizio 4: Ordine dei catch}
+\begin{lstlisting}[language=Java]
+public static void f() throws Exception{
+    System.out.println("Throw new Exception f()");
+    throw new MyException("Generated in f()");
+}
+public static void g() throws Exception{
+    try{ f(); }
+    catch(MyException ex){
+        System.out.println("My exception catched in "+
+            "g(). Rethrow");
+    }
+    catch (Exception e) {
+        System.out.println("Exception catched in g()."+
+            " Rethrow");
+        throw new Exception("Generated in g()", e);
+    }
+}
+\end{lstlisting}
+\end{frame}
+
 
 \begin{frame}[fragile]
-\frametitle{Esercizio 4}
-Ordine dei catch
+\frametitle{Esercizio 4: Ordine dei catch}
 \begin{lstlisting}[language=Java]
 public static void f() throws Exception{
     System.out.println("Throw new Exception f()");
@@ -510,8 +532,30 @@ public static void g() throws Exception{
 
 
 \begin{frame}[fragile]
-\frametitle{Esercizio 5}
-Ordine dei catch
+\frametitle{Esercizio 5: Ordine dei catch}
+\begin{lstlisting}[language=Java]
+public static void f() throws Exception{
+    System.out.println("Throw new Exception f()");
+    throw new MyException("Generated in f()");
+}
+public static void g() throws Exception{
+    try{ f(); }
+    catch (Exception e) {
+        System.out.println("Exception catched in g()."+
+            " Rethrow");
+        throw new Exception("Generated in g()", e);
+    }
+    catch(MyException ex){
+        System.out.println("My exception catched in "+
+            "g(). Rethrow");
+    }
+    
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Esercizio 5: Ordine dei catch}
 \begin{lstlisting}[language=Java]
 public static void f() throws Exception{
     System.out.println("Throw new Exception f()");
@@ -560,101 +604,6 @@ private void printFileContent(FileInputStream fileInputStream) {
 \end{lstlisting}
 \end{frame}
 
-\section{Iteratori}
-
-\section{Esercizi}
-
-%-------------
-
-%------------------------------------------------
-
-
-%----------------------------------------------------------------------------------------
 
 \end{document} 
-%
-%\documentclass{beamer}
-%\usepackage[english]{babel}
-%\usepackage{xcolor}
-%\usepackage[utf8]{inputenc}
-%%\usepackage[ngerman]{babel}
-%\usepackage{hyperref}
-%\usepackage{graphicx}
-%\usepackage{listings} % Required for insertion of code
-%%\usepackage[pdftex]{color}
-%%\usepackage{colortbl}
-%%\usepackage{listings}
-%\usepackage{xcolor}
-%\usepackage[lf]{venturis}
-%\usepackage{amsmath}
-%\usepackage{amsfonts}
-%\usepackage{amssymb}
-%\usepackage{subcaption}
-%%\usepackage{multirow}
-%\usepackage[version=3]{mhchem}
-%%\usepackage{longtable}
-%\usepackage{pgf}
-%\usepackage{tikz}
-%\usepackage[citetracker=true,sorting=none,backend=bibtex,autocite=footnote]{biblatex}
-%{\fontsize{2}{2} \bibliography{bibliography}}
-%
-%\renewcommand{\bibfont}{\tiny}
-%
-%\definecolor{kugreen}{RGB}{6,76,149}
-%\definecolor{kugreenlys}{RGB}{132,158,139}
-%\definecolor{kugreenlyslys}{RGB}{173,190,177}
-%\definecolor{kugreenlyslyslys}{RGB}{214,223,216}
-%\setbeamercovered{transparent}
-%
-%
-%
-%
-%
-%
-%\setbeamertemplate{navigation symbols}{}
-%
-%  
-%\mode<presentation>
-%{  \usetheme{Madrid}
-%  \usecolortheme[named=kugreen]{structure}
-%  \useinnertheme{circles}
-%  \usefonttheme[onlymath]{serif}
-%  \setbeamercovered{transparent}
-%  \setbeamertemplate{blocks}[rounded][shadow=true]
-%}
-%
-%
-%
-%
-%%\setbeamerfont{myTOC}{series=\bfseries}
-%\AtBeginSection[]{\frame{\frametitle{Outline}%
-%                  \usebeamerfont{myTOC}\tableofcontents[current]}}
-%                  
-%\title[Agile Verification]{Agile Verification}
-%\author[C. Menghi]{Student: Claudio Menghi \\ Supervisor: Carlo Ghezzi}
-%\institute[]{Politecnico di Milano}
-%\date{29 October 2014}
-%
-%\begin{document}
-%\frame{
-%\titlepage \vspace{-0.5cm}
-% }
-%
-%
-%\frame
-%{
-%\frametitle{Overview}
-%\tableofcontents[]
-%}
-%
 
-%
-%
-%%\section*{Bibliography}
-%%\begin{frame}[allowframebreaks]{Bibliography}
-%%\footnotesize{
-%%\bibliographystyle{abbrv}
-%%\bibliography{bibliography} }
-%%\end{frame}
-%
-%\end{document}
