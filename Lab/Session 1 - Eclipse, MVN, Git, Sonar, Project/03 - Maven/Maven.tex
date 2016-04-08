@@ -1,7 +1,9 @@
 \documentclass{article}
 
-\usepackage[T1]{fontenc}
+\newif\ifinstall
+\installtrue
 
+\usepackage[T1]{fontenc}
 \usepackage{fancyhdr} % Required for custom headers
 \usepackage{lastpage} % Required to determine the last page for the footer
 \usepackage{extramarks} % Required for headers and footers
@@ -83,12 +85,16 @@
 %----------------------------------------------------------------------------------------
 %	NAME AND CLASS SECTION
 %----------------------------------------------------------------------------------------
-
+\ifinstall
+\newcommand{\hmwkTitle}{Installing Maven} % Assignment title
+\newcommand{\hmwkDueDate}{Aprile 12, 2016} % Due date
+\else
 \newcommand{\hmwkTitle}{Maven} % Assignment title
 \newcommand{\hmwkDueDate}{Aprile 19, 2016} % Due date
+\fi
 \newcommand{\hmwkClass}{Ingegneria del Software 1} % Course/class
 \newcommand{\hmwkClassTime}{} % Class/lecture time
-\newcommand{\hmwkClassInstructor}{Sr\dj{}an Krsti\'c and Marco Scavuzzo} % Teacher/lecturer
+\newcommand{\hmwkClassInstructor}{Sr\dj{}an Krsti\'c and Claudio Menghi} % Teacher/lecturer
 \newcommand{\hmwkAuthorName}{} % Your name
 
 %----------------------------------------------------------------------------------------
@@ -162,7 +168,7 @@ higher. Install the most recent stable Java Development Kit (JDK)
 available for your operating system.
 
 \begin{description}
-\item Installing on Mac OS (assuming that brew is installed):
+\item Installing on Mac OS X (assuming that brew is installed):
 \begin{lstlisting}
 $ brew update
 $ brew install maven
@@ -207,6 +213,9 @@ Java home: /Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home/jre
 Default locale: en_US, platform encoding: UTF-8
 OS name: "mac os x", version: "10.10.5", arch: "x86_64", family: "mac"
 \end{lstlisting}
+
+\ifinstall
+\else
 
 \subsection{Project organization}
 
@@ -662,7 +671,19 @@ maven features via command line, even if they are not supported by the
 plugin. However, the typical use of maven for this course would not go
 beyond the capabilities of the m2e plugin. 
 
+\fi 
+
 \subsection{Install Maven for Eclipse}
+
+Maven is a standalone build tool that does not require you to use any
+particular IDE. It is advisable for you to understand how Maven works
+using the command line version since any particular Maven integration
+with IDE will end up calling the exact same methods of the command
+line version only wrapped in a (questionably) nice graphical interface.
+
+One such interface is offered by the Eclipse plugin for Mavan
+integration called m2e.
+
 Eclipse 4.5.2 comes with installation of m2e, so the installation is
 not needed. If you are using an older version of Eclipse (which is not
 recommended) you can install latest m2e release by using the following
@@ -685,6 +706,8 @@ its own maven installation. Therefore, it is likely that building your
 project via command line and via Eclipse might use different versions
 of maven.
 
+\ifinstall 
+\else
 \subsection{Create a Maven project in Eclipse}
 
 This process is equivalent to the command line version of running:
@@ -799,6 +822,8 @@ To create a maven project:
   </build>
 </project>
 \end{lstlisting}
+
+\fi
 
 \end{document}
 
