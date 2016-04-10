@@ -687,7 +687,7 @@ Push more branches...
 \begin{lstlisting}
 $ git checkout -b test
 $ # make some commits to test branch
-$ git push --set-upstream origin test 
+$ git push -u origin test 
 $ git branch -a
 $ git branch -vv
 $ 
@@ -767,7 +767,7 @@ $ git branch -vv
 $ git checkout -b test
 $ git merge origin/test
 $ git branch -vv
-$ git push --set-upstream origin test
+$ git push -u origin test
 \end{lstlisting}
 
 In order to see the fetched branch you will need a local branch to
@@ -799,13 +799,13 @@ respective local branches and commit.
 \begin{lstlisting}
 $ # stay on the second computer/folder
 $ git checkout -b some-different-branch
-$ git push --set-upstream origin some-different-branch
+$ git push -u origin some-different-branch
 $ git branch -vv
 $ # switch to the first computer/folder
 $ git pull
 $ git branch -vv
 $ git checkout -b some-different-branch
-$ git push --set-upstream origin some-different-branch
+$ git push -u origin some-different-branch
 $ git branch -vv
 \end{lstlisting}
 
