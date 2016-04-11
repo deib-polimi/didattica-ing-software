@@ -673,8 +673,16 @@ $ git branch -a
 \end{lstlisting}
 
 The \texttt{---set-upstream} or \texttt{-u} is used to bind the two
-branches such that the later pull command will . After this you local master
-branch is tracking the remote master branch.
+branches such that the later pull command will update the appropriate
+local branch. After this you local master branch is tracking the
+remote master branch.
+
+The default behavior of push command is to push the current local
+branch to its upstream remote branch (if their names match).
+
+\texttt{git push ---all} command performs the default push behavior
+for all local branches.
+
 
 \end{frame}
 
@@ -819,6 +827,12 @@ $ git branch -vv
 Execute these commands:
 
 \begin{lstlisting}
+$ # create bitbucket test repo
+$ git remote origin <URL>
+$ git checkout master
+$ git push -u origin master
+$ 
+$
 \end{lstlisting}
 \end{frame}
 
