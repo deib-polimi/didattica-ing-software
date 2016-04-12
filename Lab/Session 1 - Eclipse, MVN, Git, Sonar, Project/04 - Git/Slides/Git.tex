@@ -391,7 +391,7 @@ $ git log --online
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Hands on - Committing (5 mins)}
+\frametitle{Hands on - Committing (10 mins)}
 
 Execute these commands:
 
@@ -409,6 +409,20 @@ $ # create some more commits
 $ git log
 $
 \end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{.gitignore}
+
+\begin{lstlisting}
+.classpath
+.project
+target/
+.DS_Store
+*~
+\end{lstlisting}
+
 \end{frame}
 
 
@@ -581,7 +595,7 @@ $ git merge <branch name>
 phase) adding them (stage phase) and committing them (commit phase).
 
 \item However, If the two branches changed the same \textbf{line}
-of the same \textbf{file}, Git won't be able to figure out which
+(or \textbf{adjacent} lines) of the same \textbf{file}, Git won't be able to figure out which
 line to use in the final commit. 
 
 \item When such a situation occurs, Git stops right before the commit so that
@@ -610,7 +624,7 @@ $ git commit -m "conflict resolved"
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Hands on - Conflicts (2 mins)}
+\frametitle{Hands on - Conflicts (10 mins)}
 
 Execute these commands:
 
@@ -763,19 +777,17 @@ repository and sets the local master branch to track it.
 
 
 \begin{frame}[fragile]
-\frametitle{git fetch}
+\frametitle{git checkout --track}
 
 Fetch command retrieves a specified remote branch.
 
 \begin{lstlisting}
 $ # stay on the second computer/folder
-$ git fetch origin test
 $ git branch -a
 $ git branch -vv
-$ git checkout -b test
-$ git merge origin/test
+$ git checkout -track origin/test
+$ git branch -a
 $ git branch -vv
-$ git push -u origin test
 \end{lstlisting}
 
 In order to see the fetched branch you will need a local branch to
@@ -827,13 +839,25 @@ $ git branch -vv
 Execute these commands:
 
 \begin{lstlisting}
-$ # create bitbucket test repo
+$ # create bitbucket test repo (one person per group)
+$ # add your colleagues to the repo
 $ git remote origin <URL>
 $ git checkout master
 $ git push -u origin master
-$ 
-$
+$ # keep branchin', committin', pushin' and pullin'
 \end{lstlisting}
+
+Meanwhile your colleagues should execute:
+
+\begin{lstlisting}
+$ git clone <URL>
+$ git branch -a
+$ git branch -vv
+$ # keep branchin', committin', pushin' and pullin'
+$ 
+\end{lstlisting}
+
+
 \end{frame}
 
 
