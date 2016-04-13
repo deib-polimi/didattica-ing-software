@@ -79,6 +79,9 @@
 \usepackage{graphicx} % Allows including images
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
 
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{framed}
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
@@ -110,6 +113,11 @@ Politecnico di Milano \\ % Your institution for the title page
 %----------------------------------------------------------------------------------------
 
 
+\begin{frame}
+\frametitle{Esercizio 1: Veicolo}
+\includegraphics[scale=0.30]{Img/DiagrammiUML.png}
+
+\end{frame}
 
 \section{Esercizio 1: Veicolo}
 \begin{frame}
@@ -269,6 +277,120 @@ da un indirizzo IP.
 \begin{frame}
 \frametitle{Rete informatica}
 \includegraphics[scale=0.4]{Img/inf.pdf}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Tools}
+UML tools
+\begin{framed}
+\begin{itemize}
+\item	\emph{architexa} e’ un plugin di eclipse che permette di generare una versione dei diagrammi UML partendo dal codice;
+\item	\emph{Visual paradigm} ottimo per generare UML da codice e codice per UML, ma non e’ integrato con eclipse (nel caso MAC) ed e' a pagamento (ottimo tool)
+\item  \emph{StarUML}, \emph{Modelio},  \emph{Papyrus},  \emph{UML2 Tools}
+\item	ci sono tool non legati al codice, e.g., per mac e’ possibile scaricare degli stencil per omnigraffle, per windows c’e’ Visio
+\item \textbf{www.draw.io}
+\end{itemize}
+
+Abbiamo un tool nella lista dei tool da valutare
+\begin{itemize}
+\item \emph{Magic Draw} (scaricabile dal sito del poli http://www.software.polimi.it/software-download/studenti/magic-draw/)
+\end{itemize} 
+\end{framed}
+\end{frame}
+
+
+\section{Introduction}
+\begin{frame}
+\frametitle{Design}
+What is a good design?
+\end{frame}
+
+\begin{frame}
+\frametitle{Design}
+What is a good design?
+\begin{framed}
+A design the good if the cost of changing the design is minimal.
+\end{framed}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Design}
+How to create a good design?
+\end{frame}
+
+\begin{frame}
+\frametitle{Design}
+How to create a good design?
+\begin{framed}
+Take your time.\\
+Review the design.\\
+Keep it simple.\\
+\begin{itemize}
+\item keep it focuses
+\item solves only real problem we know about
+\item is easy to understand
+\end{itemize}
+\end{framed}
+\end{frame}
+
+\begin{frame}
+\frametitle{Design}
+Complexity
+\begin{framed}
+\begin{itemize}
+\item Inherent
+\item Accidental
+\end{itemize}
+\end{framed}
+\end{frame}
+
+\subsection{Design Principles}
+
+\begin{frame}
+\frametitle{Design Principles}
+Open Close Principle
+\begin{framed}
+Le entit\`a del software (le classi, i moduli e le funzioni) devono essere \emph{aperte all'estensione} e \emph{chiuse alle modifiche}\\
+\end{framed}
+\end{frame}
+
+\begin{frame}
+\frametitle{Design Principles}
+\includegraphics[scale=0.5]{Img/ocpbad.pdf}
+\end{frame}
+
+\begin{frame}
+\frametitle{Design Principles}
+\includegraphics[scale=0.5]{Img/ocpgood.pdf}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Design Principles}
+Dependency Inversion Principle
+\begin{framed}
+I moduli di alto livello non devono dipendere direttamente dai moduli di basso livello. Entrambi devono dipendere da delle astrazioni.
+\end{framed}
+Quando delle classi di alto livello devono accedere a delle risorse di basso livello (disco I/O etc..) \`e conveniente
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Design Principles}
+Single Responsibility Principle
+\begin{framed}
+A class should have only one reason to change.
+\end{framed}
+\end{frame}
+
+\begin{frame}
+\frametitle{Design Principles}
+Liskov's Substitution Principle
+\begin{framed}
+Derived types must be completely substitutable for their base types.
+\end{framed}
 \end{frame}
 
 
