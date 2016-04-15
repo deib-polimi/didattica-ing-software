@@ -379,7 +379,7 @@ nothing but the .git subdirectory.
 
 Shared remote repositories should always be created with the --bare
 flag. In fact, the remote repository that you are going to use in the
-class is already going to be initialized, however you are responsible
+class is already going to be initialized (by BitBucket), however you are responsible
 for creating your local repositories.
 
 \blockquote{
@@ -435,7 +435,8 @@ $ git config --global user.email john@example.com
 \subsection{Saving and reading changes}
 
 The git add and git commit commands compose the fundamental Git
-workflow. These are the two commands that every Git user needs to
+workflow. This workflow is called Edit-Stage-Commit workflow. These
+are the two commands that every Git user needs to
 understand, regardless of their team's collaboration model. They are
 the means to record versions of a project into the repository's
 history. Finally, git checkout is used to browse any of the previous
@@ -451,7 +452,7 @@ particular file in the next commit.
 $ git add <file or directory> 
 \end{lstlisting}
 
-With git reset command you can revert the git add command.
+git reset command can be used to revert the git add command.
 
 \begin{lstlisting}
 $ git reset <file or directory> 
