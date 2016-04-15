@@ -154,7 +154,6 @@ Politecnico di Milano \\ % Your institution for the title page
 \item Introduction
 \item Using Git locally
   \begin{itemize}
-  \item git configure
   \item git init
   \item git status
   \item git add
@@ -168,7 +167,6 @@ Politecnico di Milano \\ % Your institution for the title page
   \begin{itemize}
   \item git clone
   \item git remote
-  \item git fetch
   \item git pull
   \item git push
   \end{itemize}
@@ -220,7 +218,7 @@ history of their work.
 
 \begin{frame}
 \frametitle{First generation VCS}
-Local versioning + Exchanging patches
+Centralized versioning with full file locks
 
 \begin{figure}
 
@@ -277,9 +275,11 @@ Remote distributed versioning
 \begin{frame}[fragile]
 \frametitle{git init}
 Creating a repository in folder "testrepo''
+\small
 \begin{lstlisting}
-$ git init testrepo
-$ tree -a
+$ git init testrepo # creates a git repo 
+$ cd testrepo       # enters testrepo folder
+$ tree -a           # shows content
 |-- .git
     |-- HEAD
     |-- config
@@ -314,8 +314,8 @@ $ tree -a
 Staging files to be saved in the repository
 
 \begin{lstlisting}
-$ touch Main.java
-$ git add Main.java
+$ touch Main.java     #creates file Main.java
+$ git add Main.java   #adds Main.java to stage
 \end{lstlisting}
 
 \end{frame}
@@ -327,9 +327,9 @@ $ git add Main.java
 Checking the status of the working folder.
 
 \begin{lstlisting}
-$ git status
-$ git touch Test.java
-$ git status
+$ git status #shows Main.java staged for commit
+$ git touch Test.java #creates Test.java file
+$ git status #shows also Test.java as untracked
 $ git add Test.java
 \end{lstlisting}
 \end{frame}
@@ -341,8 +341,8 @@ $ git add Test.java
 Writing to the local repository
 
 \begin{lstlisting}
-$ git commit -m "First commit"
-$ git status
+$ git commit -m "First commit" #committing both files
+$ git status #now there is nothing to commit
 \end{lstlisting}
 \end{frame}
 
@@ -374,9 +374,9 @@ First commit
 Perform some more commits...
 
 \begin{lstlisting}
-# some modifications
-$ git commit -m "Second commit"
-$ git status
+# some modifications (edit + stage)
+$ git commit -m "Second commit" 
+$ git status 
 \end{lstlisting}
 \end{frame}
 
@@ -385,9 +385,13 @@ $ git status
 \frametitle{git log}
 
 \begin{lstlisting}
-$ git log
-$ git log --online
+$ git log #shows all the commits
+$ git log --oneline #more compact representation
+$ git log --graph --oneline --decorate --all
 \end{lstlisting}
+
+The last command shows the most informative representation of the
+commits.
 \end{frame}
 
 \begin{frame}[fragile]
@@ -397,6 +401,7 @@ Execute these commands:
 
 \begin{lstlisting}
 $ git init testrepo
+$ cd testrepo
 $ git status
 $ # create some files
 $ git status
@@ -407,7 +412,6 @@ $ git status
 $ git log
 $ # create some more commits
 $ git log
-$
 \end{lstlisting}
 \end{frame}
 
@@ -415,6 +419,8 @@ $
 \begin{frame}[fragile]
 \frametitle{.gitignore}
 
+Special file that forces \texttt{git status} to ignore files that you
+do not want to version
 \begin{lstlisting}
 .classpath
 .project
@@ -430,6 +436,8 @@ target/
 \begin{frame}
 \frametitle{Changes as a directed acyclic graph (DAG)}
 
+To create alternative and non-sequential versions, git uses the
+concepts of branches.
 \begin{figure}
 \includegraphics[scale=0.3]{figures/f10.png}
 \end{figure}
@@ -439,6 +447,7 @@ target/
 \begin{frame}
 \frametitle{Changes as a directed acyclic graph (DAG)}
 
+...and modifications in different branches can be combined.
 \begin{figure}
 \includegraphics[scale=0.3]{figures/f11.png}
 \end{figure}
@@ -449,8 +458,10 @@ target/
 \begin{frame}
 \frametitle{Changes as a directed acyclic graph (DAG)}
 
+In general, at any moment git can maintain many different versions of
+the repository.
 \begin{figure}
-\includegraphics[scale=0.3]{figures/f12.png}
+\includegraphics[scale=0.25]{figures/f12.png}
 \end{figure}
 
 \end{frame}
@@ -462,10 +473,9 @@ target/
 Creating and modifying branches
 
 \begin{lstlisting}
-$ git branch feature 
-$ git branch -m feature-GUI-Swing
-$ git branch 
-$
+$ git branch feature #creates a branch called feature
+$ git branch -m feature-GUI-Swing #renames the branch
+$ git branch #lists existing branches
 \end{lstlisting}
 \end{frame}
 
@@ -473,18 +483,30 @@ $
 \begin{frame}[fragile]
 \frametitle{git checkout}
 
-Changing between branches
+Switching between the different branches is done using \texttt{git
+  checkout}.
 
 \begin{lstlisting}
-$ git checkout feature-GUI-Swing
-$ touch GUI.java
-$ # try to switch between the branches
+$ git checkout feature-GUI-Swing #switch branches
+$ touch GUI.java 
+$ # try to switch (1) between the branches
 $ git add GUI.java
-$ # try to switch between the branches
-$ git commit -m  "added gui"
-$ # try to switch between the branches
-$ git log --graph --oneline --decorate
+$ # try to switch (2) between the branches
+$ git commit -m  "added gui" #on branch feature-GUI-Swing
+$ # try to switch (3) between the branches
+$ git log --graph --oneline --decorate --all
 \end{lstlisting}
+
+Notice that, after creating the GUI.java file,
+switching (1) between branches would keep the file on both branches.
+Also, when staged, GUI.java can be seen on both branches (2). Finally,
+after committing the file, it can be only seen 
+on feature-GUI-Swing branch (3). Therefore, you can decide on which
+branch to commit, just before actual commit. However, there are
+pitfalls: if you create a file that already exists on another branch,
+you cannot switch to that branch before committing or
+stashing/removing the file first.
+
 \end{frame}
 
 
@@ -528,14 +550,19 @@ $ git log --graph --oneline --decorate
 \begin{frame}[fragile]
 \frametitle{git merge (fast-forward)}
 
-Performing a fast-forward merge
+Performing a fast-forward merge:
 
 \begin{lstlisting}
-$ git checkout master
-$ git merge feature-GUI-Swing
-$ git log --graph --oneline --decorate
+$ git checkout master #switch to master branch
+$ git merge feature-GUI-Swing #merging feature-GUI-Swing
+$ git log --graph --oneline --decorate 
 $ 
 \end{lstlisting}
+
+Fast-forward merge can be done when both branches refer to commits in
+the same sequence. In a ff merge above the master branch is updated to
+the same commit as the one of the feature-GUI-Swing branch.
+
 \end{frame}
 
 \begin{frame}[fragile]
@@ -556,13 +583,17 @@ $ git log --graph --oneline --decorate
 Performing a 3-way merge
 
 \begin{lstlisting}
-$ git checkout -b feature-random
+$ git checkout -b feature-random #create and switch to feature-random branch
 $ # perform some commits on feature-random branch
 $ git checkout master
 $ # perform some commits on master branch
-$ git merge feature-random
+$ git merge feature-random -m "merged with feature-random"
 $ 
 \end{lstlisting}
+
+When performing a 3-way merge there are to divergent commits whose
+changes git needs to combine into a single commit. In this case git
+creates a new commit, hence we need to specify the commit message.
 \end{frame}
 
 
@@ -607,6 +638,9 @@ you can resolve the conflicts manually.
 
 \begin{frame}[fragile]
 \frametitle{Resolving conflicts}
+If we create a Main class and add an integer field "a'' in the master
+branch while integer field "b'' in feature-random branch upon merging
+we will get a conflict. Main.java file would look like this:
 \begin{lstlisting}
 $ cat Main.java
 public class Main{
@@ -616,12 +650,24 @@ int a;
 int b;
 >>>>>>>>>> feature-random
 }
+\end{lstlisting}
+Content between signs "< < < <'' and "===='' belong to the master
+branch, while between "===='' and "> > > >'' belong to the
+feature-random branch.
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Resolving conflicts}
+\begin{lstlisting}
 $ # edit the file
 $ git add Main.java
 $ git commit -m "conflict resolved"
 \end{lstlisting}
-
+After editing, staging and committing the file
+the conflict is resolved.
 \end{frame}
+
 
 \begin{frame}[fragile]
 \frametitle{Hands on - Conflicts (10 mins)}
@@ -632,7 +678,7 @@ Execute these commands:
 $ # edit the <conflicted file>
 $ git add <conflicted file>
 $ git commit -m "<message>"
-$ git log --graph --oneline --decorate
+$ git log --graph --oneline --decorate --all
 \end{lstlisting}
 \end{frame}
 
@@ -655,13 +701,17 @@ $ git log --graph --oneline --decorate
 \begin{frame}[fragile]
 \frametitle{git remote}
 
-The git remote command lets you create, view, and delete connections
-to other repositories.
+Each git repository maintains a list of remote repositories in the
+form (name, url).
+The git remote command lets you create, view, and delete items from
+this list.
 
 \begin{lstlisting}
-$ git remote add origin https://krle@bitbucket.org/krle/test-repo.git
+$ git remote add origin https://username@bitbucket.org/username/repo.git
 $ git remote
 \end{lstlisting}
+The above \texttt{git remote add} command adds to the list the pair (origin, https://username@bitbucket.org/username/repo.git).
+
 \end{frame}
 
 
@@ -679,17 +729,19 @@ $ git remote
 \begin{frame}[fragile]
 \frametitle{git push}
 
-Push command pushes the current branch to the remote repository
+Push command pushes the current branch to the remote repository.
 
 \begin{lstlisting}
 $ git push --set-upstream origin master 
 $ git branch -a
 \end{lstlisting}
 
+Git also maintains a list of (local branch, remote branch) pairs
+called upstreams.
+
 The \texttt{---set-upstream} or \texttt{-u} is used to bind the two
-branches such that the later pull command will update the appropriate
-local branch. After this you local master branch is tracking the
-remote master branch.
+branches such that the later push and pull commands can refer to them
+to update the remote or local repository, respectively.
 
 The default behavior of push command is to push the current local
 branch to its upstream remote branch (if their names match).
@@ -699,7 +751,6 @@ for all local branches.
 
 
 \end{frame}
-
 
 \begin{frame}[fragile]
 \frametitle{git push}
@@ -720,38 +771,37 @@ branches that they are tracking.
 
 \end{frame}
 
-% \begin{frame}
-% \frametitle{Configure push behavior}
+\begin{frame}
+\frametitle{Push behavior}
+
+Push has many pre-configured behaviors that can be chosen.
+Using the configuration entry \texttt{push.default}
+one can define the default action \texttt{git push} should
+take. Possible values are:
+
+\begin{itemize}
+\item \textbf{nothing} - do not push anything (error out) unless a refspec is
+  explicitly given. This is primarily meant for people who want to
+  avoid mistakes by always being explicit. 
+
+\item \textbf{current} - push the current branch to update a branch with the
+  same name on the receiving end.
+
+\item \textbf{upstream} - push the current branch back to the upstream
+  branch. 
+
+\item \textbf{matching} - push all branches having the same name on both
+  ends. 
+
+\item \textbf{simple} - works like a combination of upstream and
+  matching. It will refuse to push if the upstream branch's name is
+  different from the local one or if there is no upstream branch.
+  \textbf{This mode has become the default in Git 2.0.}
 
 
-% Using the configuration entry \texttt{push.default}
-% you can define the action git push should take if no particular
-% refspec was given. Possible values are:
+\end{itemize}
 
-% \begin{itemize}
-% \item nothing - do not push anything (error out) unless a refspec is
-%   explicitly given. This is primarily meant for people who want to
-%   avoid mistakes by always being explicit. 
-
-% \item current - push the current branch to update a branch with the
-%   same name on the receiving end.
-
-% \item upstream - push the current branch back to the branch whose
-%   changes are usually integrated into the current branch. 
-
-% \item simple - like upstream with an
-%   added safety to refuse to push if the upstream branch's name is
-%   different from the local one. When pushing to a remote that is
-%   different from the remote you normally pull from, work as
-%   current. 
-%   \textbf{This mode has become the default in Git 2.0.}
-
-% \item matching - push all branches having the same name on both
-%   ends. 
-
-% \end{itemize}
-
-% \end{frame}
+\end{frame}
 
 
 
@@ -763,7 +813,7 @@ Finally we show how a repository can be cloned
 
 \begin{lstlisting}
 $ # use a different computer/folder
-$ git clone https://krle@bitbucket.org/krle/test-repo.git
+$ git clone https://username@bitbucket.org/username/repo.git
 $ git branch
 $ git branch -a
 $ git branch -vv
@@ -814,8 +864,8 @@ changes).
 Pull command will perform fetching of the remote branch tracked by the
 current local branch (via upstream), merge them with their
 respective local branches and commit.
-
-
+For example, \texttt{git pull} on the current master branch will pull
+the origin/master branch and merge its commits with the local master branch.
 \begin{lstlisting}
 $ # stay on the second computer/folder
 $ git checkout -b some-different-branch
@@ -841,7 +891,7 @@ Execute these commands:
 \begin{lstlisting}
 $ # create bitbucket test repo (one person per group)
 $ # add your colleagues to the repo
-$ git remote origin <URL>
+$ git remote add origin <URL>
 $ git checkout master
 $ git push -u origin master
 $ # keep branchin', committin', pushin' and pullin'
@@ -867,12 +917,129 @@ $
 \end{frame}
 
 
+\begin{frame}
+\frametitle{git init}
+
+\begin{itemize}
+\item Right click on the project > Team > Share project
+\item Choose git 
+\item Click on Create and choose a path where you want to save the repo
+\item Click on Finish
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{git add}
+
+Right click on the file > Team > Add to Index
+
+\end{frame}
+
+\begin{frame}
+\frametitle{git commit}
+
+
+\begin{itemize}
+\item After adding the files...
+
+\item Right click on the project > Team > Commit
+
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{git status}
+
+To see the status of the files look in the project explorer.
+\begin{itemize}
+\item Files with ? are untracked
+\item Files with + are added
+\item Files with <yellow cylinder> are committed
+\item Files with > are modified
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{git log}
+
+Right click on the project > Team > Show in History
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{git branch}
+
+Right click on the project > Team > Switch To > New Branch...
+
+\end{frame}
+
+\begin{frame}
+\frametitle{git checkout}
+
+Right click on the project > Team > Switch To > <branch name>
+
+\end{frame}
+
+\begin{frame}
+\frametitle{git merge}
+
+
+\begin{itemize}
+\item After switching to the appropriate branch:
+
+\item Right click on the project > Team > Merge 
+
+\item Then choose the other branch
+
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{git clone}
+
+
+\begin{itemize}
+\item Right click on the project explorer > Import > Project from Git >
+Clone URI 
+
+\item Then paste the appropriate URL.
+
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{git push}
+
+\begin{itemize}
+\item Right click on the project > Team > Push branch "<branch name>"
+\item Next
+\item Finish
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{git pull}
+
+Right click on the project > Team > Pull
+
+\end{frame}
+
+
 
 \begin{frame}
 \frametitle{Git references}
 
 \begin{itemize}
-\item See your guide at BEEP!
+\item See our guide at BEEP!
 \item \url{https://git-scm.com/}
 \item \url{http://gitref.org/}
 \item \url{https://progit.org/}
