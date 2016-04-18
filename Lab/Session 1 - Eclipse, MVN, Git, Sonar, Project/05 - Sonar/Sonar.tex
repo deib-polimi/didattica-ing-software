@@ -1,5 +1,9 @@
 \documentclass{article}
 
+\newif\ifinstall
+\installfalse
+
+
 \usepackage[T1]{fontenc}
 \usepackage{fancyhdr} % Required for custom headers
 \usepackage{lastpage} % Required to determine the last page for the footer
@@ -92,10 +96,15 @@
 %	NAME AND CLASS SECTION
 %----------------------------------------------------------------------------------------
 
-\newcommand{\hmwkTitle}{Sonar} % Assignment title
-\newcommand{\hmwkDueDate}{Aprile 21, 2015} % Due date
+\ifinstall
+\newcommand{\hmwkTitle}{Installing Sonar} % Assignment title
+\newcommand{\hmwkDueDate}{Aprile 12, 2016} % Due date
+\else
+\newcommand{\hmwkTitle}{Sonar guide} % Assignment title
+\newcommand{\hmwkDueDate}{Aprile 19, 2016} % Due date
+\fi
 \newcommand{\hmwkClass}{Ingegneria del Software 1} % Course/class
-\newcommand{\hmwkClassInstructor}{Sr\dj{}an Krsti\'c and Marco Scavuzzo} % Teacher/lecturer
+\newcommand{\hmwkClassInstructor}{Sr\dj{}an Krsti\'c and Claudio Menghi} % Teacher/lecturer
 %\newcommand{\hmwkClassTime}{} % Class/lecture time
 \newcommand{\hmwkAuthorName}{} % Your name
 
@@ -153,7 +162,7 @@ It covers the 7 areas of code quality:
 
 
 
-\section{Install Sonar}
+\subsection{Install Sonar}
 
 Sonar runs 2 components that come pre-packaged for any platform. Sonar
 Analyzer analyzes your project and stores the result of the analysis
@@ -167,14 +176,23 @@ Here is how you install Sonar:
 
 \begin{itemize}
 \item download Sonar
-  \href{http://dist.sonar.codehaus.org/sonarqube-5.0.1.zip}{\ULurl{here}}
-  and unzip the downloaded file to your favorite folder
+  \href{https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-5.4.zip}{\ULurl{here}}
+  and unzip the downloaded file in the folder of your choice
 \item unzip
-\item after unzipping you will see a folder for each OS
+\item after unzipping in the subfolder \texttt{bin} you will see a folder for each OS
 \item depending on your OS, you need to run the appropriate executable
   (type in terminal \texttt{sonar.sh start} for Linux and Mac OS,
   execute StartSonar.bat for Windows)
-\item now you can browse your sonar deployment at \url{http://localhost:9000/}
+\item now you can browse your sonar deployment at
+  \url{http://localhost:9000/}
+\begin{center}
+\includegraphics[scale=0.3]{figures/ss0.png}
+\end{center}
+\item to get the administrative privileges use the default credentials
+  (admin/admin) to further customize the deployment.
+
+\ifinstall
+\else
 \item to analyze your project the easiest way is to embed the Sonar
   analysis in the maven lifecycle. To do this, modify your pom.xml to have the following line under
   the properties tag:\\
@@ -200,10 +218,12 @@ for example:
 \item execute the run configuration
 \item access your project in Sonar by going to
   \url{http://localhost:9000/} and see its statistics
+\fi
 \end{itemize}
 
-
-\subsection{Enable test coverage}
+\ifinstall
+\else
+\section{Enable test coverage}
 If you notice that the statistics that you option from the previous
 sonar analysis does not contain unit test coverage information, you
 need to enable test coverage:
@@ -248,9 +268,15 @@ need to enable test coverage:
 %   \url{http://localhost:9000/} to see the code coverage statistics.
 \end{itemize}
 
+\fi
 
+\subsection{Integrate Sonar with Eclipse (optional)}
 
-\subsection{Integrate Sonar with Eclipse}
+This installation is optional since in our experience the Sonar
+Eclipse plugin is highly unstable. The plugin would allow you to view
+the results of sonar analysis directly in the context of your code,
+rather than browsing the webserver. You are free to choose among these
+options what is more suitable for your coding habits. 
 
 \begin{itemize}
 \item go to Help $>$ Eclipse Marketplace... and search for "SonarQube"
@@ -273,6 +299,9 @@ need to enable test coverage:
 \item for more details on how to use Sonar, watch the following
   screencast: \url{https://vimeo.com/91781086}
 \end{itemize}
+
+\ifinstall
+\else
 
 \section{Use Sonar}
 
@@ -338,7 +367,7 @@ more useful if you install the Sonar Eclipse plugin.\footnote{For a
 % \item potete modificare le vostre credenziali cliccando sul vostro nome in alto a destra $>$ My profile 
 % \end{itemize}
 
-
+\fi
 
 \end{document}
 

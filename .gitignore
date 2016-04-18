@@ -5,7 +5,6 @@
 *.toc
 *.log
 *.DS_Store
-*.pdf
 *.class
 *.nav
 *.snm

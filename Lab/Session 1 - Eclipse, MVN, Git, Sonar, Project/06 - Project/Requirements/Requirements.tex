@@ -13,6 +13,9 @@
 \usepackage{color}
 \usepackage[normalem]{ulem}
 \usepackage{url}
+\usepackage [acronym] {glossaries}
+\loadglsentries {acronyms}
+
 
 % Margins
 \topmargin=-0.45in
@@ -23,6 +26,7 @@
 \headsep=0.25in
 
 \linespread{1.1} % Line spacing
+
 
 % Set up the header and footer
 \pagestyle{fancy}
@@ -41,7 +45,10 @@
 \usepackage{color}
 \usepackage[applemac]{inputenc}
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
-\usepackage{todo}
+\usepackage{regexpatch}
+\usepackage{todonotes}
+\newcommand{\todosk}[1]{\todo[inline]{#1}} 
+
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
@@ -90,9 +97,9 @@
 %----------------------------------------------------------------------------------------
 
 \newcommand{\hmwkTitle}{Requisiti di Progetto} % Assignment title
-\newcommand{\hmwkDueDate}{Aprile 21, 2015} % Due date
+\newcommand{\hmwkDueDate}{Aprile 12, 2016} % Due date
 \newcommand{\hmwkClass}{Ingegneria del Software 1} % Course/class
-\newcommand{\hmwkClassInstructor}{Sr\dj{}an Krsti\'c and Marco Scavuzzo} % Teacher/lecturer
+\newcommand{\hmwkClassInstructor}{Sr\dj{}an Krsti\'c and Claudio Menghi} % Teacher/lecturer
 %\newcommand{\hmwkClassInstructor}{} % Teacher/lecturer
 \newcommand{\hmwkAuthorName}{} % Your name
 
@@ -132,36 +139,190 @@
 %----------------------------------------------------------------------------------------
 \section{Introduzione}
 Il progetto consiste nello sviluppo di una versione software del gioco
-da tavolo ``Escape from the Aliens in Outer Space''.
+da tavolo \acrfull{cof}.
 
 Il progetto finale dovr\` a includere:
 \begin{itemize}
 \item diagramma UML iniziale dell'applicazione (al alto livello)
-\item diagrammi UML che mostrino come \`e stato progettato il software;
+\item diagrammi UML finali che mostrino come \`e stato progettato il software;
 \item implementazione funzionante del gioco conforme alle regole del gioco e alle specifiche presenti in questo documento
 \item codice sorgente dell'implementazione
 \item codice sorgente dei test di unit\`a
 \end{itemize}
 
+\textbf{La data di consegna: 3, Giugno 2016, AoE}\\
+\textbf{La data di valutazione: TBD.}
+%\todosk{we need to define the dates for submission and evaluation...}
 
+\section{Requisiti di Progetto}
 
-\textbf{La data di consegna: 19 Giugno 2015, 23:59h CET}\\
-\textbf{La data di valutazione: 23 Giugno 2015.}
+%\todosk{Translate this:}
+I requisiti del progetto consistono in due gruppi di requisiti:
 
-\section{Regole del gioco}
-Le regole del gioco sono descritte nel file \textbf{GameRules.pdf},
-caricato su BeeP. Il file definisce tre gruppi di regole (in ordine crescente di complessit\`a):
-\textbf{regole base}, \textbf{regole avanzate} e \textbf{scenari precostituiti}.
+  \begin{itemize}
+  \item requisiti game-specific
+  \item requisiti game-agnostic 
+  \end{itemize}
+
+\subsection{Game-specific requirements}
+\subsubsection{Regole base}
+Le regole del gioco sono descritte nel file \textbf{GameRules.pdf}
+(Inglese) e \textbf{RegoleGioco.pdf} (Italiano),
+caricati su BeeP. Il file definisce \textbf{regole base} di gioco.
 In oltre, vengono aggiunte le seguenti \textbf{regole addizionali}. 
 
-% \subsection{Regole Addizionali}
-% \label{RegoleAddizionali}
-% \begin{itemize}
-% \item \textbf{L'odorato  degli Alieni}: \ldots
-% \item \textbf{} \ldots
-% \end{itemize}
-% TODO (SK): Here we add any additional rules that should make
-%   the game more challenging to design, if needed...
+\subsubsection{Regole Addizionali}
+\label{RegoleAddizionali}
+Nel seguito ci riferiamo con il termine \textbf{regole complete} all'unione
+delle regole base e regole addizionali.
+
+\begin{itemize}
+\item \textbf{Gioco configurabile}: 
+il gioco deve essere progettato al fine di poter creare:
+\begin{enumerate}
+\item mappa configurabile
+\begin{enumerate}
+\item connessioni arbitrarie tra le citt\'a;
+\item bonus arbitrari sulle carte permit e sulle citt\'a e sulla
+  ``percorso della nobilt\'a'';
+\item numero di bonus arbitrari sulle carte permit e sulle citt\'a e sulla
+  ``percorso della nobilt\'a'';
+\end{enumerate}
+\item numero arbitrario di giocatori.
+\item una lista di mappe (punti a-c per ogni mappa) deve essere
+  caricata da un opportuno file di configurazione. Punto 2 deve essere
+  passato come parametro alla creazione del gioco;
+\end{enumerate}
+\item \textbf{Market}: dopo che tutti i giocatori hanno giocato il
+  loro turno (dopo ogni giro) viene lanciata la fase di Market.
+ Partendo dal primo giocatore  fino all'ultimo, ogni giocatore pu\' o
+ scegliere le carte (di permesso e politiche) e gli assistenti che intende vendere e il
+ prezzo richiesto per ognuno di essi.
+ Quando TUTTI i giocatori hanno scelto quali elementi vendere,
+seguendo un ordine casuale i giocatori possono comprare gli elementi messi in vendita dagli altri giocatori.
+\end{itemize}
+
+\subsection{Game-agnostic requirements}
+
+In questa sezione vengono presentati i requisiti tecnici
+dell'applicazione.  Deve essere un sistema distributivo composto da
+un lato gioco che pu\'o gestire molti giochi simultanei e multipli
+lati giocatore che possono partecipare nel un solo gioco. Si raccomanda
+l'utilizzo del pattern \textbf{MVC} (Model-View-Controller) per
+progettare l'intero sistema.
+
+\subsubsection{I Componenti del Gioco}
+
+Il gioco consiste di ``Lato Gioco'' e ``Lato giocatore''. \\
+
+\textbf{Lato Giocatore}\\
+
+\begin{itemize}
+\item Il lato giocatore deve poter essere istanziato pi\`u volte. 
+\item Il lato giocatore deve essere sviluppato obbligatoriamente utilizzando JavaSE. 
+\item L'interfaccia grafica deve essere mediante Swing o altre
+  tecnologie (tuttavia in questo caso non sarete supportati dai responsabili), 
+\item Il lato giocatore deve supportare RMI e Socket, in relazione al numero di studenti del gruppo, come specificato in tabella~\ref{TabellaDiValutazione}. 
+\item Nel caso in cui sia richiesta sia l'implementazione RMI che
+  quelle per mezzo di socket, l'applicazione, all'avvio, deve permettere
+  all'utente di selezionare il metodo utilizzato per la
+  comunicazione.
+\item Nel caso in cui sia richiesta sia l'implementazione CLI che
+  quelle per mezzo di GUI, l'applicazione, all'avvio, deve permettere
+  all'utente di selezionare il metodo utilizzato per la
+  visualizzazione.
+\end{itemize}
+
+\textbf{Lato Gioco}\\
+
+Questo componente deve gestire le partite e deve poter essere
+istanziato una sola volta. Deve permettere di:
+\begin{itemize}
+\item creare una nuova partita, inizializzarla, giocarla e concluderla secondo le regole del gioco.
+\item Deve essere in grado di gestire pi\`u partite
+  contemporaneamente.
+\item Deve essere implementato secondo la logica JavaSE.
+\item Nel caso in cui sia l'implementazione via socket che quelle via
+  RMI sia richiesta, quando un giocatore si connette al server, il server deve comunicare utilizzando la connessione selezionata.
+\end{itemize}
+
+\subsubsection{Avvio della partita}
+\label{avvio}
+L'assunzione base \`e che ogni giocatore che voglia partecipare a
+una partita conosca l'indirizzo (numerico o simbolico) del lato gioco. Quando un giocatore si connette, 
+\begin{itemize}
+\item se c\`e una partita in fase di avvio, il giocatore viene automaticamente aggiunto alla partita
+\item  \textbf{Regole base:\footnote{se non sono richeste le regole
+      addizionali}} la partita inizia non appena si raggiungono i 4
+  giocatori. Quando 2 giocatori si connettono a una partita viene
+  inizializzato un timeout di 20 secondi. Non appena il timeout scatta
+  la partita inizia anche se non sono raggiunti i 4 giocatori.
+\item  \textbf{Regole complete:\footnote{se sono richeste le regole
+      addizionali}} quando 2 giocatori si connettono a una partita viene
+  inizializzato un timeout di 20 secondi. Non appena il timeout scatta
+  la partita inizia. Il numero di giocatori pu\'o essere arbitrario,
+  anche maggiore di 4.
+\item se non ci sono partite in fase di avvio, viene creata una nuova partita.
+\end{itemize}
+Si precisa che una nuova partita viene creata solamente quando un utente si connette e non ci sono partite in attesa, altrimenti l'utente entra automaticamente a far parte della partita in fase di avvio.
+
+\subsubsection{Corso della partita}
+\label{corso}
+Il lato gioco consente ai vari giocatori di svolgere i propri turni
+secondo le regole di gioco. E' necessario gestire il caso in cui i
+lati giocatore si disconnettano.
+\begin{itemize}
+\item ogni giocatore ha un periodo di tempo fissato passato come parametro al momento della creazione del server per  eseguire le mosse 
+\item se un giocatore va offline il lato gioco attende per il periodo di
+  cui sopra,
+  dopo il quale sospende il giocatore (nota il giocatore non esegue
+  mosse ma viene comunque considerato nel conteggio dei punti etc.) 
+\item tutti i giocatori vengono notificati della mancanza di un giocatore
+\item il gioco continua, saltando i giri del giocatore sospeso
+\item il lato giocatore può riconnettersi e continuare il gioco se si
+  sceglie di implementare la funzionalità ``Ripristino sessione giocatore''.
+\end{itemize}
+
+\subsubsection{Funzionalita Avanzate}
+\label{FunzionalitaAvanzate}
+Di seguito sono proposte alcune funzionalit\`a avanzate che concorrono alla valutazione.  Attenzione: il loro contributo non \`e  necessariamente additivo. Design e codice verranno comunque valutati in quanto tali e contribuiranno al giudizio globale.
+
+\begin{itemize}
+\item \textbf{Gestione degli utenti}. Realizzare un sistema di
+  gestione degli utenti che supporti il login dei giocatori, conservi
+  per ciascuno le statistiche di gioco (numero di vittorie, tempo di
+  gioco, numero di sconfitte, etc...) e produca una classifica
+  ordinata, prima per numero di vittorie e quindi per minimo tempo di
+  gioco cumulativo. Inoltre, per ogni parita si desidera
+  memorizzare, in un frame laterale, la sequenza di mosse effettuate dai
+  vari giocatori in ordine di occorrenza.
+\item  \textbf{Lato Gioco persistente}. Implementare la possibilit\`a di
+  salvare lo stato del lato gioco su disco e di ricaricarlo all'avvio
+  successivo nel modo che si ritiene pi\`u idoneo. 
+\item  \textbf{Ripristino sessione giocatore}. Ai giocatori \`e permesso abbandonare
+  temporaneamente la partita per via della perdita di connettivit\`a.
+  Se il giocatore si riconnette prima della fine della partita pu\`o
+  ricominciare a giocare, come se nulla fosse successo (ovviamente
+  perde i turni durante i quali non ha giocato).
+\item \textbf{Generazione automatica delle configurazioni di
+    gioco}. Il lato gioco deve essere in grado di generare automaticamente
+  una configurazione del gioco partendo da alcuni parametri dati.
+\item \textbf{Lobby} questo requisito rimpiazza quelli specificati in
+  sezione~\ref{avvio}. Una volta avviato il server i giocatori entrano una
+  lobby (area gestione giochi) dove possono: 
+\begin{enumerate}
+\item vedere la lista dei partite create (la mappa, il numero massimo
+  di giocatori, il numero di giocatori attuale, ...)
+\item creare partite (definire mappa, timeout per le mosse...)
+\item partecipare alle partite
+\end{enumerate}
+\item \textbf{Chat} i giocatori devono poter comunicare tra di loro
+  mediante chat
+\item \textbf{AI} deve essere possibile giocare contro il computer (un
+  agente intelligente).
+Questo \'e una funzionalit\'a molto complessa. 
+Per informazioni addizionali contattare i responsabili.
+\end{itemize}
 
 
 
@@ -182,13 +343,9 @@ Max & 1 & 2 & 3 \\
 \midrule 
 18 &
 Regole base&
-Regole avanzate & 
-\begin{tabular}[x]{@{}c@{}}
-Regole Avanzate \\
-Premade scenarios
-\end{tabular}
- \\
- 
+Regole complete & 
+Regole complete \\
+
 22 &
 CLI + GUI &
 RMI + CLI & 
@@ -221,11 +378,7 @@ All Tech &
 \end{table}
 
 
-
-
-
-I gruppi di
-studenti devono implementare  le specifiche 
+I gruppi di studenti devono implementare  le specifiche 
 descritte in tabella~\ref{TabellaDiValutazione} in relazione al
 punteggio desiderato. 
 Nota: in tabella sono rappresentati i
@@ -240,21 +393,21 @@ tabella.
 
 \begin{itemize}
 \item \textbf{Command Line Interface (CLI)}: \`e implementato come un interfaccia testuale e i vari giocatori che si alternano nei turni utilizzeranno la tastiera.
-\item \textbf{Graphical User Interface (GUI)}: consiste in un interfaccia grafica swing
+\item \textbf{Graphical User Interface (GUI)}: consiste in un interfaccia grafica 
 \item \textbf{RMI:} la comunicazione avviene mediante ``Remote method invocation''
 \item \textbf{Socket}: la comunicazione avviene mediante messaggi scambiati
   attraverso socket. Lo studente deve autonomamente definire e
   implementare un protocollo di comunicazione tra i componenti distribuiti.
 \end{itemize}
 
-Per esempio, per un gruppo di 2 studenti e un punteggio
+Per esempio, per un gruppo di 3 studenti e un punteggio
 desiderato di al massimo 24 punti \`e necessario implementare le
-regole avanzate del gioco,
-comunicazione con Socket e il Command Line Interface (CLI).
+regole complete (base e addizionali) del gioco,
+comunicazione con RMI, Socket e il Command Line Interface (CLI).
 All Tech significa che il gruppo deve implementare due modi di
 comunicazione (RMI e Socket) e due tipi di interfaccia (CLI e GUI).
-Ovviamente, il carico di lavoro è ottimizzato per il gruppo di 2
-persone.\\
+Abbiamo ottimizzato il carico di lavoro per il gruppi di 3
+persone e vi consigliamo quindi di costituire gruppi di questa dimensione.\\
 \textbf{Gli studenti di telecomunicazioni, possono fare i gruppi di un massimo
 di 4 persone ed i requisiti applicati corrisponderanno il gruppo con
 una persona in meno.}\\
@@ -289,98 +442,5 @@ gruppi e comportano dei punteggi aggiuntivi. Ovviamente per
 implementare queste funzionalit\`a \`e necessario che TUTTO il resto
 del progetto sia implementato in maniera COMPLETA e ADEGUATA
 (copertura con test, ben commentata etc).
-
-
-\section{Specifiche implementative}
-
-In questa sezione vengono presentati i requisiti tecnici
-dell'applicazione che deve funzionare in rete. Si raccomanda
-l'utilizzo del pattern \textbf{MVC} (Model-View-Controller) per
-progettare l'intero sistema.
-
-\subsection{I Componenti del Gioco}
-
-Il gioco consiste di ``Lato Gioco'' e ``Lato giocatore''.
-
-\subsubsection{Lato Giocatore}
-\begin{itemize}
-\item Il lato giocatore deve poter essere istanziato pi\`u volte. 
-\item Il lato giocatore deve essere sviluppato utilizzando JavaSE. 
-\item L'interfaccia grafica deve essere realizzata obbligatoriamente in Swing, 
-\item Il lato giocatore deve supportare RMI e Socket, in relazione al numero di studenti del gruppo, come specificato in tabella~\ref{TabellaDiValutazione}. 
-\item Nel caso in cui sia richiesta sia l'implementazione RMI che
-  quelle per mezzo di socket, l'applicazione, all'avvio, deve permettere
-  all'utente di selezionare il metodo utilizzato per la
-  comunicazione.
-\end{itemize}
-
-\subsubsection{Lato Gioco}
-Questo componente deve gestire le partite e deve poter essere
-istanziato una sola volta. Deve permettere di:
-\begin{itemize}
-\item creare una nuova partita, inizializzarla, giocarla e concluderla secondo le regole del gioco.
-\item Deve essere in grado di gestire pi\`u partite
-  contemporaneamente.
-\item Deve essere implementato secondo la logica JavaSE.
-\item Nel caso in cui sia l'implementazione via socket che quelle via
-  RMI sia richiesta, all'avvio al questo componente, deve essere
-  possibile adattare il metodo utilizzato rispetto alle scellte lato
-  giocatore.
-\end{itemize}
-
-\subsection{Avvio della partita}
-L'assunzione base \`e che ogni late giocatore che voglia partecipare a
-una partita conosca l'indirizzo (numerico o simbolico) del lato gioco. Quando un giocatore si connette, 
-\begin{itemize}
-\item se c\`e una partita in fase di avvio di un giocatore viene automaticamente aggiunto alla partita
-\item quando la partita raggiunge 8 giocatori oppure quando viene raggiunto un timeout  e ci sono almeno 2 giocatori la partita inizia
-\item se non ci sono partite in fase di avvio, viene creata una nuova partita.
-\end{itemize}
-Si precisa che una nuova partita viene creata solamente quando un utente si connette e non ci sono partite in attesa, altrimenti l'utente entra automaticamente a far parte della partita in fase di avvio.
-
-\subsection{Corso della partita}
-Il lato gioco consente ai vari giocatori di svolgere i propri turni
-secondo le regole di gioco. E' necessario gestire il caso in cui i
-lati giocatore si disconnettano.
-\begin{itemize}
-\item ogni giocatore ha un periodo di tempo fissato a priori per  eseguire le mosse 
-\item se un giocatore va offline il lato gioco attende per il periodo di
-  cui sopra,
-  dopo il quale sospende il giocatore (nota il giocatore non esegue
-  mosse ma viene comunque considerato nel conteggio dei punti etc.) 
-\item tutti i giocatori vengono notificati delle mancanze di un giocatore
-\item il gioco continua, saltando i giri del giocatore sospeso
-\item il lato giocatore può riconnettersi e continuare il gioco se si sceglie di implementare il ``Lato giocatore stateful'' funzionalit\`a
-\end{itemize}
-
-\section{Funzionalita Avanzate}
-\label{FunzionalitaAvanzate}
-Di seguito sono proposte alcune funzionalit\`a avanzate che concorrono alla valutazione.  Attenzione: il loro contributo non \`e  necessariamente additivo. Design e codice verranno comunque valutati in quanto tali e contribuiranno al giudizio globale.
-
-\begin{itemize}
-\item \textbf{Gestione degli utenti}. Realizzare un sistema di
-  gestione degli utenti che supporti il login dei giocatori, conservi
-  per ciascuno le statistiche di gioco (numero di vittorie, tempo di
-  gioco, numero di sconfitte, etc...) e produca una classifica
-  ordinata, prima per numero di vittorie e quindi per minimo tempo di
-  gioco cumulativo. Inoltre, per ogni parita si desidera
-  memorizzare, in un frame laterale, la sequenza di mosse effettuate dai
-  vari giocatori in ordine di occorrenza.
-\item  \textbf{Lato gioco stateful}. Implementare la possibilit\`a di
-  salvare lo stato del lato gioco su disco e di ricaricarlo all'avvio
-  successivo nel modo che si ritiene pi\`u idoneo. 
-\item  \textbf{Lato giocatore stateful}. Ai giocatori \`e permesso abbandonare
-  temporaneamente la partita per via della perdita di connettivit\`a.
-  Se il giocatore si riconnette prima della fine della partita pu\`o
-  ricominciare a giocare, come se nulla fosse successo (ovviamente
-  perde i turni durante i quali non ha giocato).
-\item \textbf{Generazione automatica delle configurazioni di
-    gioco}. Il lato gioco deve essere in grado di generare automaticamente
-  una configurazione del gioco partendo da alcuni parametri dati. Per
-  esempio dato il numero dei terreni e il numero di Escape Hatches, il
-  lato gioco deve generare una mappa random e consigliare un numero di
-  giocatori adeguato.
-\end{itemize}
-
 
 \end{document}

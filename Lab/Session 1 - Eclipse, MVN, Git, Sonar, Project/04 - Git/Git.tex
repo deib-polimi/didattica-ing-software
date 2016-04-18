@@ -1,7 +1,10 @@
 \documentclass{article}
 
-\usepackage[T1]{fontenc}
+\newif\ifinstall
+\installfalse
 
+
+\usepackage[T1]{fontenc}
 \usepackage{fancyhdr} % Required for custom headers
 \usepackage{lastpage} % Required to determine the last page for the footer
 \usepackage{extramarks} % Required for headers and footers
@@ -86,11 +89,16 @@
 %	NAME AND CLASS SECTION
 %----------------------------------------------------------------------------------------
 
+\ifinstall
+\newcommand{\hmwkTitle}{Installing Git} % Assignment title
+\newcommand{\hmwkDueDate}{Aprile 12, 2016} % Due date
+\else
 \newcommand{\hmwkTitle}{Git guide} % Assignment title
-\newcommand{\hmwkDueDate}{Aprile 21, 2015} % Due date
+\newcommand{\hmwkDueDate}{Aprile 19, 2016} % Due date
+\fi
 \newcommand{\hmwkClass}{Ingegneria del Software 1} % Course/class
 \newcommand{\hmwkClassTime}{} % Class/lecture time
-\newcommand{\hmwkClassInstructor}{Sr\dj{}an Krsti\'c and Marco Scavuzzo} % Teacher/lecturer
+\newcommand{\hmwkClassInstructor}{Sr\dj{}an Krsti\'c and Claudio Menghi} % Teacher/lecturer
 \newcommand{\hmwkAuthorName}{} % Your name
 
 %----------------------------------------------------------------------------------------
@@ -129,7 +137,8 @@
 
 %----------------------------------------------------------------------------------------
 
- \section{Preliminaries}
+
+ \section{Introduction}
 
 A version control system is a piece of software that helps the
 developers on a software team work together and also archives a
@@ -144,6 +153,15 @@ There are three basic goals of a version control system (VCS):
 \item We want the keep the complete evolution of the code.
 \end{enumerate}
 
+Git is a widely used version control system for software development
+with a distributed architecture and an emphasis on speed, data
+integrity, and support for distributed, non-linear workflows. 
+
+Git was initially designed and developed in 2005 by Linux kernel
+developers for Linux kernel development.
+
+\ifinstall
+\else
 This document is a fairly complete guide to Git on topics selected
 from several
 sources\footnote{https://www.atlassian.com/git/tutorials}\footnote{Erick
@@ -155,14 +173,14 @@ for the purposes of collaborative development during the course.
 Broadly speaking, the history of version control tools can be divided
 into three generations.
 
-\subsubsection*{The first generation - Local revision systems}
+\subsubsection*{The first generation - Local revision systems (LVCS)}
 
 The common trait of first generation of VCSes was that they were all
 file-oriented and centralized. Most were locking-based, with
 merging-based systems arriving towards the end of that era. Only one
 person could be working on a file at a time. 
 
-\subsubsection*{The second generation - Centralized revision systems}
+\subsubsection*{The second generation - Centralized revision systems (CVCS)}
 
 The second generation tools are a fair bit more permissive about
 simultaneous modifications, with one notable restriction. Users must
@@ -176,7 +194,7 @@ the last of its kind. As dispersed, Internet-mediated software
 development becomes the norm rather than the exception, the
 centralized model of version control is visibly running out of steam.
 
-\subsubsection*{The third generation - Distributed revision systems}
+\subsubsection*{The third generation - Distributed revision systems (DVCS)}
 
 Third-generation VCSes are natively decentralized. Each user maintains
 his own local repository and changes from multiple users are merged 
@@ -200,14 +218,136 @@ representation of history as a changeset-based directed acyclic graph (DAG),
 commit-before-merge operation, and the semantics of the associated
 push and pull operations.
 Finally, two others VCS (Mercurial and git) were launched with
-the same objective by Linux kernel developers who had had extensive
+the same objective by Linux kernel developers who had an extensive
 experience with BitKeeper.\footnote{For more on history of git watch
-  Linus' talk at Goole \url{https://www.youtube.com/watch?v=4XpnKHJAok8}}
+  Linus' talk at Google \url{https://www.youtube.com/watch?v=4XpnKHJAok8}}
+
+\fi
+
+\subsection{Installing Git}
+
+\begin{description}
+\item Install Git on Linux
+
+Assuming Debian-based distribution:
+\begin{lstlisting}
+$ sudo apt-get update
+$ sudo apt-get install git
+\end{lstlisting}
+Alternatively use a different package manager if you are running
+different Linux distributions.
+
+Another option is to download the latest stable Git release from the
+Git website.
+
+\url{http://git-scm.com/download/linux}
+
+\item Install Git on Mac OS X
+
+Assuming that brew is installed:
+\begin{lstlisting}
+$ brew update
+$ brew install git
+\end{lstlisting}
+Otherwise, download the latest stable Git release from the Git
+website:
+
+\url{http://git-scm.com/download/mac} 
+
+Click on the downloaded .dmg file, then double-click the .pkg icon to
+run the installer.
+
+
+\item Install Git on Windows
+
+Download the latest stable Git release from the Git website.
+
+\url{http://git-scm.com/download/win} 
+
+Run the Git installer, ensuring that you install. Installing Git for
+Windows (msysGit) also installs a supported version of Perl.  
+
+To ensure that \texttt{git.exe} is available in the path, choose
+either:
+\begin{itemize}
+\item Run Git from the Windows Command Prompt, or 
+\item Run Git and included Unix tools from the Windows Command
+  Prompt.
+\end{itemize}
+
+\end{description}
+
+\subsection{Configuring Git}
+To configure your git installation you need to use the \texttt{git
+  config} command. The \texttt{git config} command lets you configure
+Git on several levels:
+\begin{itemize}
+\item system 
+\item current user
+\item current repository
+\end{itemize}
+
+Settings at the lower levels override ones on the levels above. For
+instance, if you define a \emph{username} at the current user level it
+will be used in every repository where you haven't specifically
+defined a username at the repository level.
+
+To define a username and email for current user run:
+
+\begin{lstlisting}
+$ git config --global user.name <username>
+$ git config --global user.email <email>
+\end{lstlisting}
+
+To define/override the username and email in a specific repository,
+navigate to the root folder of the repository and run:
+
+\begin{lstlisting}
+$ git config user.name <username>
+$ git config user.email <email>
+\end{lstlisting}
+
+For defining system-level parameters you should use \texttt{---system}
+flag. However, these parameters should be general for all the
+users. For instance one can define the default command line editor to
+be called by git:
+
+\begin{lstlisting}
+$ git config --system core.editor nano
+\end{lstlisting}
+
+In this case linux and mac users can use \texttt{nano} editor by
+default for editing config files or commit message. In fact, each of the
+configuration levels has a related configuration file that you can
+edit manually. For instance, the command:
+
+\begin{lstlisting}
+$ git config --system --edit
+\end{lstlisting}
+
+opens a system configuration file, typically stored at
+\texttt{/etc/gitconfig}. Similarly, the command:
+
+\begin{lstlisting}
+$ git config --global --edit
+\end{lstlisting}
+
+opens a current user configuration file, typically stored at
+\texttt{~/.gitconfig}. Where \texttt{~} is the home folder of the
+user. Finally, the command:
+
+\begin{lstlisting}
+$ git config --edit
+\end{lstlisting}
+
+if run in the root folder of a git repository, opens the current
+repository configuration file, typically stored at
+\texttt{<repo>/.git/config}. 
 
 
 
-% \subsection{Features}
-
+\ifinstall
+\else
 \section{Usage}
 
 \subsection{Setting up the repository}
@@ -239,7 +379,7 @@ nothing but the .git subdirectory.
 
 Shared remote repositories should always be created with the --bare
 flag. In fact, the remote repository that you are going to use in the
-class is already going to be initialized, however you are responsible
+class is already going to be initialized (by BitBucket), however you are responsible
 for creating your local repositories.
 
 \blockquote{
@@ -295,7 +435,8 @@ $ git config --global user.email john@example.com
 \subsection{Saving and reading changes}
 
 The git add and git commit commands compose the fundamental Git
-workflow. These are the two commands that every Git user needs to
+workflow. This workflow is called Edit-Stage-Commit workflow. These
+are the two commands that every Git user needs to
 understand, regardless of their team's collaboration model. They are
 the means to record versions of a project into the repository's
 history. Finally, git checkout is used to browse any of the previous
@@ -311,7 +452,7 @@ particular file in the next commit.
 $ git add <file or directory> 
 \end{lstlisting}
 
-With git reset command you can revert the git add command.
+git reset command can be used to revert the git add command.
 
 \begin{lstlisting}
 $ git reset <file or directory> 
@@ -935,7 +1076,10 @@ the commits. In this case there is only the master branch with 7 commits.
 \includegraphics[scale=0.4]{figures/s2-b.png}
 \end{center}
 
+\fi
 \newpage
+
+
 \section{Git with Eclipse}
 
 EGit is an Eclipse plug-in (software component) which allows you to
@@ -943,10 +1087,10 @@ use the distributed version control system Git directly within the
 Eclipse Integrated Development Environment (IDE). 
 
 \subsection{Installation}
-Eclipse Luna, the IDE that we are going to use in the class already contains
-EGit 3.4.1, therefore no installation is required. If you decide to
-use some other IDE or an older version of Eclipse you need to install
-it on your own.
+The latest version of Eclipse, the IDE that we are going to use in the
+class already contains EGit 3.4.1, therefore no installation is
+required. If you decide to use some other IDE or an older version of
+Eclipse you need to install it on your own.
 The EGit plug-in can be installed into every Eclipse IDE
 installation. Usually EGit supports the last two Eclipse releases.
 
@@ -983,7 +1127,8 @@ Eclipse $\rightarrow$ Preferences $\rightarrow$ Git $\rightarrow$ Team
 $\rightarrow$ Default  Repository Folder entry (for Mac). 
 
 
-
+\ifinstall
+\else
 \subsection{Create a new project}
 
 The following section explains how to create a local Git repository
@@ -1375,6 +1520,9 @@ This makes the Forking Workflow a very powerful tool for loosely-knit
 teams. Any developer can easily share changes with any other
 developer, and any branch can be efficiently merged into the official
 codebase.
+
+
+\fi 
 
 \end{document}
 
