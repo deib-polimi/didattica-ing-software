@@ -3,6 +3,9 @@
 \newif\ifinstall
 \installfalse
 
+\newif\ifghezzi
+\ghezzifalse
+
 \usepackage[T1]{fontenc}
 \usepackage{fancyhdr} % Required for custom headers
 \usepackage{lastpage} % Required to determine the last page for the footer
@@ -35,6 +38,13 @@
 \rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
 \renewcommand\headrulewidth{0.4pt} % Size of the header rule
 \renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+
+\ifghezzi
+\newcommand{\prof}{\textbf{cg}}
+\else
+\newcommand{\prof}{\textbf{ps}}
+\fi
 
 \setlength\parindent{0pt} % Removes all indentation from paragraphs
 
@@ -741,21 +751,29 @@ To create a maven project:
 \includegraphics[scale=0.5]{figures/2}
 \end{center}
 \item Click Next. Set group ID to it.polimi.ingsw and artifact ID
-  to cg\_*number* were *number* is the number of your group. You will
+  to 
+  \prof*number* were *number* is the number of your group. You will
   be informed about your number by the lab responsibles. Figures show
-  the example for project cg\_1.
+  the example for project \prof01.
 \begin{center}
+\ifghezzi
 \includegraphics[scale=0.5]{figures/3}
+\else
+\includegraphics[scale=0.5]{figures/3ps}
+\fi
 \end{center}
 \item Click finish and wait for the Maven to create the project. You
   should see the following structure of the project 
 \begin{center}
+\ifghezzi
 \includegraphics[scale=0.5]{figures/4}
+\else
+\includegraphics[scale=0.5]{figures/4ps}
+\fi
 \end{center}
 \item Open pom.xml file (shown in the Package explorer on the left),
   choose the pom.xml tab in the lower part of the window and change it
-  to match the pom.xml file shown below. Keep in mind to replace
-  *number* with your appropriate number.
+  to match the pom.xml file shown below. Keep in mind to replace *professor\_code* with \prof{}  and   *number* with your appropriate number.
 \end{compactitem}
 
 \subsection{Create a Maven project in Eclipse}
@@ -766,9 +784,9 @@ To create a maven project:
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>it.polimi.ingsw</groupId> 
-  <artifactId>cg_*number*</artifactId> 
+  <artifactId>*professor_code**number*</artifactId> 
   <version>0.0.1-SNAPSHOT</version>
-  <name>cg_*number*</name>
+  <name>*professor_code**number*</name>
   <properties>
      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
      <sonar.language>java</sonar.language>
@@ -797,7 +815,7 @@ To create a maven project:
       <plugin>
 	<groupId>org.jacoco</groupId>
 	<artifactId>jacoco-maven-plugin</artifactId>
-	<version>0.5.5.201112152213</version>
+	<version>0.7.6.201602180812</version>
 	<configuration>
 	  <destFile>target/jacoco.exec</destFile>
 	  <dataFile>target/jacoco.exec</dataFile>

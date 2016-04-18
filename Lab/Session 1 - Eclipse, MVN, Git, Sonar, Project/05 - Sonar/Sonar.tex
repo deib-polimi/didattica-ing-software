@@ -234,7 +234,7 @@ need to enable test coverage:
 <plugin>
 	<groupId>org.jacoco</groupId>
 	<artifactId>jacoco-maven-plugin</artifactId>
-	<version>0.5.5.201112152213</version>
+	<version>0.7.6.201602180812</version>
 	<configuration>
 		<destFile>target/jacoco.exec</destFile>
 		<dataFile>target/jacoco.exec</dataFile>
@@ -279,22 +279,34 @@ rather than browsing the webserver. You are free to choose among these
 options what is more suitable for your coding habits. 
 
 \begin{itemize}
-\item go to Help $>$ Eclipse Marketplace... and search for "SonarQube"
-\item check the following features:
+\item go to Help $>$ Eclipse Marketplace... and search for "SonarLint"
+\item check all the features and confirm
+\item after the installation right click on the project and select \textit{ SonarLint} $ > $ \textit{Bind to SonarQube project ...}
 \begin{center}
-\includegraphics[scale=0.5]{figures/ss6}
+	\includegraphics[scale=0.5]{figures/ss6}
 \end{center}
-\item after the installation open Eclipse $>$ Properties and choose
-  SonarQube $>$ Servers.
-\item add  \url{http://localhost:9000/} if it is not there
-\item add your Sonar credentials (if you haven't changed them the
-  default ones are: username = admin and password = admin)
-\item save changes
-\item right click on the project SonarQube $>$ Analyze
-\item you should be able to see Sonar issues tab as well as direct
-  Sonar annotations in the code:
+\item click on \textit{Connect to a SonarQube server ...}
 \begin{center}
-\includegraphics[scale=0.3]{figures/ss7.png}
+	\includegraphics[scale=0.5]{figures/ss7}
+\end{center}
+\item insert server information: Server URL  (\url{http://localhost:9000/}), a label of your choice and credentials (if you haven't changed them the default ones are: username = admin and password = admin)
+\begin{center}
+	\includegraphics[scale=0.5]{figures/ss8}
+\end{center}
+
+\item click on Finish
+\item you should already be able so see Sonar annotations on the left side of the code (where breakpoints are set).
+\item add SonarLint views:
+\begin{itemize}
+	\item click on \textit{Window} $ > $ \textit{Show View} $ > $ \textit{Other...} 
+	\item write \textit{sonar} in the filter field and select all the three available views (\textit{SonarLint Issues}, \textit{SonarLint Rule Description} and \textit{SonarQube Servers}).
+\end{itemize}
+\begin{center}
+	\includegraphics[scale=0.5]{figures/ss9.png}
+\end{center}
+\item you now should be able to see the three sonar tabs:
+\begin{center}
+\includegraphics[width=0.9\linewidth]{figures/ss10.png}
 \end{center}
 \item for more details on how to use Sonar, watch the following
   screencast: \url{https://vimeo.com/91781086}
