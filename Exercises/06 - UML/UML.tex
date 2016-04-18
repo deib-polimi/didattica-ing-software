@@ -129,7 +129,20 @@
 \tableofcontents
 \newpage
 
-
+\section{Design Principles}
+Mentre si progetta il software \`e necessario considerare i seguenti principi:
+\begin{itemize}
+\item \emph{Open Close Principle: le entit\`a software (classi, moduli e funzioni) devono essere aperti all'estensione e chiusi alle modifiche.}
+Un design intelligente consente di aggiungere una funzionalita (aperti all'estensione) senza modificare il codice gi\`a sviluppato o con delle modifiche minimali (chiusi alle modifiche).
+\item \emph{Dependency Invertion Principle: i moduli di alto livello non devono dipendere da quelli di basso livello ma da loro astrazioni.}
+Quando si utilizzano modili di basso livello (e.g., classi che consentono letture da file) i moduli di alto livello non devono dipendere direttamente da questi elementi; \`e consigliato aggiungere un livello di astrazione (High Level Classes $\rightarrow$ Abstraction Layer $\rightarrow$ Low Level Classes) in modo tale da consentire di cambiare agevolmente le Low Level Classes
+\item \emph{Interface Segregation Principle: i moduli non devono dipendere da interfacce che non utilizzano} Non aggiungete nelle interfacce metodi che non servono.
+\item \emph{Single Responsibility Principle: ogni classe deve avere solo una ragione per essere modificata} 
+Questo principio specifica che ogni classe si deve occupare solamente di una funzionalit\`a. 
+Se una classe si occupa di due funzionalit\`a signigica che \`e necessario splittare la classe in due classi
+\item \emph{Liskov's Substitution Principle: le classi derivate mediante estensioni (una classe che ne estende un altra) deve essere completamente sostituibile alla classe di partenza}.
+ 
+\end{itemize}
 
 \section{Introduzione}
 UML contiene un insieme di notazioni grafiche che supportano lo sviluppatore nelle diverse fasi di sviluppo del software. \`E composto da una serie di notazioni che consentono di specificare la maggior parte dei costrutti  forniti da un linguaggio orientato agli oggetti. Lo scopo di UML e' di fornire uno strumento  per descrivere (progettare) il sistema in fase di sviluppo e viene utilizzato al fine di:
