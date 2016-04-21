@@ -1,0 +1,609 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beamer Presentation
+% LaTeX Template
+% Version 1.0 (10/11/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+
+\documentclass{beamer}
+
+\mode<presentation> {
+
+% The Beamer class comes with a number of default slide themes
+% which change the colors and layouts of slides. Below this is a list
+% of all the themes, uncomment each in turn to see what they look like.
+
+%\usetheme{default}
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{Dresden}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+\usetheme{Madrid}
+\usepackage{pbox}
+\usepackage{listings}
+\lstset{language=Java,
+                basicstyle=\footnotesize\ttfamily,
+                keywordstyle=\footnotesize\color{blue}\ttfamily,
+}
+
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+
+% As well as themes, the Beamer class has a number of color themes
+% for any slide theme. Uncomment each of these in turn to see how it
+% changes the colors of your current slide theme.
+
+%\usecolortheme{albatross}
+%\usecolortheme{beaver}
+%\usecolortheme{beetle}
+%\usecolortheme{crane}
+%\usecolortheme{dolphin}
+%\usecolortheme{dove}
+%\usecolortheme{fly}
+%\usecolortheme{lily}
+%\usecolortheme{orchid}
+%\usecolortheme{rose}
+%\usecolortheme{seagull}
+%\usecolortheme{seahorse}
+%\usecolortheme{whale}
+%\usecolortheme{wolverine}
+
+%\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
+%\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+
+%\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+}
+
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{framed}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title[Eccezioni]{Eccezioni} % The short title appears at the bottom of every slide, the full title is only on the title page
+
+\author{Claudio Menghi} % Your name
+\institute[Polimi] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
+{
+Politecnico di Milano \\ % Your institution for the title page
+\medskip
+\textit{claudio.menghi@polimi.it} % Your email address
+}
+\date{\today} % Date, can be changed to a custom date
+
+\begin{document}
+
+\begin{frame}
+\titlepage % Print the title page as the first slide
+\end{frame}
+
+\begin{frame}
+\frametitle{Overview} % Table of contents slide, comment this block out to remove it
+\tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+%	PRESENTATION SLIDES
+%----------------------------------------------------------------------------------------
+
+
+%------------------------------------------------
+
+
+\section{Eccezioni}
+
+\begin{frame}
+\frametitle{Eccezioni}
+\begin{framed}
+Le eccezioni sono eventi che accadono durante l'esecuzione del programma  che ``disturbano" il normale flusso di esecuzione delle istruzioni. 
+\end{framed}
+\end{frame}
+
+\begin{frame}
+\frametitle{Eccezioni}
+\begin{itemize}
+\item quando un eccezione ``avviene" viene \textbf{creato} un oggetto di tipo eccezione che contiene le informazioni riguardanti l'errore includendone il tipo e lo stato dell'applicazione al momento della generazione dell'eccezione.
+\item dopo essere creata l'eccezione viene \textbf{lanciata}
+\item l'eccezione viene \textbf{propagata} finch\`e non \`e presente un metodo che consente di gestirla.
+\begin{itemize}
+\item L'insieme dei metodi che sono stati chiamati prima che l'eccezione \`e stata lanciata (\emph{call stack} costituisce l'insieme di possibili elementi che possono gestire l'eccezione). 
+\item La ricerca avviene dall'ultimo metodo eseguito risalendo lo stack delle chiamate fino al \texttt{main}
+\item il blocco di codice in grado di gestire l'eccezione viene detto \emph{exception handler}.
+\end{itemize}
+\item se non ci sono metodi capaci di catchare l'eccezione l'applicazione termina
+\end{itemize}
+\end{frame}
+
+
+
+\subsection{Tipi di eccezioni}
+\begin{frame}
+\frametitle{Tipi di eccezioni}
+Ci sono tre tipi di eccezioni
+\begin{itemize}
+\item \textbf{checked}: sono condizioni eccezionali che \emph{l'applicazione deve essere capace di gestire}. Per esempio se l'applicazione richiede all'utente di inserire il nome di un file non corretto la classe \texttt{FileReader} genera un \texttt{FileNotFoundException}. Una applicazione ben scritta deve notificare all'utente l'errore e permettegli di inserire il nome corretto. Le eccezioni checked possono essere catchate mediante il \texttt{Catch} statement.
+\item \textbf{unchecked}: (o run-time): queste condizioni sono interne all'applicazione e, in genere, non \`e possibile anticiparle ne eseguire un recover. In genere corrispondono a \emph{bug} di programmazione, per esempio un incorretto uso delle API. Supponiamo per esempio di passare al costruttore di \texttt{FileReader} un valore \texttt{null}, stiamo utilizzando impropriamente le sue API.
+\end{itemize}
+\end{frame}
+
+
+\subsection{Eccezioni unchecked}
+\begin{frame}[fragile]
+\frametitle{Eccezioni unchecked}
+\begin{itemize}
+\item sono sottoclasse di \textbf{RuntimeException}
+\item Non devono essere gestite dal client 
+\item non devono essere dichiarate.
+\end{itemize}
+\begin{framed}
+\begin{lstlisting}[language=Java]
+public boolean mossaValida(Scacchiera scacchiera, 
+        Casella casellaFinale) {
+    if(scacchiera==null){
+        throw new NullPointerException(
+            "La scacchiera non puo' essere nulla");
+    }
+    if(casellaFinale==null){
+        throw new NullPointerException(
+            "La casella finale non puo' essere nulla");
+    }
+}
+\end{lstlisting}
+\end{framed}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Eccezione unchecked}
+Considerato che le eccezioni \textbf{unchecked} in genere causano il crash dell'applicazione come posso evitarle?
+\begin{itemize}
+\item Ask for forgiveness
+\begin{lstlisting}[language=Java]
+try{
+    set.add(new Complex(1.0,1.0));
+}catch(FullStackException e){
+    System.err.println("The stack is full");
+}
+\end{lstlisting}
+\item Ask for permission
+\begin{lstlisting}[language=Java]
+if(!set.isFull()){
+    set.add(new Complex(1.0, 1.0));
+}
+\end{lstlisting}
+\item In java si utilizza la seconda convenzione
+\end{itemize}
+\end{frame}
+
+
+\subsection{Eccezioni checked}
+\begin{frame}[fragile]
+\frametitle{Eccezioni checked}
+\begin{itemize}
+\item sono condizioni eccezionali che \emph{l'applicazione deve essere capace di gestire} 
+\item  per esempio se l'applicazione richiede all'utente di inserire il nome di un file non corretto la classe \texttt{FileReader} genera un \texttt{FileNotFoundException}
+\end{itemize}
+\begin{framed}
+\begin{lstlisting}[language=Java]
+public boolean mossaValida(Scacchiera scacchiera, 
+        Casella casellaFinale) {
+    if(!casellaFinale.isEmpty()){
+        throw new MossaNonValidaException(
+            "Non e' possibile muovere una pedina in 
+              una casella gia' occupata");
+    }
+}
+\end{lstlisting}
+\end{framed}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Eccezioni checked}
+Le eccezioni checked possono essere gestite in due modi:
+\begin{itemize}
+\item utilizzando il costrutto \texttt{try}, \texttt{catch}
+\item propaganco l'eccezioni
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Eccezioni checked: try catch}
+\begin{lstlisting}[language=Java]
+try{
+    FileInputStream fileInputStream=new 
+        FileInputStream("file.txt");        
+}
+catch(FileNotFoundException e){
+    System.err.println("File not found");
+    // codice per gestire l'eccezione
+}
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Eccezioni checked: propagazione}
+\begin{lstlisting}[language=Java]
+public void doSomething() throws FileNotFoundException{
+    ....
+    
+    FileInputStram file=new FileInputStream("file.txt");
+    ...
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Creare un eccezione checked}
+\begin{lstlisting}[language=Java]
+public class MossaNonValida extends Exception {
+    /*
+     * identifica unicamente la versione della classe 
+     */
+     private static final long serialVersionUID = 
+	                -5605493852164516896L;
+
+     public MossaNonValida(String message){
+          super(message);
+     }
+}
+\end{lstlisting}
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+\frametitle{Creare un eccezione unchecked}
+\begin{lstlisting}[language=Java]
+public class FullStackException extends RuntimeException {
+    /*
+     * identifica unicamente la versione della classe 
+     */
+     private static final long serialVersionUID = 
+	                -5605493852164516896L;
+
+}
+\end{lstlisting}
+\end{frame}
+
+\subsection{Il blocco finally}
+\begin{frame}[fragile]
+\frametitle{Pillole di buona programmazione}
+Oltre al blocco catch \`e possibile specificare un blocco finally
+\begin{itemize}
+\item contiene le operazione che sono eseguite in ogni caso, sia che le operazioni vanno a buon fine sia se \`e generata un eccezione
+\item solitamente viene usato per rilasciare le risorse utilizzate (per esempio i file aperti)
+ \end{itemize}
+\end{frame}
+
+\subsection{Pillole di buona programmazione}
+\begin{frame}[fragile]
+\frametitle{Pillole di buona programmazione}
+\begin{itemize}
+\item utilizzare le eccezioni solo per condizioni eccezionali
+\item non scrivere il seguente codice
+\begin{lstlisting}[language=Java]
+try{
+        int i=0;
+        while(true){
+            range[i++].climb();
+        }
+    }catch(ArrayIndexOutOfBoundException e){
+    }
+}
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Pillole di buona programmazione}
+\begin{itemize}
+\item utilizzare le eccezioni checked per condizioni recuperabili 
+\item utilizzare eccezioni unchecked per errori di programmazione
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Pillole di buona programmazione}
+\begin{itemize}
+\item utilizzare il pi\`u possibile le eccezioni standard di Java
+\item le pi\`u comuni sono:
+\begin{itemize}
+\item \texttt{IllegalArgumentException}: valori non nulli ma parametri incorretti
+\item \texttt{IllegalStateException}: lo stato dell'oggetto non \`e appropriato per l'invocazione del metodo 
+\item \texttt{NullPointerException}: il parametro \`e null quando \`e proibito
+\item \texttt{IndexOutOfBoundException}: valore fuori dal range consentito
+\item \texttt{ConcurrentModificationException}: modifica concorrente eseguita quando proibito
+\item \texttt{UnsupportedOperationException}: l'ogggetto non supporta il metodo
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Pillole di buona programmazione}
+\begin{itemize}
+\item  documentare sempre le eccezioni di ogni metodo (sia checked che unchecked)
+ \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Pillole di buona programmazione}
+\begin{itemize}
+\item  evitare i blocchi catch vuoti, almeno documentare il perch\`e un eccezione \`e ignorata
+ \end{itemize}
+\end{frame}
+
+
+
+\section{Esercizi}
+
+
+\begin{frame}[fragile]
+\frametitle{Esercizio 1}
+\begin{lstlisting}[language=Java]
+public static void f() throws Exception{
+    System.out.println("Throw new Exception f()");
+    throw new Exception("Generated in f()");
+}
+public static void g() throws Exception{
+    try {
+        f();
+    } catch (Exception e) {
+     System.out.println("Exception catched in g(). Rethrow");
+     throw e;
+    }
+}
+public static void main(String[] args) {
+    try{    g();
+    }
+    catch(Exception ex){
+        System.out.println("Exception catched in main()"+
+            "Just stay");
+        System.out.println(ex.getMessage());
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Esercizio 1}
+Throw new Exception f()\\
+Exception catched in g(). Rethrow\\
+Exception catched in main(). Just stay\\
+Generated in f()
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Esercizio 2}
+\begin{lstlisting}[language=Java]
+public static void f() throws Exception{
+    System.out.println("Throw new Exception f()");
+    throw new Exception("Generated in f()");
+}
+public static void g() throws Exception{
+    try {
+        f();
+    } catch (Exception e) {
+     System.out.println("Exception catched in g(). Rethrow");
+     throw new Exception("Generated in g()");
+    }
+}
+public static void main(String[] args) {
+    try{    g();
+    }
+    catch(Exception ex){
+        System.out.println("Exception catched in main()"+
+            "Just stay");
+        System.out.println(ex.getMessage());
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Esercizio 2}
+Throw new Exception f()\\
+Exception catched in g(). Rethrow\\
+Exception catched in main(). Just stay\\
+Generated in g()
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Esercizio 3: Specificare la causa di un eccezione}
+
+\begin{lstlisting}[language=Java]
+public static void f() throws Exception{
+    System.out.println("Throw new Exception f()");
+    throw new Exception("Generated in f()");
+}
+public static void g() throws Exception{
+    try {
+        f();
+    } catch (Exception e) {
+     System.out.println("Exception catched in g(). Rethrow");
+     throw new Exception("Generated in g()", e);
+    }
+}
+public static void main(String[] args) {
+    try{    g(); }
+    catch(Exception ex){
+        System.out.println("Exception catched in main()"+
+            "Just stay");
+        System.out.println(ex.getMessage());
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Esercizio 4: Ordine dei catch}
+
+\begin{lstlisting}[language=Java]
+public class MyException extends Exception {
+    private static final long serialVersionUID =
+         3112454329854888478L;
+    public MyException(String message){
+        super("This is an instance of MyExeption"+message);
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Esercizio 4: Ordine dei catch}
+\begin{lstlisting}[language=Java]
+public static void f() throws Exception{
+    System.out.println("Throw new Exception f()");
+    throw new MyException("Generated in f()");
+}
+public static void g() throws Exception{
+    try{ f(); }
+    catch(MyException ex){
+        System.out.println("My exception catched in "+
+            "g(). Rethrow");
+    }
+    catch (Exception e) {
+        System.out.println("Exception catched in g()."+
+            " Rethrow");
+        throw new Exception("Generated in g()", e);
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Esercizio 4: Ordine dei catch}
+\begin{lstlisting}[language=Java]
+public static void f() throws Exception{
+    System.out.println("Throw new Exception f()");
+    throw new MyException("Generated in f()");
+}
+public static void g() throws Exception{
+    try{ f(); }
+    catch(MyException ex){
+        System.out.println("My exception catched in "+
+            "g(). Rethrow");
+    }
+    catch (Exception e) {
+        System.out.println("Exception catched in g()."+
+            " Rethrow");
+        throw new Exception("Generated in g()", e);
+    }
+}
+\end{lstlisting}
+\texttt{catch(MyException ex)} consuma l'eccezione, il ramo \texttt{catch (Exception e)} non viene eseguito
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Esercizio 5: Ordine dei catch}
+\begin{lstlisting}[language=Java]
+public static void f() throws Exception{
+    System.out.println("Throw new Exception f()");
+    throw new MyException("Generated in f()");
+}
+public static void g() throws Exception{
+    try{ f(); }
+    catch (Exception e) {
+        System.out.println("Exception catched in g()."+
+            " Rethrow");
+        throw new Exception("Generated in g()", e);
+    }
+    catch(MyException ex){
+        System.out.println("My exception catched in "+
+            "g(). Rethrow");
+    }
+    
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Esercizio 5: Ordine dei catch}
+\begin{lstlisting}[language=Java]
+public static void f() throws Exception{
+    System.out.println("Throw new Exception f()");
+    throw new MyException("Generated in f()");
+}
+public static void g() throws Exception{
+    try{ f(); }
+    catch (Exception e) {
+        System.out.println("Exception catched in g()."+
+            " Rethrow");
+        throw new Exception("Generated in g()", e);
+    }
+    catch(MyException ex){
+        System.out.println("My exception catched in "+
+            "g(). Rethrow");
+    }
+    
+}
+\end{lstlisting}
+Errore di compilazione
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Esercizio 6}
+\begin{lstlisting}[language=Java]
+private void printFileContent(FileInputStream fileInputStream) {
+ byte[] buffer = new byte[1024];
+ int readBytes = 0;
+ try {
+   while ((readBytes = fileInputStream.read(buffer)) != 0) {
+    for (int i = 0; i < readBytes; i++){
+        System.out.print(buffer[i]);
+    }
+   }
+ } catch (IOException e) {
+   System.err.println("Error reading file content");
+ } finally {
+   try {
+        fileInputStream.close();
+   } catch (IOException e) {
+       System.err.println("Error reading file");
+   }
+} 
+}
+\end{lstlisting}
+\end{frame}
+
+
+\end{document} 
+

@@ -1,0 +1,524 @@
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{hyperref}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{framed}
+\usepackage{longtable}
+\usepackage{listings}
+\usepackage{subfigure}
+\usepackage{afterpage}
+\usepackage{amsmath,amssymb}            
+\usepackage{rotating}  
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{amsthm}
+\usepackage[scriptsize]{caption} 
+\hyphenation{a-gen-tiz-za-zio-ne}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1} % Line spacing
+
+\lstset{
+  numbers=left,
+  stepnumber=5,    
+  firstnumber=1,
+  numberfirstline=true
+}
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle} % Top center head
+\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true
+  tabsize=3
+}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+
+
+
+\newcommand{\hmwkTitle}{05 - Eccezioni} % Assignment title
+\newcommand{\hmwkDueDate}{Mercoledì,\ Aprile 5,\ 2016} % Due date
+\newcommand{\hmwkClass}{Ingegneria del Software 1} % Course/class
+\newcommand{\hmwkClassTime}{} % Class/lecture time
+\newcommand{\hmwkClassInstructor}{Claudio Menghi, Alessandro Rizzi} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{} % Your name
+
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+\input{../Commands.tex}
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+\newpage
+\tableofcontents
+\newpage
+
+
+
+\section{Introduzione}
+
+
+\subsection{Eccezioni}
+\begin{itemize}
+\item Le eccezioni sono eventi che accadono durante l'esecuzione del programma  che ``disturbano" il normale flusso di esecuzione delle istruzioni. 
+\item quando un eccezione ``avviene" viene \textbf{creato} un oggetto di tipo eccezione che contiene le informazioni riguardanti l'errore includendone il tipo e lo stato dell'applicazione al momento della generazione dell'eccezione.
+\item dopo essere creata l'eccezione viene \textbf{lanciata}
+\item l'eccezione viene \textbf{propagata} finch\`e non \`e presente un metodo che consente di gestirla.
+\begin{itemize}
+\item L'insieme dei metodi che sono stati chiamati prima che l'eccezione \`e stata lanciata (\emph{call stack} costituisce l'insieme di possibili elementi che possono gestire l'eccezione). 
+\item La ricerca avviene dall'ultimo metodo eseguito risalendo lo stack delle chiamate fino al \texttt{main}
+\item il blocco di codice in grado di gestire l'eccezione viene detto \emph{exception handler}.
+\end{itemize}
+\item se non ci sono metodi capaci di catchare l'eccezione l'applicazione termina
+\end{itemize}
+
+Ci sono due tipi di eccezioni
+\begin{itemize}
+\item \emph{checked}: sono condizioni eccezionali che \emph{l'applicazione deve essere capace di gestire}. Per esempio se l'applicazione richiede all'utente di inserire il nome di un file non corretto la classe \texttt{FileReader} genera un \texttt{FileNotFoundException}. Una applicazione ben scritta deve notificare all'utente l'errore e permettegli di inserire il nome corretto. Le eccezioni checked possono essere catchate mediante il \texttt{Catch} statement.
+\item \emph{unchecked}: (o run-time): queste condizioni sono interne all'applicazione e, in genere, non \`e possibile anticiparle ne eseguire un recover. In genere corrispondono a \emph{bug} di programmazione, per esempio un incorretto uso delle API. Supponiamo per esempio di passare al costruttore di \texttt{FileReader} un valore \texttt{null}, stiamo utilizzando impropriamente le sue API.
+%\item \emph{Error}: sono condizioni eccezionali che sono esterne all'applicazione, ma che l'applicazione deve prevedere e possibilmente deve poter ``riprendersi". Per esempio, nel caso di una lettura file, nel caso di un malfunzionamento del sistema viene generato un \texttt{IOError}. Non \`e possibile effettuare un \texttt{catch} degli  errori.  
+\end{itemize}
+
+
+\subsection{Eccezioni unchecked}
+\begin{itemize}
+\item sono sottoclasse di \textbf{RuntimeException}
+\item Non devono essere gestite dal client 
+\item non devono essere dichiarate.
+\item in genere corrispondono a bug di programmazione
+\end{itemize}
+
+Le eccezioni unchecked sono utilizzate per esempio per controllare che i parametrei passati a un metodo non sono nulli. Per esempio, il metodo \texttt{mossaValida} della classe scacchiera dovrebbe controllare che la scacchiera e la casellaFinale non siano nulle. In tal caso, lo sviluppatore sta utilizzando il metodo mossaValida in una maniera impropria.
+\begin{lstlisting}[language=Java]
+public boolean mossaValida(Scacchiera scacchiera, 
+        Casella casellaFinale) {
+    if(scacchiera==null){
+        throw new NullPointerException(
+            "La scacchiera non puo' essere nulla");
+    }
+    if(casellaFinale==null){
+        throw new NullPointerException(
+            "La casella finale non puo' essere nulla");
+    }
+}
+\end{lstlisting}
+
+
+Considerato che le eccezioni \textbf{unchecked} in genere causano il crash dell'applicazione lo sviluppatore che utilizza la nostra classe vorrebbe evitare di generare tali eccezioni. A tal fine pu\`o utilizzare due strategie:
+\begin{itemize}
+\item Ask for forgiveness
+\begin{lstlisting}[language=Java]
+try{
+    set.add(new Complex(1.0,1.0));
+}catch(FullStackException e){
+    System.err.println("The stack is full");
+}
+\end{lstlisting}
+\item Ask for permission
+\begin{lstlisting}[language=Java]
+if(!set.isFull()){
+    set.add(new Complex(1.0, 1.0));
+}
+\end{lstlisting}
+
+\end{itemize}
+ In java si utilizza la seconda convenzione.
+\`E possibile dichiarare delle eccezioni \texttt{Unchecked} mediante una classe che estende \texttt{RuntimeException}
+
+\begin{lstlisting}[language=Java]
+public class FullStackException extends RuntimeException {
+    /*
+     * identifica unicamente la versione della classe 
+     */
+     private static final long serialVersionUID = 
+	                -5605493852164516896L;
+
+}
+\end{lstlisting}
+
+
+
+\subsection{Eccezioni checked}
+\begin{itemize}
+\item sono condizioni eccezionali che \emph{l'applicazione deve essere capace di gestire} 
+\item  per esempio se l'applicazione richiede all'utente di inserire il nome di un file non corretto la classe \texttt{FileReader} genera un \texttt{FileNotFoundException}
+\end{itemize}
+
+\begin{lstlisting}[language=Java]
+public boolean mossaValida(Scacchiera scacchiera, 
+        Casella casellaFinale) {
+    if(!casellaFinale.isEmpty()){
+        throw new MossaNonValidaException(
+            "Non e' possibile muovere una pedina in una casella gia' occupata");
+    }
+}
+\end{lstlisting}
+L'actual type parameter di \texttt{b1} \`e \texttt{String}.
+
+
+Le eccezioni checked possono essere gestite in due modi:
+\begin{itemize}
+\item utilizzando il costrutto \texttt{try}, \texttt{catch}
+\begin{lstlisting}[language=Java]
+try{
+    FileInputStream fileInputStream=new 
+        FileInputStream("file.txt");        
+}
+catch(FileNotFoundException e){
+    System.err.println("File not found");
+    // codice per gestire l'eccezione
+}
+\end{lstlisting}
+\item propagando le eccezioni
+\begin{lstlisting}[language=Java]
+public void doSomething() throws FileNotFoundException{
+    ....
+    
+    FileInputStram file=new FileInputStream("file.txt");
+    ...
+}
+\end{lstlisting}
+\end{itemize}
+
+\`E possibile dichiarare delle eccezioni checked mediante una classe che estende \texttt{Exception}
+
+\begin{lstlisting}[language=Java]
+public class MossaNonValida extends Exception {
+    /*
+     * identifica unicamente la versione della classe 
+     */
+     private static final long serialVersionUID = 
+	                -5605493852164516896L;
+
+     public MossaNonValida(String message){
+          super(message);
+     }
+}
+\end{lstlisting}
+
+
+\subsection{Il blocco finally}
+Oltre al blocco catch \`e possibile specificare un blocco finally
+\begin{itemize}
+\item contiene le operazione che sono eseguite in ogni caso, sia che le operazioni vanno a buon fine sia se \`e generata un eccezione
+\item solitamente viene usato per rilasciare le risorse utilizzate (per esempio i file aperti)
+ \end{itemize}
+
+\subsection{Pillole di buona programmazione}
+\begin{itemize}
+\item utilizzare le eccezioni solo per condizioni eccezionali (non scrivere il seguente)
+\begin{lstlisting}[language=Java]
+try{
+        int i=0;
+        while(true){
+            range[i++].climb();
+        }
+    }catch(ArrayIndexOutOfBoundException e){
+    }
+}
+\end{lstlisting}
+\end{itemize}
+
+\begin{itemize}
+\item utilizzare le eccezioni checked per condizioni recuperabili 
+\item utilizzare eccezioni unchecked per errori di programmazione
+\end{itemize}
+\begin{itemize}
+\item utilizzare il pi\`u possibile le eccezioni standard di Java
+\item le pi\`u comuni sono:
+\begin{itemize}
+\item \texttt{IllegalArgumentException}: valori non nulli ma parametri incorretti
+\item \texttt{IllegalStateException}: lo stato dell'oggetto non \`e appropriato per l'invocazione del metodo 
+\item \texttt{NullPointerException}: il parametro \`e null quando \`e proibito
+\item \texttt{IndexOutOfBoundException}: valore fuori dal range consentito
+\item \texttt{ConcurrentModificationException}: modifica concorrente eseguita quando proibito
+\item \texttt{UnsupportedOperationException}: l'ogggetto non supporta il metodo
+\end{itemize}
+\end{itemize}
+\begin{itemize}
+\item  documentare sempre le eccezioni di ogni metodo (sia checked che unchecked)
+ \end{itemize}
+
+
+\begin{itemize}
+\item  evitare i blocchi catch vuoti, almeno documentare il perch\`e un eccezione \`e ignorata
+ \end{itemize}
+
+
+
+
+
+
+\section{Esercizi}
+
+\subsection{Esercizio}
+\Esercizio{che cosa viene stampato quando viene invocato il metodo \texttt{main}?}
+
+\begin{lstlisting}[language=Java]
+public static void f() throws Exception{
+    System.out.println("Throw new Exception f()");
+    throw new Exception("Generated in f()");
+}
+public static void g() throws Exception{
+    try {
+        f();
+    } catch (Exception e) {
+     System.out.println("Exception catched in g(). Rethrow");
+     throw e;
+    }
+}
+public static void main(String[] args) {
+    try{    g();
+    }
+    catch(Exception ex){
+        System.out.println("Exception catched in main()"+
+            "Just stay");
+        System.out.println(ex.getMessage());
+    }
+}
+\end{lstlisting}
+
+Quando il metodo \texttt{f} viene stampato: \textit{Throw new Exception f()}\\
+Subito dopo viene creata una nuova eccezione con messaggio ``Generated in f()"  che viene lanciata. L'eccezione risale lo stack trace e viene catchata dal \texttt{catch} di \texttt{g} 
+Il \texttt{catch} di \texttt{g} stampa \textit{Exception catched in g(). Rethrow} e rilancia l'eccezione utilizzando la keyword \texttt{throw}.
+Il metodo main esegue il catch dell'eccezione, stampa \textit{Exception catched in main(). Just stay} e il messaggio contenuto all'interno dell'eccezione: \textit{Generated in f()}.
+
+\subsection{Esercizio}
+\Esercizio{che cosa viene stampato quando viene invocato il metodo \texttt{main}?}
+
+\begin{lstlisting}[language=Java]
+public static void f() throws Exception{
+    System.out.println("Throw new Exception f()");
+    throw new Exception("Generated in f()");
+}
+public static void g() throws Exception{
+    try {
+        f();
+    } catch (Exception e) {
+         System.out.println("Exception catched in g(). Rethrow");
+         throw new Exception("Generated in g()");
+    }
+}
+public static void main(String[] args) {
+    try{    g();
+    }
+    catch(Exception ex){
+        System.out.println("Exception catched in main()"+
+            "Just stay");
+        System.out.println(ex.getMessage());
+    }
+}
+\end{lstlisting}
+Quando il metodo \texttt{f} viene stampato: \textit{Throw new Exception f()}\\
+Subito dopo viene creata una nuova eccezione con messaggio ``Generated in f()"  che viene lanciata. L'eccezione risale lo stack trace e viene catchata dal \texttt{catch} di \texttt{g} 
+Il \texttt{catch} di \texttt{g} stampa \textit{Exception catched in g(). Rethrow} e crea una nuova eccezione con messaggio ``Generated in g()" che vien lanciata utilizzando la keyword \texttt{throw}.
+Il metodo main esegue il catch dell'eccezione, stampa \textit{Exception catched in main(). Just stay} e il messaggio contenuto all'interno dell'eccezione: \textit{Generated in g()}.
+
+
+
+\subsection{Esercizio}
+\Esercizio{modificare il codice dell'esercizio precedente utilizzand il costruttore \texttt{Exception(String message, Throwable cause)} all'interno di \texttt{g} al fine di specificare la causa dell'eccezione}
+
+
+\begin{lstlisting}[language=Java]
+public static void f() throws Exception{
+    System.out.println("Throw new Exception f()");
+    throw new Exception("Generated in f()");
+}
+public static void g() throws Exception{
+    try {
+        f();
+    } catch (Exception e) {
+     System.out.println("Exception catched in g(). Rethrow");
+     throw new Exception("Generated in g()", e);
+    }
+}
+public static void main(String[] args) {
+    try{    g(); }
+    catch(Exception ex){
+        System.out.println("Exception catched in main()"+
+            "Just stay");
+        System.out.println(ex.getMessage());
+    }
+}
+\end{lstlisting}
+
+\subsection{Esercizio}
+\Esercizio{discutere il seguente codice che cosa viene stampato? perch\`e?}
+
+Ordine dei catch
+\begin{lstlisting}[language=Java]
+public class MyException extends Exception {
+    private static final long serialVersionUID =
+         3112454329854888478L;
+    public MyException(String message){
+        super("This is an instance of MyExeption"+message);
+    }
+}
+\end{lstlisting}
+
+Ordine dei catch
+\begin{lstlisting}[language=Java]
+public static void f() throws Exception{
+    System.out.println("Throw new Exception f()");
+    throw new MyException("Generated in f()");
+}
+public static void g() throws Exception{
+    try{ f(); }
+    catch(MyException ex){
+        System.out.println("My exception catched in "+
+            "g(). Rethrow");
+    }
+    catch (Exception e) {
+        System.out.println("Exception catched in g()."+
+            " Rethrow");
+        throw new Exception("Generated in g()", e);
+    }
+}
+\end{lstlisting}
+Il ramo \texttt{catch(MyException ex)} consuma l'eccezione, il ramo \texttt{catch (Exception e)} non viene eseguito
+
+\subsection{Esercizio}
+\Esercizio{discutere il seguente codice che cosa viene stampato? perch\`e?}
+Ordine dei catch
+\begin{lstlisting}[language=Java]
+public static void f() throws Exception{
+    System.out.println("Throw new Exception f()");
+    throw new MyException("Generated in f()");
+}
+public static void g() throws Exception{
+    try{ f(); }
+    catch (Exception e) {
+        System.out.println("Exception catched in g()."+
+            " Rethrow");
+        throw new Exception("Generated in g()", e);
+    }
+    catch(MyException ex){
+        System.out.println("My exception catched in "+
+            "g(). Rethrow");
+    }
+    
+}
+\end{lstlisting}
+Errore di compilazione
+
+\subsection{Esercizio}
+\Esercizio{scrivere una funzione che legge un byte alla volta da un \texttt{FileInputStream}}
+
+\begin{lstlisting}[language=Java]
+private void printFileContent(FileInputStream fileInputStream) {
+ byte[] buffer = new byte[1024];
+ int readBytes = 0;
+ try {
+   while ((readBytes = fileInputStream.read(buffer)) != 0) {
+    for (int i = 0; i < readBytes; i++){
+        System.out.print(buffer[i]);
+    }
+   }
+ } catch (IOException e) {
+   System.err.println("Error reading file content");
+ } finally {
+   try {
+        fileInputStream.close();
+   } catch (IOException e) {
+       System.err.println("Error reading file");
+   }
+} 
+}
+\end{lstlisting}
+
+\section{Esercizi per casa}
+\begin{itemize}
+\item Esercizio:
+\begin{itemize}
+\item modificare opportunamente l'esempio relativo al gioco degli scacchi utilizzando le eccezioni
+\end{itemize} 
+\end{itemize}
+
+\clearpage
+
+% ---- Bibliography ----
+
+
+
+
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliographystyle{alpha}
+\bibliography{bib}
+\nocite{*}
+
+
+\end{document}
+
