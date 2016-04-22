@@ -21,6 +21,8 @@
 \usepackage{fancyhdr}
 \usepackage{graphicx}
 \usepackage{amsthm}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage[scriptsize]{caption} 
 \hyphenation{a-gen-tiz-za-zio-ne}
 % Margins
@@ -138,7 +140,7 @@
 \item l'eccezione viene \textbf{propagata} finch\`e non \`e presente un metodo che consente di gestirla.
 \begin{itemize}
 \item L'insieme dei metodi che sono stati chiamati prima che l'eccezione \`e stata lanciata (\emph{call stack} costituisce l'insieme di possibili elementi che possono gestire l'eccezione). 
-\item La ricerca avviene dall'ultimo metodo eseguito risalendo lo stack delle chiamate fino al \texttt{main}
+\item La ricerca avviene dall'ultimo metodo eseguito risalendo lo stack delle chiamate fino al \texttt{main} (o al metodo \texttt{run} se in un altro thread)
 \item il blocco di codice in grado di gestire l'eccezione viene detto \emph{exception handler}.
 \end{itemize}
 \item se non ci sono metodi capaci di catchare l'eccezione l'applicazione termina
