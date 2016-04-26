@@ -101,27 +101,24 @@
 %	NAME AND CLASS SECTION
 %----------------------------------------------------------------------------------------
 
-\newcommand{\hmwkTitle}{Model View Controller/Testing} % Assignment title
-\newcommand{\hmwkDueDate}{Martedi,\ Marzo 31,\ 2015} % Due date
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Model View Controller} % Assignment title
+\newcommand{\hmwkDueDate}{Venerd\`i,\ Aprile 22,\ 2016} % Due date
 \newcommand{\hmwkClass}{Ingegneria del Software 1} % Course/class
 \newcommand{\hmwkClassTime}{} % Class/lecture time
 \newcommand{\hmwkClassInstructor}{Claudio Menghi, Alessandro Rizzi} % Teacher/lecturer
 \newcommand{\hmwkAuthorName}{} % Your name
 
+
+
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
-
-\title{
-\vspace{2in}
-\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
-\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
-\vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
-\vspace{3in}
-}
-
-\author{\textbf{\hmwkAuthorName}}
-\date{} % Insert date here if you want it to appear below your name
+\input{../Commands.tex}
 
 %----------------------------------------------------------------------------------------
 
@@ -556,7 +553,13 @@ public class Controller implements Observer {
 \begin{lstlisting}[language=Java]
 public class View extends Observable implements Observer {
 
+    //ATTENZIONE!
+    // IN GENERALE NON E' UNA BUONA PRATICA FORNIRE ALLA VIEW UN 
+    //REFERENCE AL MODELLO 
+    // INFATTI, CON QUESTA SCELTA SAREBBE POSSIBILE MODIFICARE
+    // IL MODELLO SENZA PASSARE PER IL CONTROLLER
 	private final Model gioco;
+	
 	public View(Model gioco) {
 		gioco.registerObserver(this);
 		System.out.println(gioco);
@@ -804,9 +807,9 @@ Provare a implementare la versione ``modificata" dell'MVC presentata in~\ref{Mod
 
 
 
-\addcontentsline{toc}{chapter}{Bibliography}
-\bibliographystyle{alpha}
-\bibliography{bib}
+%\addcontentsline{toc}{chapter}{Bibliography}
+%\bibliographystyle{alpha}
+%\bibliography{bib}
 \nocite{*}
 
 
