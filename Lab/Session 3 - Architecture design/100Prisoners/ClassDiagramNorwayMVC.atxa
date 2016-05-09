@@ -1,0 +1,725 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix atxa-jdt: <http://www.architexa.com/rdf/jdt#> .
+@prefix atxa-rse-eclipse: <http://www.architexa.com/rdf/rse-eclipse#> .
+@prefix atxa-core: <http://www.architexa.com/rdf/core#> .
+@prefix atxa: <http://www.architexa.com/rdf/> .
+@prefix atxa-jdt-wkspc: <http://www.architexa.com/rdf/jdt-wkspc#> .
+
+<http://www.architexa.com/rdf/rse-eclipse#ClassDiagramNorwayMVC.atxa> a atxa-core:reloFile .
+
+atxa:DetailNode atxa-core:detailLevel "2" .
+
+atxa-core:docRoot atxa-core:browseModel "com.architexa.diagrams.relo.jdt/com.architexa.diagrams.relo.jdt.browse.ClassStrucBrowseModel" ;
+	atxa-core:contains _:node1aib1dnmfx7715 .
+
+_:node1aib1dnmfx7715 a atxa-core:node ;
+	atxa-core:model atxa-jdt-wkspc:esercitazione9prova ;
+	atxa-core:posX "64" ;
+	atxa-core:posY "35" .
+
+atxa-jdt-wkspc:esercitazione9prova atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova$Observable> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova$Observer> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova$Main> .
+
+_:node1aib1dnmfx7715 atxa-core:contains _:node1aib1dnmfx7717 .
+
+_:node1aib1dnmfx7717 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova$Observable> ;
+	atxa-core:posX "70" ;
+	atxa-core:posY "60" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova$Observable> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova$Observable.notifyObservers()> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova$Observable.Observable()> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova$Observable.observers> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova$Observable.registerObserver(Observer,)> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova$Observable.unregisterObserver(Observer,)> .
+
+_:node1aib1dnmfx7717 atxa-core:contains _:node1aib1dnmfx7718 .
+
+_:node1aib1dnmfx7718 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova$Observable.notifyObservers()> ;
+	atxa-core:posX "71" ;
+	atxa-core:posY "99" .
+
+_:node1aib1dnmfx8030 a atxa-core:link ;
+	atxa-core:model atxa-jdt:calls ;
+	rdf:subject _:node1aib1dnmfx7718 ;
+	rdf:object _:node1aib1dnmfx7724 .
+
+_:node1aib1dnmfx7717 atxa-core:contains _:node1aib1dnmfx7719 .
+
+_:node1aib1dnmfx7719 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova$Observable.Observable()> ;
+	atxa-core:posX "71" ;
+	atxa-core:posY "115" .
+
+_:node1aib1dnmfx7717 atxa-core:contains _:node1aib1dnmfx7720 .
+
+_:node1aib1dnmfx7720 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova$Observable.observers> ;
+	atxa-core:posX "71" ;
+	atxa-core:posY "83" .
+
+_:node1aib1dnmfx7717 atxa-core:contains _:node1aib1dnmfx7721 .
+
+_:node1aib1dnmfx7721 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova$Observable.registerObserver(Observer,)> ;
+	atxa-core:posX "71" ;
+	atxa-core:posY "131" .
+
+_:node1aib1dnmfx7717 atxa-core:contains _:node1aib1dnmfx7722 .
+
+_:node1aib1dnmfx7722 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova$Observable.unregisterObserver(Observer,)> ;
+	atxa-core:posX "71" ;
+	atxa-core:posY "147" .
+
+_:node1aib1dnmfx7715 atxa-core:contains _:node1aib1dnmfx7723 .
+
+_:node1aib1dnmfx7723 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova$Observer> ;
+	atxa-core:posX "350" ;
+	atxa-core:posY "208" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova$Observer> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova$Observer.update()> .
+
+_:node1aib1dnmfx7723 atxa-core:contains _:node1aib1dnmfx7724 .
+
+_:node1aib1dnmfx7724 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova$Observer.update()> ;
+	atxa-core:posX "351" ;
+	atxa-core:posY "231" .
+
+_:node1aib1dnmfx7715 atxa-core:contains _:node1aib1dnmfx7716 .
+
+_:node1aib1dnmfx7716 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova$Main> ;
+	atxa-core:posX "343" ;
+	atxa-core:posY "113" .
+
+atxa-core:docRoot atxa-core:contains _:node1aib1dnmfx7725 .
+
+_:node1aib1dnmfx7725 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model> ;
+	atxa-core:posX "398" ;
+	atxa-core:posY "285" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model$Model> .
+
+_:node1aib1dnmfx7725 atxa-core:contains _:node1aib1dnmfx7726 .
+
+_:node1aib1dnmfx7726 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model$Model> ;
+	atxa-core:posX "404" ;
+	atxa-core:posY "310" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model$Model> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model$Model.addPrigioniero(Prigioniero,)> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model$Model.changePrigioniero()> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model$Model.currentPrigioniero> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model$Model.gameState> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model$Model.getInterruttore()> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model$Model.getPrigionieri()> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model$Model.interruttore> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model$Model.Model()> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model$Model.prigionieri> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model$Model.prigionieriInTheRoom> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model$Model.prigionieriInTheRoom()> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model$Model.setInterruttore(Switch,)> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model$Model.setState(State,)> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model$Model.toString()> .
+
+_:node1aib1dnmfx14 a atxa-core:link ;
+	atxa-core:model atxa-jdt:inherits ;
+	rdf:subject _:node1aib1dnmfx7726 ;
+	rdf:object _:node1aib1dnmfx7717 ;
+	atxa-core:bendpoint _:node1aib1dnmfx10439 .
+
+_:node1aib1dnmfx10439 atxa-core:bpLocation "507,184" ;
+	atxa-core:bpIndex "0" .
+
+_:node1aib1dnmfx14 atxa-core:bendpoint _:node1aib1dnmfx10440 .
+
+_:node1aib1dnmfx10440 atxa-core:bpLocation "152,184" ;
+	atxa-core:bpIndex "1" .
+
+_:node1aib1dnmfx7644 a atxa-core:link ;
+	atxa-core:model atxa-jdt:refType ;
+	rdf:subject _:node1aib1dnmfx7726 ;
+	rdf:object _:node1aib1dnmfx7729 .
+
+_:node1aib1dnmfx7726 atxa-core:contains _:node1aib1dnmfx7730 .
+
+_:node1aib1dnmfx7730 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model$Model.addPrigioniero(Prigioniero,)> ;
+	atxa-core:posX "405" ;
+	atxa-core:posY "413" .
+
+_:node1aib1dnmfx6366 a atxa-core:link ;
+	atxa-core:model atxa-jdt:refType ;
+	rdf:subject _:node1aib1dnmfx7730 ;
+	rdf:object _:node1aib1dnmfx7731 .
+
+_:node1aib1dnmfx7726 atxa-core:contains _:node1aib1dnmfx7732 .
+
+_:node1aib1dnmfx7732 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model$Model.changePrigioniero()> ;
+	atxa-core:posX "405" ;
+	atxa-core:posY "429" .
+
+_:node1aib1dnmfx7726 atxa-core:contains _:node1aib1dnmfx7733 .
+
+_:node1aib1dnmfx7733 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model$Model.currentPrigioniero> ;
+	atxa-core:posX "405" ;
+	atxa-core:posY "333" .
+
+_:node1aib1dnmfx7726 atxa-core:contains _:node1aib1dnmfx7734 .
+
+_:node1aib1dnmfx7734 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model$Model.gameState> ;
+	atxa-core:posX "405" ;
+	atxa-core:posY "349" .
+
+_:node1aib1dnmfx7726 atxa-core:contains _:node1aib1dnmfx7735 .
+
+_:node1aib1dnmfx7735 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model$Model.getInterruttore()> ;
+	atxa-core:posX "405" ;
+	atxa-core:posY "445" .
+
+_:node1aib1dnmfx7726 atxa-core:contains _:node1aib1dnmfx7736 .
+
+_:node1aib1dnmfx7736 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model$Model.getPrigionieri()> ;
+	atxa-core:posX "405" ;
+	atxa-core:posY "461" .
+
+_:node1aib1dnmfx7726 atxa-core:contains _:node1aib1dnmfx7737 .
+
+_:node1aib1dnmfx7737 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model$Model.interruttore> ;
+	atxa-core:posX "405" ;
+	atxa-core:posY "365" .
+
+_:node1aib1dnmfx7726 atxa-core:contains _:node1aib1dnmfx7738 .
+
+_:node1aib1dnmfx7738 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model$Model.Model()> ;
+	atxa-core:posX "405" ;
+	atxa-core:posY "477" .
+
+_:node1aib1dnmfx7726 atxa-core:contains _:node1aib1dnmfx7739 .
+
+_:node1aib1dnmfx7739 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model$Model.prigionieri> ;
+	atxa-core:posX "405" ;
+	atxa-core:posY "381" .
+
+_:node1aib1dnmfx7726 atxa-core:contains _:node1aib1dnmfx7740 .
+
+_:node1aib1dnmfx7740 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model$Model.prigionieriInTheRoom> ;
+	atxa-core:posX "405" ;
+	atxa-core:posY "397" .
+
+_:node1aib1dnmfx7726 atxa-core:contains _:node1aib1dnmfx7741 .
+
+_:node1aib1dnmfx7741 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model$Model.prigionieriInTheRoom()> ;
+	atxa-core:posX "405" ;
+	atxa-core:posY "493" .
+
+_:node1aib1dnmfx7726 atxa-core:contains _:node1aib1dnmfx7742 .
+
+_:node1aib1dnmfx7742 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model$Model.setInterruttore(Switch,)> ;
+	atxa-core:posX "405" ;
+	atxa-core:posY "509" .
+
+_:node1aib1dnmfx7726 atxa-core:contains _:node1aib1dnmfx7743 .
+
+_:node1aib1dnmfx7743 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model$Model.setState(State,)> ;
+	atxa-core:posX "405" ;
+	atxa-core:posY "525" .
+
+_:node1aib1dnmfx6773 a atxa-core:link ;
+	atxa-core:model atxa-jdt:refType ;
+	rdf:subject _:node1aib1dnmfx7743 ;
+	rdf:object _:node1aib1dnmfx7744 .
+
+_:node1aib1dnmfx7726 atxa-core:contains _:node1aib1dnmfx7745 .
+
+_:node1aib1dnmfx7745 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model$Model.toString()> ;
+	atxa-core:posX "405" ;
+	atxa-core:posY "541" .
+
+atxa-core:docRoot atxa-core:contains _:node1aib1dnmfx7746 .
+
+_:node1aib1dnmfx7746 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.view> ;
+	atxa-core:posX "21" ;
+	atxa-core:posY "434" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.view> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.view$View> .
+
+_:node1aib1dnmfx7746 atxa-core:contains _:node1aib1dnmfx7747 .
+
+_:node1aib1dnmfx7747 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.view$View> ;
+	atxa-core:posX "27" ;
+	atxa-core:posY "459" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.view$View> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.view$View.gioco> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.view$View.input(String,)> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.view$View.update(Object,)> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.view$View.View(Model,)> .
+
+_:node1aib1dnmfx26 a atxa-core:link ;
+	atxa-core:model atxa-jdt:inherits ;
+	rdf:subject _:node1aib1dnmfx7747 ;
+	rdf:object _:node1aib1dnmfx7717 ;
+	atxa-core:bendpoint _:node1aib1dnmfx10441 .
+
+_:node1aib1dnmfx10441 atxa-core:bpLocation "85,184" ;
+	atxa-core:bpIndex "0" .
+
+_:node1aib1dnmfx26 atxa-core:bendpoint _:node1aib1dnmfx10442 .
+
+_:node1aib1dnmfx10442 atxa-core:bpLocation "152,184" ;
+	atxa-core:bpIndex "1" .
+
+_:node1aib1dnmfx27 a atxa-core:link ;
+	atxa-core:model atxa-jdt:inherits ;
+	rdf:subject _:node1aib1dnmfx7747 ;
+	rdf:object _:node1aib1dnmfx7723 ;
+	atxa-core:bendpoint _:node1aib1dnmfx10443 .
+
+_:node1aib1dnmfx10443 atxa-core:bpLocation "85,268" ;
+	atxa-core:bpIndex "0" .
+
+_:node1aib1dnmfx27 atxa-core:bendpoint _:node1aib1dnmfx10444 .
+
+_:node1aib1dnmfx10444 atxa-core:bpLocation "412,268" ;
+	atxa-core:bpIndex "1" .
+
+_:node1aib1dnmfx7747 atxa-core:contains _:node1aib1dnmfx7752 .
+
+_:node1aib1dnmfx7752 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.view$View.gioco> ;
+	atxa-core:posX "28" ;
+	atxa-core:posY "482" .
+
+_:node1aib1dnmfx7747 atxa-core:contains _:node1aib1dnmfx7753 .
+
+_:node1aib1dnmfx7753 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.view$View.input(String,)> ;
+	atxa-core:posX "28" ;
+	atxa-core:posY "498" .
+
+_:node1aib1dnmfx7747 atxa-core:contains _:node1aib1dnmfx7754 .
+
+_:node1aib1dnmfx7754 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.view$View.update(Object,)> ;
+	atxa-core:posX "28" ;
+	atxa-core:posY "514" .
+
+_:node1aib1dnmfx7747 atxa-core:contains _:node1aib1dnmfx7755 .
+
+_:node1aib1dnmfx7755 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.view$View.View(Model,)> ;
+	atxa-core:posX "28" ;
+	atxa-core:posY "530" .
+
+atxa-core:docRoot atxa-core:contains _:node1aib1dnmfx7756 .
+
+_:node1aib1dnmfx7756 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.controller> ;
+	atxa-core:posX "234" ;
+	atxa-core:posY "416" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.controller> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.controller$Controller> .
+
+_:node1aib1dnmfx7756 atxa-core:contains _:node1aib1dnmfx7757 .
+
+_:node1aib1dnmfx7757 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.controller$Controller> ;
+	atxa-core:posX "240" ;
+	atxa-core:posY "441" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.controller$Controller> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.controller$Controller.Controller(Model,View,)> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.controller$Controller.gioco> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.controller$Controller.update(Object,)> .
+
+_:node1aib1dnmfx517 a atxa-core:link ;
+	atxa-core:model atxa-jdt:inherits ;
+	rdf:subject _:node1aib1dnmfx7757 ;
+	rdf:object _:node1aib1dnmfx7723 ;
+	atxa-core:bendpoint _:node1aib1dnmfx10445 .
+
+_:node1aib1dnmfx10445 atxa-core:bpLocation "306,268" ;
+	atxa-core:bpIndex "0" .
+
+_:node1aib1dnmfx517 atxa-core:bendpoint _:node1aib1dnmfx10446 .
+
+_:node1aib1dnmfx10446 atxa-core:bpLocation "412,268" ;
+	atxa-core:bpIndex "1" .
+
+_:node1aib1dnmfx7153 a atxa-core:link ;
+	atxa-core:model atxa-jdt:refType ;
+	rdf:subject _:node1aib1dnmfx7757 ;
+	rdf:object _:node1aib1dnmfx7760 .
+
+_:node1aib1dnmfx7757 atxa-core:contains _:node1aib1dnmfx7761 .
+
+_:node1aib1dnmfx7761 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.controller$Controller.Controller(Model,View,)> ;
+	atxa-core:posX "241" ;
+	atxa-core:posY "480" .
+
+_:node1aib1dnmfx7757 atxa-core:contains _:node1aib1dnmfx7762 .
+
+_:node1aib1dnmfx7762 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.controller$Controller.gioco> ;
+	atxa-core:posX "241" ;
+	atxa-core:posY "464" .
+
+_:node1aib1dnmfx7757 atxa-core:contains _:node1aib1dnmfx7763 .
+
+_:node1aib1dnmfx7763 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.controller$Controller.update(Object,)> ;
+	atxa-core:posX "241" ;
+	atxa-core:posY "496" .
+
+atxa-core:docRoot atxa-core:contains _:node1aib1dnmfx7764 .
+
+_:node1aib1dnmfx7764 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.actions> ;
+	atxa-core:posX "220" ;
+	atxa-core:posY "622" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.actions> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.actions$TurnOff> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.actions$TurnOn> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.actions$Scommetti> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.actions$Action> .
+
+_:node1aib1dnmfx7764 atxa-core:contains _:node1aib1dnmfx7765 .
+
+_:node1aib1dnmfx7765 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.actions$TurnOff> ;
+	atxa-core:posX "226" ;
+	atxa-core:posY "989" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.actions$TurnOff> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.actions$TurnOff.esegui()> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.actions$TurnOff.TurnOff(Model,)> .
+
+_:node1aib1dnmfx1562 a atxa-core:link ;
+	atxa-core:model atxa-jdt:inherits ;
+	rdf:subject _:node1aib1dnmfx7765 ;
+	rdf:object _:node1aib1dnmfx7760 ;
+	atxa-core:bendpoint _:node1aib1dnmfx10447 .
+
+_:node1aib1dnmfx10447 atxa-core:bpLocation "282,755" ;
+	atxa-core:bpIndex "0" .
+
+_:node1aib1dnmfx1562 atxa-core:bendpoint _:node1aib1dnmfx10448 .
+
+_:node1aib1dnmfx10448 atxa-core:bpLocation "439,755" ;
+	atxa-core:bpIndex "1" .
+
+_:node1aib1dnmfx7765 atxa-core:contains _:node1aib1dnmfx7768 .
+
+_:node1aib1dnmfx7768 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.actions$TurnOff.esegui()> ;
+	atxa-core:posX "227" ;
+	atxa-core:posY "1012" .
+
+_:node1aib1dnmfx7765 atxa-core:contains _:node1aib1dnmfx7769 .
+
+_:node1aib1dnmfx7769 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.actions$TurnOff.TurnOff(Model,)> ;
+	atxa-core:posX "227" ;
+	atxa-core:posY "1028" .
+
+_:node1aib1dnmfx7764 atxa-core:contains _:node1aib1dnmfx7770 .
+
+_:node1aib1dnmfx7770 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.actions$TurnOn> ;
+	atxa-core:posX "508" ;
+	atxa-core:posY "987" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.actions$TurnOn> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.actions$TurnOn.esegui()> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.actions$TurnOn.TurnOn(Model,)> .
+
+_:node1aib1dnmfx3318 a atxa-core:link ;
+	atxa-core:model atxa-jdt:inherits ;
+	rdf:subject _:node1aib1dnmfx7770 ;
+	rdf:object _:node1aib1dnmfx7760 ;
+	atxa-core:bendpoint _:node1aib1dnmfx10449 .
+
+_:node1aib1dnmfx10449 atxa-core:bpLocation "562,755" ;
+	atxa-core:bpIndex "0" .
+
+_:node1aib1dnmfx3318 atxa-core:bendpoint _:node1aib1dnmfx10450 .
+
+_:node1aib1dnmfx10450 atxa-core:bpLocation "439,755" ;
+	atxa-core:bpIndex "1" .
+
+_:node1aib1dnmfx7770 atxa-core:contains _:node1aib1dnmfx7773 .
+
+_:node1aib1dnmfx7773 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.actions$TurnOn.esegui()> ;
+	atxa-core:posX "509" ;
+	atxa-core:posY "1010" .
+
+_:node1aib1dnmfx7770 atxa-core:contains _:node1aib1dnmfx7774 .
+
+_:node1aib1dnmfx7774 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.actions$TurnOn.TurnOn(Model,)> ;
+	atxa-core:posX "509" ;
+	atxa-core:posY "1026" .
+
+_:node1aib1dnmfx7764 atxa-core:contains _:node1aib1dnmfx7775 .
+
+_:node1aib1dnmfx7775 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.actions$Scommetti> ;
+	atxa-core:posX "347" ;
+	atxa-core:posY "988" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.actions$Scommetti> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.actions$Scommetti.esegui()> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.actions$Scommetti.Scommetti(Model,)> .
+
+_:node1aib1dnmfx1508 a atxa-core:link ;
+	atxa-core:model atxa-jdt:inherits ;
+	rdf:subject _:node1aib1dnmfx7775 ;
+	rdf:object _:node1aib1dnmfx7760 ;
+	atxa-core:bendpoint _:node1aib1dnmfx10451 .
+
+_:node1aib1dnmfx10451 atxa-core:bpLocation "417,755" ;
+	atxa-core:bpIndex "0" .
+
+_:node1aib1dnmfx1508 atxa-core:bendpoint _:node1aib1dnmfx10452 .
+
+_:node1aib1dnmfx10452 atxa-core:bpLocation "439,755" ;
+	atxa-core:bpIndex "1" .
+
+_:node1aib1dnmfx7775 atxa-core:contains _:node1aib1dnmfx7778 .
+
+_:node1aib1dnmfx7778 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.actions$Scommetti.esegui()> ;
+	atxa-core:posX "348" ;
+	atxa-core:posY "1011" .
+
+_:node1aib1dnmfx7775 atxa-core:contains _:node1aib1dnmfx7779 .
+
+_:node1aib1dnmfx7779 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.actions$Scommetti.Scommetti(Model,)> ;
+	atxa-core:posX "348" ;
+	atxa-core:posY "1027" .
+
+_:node1aib1dnmfx6886 a atxa-core:link ;
+	atxa-core:model atxa-jdt:refType ;
+	rdf:subject _:node1aib1dnmfx7779 ;
+	rdf:object _:node1aib1dnmfx7760 .
+
+_:node1aib1dnmfx7764 atxa-core:contains _:node1aib1dnmfx7760 .
+
+_:node1aib1dnmfx7760 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.actions$Action> ;
+	atxa-core:posX "381" ;
+	atxa-core:posY "647" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.actions$Action> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.actions$Action.Action(Model,)> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.actions$Action.esegui()> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.actions$Action.getGioco()> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.actions$Action.gioco> .
+
+_:node1aib1dnmfx7760 atxa-core:contains _:node1aib1dnmfx7780 .
+
+_:node1aib1dnmfx7780 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.actions$Action.Action(Model,)> ;
+	atxa-core:posX "382" ;
+	atxa-core:posY "686" .
+
+_:node1aib1dnmfx7760 atxa-core:contains _:node1aib1dnmfx7781 .
+
+_:node1aib1dnmfx7781 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.actions$Action.esegui()> ;
+	atxa-core:posX "382" ;
+	atxa-core:posY "702" .
+
+_:node1aib1dnmfx7760 atxa-core:contains _:node1aib1dnmfx7782 .
+
+_:node1aib1dnmfx7782 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.actions$Action.getGioco()> ;
+	atxa-core:posX "382" ;
+	atxa-core:posY "718" .
+
+_:node1aib1dnmfx7760 atxa-core:contains _:node1aib1dnmfx7783 .
+
+_:node1aib1dnmfx7783 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.actions$Action.gioco> ;
+	atxa-core:posX "382" ;
+	atxa-core:posY "670" .
+
+atxa-core:docRoot atxa-core:contains _:node1aib1dnmfx7784 .
+
+_:node1aib1dnmfx7784 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components> ;
+	atxa-core:posX "669" ;
+	atxa-core:posY "329" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$Prigioniero> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$State> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$Switch> .
+
+_:node1aib1dnmfx7784 atxa-core:contains _:node1aib1dnmfx7731 .
+
+_:node1aib1dnmfx7731 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$Prigioniero> ;
+	atxa-core:posX "832" ;
+	atxa-core:posY "354" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$Prigioniero> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$Prigioniero.equals(Object,)> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$Prigioniero.getName()> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$Prigioniero.hashCode()> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$Prigioniero.name> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$Prigioniero.Prigioniero(String,)> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$Prigioniero.toString()> .
+
+_:node1aib1dnmfx7731 atxa-core:contains _:node1aib1dnmfx7785 .
+
+_:node1aib1dnmfx7785 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$Prigioniero.equals(Object,)> ;
+	atxa-core:posX "833" ;
+	atxa-core:posY "393" .
+
+_:node1aib1dnmfx7731 atxa-core:contains _:node1aib1dnmfx7786 .
+
+_:node1aib1dnmfx7786 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$Prigioniero.getName()> ;
+	atxa-core:posX "833" ;
+	atxa-core:posY "409" .
+
+_:node1aib1dnmfx7731 atxa-core:contains _:node1aib1dnmfx7787 .
+
+_:node1aib1dnmfx7787 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$Prigioniero.hashCode()> ;
+	atxa-core:posX "833" ;
+	atxa-core:posY "425" .
+
+_:node1aib1dnmfx7731 atxa-core:contains _:node1aib1dnmfx7788 .
+
+_:node1aib1dnmfx7788 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$Prigioniero.name> ;
+	atxa-core:posX "833" ;
+	atxa-core:posY "377" .
+
+_:node1aib1dnmfx7731 atxa-core:contains _:node1aib1dnmfx7789 .
+
+_:node1aib1dnmfx7789 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$Prigioniero.Prigioniero(String,)> ;
+	atxa-core:posX "833" ;
+	atxa-core:posY "441" .
+
+_:node1aib1dnmfx7731 atxa-core:contains _:node1aib1dnmfx7790 .
+
+_:node1aib1dnmfx7790 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$Prigioniero.toString()> ;
+	atxa-core:posX "833" ;
+	atxa-core:posY "457" .
+
+_:node1aib1dnmfx7784 atxa-core:contains _:node1aib1dnmfx7744 .
+
+_:node1aib1dnmfx7744 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$State> ;
+	atxa-core:posX "776" ;
+	atxa-core:posY "589" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$State> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$State.<clinit\>()> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$State.LOSE> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$State.RUNNING> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$State.State(String,int,)> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$State.valueOf(String,)> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$State.ENUM$VALUES> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$State.values()> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$State.WIN> .
+
+_:node1aib1dnmfx7744 atxa-core:contains _:node1aib1dnmfx7791 .
+
+_:node1aib1dnmfx7791 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$State.<clinit\>()> ;
+	atxa-core:posX "777" ;
+	atxa-core:posY "676" .
+
+_:node1aib1dnmfx7744 atxa-core:contains _:node1aib1dnmfx7792 .
+
+_:node1aib1dnmfx7792 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$State.LOSE> ;
+	atxa-core:posX "777" ;
+	atxa-core:posY "612" .
+
+_:node1aib1dnmfx7744 atxa-core:contains _:node1aib1dnmfx7793 .
+
+_:node1aib1dnmfx7793 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$State.RUNNING> ;
+	atxa-core:posX "777" ;
+	atxa-core:posY "628" .
+
+_:node1aib1dnmfx7744 atxa-core:contains _:node1aib1dnmfx7794 .
+
+_:node1aib1dnmfx7794 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$State.State(String,int,)> ;
+	atxa-core:posX "777" ;
+	atxa-core:posY "692" .
+
+_:node1aib1dnmfx7744 atxa-core:contains _:node1aib1dnmfx7795 .
+
+_:node1aib1dnmfx7795 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$State.valueOf(String,)> ;
+	atxa-core:posX "777" ;
+	atxa-core:posY "708" .
+
+_:node1aib1dnmfx7744 atxa-core:contains _:node1aib1dnmfx7796 .
+
+_:node1aib1dnmfx7796 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$State.ENUM$VALUES> ;
+	atxa-core:posX "777" ;
+	atxa-core:posY "644" .
+
+_:node1aib1dnmfx7744 atxa-core:contains _:node1aib1dnmfx7797 .
+
+_:node1aib1dnmfx7797 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$State.values()> ;
+	atxa-core:posX "777" ;
+	atxa-core:posY "724" .
+
+_:node1aib1dnmfx7744 atxa-core:contains _:node1aib1dnmfx7798 .
+
+_:node1aib1dnmfx7798 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$State.WIN> ;
+	atxa-core:posX "777" ;
+	atxa-core:posY "660" .
+
+_:node1aib1dnmfx7784 atxa-core:contains _:node1aib1dnmfx7729 .
+
+_:node1aib1dnmfx7729 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$Switch> ;
+	atxa-core:posX "675" ;
+	atxa-core:posY "787" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$Switch> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$Switch.<clinit\>()> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$Switch.OFF> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$Switch.ON> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$Switch.Switch(String,int,)> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$Switch.valueOf(String,)> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$Switch.ENUM$VALUES> , <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$Switch.values()> .
+
+_:node1aib1dnmfx7729 atxa-core:contains _:node1aib1dnmfx7799 .
+
+_:node1aib1dnmfx7799 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$Switch.<clinit\>()> ;
+	atxa-core:posX "676" ;
+	atxa-core:posY "858" .
+
+_:node1aib1dnmfx7729 atxa-core:contains _:node1aib1dnmfx7800 .
+
+_:node1aib1dnmfx7800 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$Switch.OFF> ;
+	atxa-core:posX "676" ;
+	atxa-core:posY "810" .
+
+_:node1aib1dnmfx7729 atxa-core:contains _:node1aib1dnmfx7801 .
+
+_:node1aib1dnmfx7801 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$Switch.ON> ;
+	atxa-core:posX "676" ;
+	atxa-core:posY "826" .
+
+_:node1aib1dnmfx7729 atxa-core:contains _:node1aib1dnmfx7802 .
+
+_:node1aib1dnmfx7802 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$Switch.Switch(String,int,)> ;
+	atxa-core:posX "676" ;
+	atxa-core:posY "874" .
+
+_:node1aib1dnmfx7729 atxa-core:contains _:node1aib1dnmfx7803 .
+
+_:node1aib1dnmfx7803 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$Switch.valueOf(String,)> ;
+	atxa-core:posX "676" ;
+	atxa-core:posY "890" .
+
+_:node1aib1dnmfx7729 atxa-core:contains _:node1aib1dnmfx7804 .
+
+_:node1aib1dnmfx7804 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$Switch.ENUM$VALUES> ;
+	atxa-core:posX "676" ;
+	atxa-core:posY "842" .
+
+_:node1aib1dnmfx7729 atxa-core:contains _:node1aib1dnmfx7805 .
+
+_:node1aib1dnmfx7805 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#esercitazione9prova.model.components$Switch.values()> ;
+	atxa-core:posX "676" ;
+	atxa-core:posY "906" .
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix atxa-jdt: <http://www.architexa.com/rdf/jdt#> .
+@prefix atxa-rse-eclipse: <http://www.architexa.com/rdf/rse-eclipse#> .
+@prefix atxa-core: <http://www.architexa.com/rdf/core#> .
+@prefix atxa: <http://www.architexa.com/rdf/> .
+@prefix atxa-jdt-wkspc: <http://www.architexa.com/rdf/jdt-wkspc#> .
+
+<http://www.architexa.com/rdf/rse-eclipse#ClassDiagramNorwayMVC.atxa> a atxa-core:reloFile ;
+	atxa-core:contains _:node1aib1dnmfx7718 , _:node1aib1dnmfx7719 , _:node1aib1dnmfx7720 , _:node1aib1dnmfx7721 , _:node1aib1dnmfx7722 , _:node1aib1dnmfx7717 , _:node1aib1dnmfx7724 , _:node1aib1dnmfx7723 , _:node1aib1dnmfx7716 , _:node1aib1dnmfx7715 , _:node1aib1dnmfx7730 , _:node1aib1dnmfx7732 , _:node1aib1dnmfx7733 , _:node1aib1dnmfx7734 , _:node1aib1dnmfx7735 , _:node1aib1dnmfx7736 , _:node1aib1dnmfx7737 , _:node1aib1dnmfx7738 , _:node1aib1dnmfx7739 , _:node1aib1dnmfx7740 , _:node1aib1dnmfx7741 , _:node1aib1dnmfx7742 , _:node1aib1dnmfx7743 , _:node1aib1dnmfx7745 , _:node1aib1dnmfx7726 , _:node1aib1dnmfx7725 , _:node1aib1dnmfx7752 , _:node1aib1dnmfx7753 , _:node1aib1dnmfx7754 , _:node1aib1dnmfx7755 , _:node1aib1dnmfx7747 , _:node1aib1dnmfx7746 , _:node1aib1dnmfx7761 , _:node1aib1dnmfx7762 , _:node1aib1dnmfx7763 , _:node1aib1dnmfx7757 , _:node1aib1dnmfx7756 , _:node1aib1dnmfx7768 , _:node1aib1dnmfx7769 , _:node1aib1dnmfx7765 , _:node1aib1dnmfx7773 , _:node1aib1dnmfx7774 , _:node1aib1dnmfx7770 , _:node1aib1dnmfx7778 , _:node1aib1dnmfx7779 , _:node1aib1dnmfx7775 , _:node1aib1dnmfx7780 , _:node1aib1dnmfx7781 , _:node1aib1dnmfx7782 , _:node1aib1dnmfx7783 , _:node1aib1dnmfx7760 , _:node1aib1dnmfx7764 , _:node1aib1dnmfx7785 , _:node1aib1dnmfx7786 , _:node1aib1dnmfx7787 , _:node1aib1dnmfx7788 , _:node1aib1dnmfx7789 , _:node1aib1dnmfx7790 , _:node1aib1dnmfx7731 , _:node1aib1dnmfx7791 , _:node1aib1dnmfx7792 , _:node1aib1dnmfx7793 , _:node1aib1dnmfx7794 , _:node1aib1dnmfx7795 , _:node1aib1dnmfx7796 , _:node1aib1dnmfx7797 , _:node1aib1dnmfx7798 , _:node1aib1dnmfx7744 , _:node1aib1dnmfx7799 , _:node1aib1dnmfx7800 , _:node1aib1dnmfx7801 , _:node1aib1dnmfx7802 , _:node1aib1dnmfx7803 , _:node1aib1dnmfx7804 , _:node1aib1dnmfx7805 , _:node1aib1dnmfx7729 , _:node1aib1dnmfx7784 , atxa-core:docRoot , _:node1aib1dnmfx7718 , _:node1aib1dnmfx7719 , _:node1aib1dnmfx7720 , _:node1aib1dnmfx7721 , _:node1aib1dnmfx7722 , _:node1aib1dnmfx7717 , _:node1aib1dnmfx7724 , _:node1aib1dnmfx7723 , _:node1aib1dnmfx7716 , _:node1aib1dnmfx7715 , _:node1aib1dnmfx7730 , _:node1aib1dnmfx7732 , _:node1aib1dnmfx7733 , _:node1aib1dnmfx7734 , _:node1aib1dnmfx7735 , _:node1aib1dnmfx7736 , _:node1aib1dnmfx7737 , _:node1aib1dnmfx7738 , _:node1aib1dnmfx7739 , _:node1aib1dnmfx7740 , _:node1aib1dnmfx7741 , _:node1aib1dnmfx7742 , _:node1aib1dnmfx7743 , _:node1aib1dnmfx7745 , _:node1aib1dnmfx7726 , _:node1aib1dnmfx7725 , _:node1aib1dnmfx7752 , _:node1aib1dnmfx7753 , _:node1aib1dnmfx7754 , _:node1aib1dnmfx7755 , _:node1aib1dnmfx7747 , _:node1aib1dnmfx7746 , _:node1aib1dnmfx7761 , _:node1aib1dnmfx7762 , _:node1aib1dnmfx7763 , _:node1aib1dnmfx7757 , _:node1aib1dnmfx7756 , _:node1aib1dnmfx7768 , _:node1aib1dnmfx7769 , _:node1aib1dnmfx7765 , _:node1aib1dnmfx7773 , _:node1aib1dnmfx7774 , _:node1aib1dnmfx7770 , _:node1aib1dnmfx7778 , _:node1aib1dnmfx7779 , _:node1aib1dnmfx7775 , _:node1aib1dnmfx7780 , _:node1aib1dnmfx7781 , _:node1aib1dnmfx7782 , _:node1aib1dnmfx7783 , _:node1aib1dnmfx7760 , _:node1aib1dnmfx7764 , _:node1aib1dnmfx7785 , _:node1aib1dnmfx7786 , _:node1aib1dnmfx7787 , _:node1aib1dnmfx7788 , _:node1aib1dnmfx7789 , _:node1aib1dnmfx7790 , _:node1aib1dnmfx7731 , _:node1aib1dnmfx7791 , _:node1aib1dnmfx7792 , _:node1aib1dnmfx7793 , _:node1aib1dnmfx7794 , _:node1aib1dnmfx7795 , _:node1aib1dnmfx7796 , _:node1aib1dnmfx7797 , _:node1aib1dnmfx7798 , _:node1aib1dnmfx7744 , _:node1aib1dnmfx7799 , _:node1aib1dnmfx7800 , _:node1aib1dnmfx7801 , _:node1aib1dnmfx7802 , _:node1aib1dnmfx7803 , _:node1aib1dnmfx7804 , _:node1aib1dnmfx7805 , _:node1aib1dnmfx7729 , _:node1aib1dnmfx7784 , atxa-core:docRoot , _:node1aib1dnmfx8030 , _:node1aib1dnmfx14 , _:node1aib1dnmfx7644 , _:node1aib1dnmfx6366 , _:node1aib1dnmfx6773 , _:node1aib1dnmfx26 , _:node1aib1dnmfx27 , _:node1aib1dnmfx517 , _:node1aib1dnmfx7153 , _:node1aib1dnmfx1562 , _:node1aib1dnmfx3318 , _:node1aib1dnmfx1508 , _:node1aib1dnmfx6886 , _:node1aib1dnmfx8030 , _:node1aib1dnmfx14 , _:node1aib1dnmfx7644 , _:node1aib1dnmfx6366 , _:node1aib1dnmfx6773 , _:node1aib1dnmfx26 , _:node1aib1dnmfx27 , _:node1aib1dnmfx517 , _:node1aib1dnmfx7153 , _:node1aib1dnmfx1562 , _:node1aib1dnmfx3318 , _:node1aib1dnmfx1508 , _:node1aib1dnmfx6886 .
+
