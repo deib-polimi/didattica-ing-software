@@ -101,7 +101,7 @@
 \newcommand{\hmwkDueDate}{Aprile 12, 2016} % Due date
 \else
 \newcommand{\hmwkTitle}{Sonar guide} % Assignment title
-\newcommand{\hmwkDueDate}{Aprile 19, 2016} % Due date
+\newcommand{\hmwkDueDate}{Aprile 25, 2016} % Due date
 \fi
 \newcommand{\hmwkClass}{Ingegneria del Software 1} % Course/class
 \newcommand{\hmwkClassInstructor}{Sr\dj{}an Krsti\'c and Claudio Menghi} % Teacher/lecturer
@@ -267,6 +267,11 @@ need to enable test coverage:
 % \item re-run the \texttt{maven sonar} run configuration and go to
 %   \url{http://localhost:9000/} to see the code coverage statistics.
 \end{itemize}
+This plug adds an additional phase in the Maven execution called 
+prepare-agent that prepares Java VM to collect test coverage
+information and saves it in target folder under the name
+"jacoco.exec". 
+
 
 \fi
 
