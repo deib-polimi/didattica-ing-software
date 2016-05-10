@@ -3,31 +3,36 @@ package esercitazione9prova;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Observable {
+public abstract class Observable<C> {
 
-	private List<Observer> observers;
-	
-	public Observable(){
-		observers=new ArrayList<Observer>();
+	private List<Observer<C>> observers;
+
+	public Observable() {
+
+		observers = new ArrayList<Observer<C>>();
 	}
-	
-	public void registerObserver(Observer o){
+
+	public void registerObserver(Observer<C> o) {
 		observers.add(o);
 	}
-	
-	public void unregisterObserver(Observer o){
+
+	public void unregisterObserver(Observer<C> o) {
 		this.observers.remove(o);
 	}
-	
-	public void notifyObservers(){
-		for(Observer o: this.observers){
+
+	public void notifyObservers() {
+		System.out
+				.println("I am the " + this.getClass().getSimpleName() + "I am notifying my observers");
+
+		for (Observer<C> o : this.observers) {
 			o.update();
 		}
 	}
-	public <C> void notifyObservers(C c){
-		for(Observer o: this.observers){
+
+	public void notifyObservers(C c) {
+		for (Observer<C> o : this.observers) {
 			o.update(c);
 		}
-		
-	}	
+
+	}
 }

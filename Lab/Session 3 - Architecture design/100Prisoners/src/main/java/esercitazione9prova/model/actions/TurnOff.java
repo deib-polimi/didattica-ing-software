@@ -5,13 +5,13 @@ import esercitazione9prova.model.components.Switch;
 
 public class TurnOff extends Action{
 
-	public TurnOff(Model gioco) {
-		super(gioco);
+	public TurnOff() {
+		
 	}
 
 	@Override
-	public void esegui() {
-		this.getGioco().setInterruttore(Switch.OFF);
-		this.getGioco().changePrigioniero();
+	public void esegui(Model gioco) {
+		gioco.setInterruttore(Switch.OFF);
+		this.changePrigioniero(gioco);
 	}
 }

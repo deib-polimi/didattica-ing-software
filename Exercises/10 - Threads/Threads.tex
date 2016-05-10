@@ -95,14 +95,12 @@
 }
 
 
-
-
 %----------------------------------------------------------------------------------------
 %	NAME AND CLASS SECTION
 %----------------------------------------------------------------------------------------
 
-\newcommand{\hmwkTitle}{Threads} % Assignment title
-\newcommand{\hmwkDueDate}{Lunedi,\ Maggio 18,\ 2015} % Due date
+\newcommand{\hmwkTitle}{Concorrenza} % Assignment title
+\newcommand{\hmwkDueDate}{Mercoled\`i,\ Maggio 11,\ 2016} % Due date
 \newcommand{\hmwkClass}{Ingegneria del Software 1} % Course/class
 \newcommand{\hmwkClassTime}{} % Class/lecture time
 \newcommand{\hmwkClassInstructor}{Claudio Menghi, Alessandro Rizzi} % Teacher/lecturer
@@ -111,17 +109,7 @@
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
-
-\title{
-\vspace{2in}
-\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
-\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
-\vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
-\vspace{3in}
-}
-
-\author{\textbf{\hmwkAuthorName}}
-\date{} % Insert date here if you want it to appear below your name
+\input{../Commands.tex}
 
 %----------------------------------------------------------------------------------------
 
@@ -238,7 +226,7 @@ Thread t=new Thread(Runnable target, String name);
 
  o raggruppare dei threads (per esempio raggruppare dei threads che svolgono delle attivit\`a simili.
  \begin{lstlisting}[language=Java]
-Thread t=new Thread(ThreadGroup threadGroup, Runnable target, "String name);
+Thread t=new Thread(ThreadGroup threadGroup, Runnable target, String name);
 \end{lstlisting}
 
 
@@ -246,7 +234,7 @@ Thread t=new Thread(ThreadGroup threadGroup, Runnable target, "String name);
 
 
 \subsection{Interferenze}
-I thread comunicano tra loro principalmente mediante l'accesso ad attributi degli oggetti che condividono. Questa forma di comunicazione \`e estremamente efficiente ma rende possibili vari errori: i pi\`u cominu sono le interferenze. Le interferenze avvengono quando pi\`u thread accedono in meniera concorrente alle medesime risorse. Per esempio vedi l'esercizio 2. Per evitare questi problemi dobbiamo garantire che l'accesso a determinate porzioni di codice avvenga in maniera atomica, non sia consentito a due thread distinti l'accesso a porzioni di codice che possono generare inconsistenze.
+I thread comunicano tra loro principalmente mediante l'accesso ad attributi degli oggetti che condividono. Questa forma di comunicazione \`e estremamente efficiente ma rende possibili vari errori: i pi\`u comuni sono le interferenze. Le interferenze avvengono quando pi\`u thread accedono in meniera concorrente alle medesime risorse. Per esempio vedi l'esercizio 2. Per evitare questi problemi dobbiamo garantire che l'accesso a determinate porzioni di codice avvenga in maniera atomica, non sia consentito a due thread distinti l'accesso a porzioni di codice che possono generare inconsistenze.
 
 Ci sono 2 possibili modi per prevenire questi problemi:
 \begin{itemize}
@@ -254,7 +242,7 @@ Ci sono 2 possibili modi per prevenire questi problemi:
 \begin{lstlisting}[language=Java]
 public synchronized void increment();
 \end{lstlisting}
-Ad ogni oggetto viene associato un \texttt{lock} intrinseco che svolge un ruolo primario nella sincronizzazione. Prima di eseguire un metodo sincrnonized un thread deve acquisire il lock intrinseco dell'\textbf{oggetto} e rilasciarlo quando ha finito.
+Ad ogni oggetto viene associato un \texttt{lock} intrinseco che svolge un ruolo primario nella sincronizzazione. Prima di eseguire un metodo \texttt{sinchronized} un thread deve acquisire il lock intrinseco dell'\textbf{oggetto} e rilasciarlo quando ha finito.
 \item \emph{statements sincronizzati}: a differenza dei metodi sincronizzati, gli statement sincronizzati richiedono di specificare l'oggetto su cui di desidera avere il lock intrinseco. Per esempio, nel metodo \texttt{addName}
 \begin{lstlisting}[language=Java]
 public void addName(String name) {
@@ -301,7 +289,7 @@ Negli esempi precedenti c'\`e una forte relazione tra task e thread, dal momento
 ci sono 3 diverse interfacce che consentono di gestire i thread
 \begin{itemize}
 \item Executor: interfaccia che permette di lanciare nuovi task. Le sue implementazioni usano dei thread pools che consentono di riutilizzare dei thread invece di crearli da campo. Un elemento di tipo executor offre il metodo \texttt{execute(Runnable command)} che consente di eseguire un elemento runnable. 
-\item ExecutorService: aggiunge nuove features che consentono di gestire il ciclo vita dei thread. Perettono di utilizzare \texttt{Callable} object invece di oggetti runnabili. I callable object solitamente ritornano un valore. ExecutorService \`e un interfaccia che estende \texttt{Executor} e fornisce metodi quali \texttt{submit(Runnable task)} che submitta un task per l'esecuzione o \texttt{shutdown} il quale inizia lo spegnimento (nuovi task non sono accettati quelli gi\`a in coda sono finiti.
+\item ExecutorService: aggiunge nuove features che consentono di gestire il ciclo vita dei thread. Permettono di utilizzare \texttt{Callable} object invece di oggetti runnabili. I callable object solitamente ritornano un valore. ExecutorService \`e un interfaccia che estende \texttt{Executor} e fornisce metodi quali \texttt{submit(Runnable task)} che submitta un task per l'esecuzione o \texttt{shutdown} il quale inizia lo spegnimento (nuovi task non sono accettati quelli gi\`a in coda sono finiti.
 \item ScheduledExecutorServece: interfaccia che permette di specificare informazioni addizionali come la politica di scheduling da utilizzare nella gestione dei vari threads.
 \end{itemize}
 
@@ -328,10 +316,11 @@ Il package java.util.atomic definisce classi che supportano operazioni atomiche 
 
 \section{Esercizi}
 
-\subsection{Esercizio 1: preliminars}
-\begin{framed}
+\subsection{Basic: tartaruga vs coniglio}
+\Esercizio{
 Implementare una gara di corsa tra una tartaruga e un coniglio. La tartaruga e il coniglio proseguono a velocit\`a costante e differente (La tartaruga \`e pi\`u lenta).  Una volta arrivati al traguardo, la tartaruga e il coniglio stampano il messaggio arrivato! Chi arriva prima?
-\end{framed}
+}
+
 Bench\`e la tartaruga sia pi\`u lenta del coniglio, e ogni volta esegue dei passi pi\`u piccoli non abbiamo alcuna garanzia relativa al comportamento dello scheduler. Lo scheduler potrebbe dedicare pi\`u tempo al thread tartaruga consentendogli di arrivare prima al traguardo. \emph{In generale \`e bene non effettuare nessuna assunzione sul comportamento dello scheduler.}
 
 
@@ -397,10 +386,10 @@ public class Race {
 \end{lstlisting}
 
 
-\subsubsection{Sleep}
-\begin{framed}
+\subsection{Sleep: tartaruga vs coniglio}
+\Esercizio{
 Sia la tartaruga che il coniglio, dopo ogni passo eseguono una pennichella di un tempo prefissato.
-\end{framed}
+}
 Attenzione!!! Quando viene invocato il metodo sleep sul thread, non c'\`e nessuna garanzia che il thread entra nello stato sleep esattamente nel momento in cui il metodo viene invocato.
 
 \begin{lstlisting}[language=Java]
@@ -474,10 +463,10 @@ public class Race {
 }
 \end{lstlisting}
 
-\subsubsection{Join}
-\begin{framed}
+\subsection{Join: tartaruga vs coniglio}
+\Esercizio{
 Il main thread deve far partire la tartaruga solamente dopo che il coniglio \`e arrivato
-\end{framed}
+}
 \begin{lstlisting}[language=Java]
 package race;
 
@@ -556,8 +545,11 @@ public class Race {
 
 
 
-\subsection{Esercizio 2: interferenze}
-Il contatore \`e progettato per incrementare e sottrarre una unit\`a da \texttt{c}. Tuttavia il contatore pu\`o essere utilizzato da threads multipli. 
+\subsection{Interferenze: contatore}
+\Esercizio{
+Il contatore \`e progettato per incrementare e sottrarre una unit\`a da \texttt{c}. Tuttavia il contatore pu\`o essere utilizzato da threads multipli.
+\`E corretto?
+} 
 \begin{lstlisting}[language=Java]
 class Counter {
     private int c = 0;
@@ -576,6 +568,8 @@ class Counter {
 }
 \end{lstlisting}
 In questo caso potrebbe esservi un problema di interferenza, che si verifica quando i due threads sono interleaved. Anche se le operazioni \texttt{c++;} e \texttt{c--;} sono singoli statements \`e possibile che vengano tradotti in pi\`u istruzioni macchina, per esempio prendi il valore corrente di c, incrementa il valore di 1 e rimetti il calore in c.
+
+
 
 Supponiamo che i due thread \texttt{A} e \texttt{B} invocano un incremento e un decremento sul contatore nello stesso momento. Considerando il loro interleaving \`e possibile ottenere
 \begin{itemize}
@@ -615,10 +609,10 @@ In questa versione
 
 
 
-\subsection{Esercizio 2: interferenze}
-\begin{framed}
-Modellizzare una sala da ballo. All'interno della sala da ballo ci sono delle Dame, ognuna dell quali pu\`o essere in due stati: \texttt{IN\_COPPIA} o \texttt{SENZA\_UOMO}. Un cavaliere sceglie una dama dalla sala e le chiede di ballare. Se la dama ha gi\`a un cavaliere, ritorna \texttt{false}, altrimenti la dama \`e libera di ritornare \texttt{true} o \texttt{false} in relazione al gradimento per il cavaliere. Dopo aver eseguito un ballo (pi\`u o meno lungo) il cavaliere rilascia la dama.
-\end{framed}
+\subsection{Interferenze: sala da ballo}
+\Esercizio{
+Modellizzare una sala da ballo. All'interno della sala da ballo ci sono delle Dame, ognuna dell quali pu\`o essere in due stati: \texttt{IN\_COPPIA} o \texttt{SENZA\_UOMO}. Un cavaliere sceglie una dama dalla sala e le chiede di ballare. Se la dama ha gi\`a un cavaliere, ritorna \texttt{false}, altrimenti la dama \`e libera di ritornare \texttt{true} o \texttt{false} in relazione al gradimento per il cavaliere. Dopo aver eseguito un ballo (pi\`u o meno lungo) il cavaliere rilascia la dama.}
+
 \begin{lstlisting}[language=Java]
 import java.util.ArrayList;
 import java.util.Collections;
@@ -738,7 +732,7 @@ public class Dama {
 	}
 }
 \end{lstlisting}
-La dama deve gestire evidentemente dei problemi di concorrenza. Immaginiamo di non aver messo i \texttt{synchronized} sui metodi e che due thread (cavalieri) distinti \texttt{A}, \texttt{B}, chiamino in contemporanea il metodo \texttt{rispondi} (Supponiamo che i due cavalieri siano entrambi graditi alla dama (\texttt{random.nextBoolean()=true}). Supponiamo che tocchi al thread \texttt{A}. \texttt{A} controlla lo stato della dama. Immaginiamo che la dama sia libera. Il thread raggiunge l'istruzione \texttt{if(result)} ma prima di completare l'if lo scheduler d\`a il controllo a \texttt{B}. Il thread \texttt{B} controlla lo stato della dama (libera), e prosegue l'esecuzione, mette lo stato della dama a \texttt{INCOPPIA} ed esce dal metodo \texttt{rispondi} con valore \texttt{true}. Ora lo scheduler rid\`a il controllo al thread \texttt{A} che setta lo stato della dama a \texttt{INCOPPIA} e ritorna dal metodo con valore \texttt{true}. La dama st\`a ballando con due ballerini nello stesso istante.
+La dama deve gestire evidentemente dei problemi di concorrenza. Immaginiamo di non aver messo i \texttt{synchronized} sui metodi e che due thread (cavalieri) distinti \texttt{A}, \texttt{B}, chiamino in contemporanea il metodo \texttt{rispondi} (Supponiamo che i due cavalieri siano entrambi graditi alla dama (\texttt{random.nextBoolean() =true}). Supponiamo che tocchi al thread \texttt{A}. \texttt{A} controlla lo stato della dama. Immaginiamo che la dama sia libera. Il thread raggiunge l'istruzione \texttt{if(result)} ma prima di completare l'if lo scheduler d\`a il controllo a \texttt{B}. Il thread \texttt{B} controlla lo stato della dama (libera), e prosegue l'esecuzione, mette lo stato della dama a \texttt{IN\_COPPIA} ed esce dal metodo \texttt{rispondi} con valore \texttt{true}. Ora lo scheduler rid\`a il controllo al thread \texttt{A} che setta lo stato della dama a \texttt{IN\_COPPIA} e ritorna dal metodo con valore \texttt{true}. La dama st\`a ballando con due ballerini nello stesso istante.
 
 La keyword \texttt{synchronized} garantisce che prima di eseguire il metodo \texttt{synchronized}  il thread prenda il lock intrinseco associato all'oggetto. In questo caso i thread \texttt{A} e \texttt{B} non possono eseguire \texttt{rispondi} in simultanea. Uno dei due, per esempio \texttt{A} entra in \texttt{rispondi} l'altro attende che \texttt{A} rilasci il lock dell'oggetto (l'esecuzione del metodo synchronized termini).
 
@@ -777,10 +771,10 @@ public class SalaBallo {
 }
 \end{lstlisting}
 
-\subsection{Esercizio 3: wait/notify}
-\begin{framed}
-Quando una dama \`e occupata in un altro ballo il cavaliere si mette in attesa che la dama desiderata si liberi. Nota che non \`e detto che una volta libera la dama si conceda al cavaliere (potrebbe esserci un altro cavaliere in attesa pi\`u lesto nel corteggiare la dama o semplicemente il cavaliere non \`e di gradimento della dama).
-\end{framed}
+\subsection{Wait/notify: sala da ballo}
+\Esercizio{
+Quando una dama \`e occupata in un altro ballo il cavaliere si mette in attesa che la dama desiderata si liberi. Nota che non \`e detto che una volta libera la dama si conceda al cavaliere (potrebbe esserci un altro cavaliere in attesa pi\`u lesto nel corteggiare la dama o semplicemente il cavaliere non \`e di gradimento della dama).}
+
 \begin{lstlisting}[language=Java]
 import java.util.ArrayList;
 import java.util.Collections;
@@ -952,7 +946,7 @@ public class SalaBallo {
 }
 \end{lstlisting}
 
-Discutiamo prima di tutto il comportamento del metodo \texttt{attendi()} della classe \texttt{Dama}. Supponiamo che \texttt{A} e \texttt{B} siano due thread che desiderano ballare con la dama "Luisa" e che la dama "Luisa" sia gi\`a impegnata in un ballo con il thread \texttt{C}. \texttt{A} e \texttt{B} notano che la dama \`e occupata utilizzando il metodo \texttt{getStato()} e a questo punto si mettono in attesa chiamando il metodo \texttt{attendi()} dell'oggetto ``Luisa". I due thread chiamano \texttt{this.wait()} sull'oggetto ``Luisa" specificando ci mettiamo in attesa che un thread mandi una notifica relativa al cambiamento di questo oggetto. Supponiamo che a un certo punto \texttt{C} smetta di ballare. \texttt{C} invoca il metodo \texttt{rilascia} di ``Luisa" che manda una notifica a tutti i thread in attesa di una notifica su quell'oggetto. Ora, sia \texttt{A} che \texttt{B} sono svegliati. Solamente uno dei due thread (per volta)  pu\`o accedere al metodo \texttt{synchronized} l'altro thread viene messo nello stato \texttt{blocked}. Supponiamo venga data priorit\`a ad \texttt{A}. \texttt{A} esce dal metodo \texttt{attendi} e invoca il metodo \texttt{rispondi} e si ``prende la dama". Quando \texttt{B} viene risvegliato \`e convinto che la dama \`e libera, esce da \texttt{attendi} raggiunge \texttt{rispondi}, ma quando raggiunge il metodo rispondi ormai \texttt{A} si \`e preso la dama.
+Discutiamo prima di tutto il comportamento del metodo \texttt{attendi()} della classe \texttt{Dama}. Supponiamo che \texttt{A} e \texttt{B} siano due thread che desiderano ballare con la dama ``Luisa" e che la dama ``Luisa" sia gi\`a impegnata in un ballo con il thread \texttt{C}. \texttt{A} e \texttt{B} notano che la dama \`e occupata utilizzando il metodo \texttt{getStato()} e a questo punto si mettono in attesa chiamando il metodo \texttt{attendi()} dell'oggetto ``Luisa". I due thread chiamano \texttt{this.wait()} sull'oggetto ``Luisa" specificando ci mettiamo in attesa che un thread mandi una notifica relativa al cambiamento di questo oggetto. Supponiamo che a un certo punto \texttt{C} smetta di ballare. \texttt{C} invoca il metodo \texttt{rilascia} di ``Luisa" che manda una notifica a tutti i thread in attesa di una notifica su quell'oggetto. Ora, sia \texttt{A} che \texttt{B} sono svegliati. Solamente uno dei due thread (per volta)  pu\`o accedere al metodo \texttt{synchronized} l'altro thread viene messo nello stato \texttt{blocked}. Supponiamo venga data priorit\`a ad \texttt{A}. \texttt{A} esce dal metodo \texttt{attendi} e invoca il metodo \texttt{rispondi} e si ``prende la dama". Quando \texttt{B} viene risvegliato \`e convinto che la dama \`e libera, esce da \texttt{attendi} raggiunge \texttt{rispondi}, ma quando raggiunge il metodo rispondi ormai \texttt{A} si \`e preso la dama.
 
  
 Supponiamo ora di cambiare il metodo attendi come segue. Se consideriamo lo scenario precedente il problema \`e risolto. Quando \texttt{B} accede alla sezione critica ricontrolla lo stato della Dama. Se la dama \`e in coppia un altro thread l'ha gi\`a corteggiata con successo, il cavaliere (\texttt{B} ) si rimette a dormire.
@@ -984,10 +978,10 @@ public enum Stato {
 }
 \end{lstlisting}
 
-\subsection{Esercizio 4: lock object}
-\begin{framed}
+\subsection{Lock object: sala da ballo}
+\Esercizio{
 Prima che la donna si conceda a un ballo \`e necessario spendere del tempo nel corteggiamento (il metodo risponde \`e un attivit\`a lunga). Un cavaliere, quando vede che la dama desiderata \`e corteggiata da un altro cavaliere si demoralizza e non vuole attendere oltre. 
-\end{framed}
+}
 
 Questo esercizio ha il solo obiettivo di mostrare un esempio di utilizzo dei lock objects, e in particolare dei metodi \texttt{tryLock}, \texttt{lock}, \texttt{unlock}.
 
@@ -1205,10 +1199,11 @@ public class SalaBallo {
 }
 \end{lstlisting}
 
-\subsection{Esercizio 5: executors}
-\begin{framed}
+\subsection{Executor: sala da ballo}
+\Esercizio{
 La sala da ballo pu\`o contenere al pi\`u 3 cavalieri per volta 
-\end{framed}
+}
+
 L'obiettivo \`e mostrare un esempio di utilizzo di \texttt{Executors} e \texttt{ThreadPool}. Nota in generale \`e conveniente utilizzare questi strumenti, in modo da disaccoppiare i task dalla parte relativa alla gestione dei thread (lasciata agli  \texttt{Executors}).
 
 \begin{lstlisting}[language=Java]
