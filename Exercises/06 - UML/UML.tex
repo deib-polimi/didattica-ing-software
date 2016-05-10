@@ -102,7 +102,7 @@
 %----------------------------------------------------------------------------------------
 
 \newcommand{\hmwkTitle}{UML: Unified Modeling Language} % Assignment title
-\newcommand{\hmwkDueDate}{Venerd\`i,\ Aprile 8,\ 2016} % Due date
+\newcommand{\hmwkDueDate}{Marted\`i,\ Aprile 5,\ 2016} % Due date
 \newcommand{\hmwkClass}{Ingegneria del Software 1} % Course/class
 \newcommand{\hmwkClassTime}{} % Class/lecture time
 \newcommand{\hmwkClassInstructor}{Claudio Menghi, Alessandro Rizzi} % Teacher/lecturer
@@ -135,11 +135,11 @@ Mentre si progetta il software \`e necessario considerare i seguenti principi:
 \item \emph{Open Close Principle: le entit\`a software (classi, moduli e funzioni) devono essere aperti all'estensione e chiusi alle modifiche.}
 Un design intelligente consente di aggiungere una funzionalita (aperti all'estensione) senza modificare il codice gi\`a sviluppato o con delle modifiche minimali (chiusi alle modifiche).
 \item \emph{Dependency Invertion Principle: i moduli di alto livello non devono dipendere da quelli di basso livello ma da loro astrazioni.}
-Quando si utilizzano modili di basso livello (e.g., classi che consentono letture da file) i moduli di alto livello non devono dipendere direttamente da questi elementi; \`e consigliato aggiungere un livello di astrazione (High Level Classes $\rightarrow$ Abstraction Layer $\rightarrow$ Low Level Classes) in modo tale da consentire di cambiare agevolmente le Low Level Classes
+Quando si utilizzano moduli di basso livello (e.g., classi che consentono letture da file) i moduli di alto livello non devono dipendere direttamente da questi elementi; \`e consigliato aggiungere un livello di astrazione (High Level Classes $\rightarrow$ Abstraction Layer $\rightarrow$ Low Level Classes) in modo tale da consentire di cambiare agevolmente le Low Level Classes
 \item \emph{Interface Segregation Principle: i moduli non devono dipendere da interfacce che non utilizzano} Non aggiungete nelle interfacce metodi che non servono.
 \item \emph{Single Responsibility Principle: ogni classe deve avere solo una ragione per essere modificata} 
 Questo principio specifica che ogni classe si deve occupare solamente di una funzionalit\`a. 
-Se una classe si occupa di due funzionalit\`a signigica che \`e necessario splittare la classe in due classi
+Se una classe si occupa di due funzionalit\`a significa che \`e necessario dividere la classe in due.
 \item \emph{Liskov's Substitution Principle: le classi derivate mediante estensioni (una classe che ne estende un altra) deve essere completamente sostituibile alla classe di partenza}.
  
 \end{itemize}
@@ -214,7 +214,7 @@ $\langle \langle utility \rangle \rangle$ indica che tutti i metodi o le variabi
 \`E un tipo di relazione che descrive che due classi sono associate. Per esempio, Figura~\ref{Fig:Associazione} presenta un associazione tra le due classi \texttt{Persona} e \texttt{Casa}\footnote{Per semplicit\`a gli attributi e i metodi delle classi non sono mostrati nel diagramma}. 
 L'associazione specifica la relazione \texttt{vive} la relazione tra le classi  \texttt{Persona} e \texttt{Casa}.  Solitamente il nome della relazione \`e un verbo. \`E anche possibile specificare alle estremit\`a i ruoli svolti dalle classi nell'associazione e anche una espressione che specifica la molteplicit\`a. La molteplicit\`a si riferice ai numeri posti sulle frecce e rappresentano il numero di oggetti connessi agli altri per mezzo dell'associazione. Le moltiplicit\`a possono essere espressi come numeri, ranges o combinazioni dei due.
 \begin{itemize}
-\item Digit: il numero esatto di elementi
+\item \textit{Digit}: il numero esatto di elementi
 \item $*$ or $0..*$: zero o alcuni
 \item $0..1$ Zero or one. In Java this is often implemented with a reference that can be null.
 \item $1..*$ uno o molti
@@ -222,13 +222,16 @@ L'associazione specifica la relazione \texttt{vive} la relazione tra le classi  
 \end{itemize}
 Per esempio in Figura~\ref{Fig:Associazione} viene specificato che una persona vive in una casa e che in una casa vive almeno una persona.
 Gli estremi di un'associazione implicano la presenza di attributi impliciti. Per esempio il class diagram descritto in Figura~\ref{Fig:Associazione} viene mappato nel codice seguente.
+
 \begin{figure}[h!]
   \centering
     \includegraphics[width=0.5\textwidth]{Img/Associazione.pdf}
       \caption{Associazione tra Persona e Casa.}
       \label{Fig:Associazione}
 \end{figure}
-La classe \texttt{Persona} contiene il reference alla \texttt{Casa} della persona.
+
+La classe \texttt{Persona} contiene il riferimento alla \texttt{Casa} della persona.
+
 \begin{lstlisting}
 public class Persona {
     private Casa casa; 
@@ -241,7 +244,7 @@ public class Casa {
 }
 \end{lstlisting}
 \`E possibile specificare la direzione di navigabilit\`a dell'associazione. 
-Per esempio, in Figura~\ref{Fig:Associazione2} l'associazione \`e navigabile solo nella direzione Casa$\rightarrow$Persona. Questo implica che data una casa \`e possibile sapere le persone che vinono in quella casa ma non il viceversa. La nuova relazione viene mappata sul codice Java seguente:
+Per esempio, in Figura~\ref{Fig:Associazione2} l'associazione \`e navigabile solo nella direzione Casa$\rightarrow$Persona. Questo implica che data una casa \`e possibile sapere le persone che vivono in quella casa ma non viceversa. La nuova relazione viene mappata sul codice Java seguente:
 
 \begin{figure}[h!]
   \centering
@@ -358,12 +361,12 @@ Discutendo la classi  \texttt{Pullman} e  \texttt{Passeggero}. Alcune soluzoni s
 
 Il \texttt{Pullman} \`e uno specifico tipo di \texttt{Veicolo}, quindi \texttt{Pullman} estende  \texttt{Veicolo}. \texttt{Pullman} eredita tutti i metodi e gli attributi di \texttt{Veicolo}. A tutti gli effetti un \texttt{Pullman}  \`e un  \texttt{Veicolo}. Un \texttt{Pullman} ha delle caratteristiche  aggiuntive: ha un numero di posti (intero), una societ\`a (stringa) etc. I metodi \texttt{getSociet\`a} e \texttt{setSociet\`a} permettono di settare e ottenere la societ\`a relativa a un pullman. Un \texttt{Passeggero} \`e identificato da un nome e un cognome. 
 
-Discutiamo ora la relazione tra \texttt{Pullman} e \texttt{Passeggero}. La specifica \`e ambigua e si presta a varie interpretazioni che risultano in class diagram differenti. In Figura~\ref{Fig:pullmanPasseggero} ne vengono presentati alcuni. La prima interpretazione \`e che il nostro sistema debba tenere traccia dei passeggeri presenti in un pullman in uno specifico istante temporale. In questo caso, la prima e la seconda soluzione risultano adeguate: esiste una associazione tra le classi \texttt{Pullman} e \texttt{Passeggero}, un passeggero \`e su un pullman e un pullman pu\`o contenere un certo numero di passeggeri. La differenza tra le due soluzioni concerne la navigabilit\`a dell'associazione. Nel primo caso la classe Pullman contiene un reference a ogni passeggero contenuto nel pullman, ma il passeggero non contiene il reference al pullman in cui si trova. Questa soluzione \`e preferibile quando l'associazione deve \emph{solo} essere percorsa in questa direzione, infatti dato un passeggero, per sapere su quale pullman si trova devo scorrere tutti i pullman e controllare che il passeggero non sia all'interno. Nel secondo caso il passeggero contiene il reference al pullman in cui si trova, quindi dato un passeggero \`e semplicissimo sapere il pullman dove si trova. Lo svantaggio \`e in fase di aggiornamento dei passeggeri contenuti in un pullman: bisogna garantire che i reference contenuti nella classe pullman e il reference nella classe passeggero siano consistenti. Per esempio per muovere un passeggero p da un pullman1 a un pullman2 bisogna eseguire il seguente aggiornamento.
+Discutiamo ora la relazione tra \texttt{Pullman} e \texttt{Passeggero}. La specifica \`e ambigua e si presta a varie interpretazioni che risultano in class diagram differenti. In Figura~\ref{Fig:pullmanPasseggero} ne vengono presentati alcuni. La prima interpretazione \`e che il nostro sistema debba tenere traccia dei passeggeri presenti in un pullman in uno specifico istante temporale. In questo caso, la prima e la seconda soluzione risultano adeguate: esiste una associazione tra le classi \texttt{Pullman} e \texttt{Passeggero}, un passeggero \`e su un pullman e un pullman pu\`o contenere un certo numero di passeggeri. La differenza tra le due soluzioni concerne la navigabilit\`a dell'associazione. Nel primo caso la classe Pullman contiene un reference a ogni passeggero contenuto nel pullman, ma il passeggero non contiene il reference al pullman in cui si trova. Questa soluzione \`e preferibile quando l'associazione deve \emph{solo} essere percorsa in questa direzione, infatti dato un passeggero, per sapere su quale pullman si trova devo scorrere tutti i pullman e controllare che il passeggero non sia all'interno. Nel secondo caso il passeggero contiene il reference al pullman in cui si trova, quindi dato un passeggero \`e semplicissimo sapere il pullman dove si trova. Lo svantaggio \`e in fase di aggiornamento dei passeggeri contenuti in un pullman: bisogna garantire che i reference contenuti nella classe pullman e il reference nella classe passeggero siano consistenti. Per esempio per muovere un passeggero \texttt{p} da un \texttt{pullman1} a un \texttt{pullman2} bisogna eseguire il seguente aggiornamento.
 
 \begin{lstlisting}
-pullman1.delPasseggero(p)
-pullman2.addPasseggero(p)
-p.changePullman(pullman2)
+pullman1.delPasseggero(p);
+pullman2.addPasseggero(p);
+p.changePullman(pullman2);
 \end{lstlisting}
 
 Nota che senza la terza istruzione si raggiungerebbe una situazione di inconsistenza. La traduzione in Java viene lasciata al lettore, seguendo le indicazioni date nell'introduzione.
@@ -380,7 +383,7 @@ Nota che senza la terza istruzione si raggiungerebbe una situazione di inconsist
 \Esercizio{
 \begin{itemize}
 \item \emph{R1}: Nella redazione di una testata giornalistica ci sono tre tipi di giornalisti: gli editori, i reporter, ed i fotografi.
-\item \emph{R2}: Ogni dipendente \`e caratterizzato da un nome e da un salario e ha diritto ad almeno un benefit (cio\`e un oggetto che viene concesso in uso al dipendente dall'azienda, ma che \`e di proprieta\`a dell'azienda).
+\item \emph{R2}: Ogni dipendente \`e caratterizzato da un nome e da un salario e ha diritto ad almeno un benefit (cio\`e un oggetto che viene concesso in uso al dipendente dall'azienda, ma che \`e di propriet\`a dell'azienda).
 \item \emph{R3}: Ci possono essere vari tipi di benefit: telefono cellulare, macchina fotografica, computer (che pu\`o essere o un portatile, o un palmare).
 \item \emph{R4}: Tra i benefit ci possono anche essere degli apparecchi che hanno funzionalit\`a sia di telefono cellulare che di macchina fotografica.
 \item \emph{R5}: Un telefono cellulare \`e caratterizzato da un numero di telefono, e offre la funzionalit\`a di chiamata di un altro numero, e di spedizione di un testo ad un altro telefono.
@@ -391,7 +394,7 @@ Nota che senza la terza istruzione si raggiungerebbe una situazione di inconsist
 \item \emph{R10}: Un reporter pu\`o lavorare in coppia con un fotografo, e fa riferimento ad un editore.
 \end{itemize}}
 
-Questo esercizio ha lo scopo di proporre diverse soluzioni che soddisfano i requisiti specificati (in generale nella soluzione viene prestata poca attenzione ad attributi e metodi delle specifiche classi, mentre vengono considerate le loro relazioni). In generale possono esserci soluzioni equivalenti allo stesso problema. Le soluzioni in genere differiscono per la loro estendibilit\`a. Infatti, lo sviluppatore di solito si trova di fronte a una scelta: soddisfare nello specifico ogni minimo requisito (vincoli di relazione tra classi) rendendo l'implementazione molto relazionata al problema che si desidera risolvere o rilassare dei requisiti (vincoli di relazione tra classi) per rendere l'applicazione pi\`u astratta possibile e pi\`u facilmente estendibile. Il buon progettista \`e in grado di effettuare la scelta migliore in relazione al problema che si sta risolvendo. In genere possono essere 
+Questo esercizio ha lo scopo di proporre diverse soluzioni che soddisfano i requisiti specificati (in generale nella soluzione viene prestata poca attenzione ad attributi e metodi delle specifiche classi, mentre vengono considerate le loro relazioni). In generale possono esserci soluzioni equivalenti allo stesso problema. Le soluzioni in genere differiscono per la loro estendibilit\`a. Infatti lo sviluppatore, di solito, si trova di fronte a una scelta: soddisfare nello specifico ogni minimo requisito (vincoli di relazione tra classi) rendendo l'implementazione molto relazionata al problema che si desidera risolvere o rilassare dei requisiti (vincoli di relazione tra classi) per rendere l'applicazione pi\`u astratta possibile e pi\`u facilmente estendibile. Il buon progettista \`e in grado di effettuare la scelta migliore in relazione al problema che si sta risolvendo. In genere possono essere 
 valutate situazioni intermedie che vincolano il progetto ma rendono comunque l'applicazione estendibile (in certe direzioni).
 
 Consideriamo i requisiti riguardanti i \texttt{Benefit}: \emph{R3}, \emph{R4}, \emph{R5} e \emph{R6}. La soluzione naive, che rispetta perfettamente le specifiche \`e presentata in Figura~\ref{Fig:benefit1}.  Il requisito \emph{R6} specifica che se il telefono ha la funzione di macchina fotografica fornisce una funzionalit\`a che consente di mandare immagini. Il sospetto che ci sorge \`e che anche il computer possegga questa funzionalit\`a di mandare immagini.
@@ -402,7 +405,7 @@ Consideriamo i requisiti riguardanti i \texttt{Benefit}: \emph{R3}, \emph{R4}, \
     \caption{Benefit soluzione 1.}
       \label{Fig:benefit1}
 \end{figure}
-Partendo da questa ipotesi un progettista potrebbe astrare e realizzare il design presentato in~Figura~\ref{Fig:benefit2}. In particolare, lo sviluppatore potrebbe specificare che un \texttt{Benefit} ha delle funzionalit\`a. In questo caso un aggregazione o una composizione \`e il tipo di associazione pi\`u adatta. Le funzionalit\`a e i benefit sono specificate in due gerarchie distinte. Ovviamente in questo caso siamo molto pi\`u flessibili, potremmo aggiungere la funzionalit\`a chiamata a un particolare computer munito di scheda SIM, ma abbiamo meno garanzie ``statiche": potenzialmente una macchina fotografica potrebbe chiamare. Il particolare, in questo caso \`e molto importante \emph{come} gli oggetti vengono creati e quindi il creational pattern usato.
+Partendo da questa ipotesi un progettista potrebbe astrare e realizzare il design presentato in~Figura~\ref{Fig:benefit2}. In particolare, lo sviluppatore potrebbe specificare che un \texttt{Benefit} ha delle funzionalit\`a. In questo caso un aggregazione o una composizione \`e il tipo di associazione pi\`u adatta. Le funzionalit\`a e i benefit sono specificate in due gerarchie distinte. Ovviamente in questo caso siamo molto pi\`u flessibili, potremmo aggiungere la funzionalit\`a chiamata a un particolare computer munito di scheda SIM, ma abbiamo meno garanzie ``statiche": potenzialmente una macchina fotografica potrebbe chiamare. In particolare in questo caso \`e molto importante \emph{come} gli oggetti vengono creati e quindi il creational pattern usato.
 \begin{figure}[h!]
   \centering
     \includegraphics[width=1\textwidth]{Img/benefit2.pdf}
