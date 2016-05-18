@@ -1,0 +1,1271 @@
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{hyperref}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{listings}
+\usepackage{subfigure}
+\usepackage{afterpage}
+\usepackage{amsmath,amssymb}            
+\usepackage{rotating}  
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{amsthm}
+\usepackage[scriptsize]{caption} 
+\hyphenation{a-gen-tiz-za-zio-ne}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1} % Line spacing
+
+\lstset{
+  numbers=left,
+  stepnumber=5,    
+  firstnumber=1,
+  numberfirstline=true
+}
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle} % Top center head
+\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true
+  tabsize=3
+}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+\newcommand{\hmwkTitle}{Socket} % Assignment title
+\newcommand{\hmwkDueDate}{Marted\`i,\ Maggio 17,\ 2016} % Due date
+\newcommand{\hmwkClass}{Ingegneria del Software 1} % Course/class
+\newcommand{\hmwkClassTime}{} % Class/lecture time
+\newcommand{\hmwkClassInstructor}{Claudio Menghi, Alessandro Rizzi} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{} % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+\input{../Commands.tex}
+
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+\newpage
+\tableofcontents
+\newpage
+
+
+
+\section{Introduzione}
+La comunicazione di rete mediante socket pu\`o essere eseguita come specificato in seguito:
+\begin{itemize}
+\item il \emph{server}  attende che i client si connettano rimanendo in ascolto su una specifica porta (\emph{listening}) 
+\item un \emph{client} conosce il nome dell'host (l'indirizzo ip della macchina) sul quale il server \`e eseguito e il numero di porta sulla quale il server \`e in ascolto. Il client prova a contattare il server su quella porta. 
+\item il \emph{server} crea un nuovo canale di comunicazione.
+\end{itemize} 
+
+Un socket consente una comunicazione \emph{bidirezionale}, e per mezzo della porta il layer TCP riesce a identificare l'applicazione a cui vanno consegnati i paccketti ricevuti. Un socket ha due end-points: \texttt{PORT}, \texttt{IP} del server e \texttt{PORT}, \texttt{IP} del client.
+
+Le classi di Java che consentono di gestire i socket sono contenuti all'interno del package \texttt{java.net}. La classe \texttt{ServerSocket} consente al server di creare un ascoltatore (listener) che accetta connessioni dal client.
+
+
+
+\section{Esercizi}
+
+
+\subsection{client-server (per un client singolo)} 
+La comunicazione tra client e server passa per i seguenti punti:
+\begin{itemize}
+\item il processo server viene eseguito e attende (wait) una connessione dal client per mezzo della classe \texttt{Server Socket};
+\item il processo client viene lanciato (start) e si connette al server sfruttando la classe \texttt{Socket}
+\item il server crea un socket che viene utilizzato per comunicare con il client
+\end{itemize}
+
+\subsubsection{The server class}
+\begin{itemize}
+\item La classe server deve creare un istanza della classe \texttt{java.net.ServerSocket} attraverso l'istruzione
+\begin{itemize}
+\item \texttt{ServerSocket serverSocket=new ServerSocket(29999);}
+\item il valore  29999 indica la porta sulla quale il server attende la connessione.
+\end{itemize} 
+\item Il server chiama il metodo  \texttt{accept()} di \texttt{serverSocket}. Questo metodo specifica che il server attende una determinata richiesta di connessione da parte del client\footnote{Attenzione assicurati che la porta non sia gi\`a in uso sul tuo server (per esempio che il tuo server non sia gi\`a in esecuzione.}.
+\begin{itemize}
+\item Socket socket=serverSocket.accept();
+\end{itemize}
+\item Quando un client si connette al server uno nuovo socket viene ritornato \texttt{Socket}.
+\end{itemize}
+
+\begin{lstlisting}[language=Java,escapechar=|]
+package socket;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.Scanner;
+
+/**
+ * contains the Server class
+ * This server is able to manage only one client
+ * @author Claudio Menghi
+ *
+ */
+public class Server {
+
+	/**
+	 * is the port that the Server uses to wait connections
+	 */
+	private final static int PORT = 29999;
+
+	/**
+	 * starts the server
+	 * @throws IOException
+	 */
+	public void startServer() throws IOException {
+		//creates a new Server socket on the specified port
+		ServerSocket serverSocket = new ServerSocket(PORT);
+		System.out.println("Server socket ready on port: " + PORT);
+
+		// puts the serverSocket in a state where is waiting for client connections
+		// the server stops on this instruction until a connection arrives
+		Socket socket = serverSocket.accept();
+		System.out.println("client connection received");
+
+		// creates a new scanner that is able to read characters from the socket
+		// for more detail drag your mouse over the Scanner class
+		Scanner socketIn = new Scanner(
+				socket.getInputStream());
+		
+		// creates a new PrintWriter that is able to write characters on the socket
+		// for more details drag your mouse over the PrintWriter class
+		PrintWriter socketOut=new PrintWriter(socket.getOutputStream());
+		
+		boolean end=false;
+		
+		// reads and write characters from the socket until the String quit is received
+		while(!end){
+			// line contains the String sent by the client
+			String line=socketIn.nextLine();
+			System.out.println("SERVER: received the string: "+line);
+			if(line.equals("quit")){
+				end=true;
+			}
+			else{
+				// the Server sends to the client the following string
+				socketOut.println("Well done client, the server has received the string: "+line);
+				socketOut.flush();
+			}
+		}
+		System.out.println("Closing the socket");
+		// closes the scanner
+		socketIn.close();
+		// closes the printWriter
+		socketOut.close();
+		// closes the socket
+		socket.close();
+		// closes the ServerSocket
+		serverSocket.close();
+	}
+	
+	/**
+	 * Runs the Server 
+	 * @param args
+	 */
+	public static void main(String[] main){
+		// creates the server
+		Server echoServer=new Server();
+		try {
+			// starts the server
+			echoServer.startServer();
+		} catch (IOException e) {			
+			e.printStackTrace();
+		}
+	}
+}
+\end{lstlisting}
+
+
+\subsubsection{The client class}
+\begin{itemize}
+\item apre un socket verso lo specifico indirizzo IP e la data porta 
+\begin{itemize}
+\item \texttt{Socket socket = new Socket(“127.0.0.1”, 29999)}
+\end{itemize}
+\item ATTENZIONE: controllare che allo specifico indirizzo IP e alla data PORTA sia presente un server in attesa di connessioni (eseguite il server prima del client)
+\item se la connessione \`e stata stabilita \`e possibile creare un \texttt{Scanner} per leggere dal socket e un \texttt{PrintWriter} per scrivere
+\begin{itemize}
+\item \texttt{Scanner in = new Scanner(socket.getInputStream());}
+\item \texttt{PrintWriter out = new PrintWriter(socket.getOutputStream());}
+\end{itemize}
+\end{itemize}
+
+\begin{lstlisting}[language=Java,escapechar=|]
+
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.util.Scanner;
+
+/**
+ * contains the Client class
+ * 
+ * @author Claudio Menghi
+ * 
+ */
+public class Client {
+
+	/**
+	 * is the port that the Server uses to wait connections
+	 */
+	private final static int PORT = 29999;
+
+	/**
+	 * starts the Client
+	 * 
+	 * @throws IOException
+	 */
+	public void startClient() throws IOException {
+
+		/*
+		 * creates a new socket that refers to the machine with the specified IP
+		 * and PORT 127.0.0.1 refers to your local machine, change this address
+		 * if you want to use your program in the network (in case of problems
+		 * check your firewall preferences)
+		 */
+		Socket socket = new Socket("127.0.0.1", PORT);
+		System.out.println("Connection Established");
+
+		// creates a new stream that is able to read characters from the socket
+		// for more detail drag your mouse over the Scanner class
+		Scanner socketIn = new Scanner(socket.getInputStream());
+		// creates a new stream that is able to write characters on the socket
+		// for more details drag your mouse over the PrintWriter class
+		PrintWriter socketOut = new PrintWriter(socket.getOutputStream());
+
+		// creates a new scanner to read input from standard input
+		Scanner stdin = new Scanner(new InputStreamReader(System.in));
+
+		while (true) {
+			// read the string from the standard input
+			String inputLine = stdin.nextLine();
+			// sends the read string to the server
+			socketOut.println(inputLine);
+			socketOut.flush();
+			// checks if there is a message sent from the server
+			if (socketIn.hasNextLine()) {
+				String socketLine = socketIn.nextLine();
+				// print the message to the standard output
+				System.out.println(socketLine);
+			} else {
+				break;
+			}
+		}
+
+		// closes the scanner
+		socketIn.close();
+		// closes the printWriter
+		socketOut.close();
+		// closes the standard input scanner
+		stdin.close();
+		// closes the socket
+		socket.close();
+
+	}
+	/**
+	 * Runs the Client 
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// creates a new Client
+		Client client = new Client();
+		try {
+			// runs the Client
+			client.startClient();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+}
+\end{lstlisting}
+
+
+\subsection{client-server (multi client)} 
+La comunicazione client server multi-client si basa sui seguenti passi:
+\begin{itemize}
+\item il server viene eseguito e attende una connessione sul suo \texttt{ServerSocket}
+\item il client viene eseguito e si connette al server mediante la classe \texttt{Socket}
+\item il server \emph{crea il socket} da utilizzare per comunicare con il  client
+\item il server \emph{crea un nuovo thread} che \`e responsabile di gestire il socket e la comunicazione con il client specifico
+\end{itemize}
+ATTENZIONE!!! all'interno del server ogni socket viene gestito da un thread distinto. Nel seguente esempio il behavior del thread \`e contenuto nella classe \texttt{ServerClientHandler}.
+
+\subsubsection{The multi-client server class}
+\begin{lstlisting}[language=Java,escapechar=|]
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+/**
+ * contains the Server class This server is able to manage multiple clients
+ * 
+ * @author Claudio Menghi
+ * 
+ */
+public class Server {
+
+	/**
+	 * is the port that the Server uses to wait connections
+	 */
+	private final static int PORT = 29999;
+
+	/**
+	 * starts the server
+	 * 
+	 * @throws IOException
+	 */
+	public void startServer() throws IOException {
+		/*
+		 * ExecutorService represents an asynchronous execution mechanism which
+		 * is capable of executing tasks in the background.
+		 * Executors.newCachedThreadPool() Creates a thread pool that creates
+		 * new threads as needed, but will reuse previously constructed threads
+		 * when they are available.
+		 */
+		ExecutorService executor = Executors.newCachedThreadPool();
+
+		// creates a new Server socket on the specified port
+		ServerSocket serverSocket = new ServerSocket(PORT);
+		System.out.println("Server socket ready on port: " + PORT);
+
+		System.out.println("Server ready");
+		while (true) {
+			try {
+				// puts the serverSocket in a state where is waiting for client
+				// connections
+				// the server stops on this instruction until a connection
+				// arrives
+				Socket socket = serverSocket.accept();
+				// Submits a Runnable task for execution
+				executor.submit(new ClientHandler(socket));
+			} catch (IOException e) {
+				break;
+			}
+		}
+		// shutdown the executor
+		executor.shutdown();
+
+		// closes the ServerSocket
+		serverSocket.close();
+	}
+
+	/**
+	 * Runs the Server
+	 * 
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		Server server = new Server();
+
+		// starts the server
+		try {
+			server.startServer();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+}
+\end{lstlisting}
+
+\subsubsection{The ClientHandler class}
+\begin{lstlisting}[language=Java,escapechar=|]
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.util.Scanner;
+
+
+/**
+ * contains the Handler of a Client
+ * @author Claudio Menghi
+ *
+ */
+public class ClientHandler implements Runnable{
+	
+	/**
+	 * contains the Socket which i managed by the Handler
+	 */
+	private Socket socket;
+	
+	/**
+	 * creates a new {@link ServerClientHandler} with the specified socket
+	 * @param socket is the socket that is managed by the handler
+	 */
+	public ClientHandler(Socket socket){
+		this.socket = socket;
+	}
+	
+	/**
+	 * executes the client handler
+	 */
+	public void run() {
+		try {
+			// creates a new stream that is able to read characters from the socket
+			// for more detail drag your mouse over the BufferedReader class
+			Scanner socketIn = new Scanner(socket.getInputStream());
+			
+			// creates a new stream that is able to write characters on the socket
+			// for more details drag your mouse over the PrintWriter class
+			PrintWriter socketOut = new PrintWriter(socket.getOutputStream());
+			
+			while (true){				
+				// reads a new Line from the Socket
+				String line = socketIn.nextLine();
+				
+				// writes the line in the screen
+				System.out.println(line);
+				
+				// if the line is equal to quit
+				if (line.equals("quit")){
+					// exits from the while
+					break;
+				}
+				else {
+					// the Server sends to the client the following string
+					socketOut.println("Well done client, the server has reveived the String: " + line);
+					socketOut.flush();
+				}
+			}
+			// closes the scanner
+			socketIn.close();
+			// closes the printWriter
+			socketOut.close();
+			// closes the socket
+			socket.close();
+			
+		} catch (IOException e) {
+			System.err.println(e.getMessage());
+		}
+	}
+}
+\end{lstlisting}
+
+\subsection{client-server (gioco condiviso) Client}
+\label{clientservershared}
+Il lettore pu\`o utilizzare il client precedentemente descritto
+
+
+\subsubsection{Client}
+\begin{lstlisting}[language=Java,escapechar=|]
+package game.client;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+/**
+ * contains the Client implementation
+ * 
+ * @author Claudio Menghi
+ * 
+ */
+public class Client {
+
+	/**
+	 * is the port that the Server uses to wait connections
+	 */
+	private final static int PORT = 29999;
+	private final static String IP="127.0.0.1";
+
+	/**
+	 * starts the Client
+	 * 
+	 * @throws IOException
+	 */
+	public void startClient() throws IOException {
+
+		/*
+		 * creates a new socket that refers to the machine with the specified IP
+		 * and PORT 127.0.0.1 refers to your local machine, change this address
+		 * if you want to use your program in the network (in case of problems
+		 * check your firewall preferences)
+		 */
+		Socket socket = new Socket(IP, PORT);
+		System.out.println("Connection Established");
+
+		// creates the thread pool
+		ExecutorService executor = Executors.newFixedThreadPool(2);
+		
+		// runs the client handler in charge of getting messages from the server
+		executor.submit(new ClientInHandler(new Scanner(socket.getInputStream())));
+		
+		// runs the client handler in charge of reading the mosse from the command line and sending it to the server
+		executor.submit(new ClientOutHandler(new PrintWriter(socket.getOutputStream())));
+		
+	}
+	/**
+	 * Runs the Client 
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// creates a new Client
+		Client client = new Client();
+		try {
+			// runs the Client
+			client.startClient();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+}
+\end{lstlisting}
+
+\subsubsection{ClientInHandler}
+\begin{lstlisting}[language=Java,escapechar=|]
+/**
+ * manages the incoming connection of the client, that is the messages sent from the server to the client
+ * @author Claudio Menghi
+ *
+ */
+public class ClientInHandler implements Runnable {
+
+	/**
+	 * contains the Scanner which is used to read messages from the server
+	 */
+	private Scanner socketIn;
+	
+	/**
+	 * creates a new Handler for the incoming connections
+	 * @param socketIn is the scanner which is used to read messages that are sent from the server
+	 */
+	public ClientInHandler(Scanner socketIn) {
+		this.socketIn=socketIn;
+	}
+	
+	/**
+	 * executes the client handler
+	 */
+	public void run() {
+			
+			while (true) {
+				// reads a new Line from the Scanner
+				String line = socketIn.nextLine();
+				// print the message sent by the server
+				System.out.println(line);
+			}
+	}
+}
+\end{lstlisting}
+
+\subsubsection{ClientOutHandler}
+\begin{lstlisting}[language=Java,escapechar=|]
+/**
+ * contains the Handler which is responsible of reading the mosse from the
+ * command line and sending them to the server
+ * 
+ * @author Claudio Menghi
+ * 
+ */
+public class ClientOutHandler implements Runnable {
+
+	/**
+	 * contains the writer which is used to send messages to the server
+	 */
+	private PrintWriter socketOut;
+
+	/**
+	 * creates a new Handler responsible to read the mosse from command line and
+	 * send them to the server
+	 * 
+	 * @param socketOut
+	 */
+	public ClientOutHandler(PrintWriter socketOut) {
+		this.socketOut = socketOut;
+	}
+
+	/**
+	 * executes the client handler
+	 */
+	public void run() {
+		// creates a new scanner to read input from standard input
+
+		Scanner stdin = new Scanner(System.in);
+
+		while (true) {
+			// read the string from the standard input
+			String inputLine = stdin.nextLine();
+			// sends the read string to the server
+			socketOut.println(inputLine);
+			socketOut.flush();
+		}
+	}
+}
+\end{lstlisting}
+
+\subsection{client-server (gioco condiviso) Server}
+
+\subsubsection{Model}
+\begin{lstlisting}[language=Java,escapechar=|]
+/**
+ * contains the possible states of the game
+ * @author Claudio Menghi
+ *
+ */
+public enum GameState {	
+	
+	WAITINGTWOPLAYERS  {
+		@Override
+		public GameState nextState() {
+			
+			return WAITINGONEPLAYER;
+		}
+	},
+	WAITINGONEPLAYER  {
+		@Override
+		public GameState nextState() {
+			
+			return RUNNING;
+		}
+	},
+	RUNNING  {
+		@Override
+		public GameState nextState() {
+			
+			return ONE_MOSSA_RECEIVED;
+		}
+	},
+	ONE_MOSSA_RECEIVED{
+		@Override
+		public GameState nextState() {
+			
+			return ENDED;
+		}
+	},
+	ENDED  {
+		@Override
+		public GameState nextState() {
+			
+			return ENDED;
+		}
+	};
+	
+	public abstract GameState nextState();
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java,escapechar=|]
+/**
+ * contains the different actions the user can perform
+ * @author Claudio Menghi
+ *
+ */
+public enum Mossa{	
+	
+	FORBICE  {
+		@Override
+		public boolean batte(Mossa other) {
+			
+			return other == CARTA;
+		}
+	},	
+	CARTA {
+		@Override
+		public boolean batte(Mossa other){
+			return other == PIETRA;
+		}
+	},
+	PIETRA { 
+		@Override
+		public boolean batte(Mossa other){
+			return other == FORBICE;
+		} 
+	};
+	
+	public abstract boolean batte(Mossa other);
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java,escapechar=|]
+/**
+ * contains the model of the game
+ * 
+ * @author Claudio Menghi
+ * 
+ */
+public class Partita extends Observable{
+
+	// contains the number of player of the game
+	private static final int nPlayers = 2;
+	
+	private Player winner;
+	
+	/**
+	 * mappa che contiene per ogni giocatore la mossa scelta
+	 */
+	private Map<Player, Mossa> mossa;
+
+	// contains the current state of the game
+	private GameState gameState;
+
+	public Partita() {
+		this.gameState = GameState.WAITINGTWOPLAYERS;
+		this.mossa = new HashMap<Player, Mossa>();
+		this.mossa.put(new Player("player1"), null);
+		this.mossa.put(new Player("player2"), null);
+	}
+
+	public void addMossa(Player player, Mossa mossa){
+		this.mossa.put(player, mossa);
+	}
+	
+	/**
+	 * returns the number of players
+	 * 
+	 * @return the number of players
+	 */
+	public static int getNplayers() {
+		return nPlayers;
+	}
+
+	/**
+	 * returns the state of the game
+	 * 
+	 * @return the current state of the game
+	 */
+	public GameState getGameState() {
+		return gameState;
+	}
+
+	/**
+	 * sets the state of the game
+	 * 
+	 * @param gameState
+	 *            sets the state of the game to the gameState
+	 */
+	public void setGameState(GameState gameState) {
+		this.gameState = gameState;
+		this.setChanged();
+		this.notifyObservers("Game state: "+gameState);
+	}
+	
+	/**
+	 * ritorna l'insieme dei giocatori
+	 * @return the set of the players
+	 */
+	public Set<Player> getPlayers(){
+		return this.mossa.keySet();
+	}
+	
+	public boolean hasPerformedAnAction(Player player){
+		return this.mossa.get(player)!=null;
+	}
+	
+	
+	public Map<Player, Mossa> getPlayersActions(){
+		return Collections.unmodifiableMap(this.mossa);
+	}
+
+
+
+	public Player getWinner() {
+		return winner;
+	}
+
+	public void setWinner(Player winner) {
+		
+		this.winner = winner;
+		this.setChanged();
+		this.notifyObservers("The winner is "+winner);
+	}
+
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java,escapechar=|]
+public class Player{
+
+	
+	private String name;
+	
+	public Player(String name){
+		this.name=name;
+	}
+	
+	@Override
+	public String toString() {
+		return "Player [name=" + name + "]";
+	}
+
+	public String getName(){
+		return this.name;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Player other = (Player) obj;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+}
+\end{lstlisting}
+
+\subsubsection{Actions}
+\begin{lstlisting}[language=Java,escapechar=|]
+import game.server.model.Partita;
+import game.server.model.Player;
+
+public abstract class Action{
+
+	private Player player;
+
+	public Action(Player player) {
+		this.setPlayer(player);
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+	public abstract void esegui(Partita model);
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java,escapechar=|]
+import java.util.Iterator;
+import java.util.Set;
+
+import game.server.model.GameState;
+import game.server.model.Mossa;
+import game.server.model.Partita;
+import game.server.model.Player;
+
+public class EseguiMossa extends Action {
+
+	private final Mossa mossa;
+	
+	public EseguiMossa(Mossa mossa, Player player) {
+		super( player);
+		this.mossa=mossa;
+		
+	}
+
+	@Override
+	public void esegui(Partita model) {
+		System.out.println("Server: Performing the action");
+		synchronized (model) {
+			System.out.println(model.getGameState());
+			if(
+					(model.getGameState().equals(GameState.RUNNING)|| model.getGameState().equals(GameState.ONE_MOSSA_RECEIVED)) && 
+					!model.hasPerformedAnAction(this.getPlayer())){
+				
+
+				model.addMossa(this.getPlayer(), mossa);
+				GameState gameState=model.getGameState();
+				GameState nextState=gameState.nextState();
+				
+				System.out.println("updating the game state");
+				model.setGameState(nextState);
+				if(nextState==GameState.ENDED){
+					Set<Player> players=model.getPlayers();
+					Iterator<Player> it=players.iterator();
+					Player player1=it.next();
+					Player player2=it.next();
+					if(model.getPlayersActions().get(player1).batte(model.getPlayersActions().get(player2))){
+						model.setWinner(player1);
+					}
+					else{
+						model.setWinner(player2);
+					}
+				}	
+			}
+		}
+		
+		System.out.println("Server: Action performed");
+	}
+}
+\end{lstlisting}
+
+
+
+\subsubsection{View}
+\begin{lstlisting}[language=Java,escapechar=|]
+import game.server.actions.Action;
+import game.server.actions.EseguiMossa;
+import game.server.model.Mossa;
+import game.server.model.Player;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.util.Observable;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+/**
+ * contains the Handler of a Client
+ * 
+ * @author Claudio Menghi
+ * 
+ */
+public class ServerSocketView extends View implements Runnable{
+
+	/**
+	 * contains the Socket which i managed by the Handler
+	 */
+	private Socket socket;
+	private Scanner socketIn;
+	private PrintWriter socketOut;
+	
+	/**
+	 * creates a new {@link ServerSocketView} with the specified socket
+	 * 
+	 * @param socket
+	 *            is the socket that is managed by the handler
+	 * @throws IOException
+	 */
+	public ServerSocketView(Socket socket) throws IOException {
+		this.socket = socket;
+		// creates a new stream that is able to read characters from the socket
+		// for more detail drag your mouse over the Scanner class
+		socketIn = new Scanner(socket.getInputStream());
+
+		// creates a new stream that is able to write characters on the socket
+		// for more details drag your mouse over the PrintWriter class
+		socketOut = new PrintWriter(socket.getOutputStream());
+	}
+	
+
+	/**
+	 * executes the client handler
+	 */
+	public void run() {
+		try {
+
+			while (true) {
+				// reads a new Line from the Socket
+				String line = socketIn.nextLine();
+
+				System.out.println("SERVER: getting the command "+line);
+				StringTokenizer tokenizer=new StringTokenizer((String) line);
+				
+				Player player=new Player(tokenizer.nextToken());
+				System.out.println("SERVER: "+player);
+				
+				Mossa mossa=Mossa.valueOf(tokenizer.nextToken().toUpperCase());
+				System.out.println("SERVER: "+mossa);
+				
+				Action action=new EseguiMossa(mossa, player);
+				
+				this.setChanged();
+				this.notifyObservers(action);
+				if (line.equals("quit")) {
+					// exits from the while
+					break;
+				}
+			}
+			// closes the scanner
+			socketIn.close();
+			// closes the printWriter
+			socketOut.close();
+			// closes the socket
+			socket.close();
+
+		} catch (IOException e) {
+			System.err.println(e.getMessage());
+		}
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		System.out.println("SERVER-VIEW-SOCKET: sending the client the message: "+
+				arg);
+		socketOut
+		.println("SERVER: "
+				+ arg);
+		socketOut.flush();
+	}
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java,escapechar=|]
+public abstract class View extends Observable implements Observer {
+
+
+}
+\end{lstlisting}
+\subsubsection{Server}
+\begin{lstlisting}[language=Java,escapechar=|]
+import game.server.model.GameState;
+import game.server.model.Partita;
+import game.server.view.ServerSocketView;
+import game.server.view.View;
+
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.rmi.AlreadyBoundException;
+import java.rmi.RemoteException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+/**
+ * contains the implementation of the Server class. This server is able to manage multiple clients
+ * 
+ * @author Claudio Menghi
+ * 
+ */
+public class Server {
+
+	/**
+	 * is the port that the Server uses to wait connections
+	 */
+	private final static int PORT = 29999;
+	
+	private Partita partita;
+	private Controller controller;
+	
+	public Server() throws RemoteException{
+		partita=new Partita();
+		controller=new Controller(partita);
+	}
+	
+	public void start() throws AlreadyBoundException, IOException{
+		this.startSocket();
+	}
+	
+	
+	/**
+	 * starts the server
+	 * 
+	 * @throws IOException
+	 */
+	private void startSocket() throws IOException {
+		/*
+		 * ExecutorService represents an asynchronous execution mechanism which
+		 * is capable of executing tasks in the background.
+		 * Executors.newCachedThreadPool() Creates a thread pool that creates
+		 * new threads as needed, but will reuse previously constructed threads
+		 * when they are available.
+		 */
+		ExecutorService executor = Executors.newCachedThreadPool();
+
+		// creates a new Server socket on the specified port
+		ServerSocket serverSocket = new ServerSocket(PORT);
+		System.out.println("Server socket ready on port: " + PORT);
+		System.out.println("Server ready");
+		
+		while (true) {
+
+			try {
+				// puts the serverSocket in a state where is waiting for client
+				// connections
+				// the server stops on this instruction until a connection
+				// arrives
+				Socket socket = serverSocket.accept();
+				ServerSocketView view=new ServerSocketView(socket);
+				this.addClient(view);
+				executor.submit(view);
+				
+
+			} catch (IOException e) {
+				break;
+			}
+		}
+		// shutdown the executor
+		executor.shutdown();
+
+		// closes the ServerSocket
+		serverSocket.close();
+	}
+	
+
+	public void addClient(View view){
+		view.addObserver(controller);
+		partita.addObserver(view);
+		// Submits a Runnable task for execution
+		partita.setGameState(partita.getGameState().nextState());
+		if(partita.getGameState().equals(GameState.RUNNING)){
+			System.out.println("creo una nuova partita");
+			partita=new Partita();
+			System.out.println(partita.getGameState());
+			controller=new Controller(partita);
+		}	
+	}
+	/**
+	 * Runs the Server
+	 * 
+	 * @param args
+	 * @throws AlreadyBoundException 
+	 * @throws RemoteException 
+	 */
+	public static void main(String[] args) throws AlreadyBoundException, RemoteException {
+		Server server = new Server();
+		// starts the server
+		try {
+			server.start();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java,escapechar=|]
+
+import game.server.actions.Action;
+import game.server.model.Partita;
+
+import java.util.Observable;
+import java.util.Observer;
+
+/**
+ * contains the controller of the game
+ * 
+ * @author Claudio Menghi
+ * 
+ */
+public class Controller implements Observer{
+
+	
+	private Partita partita;
+
+	/**
+	 * creates a new Controller
+	 */
+	public Controller(Partita partita) {
+		this.partita=partita;
+	}
+
+	
+	@Override
+	public void update(Observable o, Object arg) {
+		Action action=(Action) arg;
+		System.out.println("Server: the thread that is performing the action have been lanched ");
+		
+		action.esegui(partita);
+	}
+}
+\end{lstlisting}
+
+\clearpage
+
+% ---- Bibliography ----
+
+
+
+
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliographystyle{alpha}
+\bibliography{bib}
+\nocite{*}
+
+
+\end{document}
+

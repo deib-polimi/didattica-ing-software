@@ -962,11 +962,6 @@ public synchronized void attendi(){
 		}
 	}
 \end{lstlisting}
-Anche in questo caso tuttavia \`e possibile discutere un scenario particolare: supponiamo che \texttt{A} venga svegliato, esca dal metodo sincrono \texttt{attendi} ma prima che riesca ad entrare nel metodo sincrono \texttt{rispondi} il controllo viene passato a \texttt{B}, che a sua volta vede la dama libera ed esce da attendi. Ora, lo scheduler potrebbe consentire ad \texttt{A} di entrare nel metodo \texttt{rispondi} e quando \texttt{B} entra si trova la dama gi\`a occupata.
-
-Il problema \`e il seguente. Abbiamo un azione (\texttt{attendi} o \texttt{rilascia}) che dipende da una condizione: il valore ritornato da (\texttt{getStato}). Tra il momento $t$ in cui chiediamo alla dama il suo stato mediante il metodo (\texttt{getStato}) e il momento in cui eseguiamo un azione $t+1$ (\texttt{attendi} o \texttt{rilascia})  rilasciamo il lock sull'oggetto. Quindi non abbiamo garanzie che quello che effettuiamo al tempo $t+1$ \`e consistente con la condizione che abbiamo controllato al tempo $t$, dal momento che tra $t$ e $t+1$ un altro thread pu\`o aver effettuato delle modifiche allo stato dell'oggetto (considerato che abbiamo rilasciato il lock).
-
-Si lascia allo studente lo sviluppo di una versione che risolva questo problema (idea: la composizione dei due metodi deve essere sincrona).
 
 \begin{lstlisting}[language=Java]
 /**
