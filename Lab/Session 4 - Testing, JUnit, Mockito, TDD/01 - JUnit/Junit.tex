@@ -347,13 +347,246 @@ that provides constant input (for example a constant string).
 Mocking can be done manually with the a common interface and the
 Adapter pattern or using a mocking library (e.g., Mockito).
 
-\section{Mockito (optional)}
+\section{Advanced Testing (optional)}
 
-A unit test should test a class in isolation. Side effects from other
-classes or the system should be eliminated if possible. The
-achievement of this desired goal is typical complicated by the fact
-that Java classes usually depend on other classes. To solve this, you
-can use the so called test doubles provided with the library Mockito. 
+\subsection{Parametric testing}
+
+
+Junit 4 has introduced a new feature Parameterized tests.Parameterized
+tests allow developer to run the same test over and over again using
+different values.
+Parametrized testing is supported from the version 4 of JUnit, so
+remember to create JUnit 4 tests and update the JUnit dependency in
+your pom to version 4.12:
+
+\begin{lstlisting}
+<dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+</dependency>
+\end{lstlisting}
+
+Let's consider using parametric testing for a simple add function:
+
+\begin{lstlisting}
+public class MyClass {
+
+	public int add(int a, int b){
+		return a+b;
+	}
+	
+}
+\end{lstlisting}
+
+Using the following test class:
+
+\begin{lstlisting}
+import static org.junit.Assert.*;
+import java.util.Arrays;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
+
+@RunWith(value = Parameterized.class)
+public class MyClassTest {
+
+	private int numberA;
+	private int numberB;
+	private int expected;
+	
+	public MyClassTest(int numberA, int numberB, int expected) {
+		this.numberA = numberA;
+		this.numberB = numberB;
+		this.expected = expected;
+	}
+
+	//Declares parameters here
+	@Parameters(name = "{index}: add({0}+{1})={2}")
+	public static Iterable<Object[]> data() {
+		return Arrays.asList(new Object[][] { 
+			{ 1, 1, 2 }, 
+			{ 2, 2, 4 }, 
+			{ 8, 2, 10 }, 
+			{ 4, 5, 9 } 
+		});
+	}
+	
+	@Before
+	public void setUp() throws Exception {
+	}
+
+	@Test
+	public void test() {
+		MyClass c = new MyClass();
+		assertEquals(expected,c.add(numberA, numberB));
+	}
+
+}
+\end{lstlisting}
+
+To use the feature annotate test class with
+@RunWith(value = Parameterized.class). Then, create a public static
+method annotated with @Parameters that returns a collection of objects
+(as Array) as test data set.
+
+These data will be used to initialize the instance of the test class,
+so you need to create a public constructor that takes in what is
+equivalent to one "row" of test data.
+
+Create a private variable to hold data for each "column" of your
+input test data. 
+
+Once this is set you can create your tests case(s) using the private
+variables as the source of the test data.
+
+For convenience you can pass parameters to the @Parameters annotation
+that will define the formatting for your tests. This is useful to
+figure out which particular "row'' of your input data has caused a
+test failure. In the example, we use $"{index}: add({0}+{1})={2}"$
+that simply prints index of the test followed by the input and
+expected output. For example, if input parameters are  
+“{ 8, 2, 10 }” from the example, then {0} = 8, {1} = 2, {2} = 10,
+hence the formatting will show "2: add(8+2)=10"
+
+
+\subsection{Static mocking}
+
+When designing and implementing a larger piece of software you soon
+realize that objects you instantiate encapsulate some functionality, but
+delegate many other to different objects. For instance, you have controller
+classes that depend on action classes and action that depend on data
+classes and so on.
+
+The idea of unit testing is that we want to test our code in
+isolation, i.e., without testing the dependencies. This test allows
+you to verify that the code being tested works, regardless of it's
+dependencies. The approach is that you assume the dependencies work
+according to their specification and then you write the code that
+relies on the dependencies according to its own specification.
+After that each module is tested in isolation.
+
+To ensure the isolation one needs to "mock'' the dependencies with so
+called mock object. They simulate the behavior of real objects in
+controlled ways and decouple and localize your unit tests.
+
+For instance, consider an extension of the previous class with code
+that reads from standard input:
+
+
+\begin{lstlisting}
+public class MyClass {
+
+	public int foo(){
+                Scanner sc=new Scanner(System.in);
+                int a = sc.nextInt();
+                int b = sc.nextInt();
+		sc.close();
+
+                //do something to a and b to obtain c
+                return c;
+	}
+	public static void main(String argv[]){
+		MyClass c = new MyClass();
+		c.foo();
+	}	
+}
+\end{lstlisting}
+
+Testing the method foo() cannot be done automatically due to the
+dependency on the code that reads from standard input. So let's
+refactor the code a bit.
+
+\begin{lstlisting}
+public interface Input {
+	public int nextInt();
+}
+
+public class InputMock implements Input {
+
+	@Override
+	public int nextInt() {
+		return 0;
+	}
+
+}
+
+public class StandardInputProxy implements Input {
+
+	Scanner sc=new Scanner(System.in);
+
+	@Override
+	public int nextInt() {
+		return sc.nextInt();;		
+	}
+
+}
+\end{lstlisting}
+
+First we can create a common interface for original and mock objects
+refactoring-in the methods that we need to use in foo().
+Then we make a generic dependency on the interface in the original class.
+
+\begin{lstlisting}
+public class MyClass {
+
+	Input sc;
+	public MyClass(Input i) {
+		sc=i;
+	}
+
+	public int foo(){
+                int a = sc.nextInt();
+                int b = sc.nextInt();
+		
+                //do something to a and b to obtain c
+                return c;
+	}
+	public static void main(String argv[]){
+		MyClass c = new MyClass(new StandardInputProxy());
+		c.foo();
+	}	
+	
+}
+\end{lstlisting}
+
+However, now we can "plug-in'' out mock object at the test phase:
+
+\begin{lstlisting}
+public class MyClassTest extends TestCase {
+
+	MyClass c;
+	protected void setUp() throws Exception {
+		super.setUp();
+		c =  new MyClass(new InputMock());
+	}
+	
+	public void testExample()
+        {
+		int x = c.foo();
+		assertEquals(0, x);
+        }
+}
+\end{lstlisting}
+
+
+The example shows a very simple mock object, however you can implement
+arbitrary test input generation logic in \texttt{InputMock}.
+
+\subsection{Mockito}
+
+As we said before, unit test should test a class in isolation. Side
+effects from other classes or the system should be eliminated if
+possible. 
+One way to resolve this is to introduce mock classes implementing
+the proxy design pattern like shown above. However, this approach
+pollutes your design with unnecessary classes used only for testing.
+
+To solve this, you can generate mock object at runtime with the help
+of the Mockito library. 
 
 To use mockito add the following maven dependency:
 
@@ -366,8 +599,8 @@ To use mockito add the following maven dependency:
 \end{lstlisting}
 
 Mockito supports the creation of mock objects with the static
-mock(). If you add a static import for org.mockito.Mockito.*;, you can
-access Mockitos methods like mock() directly. Static imports allows
+mock() method. If you add a static import for org.mockito.Mockito.*, you can
+access Mockito's methods like mock() directly. Static imports even allow
 you to call static members, i.e., methods and fields of a class
 directly without specifying the class. 
 
@@ -403,13 +636,21 @@ public void test1()  {
   //  create mock
   MyClass test = Mockito.mock(MyClass.class);
   
-  // define return value for method getUniqueId()
-  when(test.getUniqueId()).thenReturn(43);
+  // define return value for method foo()
+  when(test.foo()).thenReturn(42);
   
   // use mock in test.... 
-  assertEquals(test.getUniqueId(), 43);
+  assertEquals(test.foo(), 42);
 }
 
+\end{lstlisting}
+
+The example above creates a mock object for our MyClass and defines
+that foo() returns 42.
+
+\begin{lstlisting}
+
+//...
 
 // Demonstrates the return of multiple values
 @Test
