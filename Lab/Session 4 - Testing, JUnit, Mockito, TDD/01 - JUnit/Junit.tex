@@ -330,12 +330,144 @@ Posso mettere l'attributo amount come privato.
 Per testare dei metodi privati ci sono 2 strade possibili:
 \begin{itemize}
 \item testarlo attraverso un altro metodo pubblico che lo utilizza
-%\item utilizzare la \emph{reflection} (nel caso sia proprio necessario).
+\item utilizzare la \emph{reflection} (non consigliato! usa solo nel caso sia proprio necessario).
 \end{itemize}
-%in pratica conviene testare solo la parte di codice visibile da un ipotetico “client” completamente esterno al codice, e quindi trascurare i metodi protetti
+In pratica conviene testare solo la parte di codice visibile da un ipotetico “client” completamente esterno al codice, e quindi trascurare i metodi protetti
 
 \section{Che cosa testare?}
 Non \`e una regola assoluta, ma il principio generale \`e: \emph{quanto pi\`u una parte di codice \`e visibile dall'esterno, tanto pi\`u deve essere testata}
+
+Unit tests should \textbf{not} test network, multithreading or GUI code.
+The tests should be deterministic and automatic with predefined input
+and the expected output, so also do not test code that interact with
+standard input (System.in). In case you want to test such code you need to
+\emph{mock} the interaction with standard input with code
+that provides constant input (for example a constant string). 
+
+Mocking can be done manually with the a common interface and the
+Adapter pattern or using a mocking library (e.g., Mockito).
+
+\section{Mockito (optional)}
+
+A unit test should test a class in isolation. Side effects from other
+classes or the system should be eliminated if possible. The
+achievement of this desired goal is typical complicated by the fact
+that Java classes usually depend on other classes. To solve this, you
+can use the so called test doubles provided with the library Mockito. 
+
+To use mockito add the following maven dependency:
+
+\begin{lstlisting}
+<dependency>
+	<groupId>org.mockito</groupId>
+	<artifactId>mockito-all</artifactId>
+	<version>1.9.5</version>
+</dependency>
+\end{lstlisting}
+
+Mockito supports the creation of mock objects with the static
+mock(). If you add a static import for org.mockito.Mockito.*;, you can
+access Mockitos methods like mock() directly. Static imports allows
+you to call static members, i.e., methods and fields of a class
+directly without specifying the class. 
+
+To configure which values are returned at a method call Mockito
+defines a fluent API. You can use the verify() method to ensure that a
+method was called. 
+
+The when(....).thenReturn(....) call chain can be used to specify a
+condition and a return value for this condition. If you specify more
+than one value, they are returned in the order of specification until
+the last one is used. Afterwards the last specified value is
+returned. Mocks can also return different values depending on
+arguments passed into a method. You also use methods like anyString or
+anyInt to define that independent of the input value a certain return
+value should be returned. 
+
+The doReturn(...).when(...).methodCall call chain works similar but is
+useful for void methods. The doThrow variant can be used for methods
+which return void to throw an exception. 
+
+
+All these usages are demonstrated by the following code snippet. 
+
+
+
+\begin{lstlisting}
+
+import static org.mockito.Mockito.*;
+import static org.junit.Assert.*;
+
+@Test
+public void test1()  {
+  //  create mock
+  MyClass test = Mockito.mock(MyClass.class);
+  
+  // define return value for method getUniqueId()
+  when(test.getUniqueId()).thenReturn(43);
+  
+  // use mock in test.... 
+  assertEquals(test.getUniqueId(), 43);
+}
+
+
+// Demonstrates the return of multiple values
+@Test
+public void testMoreThanOneReturnValue()  {
+  Iterator i= mock(Iterator.class);
+  when(i.next()).thenReturn("Mockito").thenReturn("rocks");
+  String result=i.next()+" "+i.next();
+  //assert
+  assertEquals("Mockito rocks", result);
+}
+
+// this test demonstrates how to return values based on the input
+@Test
+public void testReturnValueDependentOnMethodParameter()  {
+  Comparable c= mock(Comparable.class);
+  when(c.compareTo("Mockito")).thenReturn(1);
+  when(c.compareTo("Eclipse")).thenReturn(2);
+  //assert
+  assertEquals(1,c.compareTo("Mockito"));
+}
+
+// this test demonstrates how to return values independent of the input value
+
+@Test
+public void testReturnValueInDependentOnMethodParameter()  {
+  Comparable c= mock(Comparable.class);
+  when(c.compareTo(anyInt())).thenReturn(-1);
+  //assert
+  assertEquals(-1 ,c.compareTo(9));
+}
+
+// return a value based on the type of the provide parameter
+
+@Test
+public void testReturnValueInDependentOnMethodParameter()  {
+  Comparable c= mock(Comparable.class);
+  when(c.compareTo(isA(Todo.class))).thenReturn(0);
+  //assert
+  Todo todo = new Todo(5);
+  assertEquals(todo ,c.compareTo(new Todo(1)));
+} 
+
+
+// this test demonstrates how use doThrow
+
+@Test(expected=IOException.class)
+public void testForIOException() {
+  // create an configure mock
+  OutputStream mockStream = mock(OutputStream.class);
+  doThrow(new IOException()).when(mockStream).close();
+  
+  // use mock
+  OutputStreamWriter streamWriter= new OutputStreamWriter(mockStream);
+  streamWriter.close();
+} 
+
+\end{lstlisting}
+
 
 
 
