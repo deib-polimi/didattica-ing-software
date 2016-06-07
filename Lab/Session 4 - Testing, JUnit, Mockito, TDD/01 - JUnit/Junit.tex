@@ -80,8 +80,8 @@
 %	NAME AND CLASS SECTION
 %----------------------------------------------------------------------------------------
 
-\newcommand{\hmwkTitle}{Junit} % Assignment title
-\newcommand{\hmwkDueDate}{Martedi,\ Aprile 15,\ 2014} % Due date
+\newcommand{\hmwkTitle}{Unit Testing} % Assignment title
+\newcommand{\hmwkDueDate}{Martedi,\ May 31,\ 2016} % Due date
 \newcommand{\hmwkClass}{Ingegneria del Software 1} % Course/class
 \newcommand{\hmwkClassTime}{} % Class/lecture time
 \newcommand{\hmwkClassInstructor}{} % Teacher/lecturer
@@ -330,13 +330,975 @@ Posso mettere l'attributo amount come privato.
 Per testare dei metodi privati ci sono 2 strade possibili:
 \begin{itemize}
 \item testarlo attraverso un altro metodo pubblico che lo utilizza
-%\item utilizzare la \emph{reflection} (nel caso sia proprio necessario).
+\item utilizzare la \emph{reflection} (non consigliato! usa solo nel caso sia proprio necessario).
 \end{itemize}
-%in pratica conviene testare solo la parte di codice visibile da un ipotetico “client” completamente esterno al codice, e quindi trascurare i metodi protetti
+In pratica conviene testare solo la parte di codice visibile da un ipotetico “client” completamente esterno al codice, e quindi trascurare i metodi protetti
 
 \section{Che cosa testare?}
 Non \`e una regola assoluta, ma il principio generale \`e: \emph{quanto pi\`u una parte di codice \`e visibile dall'esterno, tanto pi\`u deve essere testata}
 
+Unit tests should \textbf{not} test network, multithreading or GUI code.
+The tests should be deterministic and automatic with predefined input
+and the expected output, so also do not test code that interact with
+standard input (System.in). In case you want to test such code you need to
+\emph{mock} the interaction with standard input with code
+that provides constant input (for example a constant string). 
+
+Mocking can be done manually with the a common interface and the
+Adapter pattern or using a mocking library (e.g., Mockito).
+
+\section{Advanced Testing (optional)}
+
+\subsection{Parametric testing}
+
+
+Junit 4 has introduced a new feature Parameterized tests.Parameterized
+tests allow developer to run the same test over and over again using
+different values.
+Parametrized testing is supported from the version 4 of JUnit, so
+remember to create JUnit 4 tests and update the JUnit dependency in
+your pom to version 4.12:
+
+\begin{lstlisting}
+<dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+</dependency>
+\end{lstlisting}
+
+Let's consider using parametric testing for a simple add function:
+
+\begin{lstlisting}
+public class MyClass {
+
+	public int add(int a, int b){
+		return a+b;
+	}
+	
+}
+\end{lstlisting}
+
+Using the following test class:
+
+\begin{lstlisting}
+import static org.junit.Assert.*;
+import java.util.Arrays;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
+
+@RunWith(value = Parameterized.class)
+public class MyClassTest {
+
+	private int numberA;
+	private int numberB;
+	private int expected;
+	
+	public MyClassTest(int numberA, int numberB, int expected) {
+		this.numberA = numberA;
+		this.numberB = numberB;
+		this.expected = expected;
+	}
+
+	//Declares parameters here
+	@Parameters(name = "{index}: add({0}+{1})={2}")
+	public static Iterable<Object[]> data() {
+		return Arrays.asList(new Object[][] { 
+			{ 1, 1, 2 }, 
+			{ 2, 2, 4 }, 
+			{ 8, 2, 10 }, 
+			{ 4, 5, 9 } 
+		});
+	}
+	
+	@Before
+	public void setUp() throws Exception {
+	}
+
+	@Test
+	public void test() {
+		MyClass c = new MyClass();
+		assertEquals(expected,c.add(numberA, numberB));
+	}
+
+}
+\end{lstlisting}
+
+To use the feature annotate test class with
+@RunWith(value = Parameterized.class). Then, create a public static
+method annotated with @Parameters that returns a collection of objects
+(as Array) as test data set.
+
+These data will be used to initialize the instance of the test class,
+so you need to create a public constructor that takes in what is
+equivalent to one "row" of test data.
+
+Create a private variable to hold data for each "column" of your
+input test data. 
+
+Once this is set you can create your tests case(s) using the private
+variables as the source of the test data.
+
+For convenience you can pass parameters to the @Parameters annotation
+that will define the formatting for your tests. This is useful to
+figure out which particular "row'' of your input data has caused a
+test failure. In the example, we use $"{index}: add({0}+{1})={2}"$
+that simply prints index of the test followed by the input and
+expected output. For example, if input parameters are  
+“{ 8, 2, 10 }” from the example, then {0} = 8, {1} = 2, {2} = 10,
+hence the formatting will show "2: add(8+2)=10"
+
+
+\subsection{Static mocking}
+
+When designing and implementing a larger piece of software you soon
+realize that objects you instantiate encapsulate some functionality, but
+delegate many other to different objects. For instance, you have controller
+classes that depend on action classes and action that depend on data
+classes and so on.
+
+The idea of unit testing is that we want to test our code in
+isolation, i.e., without testing the dependencies. This test allows
+you to verify that the code being tested works, regardless of it's
+dependencies. The approach is that you assume the dependencies work
+according to their specification and then you write the code that
+relies on the dependencies according to its own specification.
+After that each module is tested in isolation.
+
+To ensure the isolation one needs to "mock'' the dependencies with so
+called mock object. They simulate the behavior of real objects in
+controlled ways and decouple and localize your unit tests.
+
+For instance, consider an extension of the previous class with code
+that reads from standard input:
+
+
+\begin{lstlisting}
+public class MyClass {
+
+	public int foo(){
+                Scanner sc=new Scanner(System.in);
+                int a = sc.nextInt();
+                int b = sc.nextInt();
+		sc.close();
+
+                //do something to a and b to obtain c
+                return c;
+	}
+	public static void main(String argv[]){
+		MyClass c = new MyClass();
+		c.foo();
+	}	
+}
+\end{lstlisting}
+
+Testing the method foo() cannot be done automatically due to the
+dependency on the code that reads from standard input. So let's
+refactor the code a bit.
+
+\begin{lstlisting}
+public interface Input {
+	public int nextInt();
+}
+
+public class InputMock implements Input {
+
+	@Override
+	public int nextInt() {
+		return 0;
+	}
+
+}
+
+public class StandardInputProxy implements Input {
+
+	Scanner sc=new Scanner(System.in);
+
+	@Override
+	public int nextInt() {
+		return sc.nextInt();;		
+	}
+
+}
+\end{lstlisting}
+
+First we can create a common interface for original and mock objects
+refactoring-in the methods that we need to use in foo().
+Then we make a generic dependency on the interface in the original class.
+
+\begin{lstlisting}
+public class MyClass {
+
+	Input sc;
+	public MyClass(Input i) {
+		sc=i;
+	}
+
+	public int foo(){
+                int a = sc.nextInt();
+                int b = sc.nextInt();
+		
+                //do something to a and b to obtain c
+                return c;
+	}
+	public static void main(String argv[]){
+		MyClass c = new MyClass(new StandardInputProxy());
+		c.foo();
+	}	
+	
+}
+\end{lstlisting}
+
+However, now we can "plug-in'' out mock object at the test phase:
+
+\begin{lstlisting}
+public class MyClassTest extends TestCase {
+
+	MyClass c;
+	protected void setUp() throws Exception {
+		super.setUp();
+		c =  new MyClass(new InputMock());
+	}
+	
+	public void testExample()
+        {
+		int x = c.foo();
+		assertEquals(0, x);
+        }
+}
+\end{lstlisting}
+
+
+The example shows a very simple mock object, however you can implement
+arbitrary test input generation logic in \texttt{InputMock}.
+
+\subsection{Dynamic mocking (with Mockito)}
+
+As we said before, unit test should test a class in isolation. Side
+effects from other classes or the system should be eliminated if
+possible. 
+One way to resolve this is to introduce mock classes implementing
+the proxy design pattern like shown above. However, this approach
+pollutes your design with unnecessary classes used only for testing.
+
+To solve this, you can generate mock object at runtime with the help
+of the Mockito library. 
+
+To use mockito add the following maven dependency:
+
+\begin{lstlisting}
+<dependency>
+	<groupId>org.mockito</groupId>
+	<artifactId>mockito-all</artifactId>
+	<version>1.9.5</version>
+</dependency>
+\end{lstlisting}
+
+Mockito supports the creation of mock objects with the static
+mock() method. If you add a static import for org.mockito.Mockito.*, you can
+access Mockito's methods like mock() directly. Static imports even allow
+you to call static members, i.e., methods and fields of a class
+directly without specifying the class. 
+
+To configure which values are returned at a method call Mockito
+defines a fluent API. You can use the verify() method to ensure that a
+method was called. 
+
+The when(....).thenReturn(....) call chain can be used to specify a
+condition and a return value for this condition. If you specify more
+than one value, they are returned in the order of specification until
+the last one is used. Afterwards the last specified value is
+returned. Mocks can also return different values depending on
+arguments passed into a method. You also use methods like anyString or
+anyInt to define that independent of the input value a certain return
+value should be returned. 
+
+The doReturn(...).when(...).methodCall call chain works similar but is
+useful for void methods. The doThrow variant can be used for methods
+which return void to throw an exception. 
+
+
+All these usages are demonstrated by the following code snippet. 
+
+
+
+\begin{lstlisting}
+
+import static org.mockito.Mockito.*;
+import static org.junit.Assert.*;
+
+@Test
+public void test1()  {
+  //  create mock
+  MyClass test = Mockito.mock(MyClass.class);
+  
+  // define return value for method foo()
+  when(test.foo()).thenReturn(42);
+  
+  // use mock in test.... 
+  assertEquals(test.foo(), 42);
+}
+
+\end{lstlisting}
+
+The example above creates a mock object for our MyClass and defines
+that foo() returns 42.
+
+\begin{lstlisting}
+
+//...
+
+// Demonstrates the return of multiple values
+@Test
+public void testMoreThanOneReturnValue()  {
+  Iterator i= mock(Iterator.class);
+  when(i.next()).thenReturn("Mockito").thenReturn("rocks");
+  String result=i.next()+" "+i.next();
+  //assert
+  assertEquals("Mockito rocks", result);
+}
+
+// this test demonstrates how to return values based on the input
+@Test
+public void testReturnValueDependentOnMethodParameter()  {
+  Comparable c= mock(Comparable.class);
+  when(c.compareTo("Mockito")).thenReturn(1);
+  when(c.compareTo("Eclipse")).thenReturn(2);
+  //assert
+  assertEquals(1,c.compareTo("Mockito"));
+}
+
+// this test demonstrates how to return values independent of the input value
+
+@Test
+public void testReturnValueInDependentOnMethodParameter()  {
+  Comparable c= mock(Comparable.class);
+  when(c.compareTo(anyInt())).thenReturn(-1);
+  //assert
+  assertEquals(-1 ,c.compareTo(9));
+}
+
+// return a value based on the type of the provide parameter
+
+@Test
+public void testReturnValueInDependentOnMethodParameter()  {
+  Comparable c= mock(Comparable.class);
+  when(c.compareTo(isA(Todo.class))).thenReturn(0);
+  //assert
+  Todo todo = new Todo(5);
+  assertEquals(todo ,c.compareTo(new Todo(1)));
+} 
+
+
+// this test demonstrates how use doThrow
+
+@Test(expected=IOException.class)
+public void testForIOException() {
+  // create an configure mock
+  OutputStream mockStream = mock(OutputStream.class);
+  doThrow(new IOException()).when(mockStream).close();
+  
+  // use mock
+  OutputStreamWriter streamWriter= new OutputStreamWriter(mockStream);
+  streamWriter.close();
+} 
+
+\end{lstlisting}
+
+\subsection{Property-based testing (with ScalaCheck)}
+
+\textit{First of all, if you are reading this - well done! This is
+  highly novel and experimental section and, of course, an optional
+  part of the course. To our best knowledge, there
+  isn't any good tool support for property-based testing in
+  Java. Therefore, all of the examples are done using command line and
+  a Scala library that happens to work well with Java 1.7 version.
+  Nevertheless, we believe that you can still benefit from the
+  examples and information in this chapter.}\\
+
+The difference between a traditional test and a property is that tests
+traditionally verify behavior based on specific data points checked by
+the test. For example:
+
+\[assert(add(4,5) == 9)\]
+
+A test might, for instance, pass three or four specific lists of different
+sizes to a method under test that takes a list and check
+if the results are as expected. 
+
+A property, by contrast, would describe at a high level the
+preconditions of the method under test and specify some aspect of the
+result that should hold no matter what input was passed. For
+example:
+
+\[assert(\forall x, y (add(x,y) == add(y,x))) \]
+
+or in case of string concatenation:
+
+\[assert(\forall p, q (concat(p,q).endsWith(q))\]
+
+Rather than checking the results with specific input, properties are
+asserted (“for any possible input, [some condition] should hold”), and
+a test runner searches for counter-examples. Typically, if it finds a
+combination of arguments that causes the property to fail, it then
+searches for simpler versions of those arguments that still fail, and
+then prints the minimal failing input.
+
+Property-based testing is inherently different when it comes to
+writing tests: instead of testing for specific input and output values, we
+test the properties of the code under testing. You can think of
+properties as rules, invariants or requirements.
+
+There are many testing libraries that enable property-based testing
+in different programming languages. They implement support for:
+
+\begin{itemize}
+\item writing executable properties of the code under test
+\item automatic generation of input for the tests
+\item execution of the code for the generated input
+\item checking correctness of the output against properties
+\item shrinking the input to the smallest example that violates a property
+\end{itemize}
+
+To perform property-based testing in Java the best choice is to use
+ScalaCheck library. ScalaCheck is originally designed for testing
+Scala code, but due to interoperability of Java and Scala, it can be
+used to test Java code as well. We call tests written in Scala using
+ScalaCheck - specification. 
+
+Before we can use ScalaCheck to test our implementation, we obviously
+first need an example implementation. Let's create a maven project
+with following structure:
+
+\begin{lstlisting}
+|-- pom.xml
+|-- src
+    |-- main
+    |   |-- com
+    |       |-- company
+    |           |-- account
+    |               |-- Account.java
+    |               |-- InsufficientFundsException.java
+    |-- test
+        |-- com
+            |-- company
+                |-- test
+                    |-- AccountSpecification.scala
+                    |-- AccountTest.java
+\end{lstlisting}
+
+The pom.xml is configured as follows:
+
+\begin{lstlisting}
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.company.scala</groupId>
+    <artifactId>bank</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <properties>
+        <scala.version>2.9.0-1</scala.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>${scala.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.scala-tools.testing</groupId>
+            <artifactId>scalacheck_2.9.0-1</artifactId>
+            <version>1.9</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <sourceDirectory>src/main/</sourceDirectory>
+        <testSourceDirectory>src/test/</testSourceDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.scala-tools</groupId>
+                <artifactId>maven-scala-plugin</artifactId>
+                <version>2.15.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+			<id>test</id>
+			<phase>test</phase>
+			<goals>
+			   <goal>run</goal>
+			</goals>
+		    </execution>
+                </executions>
+                <configuration>
+                    <scalaVersion>${scala.version}</scalaVersion>
+                    <args>
+                        <arg>-target:jvm-1.5</arg>
+                    </args>
+                    <launchers>
+                        <!-- this should allow us to execute the ScalaCheck tests -->
+                        <launcher>
+                            <id>test</id>
+                            <mainClass>com.company.test.Runner</mainClass>
+                        </launcher>
+                    </launchers>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.scala-tools</groupId>
+                <artifactId>maven-scala-plugin</artifactId>
+                <configuration>
+                    <scalaVersion>${scala.version}</scalaVersion>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
+</project>
+\end{lstlisting}
+
+As you can see from the pom.xml file, we utilize two new dependencies:
+scala-library and scalacheck. We also set up maven-scala-plugin to
+compile scala code in the compile and testCompile maven phase, as well
+as to run any ScalaCheck specifications in the test phase.
+
+We create an Account class that provides simple functionality of a
+bank account:
+
+\begin{lstlisting}
+package com.company.account;
+
+public class Account {
+  
+  public final static int GOLD_AGE = 50;
+  public final static double GOLD_BALANCE = 10000;
+  public final static double STD_INTEREST = .02;
+  public final static double GOLD_INTEREST = .03;
+  
+  private int id;
+  private int age;
+  private double balance;
+  
+  public Account(int id, int age, double balance) {
+    this.id = id;
+    this.age = age;
+    this.balance = balance;
+  }
+  
+  public double getBalance() {
+    return(balance);
+  }
+  
+  public int getAge() {
+    return(age);
+  }
+  
+  public void deposit(double amt) {
+    assert (amt > 0);
+    balance += amt;
+  }
+  
+  public void withdraw(double amt) throws InsufficientFundsException {
+    assert(amt > 0);
+    if (amt <= this.balance) 
+      balance -= amt;
+    else 
+     throw new InsufficientFundsException();
+  }
+
+  public double getRate() {
+    if (balance < Account.GOLD_BALANCE && age < Account.GOLD_AGE) 
+      return(Account.STD_INTEREST);
+    else 
+      return(Account.GOLD_INTEREST);
+  }
+
+    public void creditInterest() {
+    deposit(getRate() * balance);
+  }
+}
+\end{lstlisting}
+
+As well as an auxiliary exception:
+
+\begin{lstlisting}
+package com.company.account;
+
+public class InsufficientFundsException extends Exception {}
+\end{lstlisting}
+
+Now, typical Junit (or example-based) testing would look something like
+this (see the JavaDoc for more explanation):
+
+\begin{lstlisting}
+package com.company.test;
+
+import org.junit.Test;
+import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import com.company.account.*;
+
+public class AccountTest {
+
+    private static double DEFAULT_DELTA = 0;
+
+    /**
+     * Check if depositing a particular amount (amt == 100) to an account 
+     * with existing balance (acct.getBalance() == 10) increases the 
+     * new balance appropriately (acct.getBalance() == 110)
+     */
+    @Test
+    public void testDeposit() {
+        // simple deposit
+        Account acct = new Account(1, 1, 10); // id, age, balance
+        double oldBalance = acct.getBalance();
+        double amt = 100;
+        acct.deposit(amt);
+        assertEquals(acct.getBalance(), oldBalance + amt, DEFAULT_DELTA);
+    }
+
+    /**
+     * Similar test with negative initial account balance (acct.getBalance() == -100)
+     */
+    @Test
+    public void testDepositWithNegativeBalance() {
+        // deposit when we start with a negative balance
+        Account acct = new Account(1, 1, -100); // id, age, balance
+        double amt = 100;
+        acct.deposit(amt);
+        assertEquals(acct.getBalance(), 0, DEFAULT_DELTA);
+    }
+
+    /**
+     * Check if withdrawing a particular amount (amt == 50) from an account 
+     * with existing balance (acct.getBalance() == 100) decreases the 
+     * new balance appropriately (acct.getBalance() == 50)
+     * @throws InsufficientFundsException - should not be thrown
+     */
+    @Test
+    public void withdrawNormal() throws InsufficientFundsException {
+        Account acct = new Account(1, 1, 100);
+        double oldBalance = acct.getBalance();
+        double amt = 50;
+        acct.withdraw(amt);
+        assertEquals(acct.getBalance(), oldBalance - amt, DEFAULT_DELTA);
+    }
+
+    /**
+     * Test if the InsufficientFundsException exception is thrown when withdrawing
+     * an amount (amt == 50) greater than the balance (acct.getBalance() == 10)
+     */
+    @Test
+    public void withdrawOverdraft() {
+        Account acct = new Account(1, 1, 10);
+        double amt = 50;
+
+        boolean exception = false;
+        try {
+            acct.withdraw(amt);
+        } catch(Exception ex) {
+            exception = ex instanceof InsufficientFundsException;
+        }
+        assertTrue("InsufficientFundsException should have been thrown", exception);
+    }
+
+    /**
+     * Getting the lower rate for young people with low balance
+     */
+    @Test
+    public void Rate_lowBalance_lowAge() {
+        Account acct = new Account(1, Account.GOLD_AGE - 1, Account.GOLD_BALANCE - 0.01);
+        assertEquals(Account.STD_INTEREST, acct.getRate(), 0);
+    }
+
+    /**
+     * Getting the higher rate for people with high balance
+     */
+    @Test
+    public void rateHighBalance() {
+        Account acct = new Account(1, 1, Account.GOLD_BALANCE);
+        assertEquals(Account.GOLD_INTEREST, acct.getRate(), DEFAULT_DELTA);
+    }
+
+    /**
+     * Getting the higher rate for old people 
+     */
+    @Test
+    public void rateHighAge() {
+        Account acct = new Account(1, Account.GOLD_AGE, 100);
+        assertEquals(Account.GOLD_INTEREST, acct.getRate(), DEFAULT_DELTA);
+    }
+
+    /**
+     * Applying the appropriate interest rate 
+     */
+    @Test
+    public void creditInterest() {
+        Account acct = new Account(1,1,100);
+        double oldBalance = acct.getBalance();
+        acct.creditInterest();
+        assertEquals(acct.getBalance(), oldBalance + ( oldBalance * acct.getRate()), DEFAULT_DELTA);
+    }
+}
+\end{lstlisting}
+
+If we run now \texttt{mvn test} we see 8 successful test executions:
+
+\begin{lstlisting}
+
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ bank ---
+[INFO] Surefire report directory: ./target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running com.company.test.AccountTest
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.051 sec
+
+Results :
+
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0
+\end{lstlisting}
+
+However each of these tests exercise only a single example input to the
+methods of the Account class. Using ScalaCheck, we can do better, note
+the following Scala code (read ScalaDoc for more information):
+
+\begin{lstlisting}
+package com.company.test
+
+import com.company.account.Account
+import com.company.account.InsufficientFundsException
+import org.scalacheck.Prop._
+import org.scalacheck.{Prop, Arbitrary, Gen, Properties}
+import com.company.account.Account
+import scala.Some
+
+/**
+ * For any type used as an input in the properties defined in ScalaCheck
+ * we need to define a generator, i.e., a way to create instances using 
+ * some particular strategy. Most common strategy is to randomly generate 
+ * instances with a particular distribution. It is also common to favor 
+ * edge cases. For example for Int, MAX_INT and MIN_INT are very likely to
+ * be generated
+ * 
+ * This Scala object (singleton pattern) is a custom data generator for 
+ * the Account class
+ */
+object GenAccount {
+
+  import com.company.account.Account._
+
+  val MAX_ID: Int = 999999
+  val MAX_AGE: Int = 200
+  val MAX_BALANCE: Double = 10 * GOLD_BALANCE
+
+  /**
+   * This method takes care of generating new objects of the Account class, using
+   * random values defined within a certain range: ID from [0,999999], age from [0,200]
+   * and balance from [0,100000]
+   * Every time genAccount method is called it produces a random Account object.
+   */
+  def genAccount(maxId: Int, maxAge: Int, maxBalance: Double): Gen[Account] = for {
+    id <- Gen.choose(0, maxId)
+    age <- Gen.choose(0, maxAge)
+    balance <- Gen.choose(0, maxBalance)
+  } yield new Account(id, age, balance)
+
+  /**
+   * For ScalaCheck to generate values of a custom class it uses the Arbitrary parametric type.
+   * 
+   * This must be defined as an implicit value or function and imported into the scope of the 
+   * ScalaCheck tests so that ScalaCheck can generate test data of the required type
+   * 
+   * The `Arbitrary` module defines implicit instances for common types (Int, String, ...), 
+   * for convenient use in your properties and generators.
+   */
+  implicit val arbAccount: Arbitrary[Account] =
+    Arbitrary(genAccount(MAX_ID, MAX_AGE, MAX_BALANCE))
+}
+
+/**
+ * This Scala object defines specification for the Account class.
+ * Specification is defined via set of properties represented 
+ * via property methods overrided from the Properties superclass.
+ */
+object AccountSpecification extends Properties("Account") {
+
+  import com.company.account.Account._
+  import GenAccount._
+
+  /**
+   * Generator of pairs (Account, amount) 
+   */
+  val genAcctAmt: Gen[(Account, Double)] = for {
+    acct <- Arbitrary.arbitrary[Account]
+    amt <- Gen.choose(0.01, MAX_BALANCE)
+  } yield (acct, amt)
+
+
+  /**
+   * Property 1:
+   * For all pairs of (Account, amount), if we deposit the amount
+   * the account balance is increased exactly as much 
+   */
+  property("Deposit") = forAll(genAcctAmt) {
+    case (acct: Account, amt: Double) =>
+      val oldBalance = acct.getBalance()
+      acct.deposit(amt)
+      acct.getBalance() == oldBalance + amt
+  }
+
+  /**
+   * Property 2:
+   * This is the same property checks as above, but uses the arbitrary generator of
+   * tuples of type (Account, Double) instead of providing a reference to the generator
+   * function. PLease note how the code is a little longer due to the extra type-related boilerplate
+   */
+  property("Deposit-with-Arbitrary") = forAll { (input:(Account,Double)) =>
+    input match {
+      case (acct: Account, amt: Double) =>
+        val oldBalance = acct.getBalance()
+        acct.deposit(amt)
+        acct.getBalance() == oldBalance + amt
+    }
+  }
+  /**
+   * Property 3: 
+   * For all accounts and amounts, if the amount is lower than 
+   * the account balance then if we withdraw the amount the 
+   * balance is decreased as much.  
+   */
+  property("Withdraw-normal") = forAll(genAcctAmt) {
+    case (acct: Account, amt: Double) =>
+      amt <= acct.getBalance() ==> {
+        val oldBalance = acct.getBalance()
+        acct.withdraw(amt)
+        acct.getBalance() == oldBalance - amt
+      }
+  }
+
+  /**
+   * Property 4:
+   * For all accounts and amounts, if the amount is strictly 
+   * higher than the account balance then if we withdraw, the 
+   * InsufficientFundsException should be raised
+   */
+  property("Withdraw-overdraft") = forAll(genAcctAmt) {
+    case (acct: Account, amt: Double) =>
+      amt > acct.getBalance() ==> {
+        val oldBalance = acct.getBalance()
+        Prop.throws(acct.withdraw(amt), classOf[InsufficientFundsException]) && acct.getBalance() == oldBalance
+      }
+  }
+
+  /**
+   * Property 5:
+   * For all accounts of young people with low account balance
+   * the interest rate is STD_INTEREST
+   */
+  property("Rate-lowBalance, lowAge") = {
+    val gen = genAccount(MAX_ID, GOLD_AGE - 1, GOLD_BALANCE - .01)
+
+    forAll(gen) {
+      acct: Account => acct.getRate() == STD_INTEREST
+    }
+  }
+
+  /**
+   * Property 6:
+   * For all accounts with high account balance
+   * the interest rate is GOLD_INTEREST
+   */
+  property("Rate-highBalance") = forAll { (acct: Account) =>
+      acct.getBalance() >= GOLD_BALANCE ==> (acct.getRate() == GOLD_INTEREST)
+  }
+
+  /**
+   * Property 7:
+   * For all accounts of old people 
+   * the interest rate is GOLD_INTEREST
+   */
+  property("Rate-highAge") = forAll { acct: Account =>
+      acct.getAge() >= GOLD_AGE ==> (acct.getRate() == GOLD_INTEREST)
+  }
+
+  /**
+   * Property 8:
+   * For all accounts if we apply the credit interest
+   * the appropriate rate is used
+   */
+  property("CreditInterest") = forAll {
+    acct: Account =>
+      val oldBalance = acct.getBalance()
+      acct.creditInterest()
+      acct.getBalance() == oldBalance + (oldBalance * acct.getRate())
+  }
+}
+
+/**
+ * Used for running the tests from the command line, as there are no JUnit
+ * compatible runners for ScalaCheck (could be done if ScalaCheck is used
+ * from ScalaTest)
+ */
+object Runner {
+  val rnd = new java.util.Random(100)
+  val parms = org.scalacheck.Test.Params(100, 500, 0, 20, rnd, 1)
+
+  def apply() = {
+    AccountSpecification.check(parms)
+  }
+
+  def main(args: Array[String]) = apply()
+}
+\end{lstlisting}
+
+Now if we run \texttt{mvn test} we get:
+
+\begin{lstlisting}
+[INFO] --- maven-scala-plugin:2.15.2:run (test) @ bank ---
+[INFO] Checking for multiple versions of scala
+[INFO] launcher 'test' selected => com.company.test.Runner
++ Account.Deposit: OK, passed 100 tests.
++ Account.Deposit-with-Arbitrary: OK, passed 100 tests.
++ Account.Withdraw-normal: OK, passed 100 tests.
++ Account.Withdraw-overdraft: OK, passed 100 tests.
++ Account.Rate-lowBalance, lowAge: OK, passed 100 tests.
++ Account.Rate-highBalance: OK, passed 100 tests.
++ Account.Rate-highAge: OK, passed 100 tests.
++ Account.CreditInterest: OK, passed 100 tests.
+\end{lstlisting} 
+
+Each property has passed 100 tests (which is configured in the
+org.scalacheck.Test.Params) for 100 distinct inputs generated by the
+ScalaCheck library using the defined generators. This is 800 inputs,
+comparing to 8 considered by the (equivalent) JUnit tests.
+Also, note that upon each run of the ScalaCheck different
+random input is generated and upon each run you gain more confidence
+that your methods are implemented according to the specification.
+
+For more information on ScalaCheck refer to the official documentation
+at \url{https://www.scalacheck.org/documentation.html}.
 
 
 
