@@ -93,7 +93,7 @@
 %----------------------------------------------------------------------------------------
 
 \newcommand{\hmwkTitle}{Eclipse} % Assignment title
-\newcommand{\hmwkDueDate}{Marzo 15, 2016} % Due date
+\newcommand{\hmwkDueDate}{Marzo 14, 2017} % Due date
 \newcommand{\hmwkClass}{Ingegneria del Software 1} % Course/class
 \newcommand{\hmwkClassInstructor}{S. Krsti\'c and M. Scavuzzo and F. Marconi and A. Rizzi and C. Menghi} % Teacher/lecturer
 %\newcommand{\hmwkClassTime}{} % Class/lecture time
@@ -157,12 +157,12 @@
 \subsection{Mac OSx}
 
 
-\textbf{Installazione Java JDK SE 8u74}
+\textbf{Installazione Java JDK SE 8u121}
 \begin{itemize}
 \item connettiti al sito di
   \href{http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html}{\ULurl{Oracle}}
 \item clicca su ``accept the license agreement''
-\item scarica \textit{JDK 8} (SE 8u74) per Mac OS X
+\item scarica \textit{JDK 8} (SE 8u121) per Mac OS X
 \item installa
 \end{itemize}
 
@@ -172,19 +172,19 @@
 \item apri ``applications'' (applicazioni) sul tuo mac
 \item crea la cartella ``eclipse''
 \item connettiti al sito di \href{https://eclipse.org/downloads/}{\ULurl{Eclipse}}
-\item scarica Eclipse Mars.2 (4.5.2) per Mac OS X (Eclipse IDE for Java Developers)
+\item scarica Eclipse Neon.2 (4.6.2) per Mac OS X (Eclipse IDE for Java Developers)
 \item copia il file scaricato nella cartella ``eclipse'' creata precedentemente
 \item estrai il file
 \end{itemize}
 
 
 \subsection{Windows}
-\textbf{Installazione Java JDK SE 8u74}
+\textbf{Installazione Java JDK SE 8u121}
 \begin{itemize}
 \item connettiti al sito di
   \href{http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html}{\ULurl{Oracle}}
 \item clicca su ``accept the license agreement''
-\item scarica \textit{JDK 8} (SE 8u74) per Windows 
+\item scarica \textit{JDK 8} (SE 8u121) per Windows 
 \item scegli correttamente tra Windows x64/x86
 \item installa (nota che di default la jre \`e installata sotto ``Program Files/Java'')
 \end{itemize}
@@ -194,7 +194,7 @@
 \item apri Program Files (C://Program Files)
 \item crea la cartella ``eclipse''
 \item connettiti al sito di \href{https://eclipse.org/downloads/}{\ULurl{Eclipse}}
-\item scarica Eclipse Mars.2 (4.5.2) per Windows (Eclipse IDE for Java Developers)
+\item scarica Eclipse Neon.2 (4.6.2) per Windows (Eclipse IDE for Java Developers)
 \item clicca sulla freccia verde rivolta verso il basso
 \item clicca su ``open''
 \item copia il contenuto della cartella ``eclipse'' nella cartella ``C://Program Files'' precedentemente creata
@@ -204,12 +204,12 @@
 
 
 
-\textbf{Installazione Java JDK SE 8u74}
+\textbf{Installazione Java JDK SE 8u121}
 \begin{itemize}
 \item apri il terminale
 \item  verifica la versione di java con ``\texttt{java -version}''
 \begin{itemize}
-\item se la versione \`e "1.8.0\_74" hai finito.
+\item se la versione \`e "1.8.0\_121" hai finito.
 \item se no, continua la procedura
 \end{itemize}
 \item rimuovi openjdk se installato con \texttt{sudo apt-get purge openjdk-*}
@@ -219,13 +219,13 @@
 \item crea la cartella \texttt{sudo mkdir -p /usr/local/java}
 \item scegli la cartella dove \`e presente l'archivio, per esempio \texttt{cd /home/"your\_user\_name"/Downloads}
 \item copia l'archivio nella cartella di installazione:\\
-	\verb!sudo cp jdk-8u74-linux-x64.tar.gz /usr/local/java!
+	\verb!sudo cp jdk-8u121-linux-x64.tar.gz /usr/local/java!
 \item scegli la cartella di installazione \texttt{cd /usr/local/java}
-%\item rendi eseguibile l'archivio \texttt{sudo chmod a+x jre-8u74-linux-x64.tar.gz}%TODO Are you sure?
-\item estraetelo \texttt{sudo tar -zxvf jdk-8u74-linux-x64.tar.gz}
+%\item rendi eseguibile l'archivio \texttt{sudo chmod a+x jre-8u121-linux-x64.tar.gz}%TODO Are you sure?
+\item estraetelo \texttt{sudo tar -zxvf jdk-8u121-linux-x64.tar.gz}
 \item Modifica le variabili con \texttt{sudo nano /etc/profile}  e
   aggiungi: \\
-\texttt{JAVA\_HOME=/usr/local/java/jdk1.8.0\_74} \\
+\texttt{JAVA\_HOME=/usr/local/java/jdk1.8.0\_121} \\
 \texttt{export JAVA\_HOME}\\
 \texttt{PATH=\$PATH:\$JAVA\_HOME/bin}\\
 \texttt{export PATH}
@@ -234,10 +234,10 @@
 \item informa aptitude (apt) della nuova versione di Java installata
 \begin{itemize}
 \item \verb!sudo update-alternatives --install "/usr/bin/java" "java" \! \\
-	  \verb!"/usr/local/java/jdk1.8.0\_74/bin/java" 1!
+	  \verb!"/usr/local/java/jdk1.8.0\_121/bin/java" 1!
 \item \verb!sudo update-alternatives --install "/usr/bin/javaws" "javaws" \! \\  				      
-	  \verb!"/usr/local/java/jdk1.8.0\_74/bin/javaws" 1!
-\item \verb!sudo update-alternatives --set java /usr/local/java/jdk1.8.0\_74/bin/java"!
+	  \verb!"/usr/local/java/jdk1.8.0\_121/bin/javaws" 1!
+\item \verb!sudo update-alternatives --set java /usr/local/java/jdk1.8.0\_121/bin/java"!
 \end{itemize} 
 \item verifica la versione \texttt{java -version}
 \item riavvia il sistema \texttt{sudo reboot}
@@ -249,8 +249,8 @@
 \item connettiti al sito di \href{https://eclipse.org/downloads/}{\ULurl{Eclipse}}
 \item scegli correttamente tra x64/x86 (controlla l'architettura con:
   "\texttt{file /sbin/init}")
-\item scarica Eclipse Mars.2 (4.5.2) per Linux (Eclipse IDE for Java Developers)
-\item estrailo  \texttt{tar -zxvf eclipse-java-mars-2-linux-gtk-x86\_64.tar.gz}
+\item scarica Eclipse Neon.2 (4.6.2) per Linux (Eclipse IDE for Java Developers)
+\item estrailo  \texttt{tar -zxvf eclipse-java-neon-2-linux-gtk-x86\_64.tar.gz}
 \item eseguilo \texttt{./eclipse/eclipse \&}
 \end{itemize}
 
