@@ -97,10 +97,10 @@
 %----------------------------------------------------------------------------------------
 \ifinstall
 \newcommand{\hmwkTitle}{Installing Maven} % Assignment title
-\newcommand{\hmwkDueDate}{Aprile 12, 2016} % Due date
+\newcommand{\hmwkDueDate}{11 Aprile, 2017} % Due date
 \else
 \newcommand{\hmwkTitle}{Maven} % Assignment title
-\newcommand{\hmwkDueDate}{Aprile 25, 2016} % Due date
+\newcommand{\hmwkDueDate}{11 Aprile 2017} % Due date
 \fi
 \newcommand{\hmwkClass}{Ingegneria del Software 1} % Course/class
 \newcommand{\hmwkClassTime}{} % Class/lecture time
@@ -353,7 +353,7 @@ $ cat pom.xml
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <version>4.12</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -554,7 +554,7 @@ customizing the compile phase to use Java version 1.8:
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <version>4.12</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -563,7 +563,7 @@ customizing the compile phase to use Java version 1.8:
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.5.1</version>
+        <version>3.6.1</version>
         <configuration>
           <source>1.8</source>
           <target>1.8</target>
@@ -804,7 +804,7 @@ To create a maven project:
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.5.1</version>
+        <version>3.6.1</version>
         <configuration>
           <source>1.8</source>
           <target>1.8</target>
@@ -813,7 +813,7 @@ To create a maven project:
       <plugin>
 	<groupId>org.jacoco</groupId>
 	<artifactId>jacoco-maven-plugin</artifactId>
-	<version>0.7.6.201602180812</version>
+	<version>0.7.9</version>
 	<configuration>
 	  <destFile>target/jacoco.exec</destFile>
 	  <dataFile>target/jacoco.exec</dataFile>

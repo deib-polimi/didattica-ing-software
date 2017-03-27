@@ -98,13 +98,13 @@
 
 \ifinstall
 \newcommand{\hmwkTitle}{Installing Sonar} % Assignment title
-\newcommand{\hmwkDueDate}{Aprile 12, 2016} % Due date
+\newcommand{\hmwkDueDate}{Aprile 11, 2017} % Due date
 \else
 \newcommand{\hmwkTitle}{Sonar guide} % Assignment title
-\newcommand{\hmwkDueDate}{Aprile 25, 2016} % Due date
+\newcommand{\hmwkDueDate}{Aprile 11, 2017} % Due date
 \fi
 \newcommand{\hmwkClass}{Ingegneria del Software 1} % Course/class
-\newcommand{\hmwkClassInstructor}{Sr\dj{}an Krsti\'c and Claudio Menghi} % Teacher/lecturer
+\newcommand{\hmwkClassInstructor}{Sr\dj{}an Krsti\'c, Claudio Menghi and Francesco Marconi} % Teacher/lecturer
 %\newcommand{\hmwkClassTime}{} % Class/lecture time
 \newcommand{\hmwkAuthorName}{} % Your name
 
@@ -176,14 +176,14 @@ Here is how you install Sonar:
 
 \begin{itemize}
 \item download Sonar
-  \href{https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-5.4.zip}{\ULurl{here}}
+  \href{https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-5.6.6.zip}{\ULurl{here}}
   and unzip the downloaded file in the folder of your choice
 \item unzip
 \item after unzipping in the subfolder \texttt{bin} you will see a folder for each OS
 \item depending on your OS, you need to run the appropriate executable
   (type in terminal \texttt{sonar.sh start} for Linux and Mac OS,
   execute StartSonar.bat for Windows)
-\item now you can browse your sonar deployment at
+\item wait a few seconds you should be able to browse your sonar deployment at
   \url{http://localhost:9000/}
 \begin{center}
 \includegraphics[scale=0.3]{figures/ss0.png}
@@ -234,7 +234,7 @@ need to enable test coverage:
 <plugin>
 	<groupId>org.jacoco</groupId>
 	<artifactId>jacoco-maven-plugin</artifactId>
-	<version>0.7.6.201602180812</version>
+	<version>0.7.9</version>
 	<configuration>
 		<destFile>target/jacoco.exec</destFile>
 		<dataFile>target/jacoco.exec</dataFile>
@@ -313,8 +313,8 @@ options what is more suitable for your coding habits.
 \begin{center}
 \includegraphics[width=0.9\linewidth]{figures/ss10.png}
 \end{center}
-\item for more details on how to use Sonar, watch the following
-  screencast: \url{https://vimeo.com/91781086}
+\item for more details on how to install and use SonarLint, watch the following screencast: \\
+  \url{https://youtu.be/5A5LGjN3PE0}
 \end{itemize}
 
 \ifinstall
@@ -343,7 +343,7 @@ from the SonarQube instance can be displayed at will, although project
 dashboards typically contain only project widgets.
 The Default Dashboard gives an overview of your project (with widgets
 like Size, etc.) and its quality (with widgets like Issues and
-Technical Debt, Duplications, etc.).\footnote{for more details visit: \url{http://docs.sonarqube.org/display/SONAR/Project+Dashboards}}
+Technical Debt, Duplications, etc.).\footnote{for more details visit: \url{https://docs.sonarqube.org/display/SONARQUBE56/Project+Dashboards}}
 \begin{center}
 \includegraphics[scale=0.3]{figures/ss2.png}
 \end{center}
@@ -364,7 +364,7 @@ typically at lower severities.
 Every issue will be directly marked in the code, however this is far
 more useful if you install the Sonar Eclipse plugin.\footnote{For a
   complete guide to Sonar visit:
-\url{http://docs.sonarqube.org/display/SONAR/Documentation}}
+\url{https://docs.sonarqube.org/display/SONARQUBE56/Documentation}}
 \begin{center}
 \includegraphics[scale=0.3]{figures/ss4.png}
 \end{center}
