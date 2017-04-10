@@ -176,12 +176,12 @@ Here is how you install Sonar:
 
 \begin{itemize}
 \item download Sonar
-  \href{https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-5.6.6.zip}{\ULurl{here}}
+  \href{https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-6.3.zip}{\ULurl{here}}
   and unzip the downloaded file in the folder of your choice
 \item unzip
 \item after unzipping in the subfolder \texttt{bin} you will see a folder for each OS
 \item depending on your OS, you need to run the appropriate executable
-  (type in terminal \texttt{sonar.sh start} for Linux and Mac OS,
+  (type in terminal \texttt{./sonar.sh start} for Linux and Mac OS,
   execute StartSonar.bat for Windows)
 \item wait a few seconds you should be able to browse your sonar deployment at
   \url{http://localhost:9000/}
@@ -207,7 +207,7 @@ for example:
  </properties>
 ...
 \end{lstlisting}
-\item Note that, this change is already included in the maven guide
+\item Note that, this change is already included in the maven guide and the provided project template
 \item create a new run configuration: right click on the project $>$
   Run as $>$ Run configurations...
 \item choose a New maven build. Name it \texttt{maven sonar} and put
@@ -256,7 +256,7 @@ need to enable test coverage:
 	</executions>
 </plugin>
 \end{lstlisting}
-\item Note that, this change is already included in the maven guide
+\item Note that, this change is already included in the maven guide and the provided template
 
 % \item navigate to the root folder of you project
 % \item run the following command 
@@ -299,8 +299,8 @@ options what is more suitable for your coding habits.
 	\includegraphics[scale=0.5]{figures/ss8}
 \end{center}
 
-\item click on Finish
-\item you should already be able so see Sonar annotations on the left side of the code (where breakpoints are set).
+\item click on Finish. You should already be able so see Sonar annotations on the left side of the code (where breakpoints are set).
+\item \em{troubleshooting: } if you see a message similar to "the following plugins do not meet the required minimum versions, please upgrade them: java (installed: 3.13.1, minimum: 4.0) ,javascript (installed: 2.11, minimum: 2.14)" when integrating SonarQube and SonarLint, go to the Sonar administration, Administration/System/UpdateCenter and update the required plugins.
 \item add SonarLint views:
 \begin{itemize}
 	\item click on \textit{Window} $ > $ \textit{Show View} $ > $ \textit{Other...} 
